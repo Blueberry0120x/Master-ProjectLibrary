@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pytest
 
-DATA_DIR = Path(__file__).resolve().parent.parent / "data"
+DATA_DIR = Path(__file__).resolve().parent.parent.parent / "data"
 
 
 class TestProjectInfo:
@@ -98,11 +98,11 @@ class TestFormFiles:
     """
 
     PROJECT_BOOK = (
-        Path(__file__).resolve().parent.parent
+        Path(__file__).resolve().parent.parent.parent
         / "knowledge" / "san-diego-city" / "ProjectBook"
     )
     REF_FORM = (
-        Path(__file__).resolve().parent.parent
+        Path(__file__).resolve().parent.parent.parent
         / "knowledge" / "san-diego-city" / "Reference" / "Form"
     )
 

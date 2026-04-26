@@ -1,0 +1,41 @@
+{
+  "project": {
+    "name": "Detached ADU - 5552 Redwood St",
+    "address": "5552 Redwood St",
+    "city": "San Diego",
+    "state": "CA",
+    "zip": "92105",
+    "prj_number": "1142530",
+    "pmt_number": null,
+    "status": "pending_approval"
+  },
+  "building": {
+    "type": "Residential",
+    "project_type": "New Construction",
+    "stories": 2,
+    "sf": 1200,
+    "exterior_finish": "Stucco",
+    "structure": "Wood-frame",
+    "foundation": "Slab-on-grade",
+    "roof": "Composition shingle"
+  },
+  "applicant": {
+    "name": "ADEC Group",
+    "title": "Engineer of Record",
+    "company": "ADEC Group",
+    "phone": "",
+    "email": "passio.engineering@gmail.com"
+  },
+  "hauler": {
+    "name": "EDCO",
+    "zip_served": "92841"
+  },
+  "recycling_facility": {
+    "name": "Miramar Greenery",
+    "address": "8108 Miramar Rd, San Diego, CA 92126"
+  },
+  "disposal_facility": {
+    "name": "Miramar Landfill",
+    "address": "5180 Convoy St, San Diego, CA 92111"
+  }
+}

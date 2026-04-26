@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import pytest
 
-from src.agents.knowledge_loader import detect_topics, resolve_jurisdiction
+from engine.agents.knowledge_loader import detect_topics, resolve_jurisdiction
 
 
 class TestResolveJurisdiction:
