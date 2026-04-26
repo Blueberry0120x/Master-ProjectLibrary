@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cost Breakdown — 4335 Euclid Ave</title>
+<style>
+  :root {
+    --blue: #1a5fa8; --teal: #00a0b0; --green: #1e8449; --orange: #d35400;
+    --red: #c0392b; --gray: #555; --light: #f4f8fc; --white: #fff;
+    --border: #ccd9e8; --text: #1a1a2e;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #e9eef5; color: var(--text); font-size: 13px; }
+
+  /* HEADER */
+  .site-header { background: linear-gradient(135deg, #1a3a6e 0%, #1a5fa8 100%); color: #fff; padding: 22px 32px 16px; }
+  .site-header h1 { font-size: 22pt; font-weight: 800; letter-spacing: -0.5px; }
+  .site-header .sub { font-size: 11pt; opacity: 0.85; margin-top: 4px; }
+  .site-header .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .chip { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 3px 12px; font-size: 9.5pt; }
+
+  /* SUMMARY CARDS */
+  .summary-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; padding: 18px 32px; }
+  .sum-card { background: var(--white); border-radius: 10px; padding: 16px 18px; border-top: 4px solid var(--teal); box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+  .sum-card .label { font-size: 9pt; color: var(--gray); text-transform: uppercase; letter-spacing: 0.5px; }
+  .sum-card .amount { font-size: 18pt; font-weight: 800; color: var(--blue); margin-top: 4px; }
+  .sum-card .pct { font-size: 9pt; color: var(--gray); margin-top: 2px; }
+  .sum-card.total { border-top-color: #1a3a6e; background: #1a3a6e; color: #fff; }
+  .sum-card.total .label { color: rgba(255,255,255,0.7); }
+  .sum-card.total .amount { color: #fff; font-size: 20pt; }
+  .sum-card.total .pct { color: rgba(255,255,255,0.6); }
+
+  /* TABS */
+  .tabs { display: flex; gap: 0; padding: 0 32px; border-bottom: 2px solid var(--border); background: var(--white); }
+  .tab { padding: 11px 22px; cursor: pointer; font-weight: 600; font-size: 10.5pt; color: var(--gray); border-bottom: 3px solid transparent; margin-bottom: -2px; transition: all 0.15s; white-space: nowrap; }
+  .tab:hover { color: var(--blue); }
+  .tab.active { color: var(--blue); border-bottom-color: var(--blue); }
+
+  /* PANELS */
+  .panel { display: none; padding: 22px 32px 32px; }
+  .panel.active { display: block; }
+
+  /* SECTION HEADER */
+  .sec-title { font-size: 13pt; font-weight: 700; color: var(--blue); margin-bottom: 14px; padding-bottom: 6px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 8px; }
+  .sec-title .icon { font-size: 16pt; }
+
+  /* COST TABLE */
+  .cost-table { width: 100%; border-collapse: collapse; background: var(--white); border-radius: 8px; overflow: hidden; box-shadow: 0 1px 6px rgba(0,0,0,0.07); margin-bottom: 22px; }
+  .cost-table thead tr { background: var(--blue); color: #fff; }
+  .cost-table thead th { padding: 9px 14px; text-align: left; font-size: 9.5pt; text-transform: uppercase; letter-spacing: 0.4px; }
+  .cost-table thead th.right { text-align: right; }
+  .cost-table tbody tr { border-bottom: 1px solid var(--border); }
+  .cost-table tbody tr:hover { background: #f0f6ff; }
+  .cost-table tbody tr.subtotal { background: #e8f0fa; font-weight: 700; }
+  .cost-table tbody tr.group-header td { background: #dce8f5; color: var(--blue); font-weight: 700; font-size: 10pt; padding: 7px 14px; }
+  .cost-table td { padding: 8px 14px; font-size: 10pt; vertical-align: top; }
+  .cost-table td.right { text-align: right; font-variant-numeric: tabular-nums; }
+  .cost-table td.note { font-size: 9pt; color: var(--gray); font-style: italic; }
+  .cost-table td.basis { font-size: 9pt; color: #777; }
+
+  /* BAR CHART */
+  .bar-container { background: var(--white); border-radius: 8px; padding: 20px 22px; box-shadow: 0 1px 6px rgba(0,0,0,0.07); margin-bottom: 22px; }
+  .bar-row { margin-bottom: 12px; }
+  .bar-label { display: flex; justify-content: space-between; margin-bottom: 4px; font-size: 10pt; }
+  .bar-label .name { font-weight: 600; }
+  .bar-label .val { color: var(--blue); font-weight: 700; }
+  .bar-track { background: #e0e8f0; border-radius: 6px; height: 18px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 6px; transition: width 0.8s ease; }
+
+  /* ASSUMPTIONS BOX */
+  .assume-box { background: #fff8e1; border: 1px solid #f9a825; border-radius: 8px; padding: 14px 18px; margin-bottom: 18px; }
+  .assume-box h3 { color: #7a5c00; font-size: 10.5pt; margin-bottom: 8px; }
+  .assume-box ul { padding-left: 18px; }
+  .assume-box li { margin-bottom: 4px; font-size: 10pt; color: #4a3900; line-height: 1.5; }
+
+  /* NOTES */
+  .note-box { background: #e8f5e9; border: 1px solid #66bb6a; border-radius: 8px; padding: 12px 16px; margin-bottom: 16px; font-size: 10pt; color: #1b5e20; }
+  .warn-box { background: #fde8e8; border: 1px solid #e57373; border-radius: 8px; padding: 12px 16px; margin-bottom: 16px; font-size: 10pt; color: #7a1111; }
+
+  /* TOGGLE DETAILS */
+  .toggle-btn { background: none; border: 1px solid var(--teal); color: var(--teal); border-radius: 5px; padding: 3px 10px; cursor: pointer; font-size: 9pt; margin-left: 10px; }
+  .toggle-btn:hover { background: var(--teal); color: #fff; }
+  .detail-rows { display: none; }
+  .detail-rows.open { display: table-row-group; }
+
+  /* PHASE TIMELINE */
+  .timeline { display: flex; gap: 0; margin-bottom: 22px; overflow-x: auto; }
+  .phase { flex: 1; min-width: 120px; background: var(--white); border-right: 2px solid #e0e8f0; padding: 12px 14px; }
+  .phase:last-child { border-right: none; }
+  .phase .ph-label { font-size: 9pt; color: var(--gray); text-transform: uppercase; margin-bottom: 4px; }
+  .phase .ph-name { font-weight: 700; color: var(--blue); font-size: 10.5pt; margin-bottom: 6px; }
+  .phase .ph-dur { font-size: 9pt; background: var(--teal); color: #fff; border-radius: 20px; padding: 1px 9px; display: inline-block; margin-bottom: 6px; }
+  .phase .ph-cost { font-size: 11pt; font-weight: 800; color: #1a3a6e; }
+  .phase .ph-items { font-size: 9pt; color: var(--gray); margin-top: 4px; line-height: 1.6; }
+
+  /* CONTINGENCY SLIDER */
+  .slider-wrap { background: var(--white); border-radius: 8px; padding: 16px 20px; box-shadow: 0 1px 6px rgba(0,0,0,0.07); margin-bottom: 22px; }
+  .slider-wrap label { font-weight: 600; font-size: 10.5pt; }
+  .slider-wrap input[type=range] { width: 100%; margin: 10px 0; accent-color: var(--blue); }
+  .slider-output { font-size: 13pt; font-weight: 800; color: var(--blue); }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .summary-row { grid-template-columns: repeat(2, 1fr); }
+    .tabs { overflow-x: auto; }
+  }
+  @media (max-width: 600px) {
+    .summary-row { grid-template-columns: 1fr; }
+    .site-header, .tabs, .panel { padding-left: 14px; padding-right: 14px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="site-header">
+  <h1>💰 Project Cost Breakdown</h1>
+  <div class="sub">4335 Euclid Avenue, San Diego, CA 92115 &nbsp;|&nbsp; APN: 471-271-16-00 &nbsp;|&nbsp; Zone: CUPD-CU-2-4</div>
+  <div class="chips">
+    <span class="chip">9 Residential Units (R-2)</span>
+    <span class="chip">1 Commercial Unit (B)</span>
+    <span class="chip">~6,850 SF GBA</span>
+    <span class="chip">4 Attached Bldgs (townhouse row, 6'-7" gap)</span>
+    <span class="chip">2 Stories / ≤30 ft</span>
+    <span class="chip">Type V-A Construction</span>
+    <span class="chip">NFPA 13 Sprinklered</span>
+    <span class="chip">6" 2-hr Party Walls</span>
+    <span class="chip">1 Covered Parking</span>
+  </div>
+</div>
+
+<!-- SUMMARY CARDS -->
+<div class="summary-row">
+  <div class="sum-card">
+    <div class="label">🏗️ Construction</div>
+    <div class="amount" id="c-constr">$2,250,000</div>
+    <div class="pct">~68% of total</div>
+  </div>
+  <div class="sum-card">
+    <div class="label">📐 Architecture / Engineering</div>
+    <div class="amount">$320,000</div>
+    <div class="pct">~10% of total</div>
+  </div>
+  <div class="sum-card">
+    <div class="label">🏛️ Permitting / Fees</div>
+    <div class="amount">$485,000</div>
+    <div class="pct">~15% of total</div>
+  </div>
+  <div class="sum-card total">
+    <div class="label">TOTAL PROJECT COST</div>
+    <div class="amount" id="grand-total">$3,300,000</div>
+    <div class="pct" id="psf-total">~$482/SF GBA</div>
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="tabs">
+  <div class="tab active" onclick="switchTab('construction')">🏗️ Construction</div>
+  <div class="tab" onclick="switchTab('arch')">📐 Architecture & Engineering</div>
+  <div class="tab" onclick="switchTab('permits')">🏛️ Permits & Fees</div>
+  <div class="tab" onclick="switchTab('overview')">📊 Summary Chart</div>
+  <div class="tab" onclick="switchTab('schedule')">📅 Cost Schedule</div>
+  <div class="tab" onclick="switchTab('sensitivity')">🎛️ Sensitivity</div>
+</div>
+
+<!-- ======================== CONSTRUCTION ======================== -->
+<div class="panel active" id="panel-construction">
+  <div class="assume-box">
+    <h3>⚙️ Design Basis (Certain)</h3>
+    <ul>
+      <li><strong>Per Review 2 drawings (04/13/26):</strong> 4 building blocks in attached townhouse row (6'-7 3/4" gaps between blocks), 2 stories, footprint ~3,422 SF × 2 = ~6,845 SF GBA. FAR ~1.10 of 2.0 max.</li>
+      <li><strong>Program:</strong> 1st floor: commercial 640.38 SF (front, 30' deep) + 4 residential units (568.59 SF each) + 2 storage (33.49 SF each) + trash enclosure (196.81 SF). 2nd floor: 4 residential units (568.59 SF each) + 1 residential unit (669.80 SF).</li>
+      <li><strong>Structure:</strong> Type V-A wood frame, 2×6 studs at 16" o/c, 2 stories over grade-level slab-on-grade. No basement.</li>
+      <li><strong>Party walls (between the 4 blocks):</strong> 6-inch nominal double-stud party wall assembly — 2×4 studs each side, 1" air gap, double layer 5/8" Type X gypsum each side = <strong>2-hour fire rating, STC 55+</strong> (UL U905 or equal).</li>
+      <li><strong>Exterior walls at 0-ft setback:</strong> 2×6 framing, 5/8" Type X gypsum interior + 5/8" Type X sheathing exterior, 1-hour rated, 0% openings per IBC Table 602.</li>
+      <li><strong>Commercial overhang soffit (5-ft cantilever over driveway):</strong> 5/8" Type X gypsum board on metal hat channel — 1-hour rated assembly per UL L528, no unprotected penetrations.</li>
+      <li><strong>Floor/ceiling assembly (1 upper floor):</strong> TJI joists, 3/4" T&G subfloor, blown-in insulation, 5/8" Type X gypsum ceiling — IIC 50+ / STC 50+ per CBC §1206.</li>
+      <li><strong>Sprinklers:</strong> NFPA 13 throughout all 4 blocks + commercial unit. Separate riser per block.</li>
+      <li><strong>Foundations:</strong> Continuous concrete perimeter footings, 18" wide × 12" deep, grade beam at party walls. Slab-on-grade 4" with #3 rebar at 18" o/c.</li>
+      <li><strong>Parking:</strong> 1 covered stall (not required per PSTPA; provided per design).</li>
+      <li><strong>Cost basis:</strong> SD 2026 hard cost benchmark — Type V-A mixed-use residential $290–$320/SF (2-story is toward lower end vs 3-story). Applied $305/SF blended for 9 resi units; $270/SF for commercial shell.</li>
+    </ul>
+  </div>
+
+  <div class="sec-title"><span class="icon">🏚️</span>Demo & Site Work</div>
+  <table class="cost-table">
+    <thead><tr><th>Line Item</th><th>Basis</th><th class="right">Unit Cost</th><th class="right">Qty</th><th class="right">Amount</th></tr></thead>
+    <tbody>
+      <tr><td>Demolition — existing auto repair building</td><td class="basis">1,225 SF, 1-story (APN per County records)</td><td class="right">$18/SF</td><td class="right">1,225 SF</td><td class="right">$22,050</td></tr>
+      <tr><td>Selective demo — existing carport, utilities, foundations</td><td class="basis">Per Review 2 (E) site plan</td><td class="right">LS</td><td class="right">1</td><td class="right">$8,000</td></tr>
+      <tr><td>Earthwork — grading, compaction</td><td class="basis">Flat lot, minor cut for footings</td><td class="right">$12/CY</td><td class="right">60 CY</td><td class="right">$720</td></tr>
+      <tr><td>Erosion control / SWPPP</td><td class="basis">Required by City</td><td class="right">LS</td><td class="right">1</td><td class="right">$3,500</td></tr>
+      <tr><td>Temporary fencing, signage</td><td class="basis">Perimeter 6-ft chain link</td><td class="right">LS</td><td class="right">1</td><td class="right">$4,200</td></tr>
+      <tr class="subtotal"><td colspan="4">Demo &amp; Site Work Subtotal</td><td class="right">$38,470</td></tr>
+    </tbody>
+  </table>
+
+  <div class="sec-title"><span class="icon">🪨</span>Foundations &amp; Concrete</div>
+  <table class="cost-table">
+    <thead><tr><th>Line Item</th><th>Basis</th><th class="right">Unit Cost</th><th class="right">Qty</th><th class="right">Amount</th></tr></thead>
+    <tbody>
+      <tr><td>Perimeter footings (continuous, 18"×12")</td><td class="basis">~230 LF perimeter (89' × 30' outline)</td><td class="right">$95/LF</td><td class="right">230 LF</td><td class="right">$21,850</td></tr>
+      <tr><td>Grade beams at party walls (3 interior party walls)</td><td class="basis">~90 LF across 3 interior walls (30' each)</td><td class="right">$110/LF</td><td class="right">90 LF</td><td class="right">$9,900</td></tr>
+      <tr><td>Slab-on-grade (4" with #3 rebar)</td><td class="basis">~3,422 SF footprint per Review 2</td><td class="right">$9.50/SF</td><td class="right">3,422 SF</td><td class="right">$32,509</td></tr>
+      <tr><td>Anchor bolts, hold-downs, hardware</td><td class="basis">Seismic zone D2</td><td class="right">LS</td><td class="right">1</td><td class="right">$10,000</td></tr>
+      <tr class="subtotal"><td colspan="4">Foundations Subtotal</td><td class="right">$74,259</td></tr>
+    </tbody>
+  </table>
+
+  <div class="sec-title"><span class="icon">🪵</span>Framing &amp; Structural</div>
+  <table class="cost-table">
+    <thead><tr><th>Line Item</th><th>Basis</th><th class="right">Unit Cost</th><th class="right">Qty</th><th class="right">Amount</th></tr></thead>
+    <tbody>
+      <tr><td>Wood framing — exterior walls (2×6 @ 16" o/c)</td><td class="basis">~6,845 SF GBA × 1.1 factor (2-story)</td><td class="right">$14/SF</td><td class="right">7,530 SF</td><td class="right">$105,420</td></tr>
+      <tr><td>Party wall assemblies (6" double-stud, 2-hr, STC 55+)</td><td class="basis">3 interior party walls × 30' × 20' (2-story) = 1,800 SF</td><td class="right">$22/SF</td><td class="right">1,800 SF</td><td class="right">$39,600</td></tr>
+      <tr><td>Floor framing — TJI joists + subfloor (3/4" T&amp;G)</td><td class="basis">~3,422 SF upper floor (1 floor, not 2)</td><td class="right">$18/SF</td><td class="right">3,422 SF</td><td class="right">$61,596</td></tr>
+      <tr><td>Roof framing — pre-engineered trusses, flat/low-slope</td><td class="basis">~3,422 SF roof area (full footprint)</td><td class="right">$16/SF</td><td class="right">3,422 SF</td><td class="right">$54,752</td></tr>
+      <tr><td>Shear walls — plywood, hold-downs (seismic)</td><td class="basis">Seismic D2 per CBC Ch. 23; 2-story lighter lateral</td><td class="right">LS</td><td class="right">1</td><td class="right">$22,000</td></tr>
+      <tr><td>Steel — beams, posts, connectors</td><td class="basis">Commercial bay header, lintels</td><td class="right">LS</td><td class="right">1</td><td class="right">$16,000</td></tr>
+      <tr><td>Commercial overhang (5-ft cantilever, 1-hr soffit)</td><td class="basis">20 ft wide × 5 ft deep = 100 SF</td><td class="right">$320/SF</td><td class="right">100 SF</td><td class="right">$32,000</td></tr>
+      <tr class="subtotal"><td colspan="4">Framing &amp; Structural Subtotal</td><td class="right">$331,368</td></tr>
+    </tbody>
+  </table>
+
+  <div class="sec-title"><span class="icon">🔥</span>Fire-Rated Assemblies</div>
+  <table class="cost-table">
+    <thead><tr><th>Line Item</th><th>Basis / Code</th><th class="right">Unit Cost</th><th class="right">Qty</th><th class="right">Amount</th></tr></thead>
+    <tbody>
+      <tr><td>5/8" Type X gypsum — 1-hr exterior walls (0-ft setback)</td><td class="basis">IBC Table 602; N/S property-line walls, 2 stories</td><td class="right">$4.20/SF</td><td class="right">2,800 SF</td><td class="right">$11,760</td></tr>
+      <tr><td>5/8" Type X gypsum — B/R-2 occupancy separation (1-hr partition)</td><td class="basis">IBC Table 508.4, sprinklered; commercial/residential floor-ceiling over commercial bay</td><td class="right">$4.20/SF</td><td class="right">640 SF</td><td class="right">$2,688</td></tr>
+      <tr><td>Double 5/8" Type X — floor/ceiling assembly between stories (IIC 50/STC 50)</td><td class="basis">CBC §1206; full 3,422 SF floor/ceiling</td><td class="right">$6.50/SF</td><td class="right">3,422 SF</td><td class="right">$22,243</td></tr>
+      <tr><td>Fire-rated doors — 3/4-hr unit entries + stairs</td><td class="basis">IBC §716; 9 unit entries + 1 commercial + 1 stair</td><td class="right">$1,100/ea</td><td class="right">11</td><td class="right">$12,100</td></tr>
+      <tr><td>NFPA 13 sprinkler system — all 4 blocks + commercial</td><td class="basis">~6,845 SF; 4 separate risers</td><td class="right">$7.50/SF</td><td class="right">6,845 SF</td><td class="right">$51,338</td></tr>
+      <tr><td>Fire alarm system (FACP + devices)</td><td class="basis">CBC §907; R-2 multi-unit</td><td class="right">LS</td><td class="right">1</td><td class="right">$22,000</td></tr>
+      <tr><td>Fire-stop penetrations (pipes, conduit through rated assemblies)</td><td class="basis">IBC §714; estimated 60 penetrations</td><td class="right">$180/ea</td><td class="right">60</td><td class="right">$10,800</td></tr>
+      <tr class="subtotal"><td colspan="4">Fire-Rated Assemblies Subtotal</td><td class="right">$132,929</td></tr>
+    </tbody>
+  </table>
+
+  <div class="sec-title"><span class="icon">🏠</span>Exterior Envelope</div>
+  <table class="cost-table">
+    <thead><tr><th>Line Item</th><th>Basis</th><th class="right">Unit Cost</th><th class="right">Qty</th><th class="right">Amount</th></tr></thead>
+    <tbody>
+      <tr><td>Roofing — TPO membrane (low-slope, 60-mil)</td><td class="basis">~3,422 SF roof area (full footprint)</td><td class="right">$14/SF</td><td class="right">3,422 SF</td><td class="right">$47,908</td></tr>
+      <tr><td>Exterior cladding — stucco (3-coat) + cementitious panels</td><td class="basis">~4,800 SF wall area (2-story perimeter)</td><td class="right">$18/SF</td><td class="right">4,800 SF</td><td class="right">$86,400</td></tr>
+      <tr><td>Windows — vinyl double-pane, Title 24 compliant</td><td class="basis">9 units + commercial storefront; ~720 SF</td><td class="right">$75/SF</td><td class="right">720 SF</td><td class="right">$54,000</td></tr>
+      <tr><td>Commercial storefront glazing (front 25 ft)</td><td class="basis">Aluminum storefront system</td><td class="right">$125/SF</td><td class="right">160 SF</td><td class="right">$20,000</td></tr>
+      <tr><td>Entry doors — residential (9 units + commercial)</td><td class="basis">Steel + frame per unit</td><td class="right">$1,400/ea</td><td class="right">10</td><td class="right">$14,000</td></tr>
+      <tr><td>Weather barrier, flashing, sealants</td><td class="basis">Full envelope</td><td class="right">LS</td><td class="right">1</td><td class="right">$14,000</td></tr>
+      <tr><td>Thermal insulation — walls (R-21), attic (R-38)</td><td class="basis">Title 24 CZ7 compliance</td><td class="right">LS</td><td class="right">1</td><td class="right">$16,500</td></tr>
+      <tr class="subtotal"><td colspan="4">Exterior Envelope Subtotal</td><td class="right">$252,808</td></tr>
+    </tbody>
+  </table>
+
+  <div class="sec-title"><span class="icon">🔧</span>MEP Systems</div>
+  <table class="cost-table">
+    <thead><tr><th>Line Item</th><th>Basis</th><th class="right">Unit Cost</th><th class="right">Qty</th><th class="right">Amount</th></tr></thead>
+    <tbody>
+      <tr class="group-header"><td colspan="5">Plumbing</td></tr>
+      <tr><td>Domestic water — copper supply lines, 9 units + commercial</td><td class="basis">Individual shutoffs per unit</td><td class="right">$6,500/unit</td><td class="right">10</td><td class="right">$65,000</td></tr>
+      <tr><td>Sanitary sewer — ABS drain, waste, vent (DWV)</td><td class="basis">Connect to existing Euclid Ave main</td><td class="right">$5,200/unit</td><td class="right">10</td><td class="right">$52,000</td></tr>
+      <tr><td>Water heaters — tankless gas (1 per unit)</td><td class="basis">90%+ efficiency, Title 24</td><td class="right">$1,800/ea</td><td class="right">10</td><td class="right">$18,000</td></tr>
+      <tr><td>Plumbing fixtures — per unit (2 BA avg)</td><td class="basis">Mid-grade — toilet, lav, tub/shower</td><td class="right">$4,200/unit</td><td class="right">9</td><td class="right">$37,800</td></tr>
+      <tr><td>Commercial plumbing (sink, restroom, floor drain)</td><td class="basis">1 commercial unit, 640 SF</td><td class="right">LS</td><td class="right">1</td><td class="right">$10,000</td></tr>
+      <tr class="group-header"><td colspan="5">Electrical</td></tr>
+      <tr><td>Electrical service — 400A main + 9 sub-panels (100A each)</td><td class="basis">SDG&amp;E utility connection</td><td class="right">LS</td><td class="right">1</td><td class="right">$28,000</td></tr>
+      <tr><td>Interior wiring — all units + commercial</td><td class="basis">CEC Title 24 compliant</td><td class="right">$9,500/unit</td><td class="right">10</td><td class="right">$95,000</td></tr>
+      <tr><td>EV charging conduit (4 circuits, rough-in only)</td><td class="basis">CALGreen Tier 1</td><td class="right">LS</td><td class="right">1</td><td class="right">$6,500</td></tr>
+      <tr><td>Solar PV — 3.6 kW (Title 24 CALGreen minimum)</td><td class="basis">12 panels × 300W</td><td class="right">$2,800/kW</td><td class="right">3.6 kW</td><td class="right">$10,080</td></tr>
+      <tr class="group-header"><td colspan="5">Mechanical / HVAC</td></tr>
+      <tr><td>Mini-split HVAC — 1 system per unit (9 resi)</td><td class="basis">Mitsubishi or equal; 18K BTU avg</td><td class="right">$4,200/unit</td><td class="right">9</td><td class="right">$37,800</td></tr>
+      <tr><td>Commercial HVAC — rooftop unit (RTU)</td><td class="basis">~640 SF commercial</td><td class="right">LS</td><td class="right">1</td><td class="right">$10,000</td></tr>
+      <tr><td>Exhaust fans, ductwork, Title 24 ventilation</td><td class="basis">Per unit + common areas</td><td class="right">LS</td><td class="right">1</td><td class="right">$14,000</td></tr>
+      <tr class="subtotal"><td colspan="4">MEP Subtotal</td><td class="right">$384,180</td></tr>
+    </tbody>
+  </table>
+
+  <div class="sec-title"><span class="icon">🎨</span>Interior Finishes</div>
+  <table class="cost-table">
+    <thead><tr><th>Line Item</th><th>Basis</th><th class="right">Unit Cost</th><th class="right">Qty</th><th class="right">Amount</th></tr></thead>
+    <tbody>
+      <tr><td>Flooring — LVP (bedrooms/living), tile (bath/kitchen)</td><td class="basis">9 resi units avg ~580 SF/unit (per Review 2)</td><td class="right">$9/SF</td><td class="right">5,220 SF</td><td class="right">$46,980</td></tr>
+      <tr><td>Drywall — 1/2" standard interior walls</td><td class="basis">~12,000 SF all surfaces (2-story)</td><td class="right">$3.80/SF</td><td class="right">12,000 SF</td><td class="right">$45,600</td></tr>
+      <tr><td>Paint — interior (2 coats, walls + ceilings)</td><td class="basis">~18,000 SF paintable</td><td class="right">$2.20/SF</td><td class="right">18,000 SF</td><td class="right">$39,600</td></tr>
+      <tr><td>Cabinets + countertops — kitchens (9 units)</td><td class="basis">Mid-grade shaker; quartz counter</td><td class="right">$8,500/unit</td><td class="right">9</td><td class="right">$76,500</td></tr>
+      <tr><td>Bath tile + fixtures (vanity, mirror, accessories)</td><td class="basis">Per unit, 1–2 BA avg</td><td class="right">$3,200/unit</td><td class="right">9</td><td class="right">$28,800</td></tr>
+      <tr><td>Appliances (refrigerator, range, microwave, DW, W/D)</td><td class="basis">Mid-grade stainless; per Review 2 each unit has full appl. set</td><td class="right">$3,800/unit</td><td class="right">9</td><td class="right">$34,200</td></tr>
+      <tr><td>Commercial interior shell (concrete floor, painted drywall)</td><td class="basis">Tenant to finish; shell only; 640 SF</td><td class="right">$28/SF</td><td class="right">640 SF</td><td class="right">$17,920</td></tr>
+      <tr><td>Interior doors + hardware (per unit avg 4 doors)</td><td class="basis">Hollow core + hardware</td><td class="right">$320/ea</td><td class="right">36</td><td class="right">$11,520</td></tr>
+      <tr class="subtotal"><td colspan="4">Interior Finishes Subtotal</td><td class="right">$301,120</td></tr>
+    </tbody>
+  </table>
+
+  <div class="sec-title"><span class="icon">🅿️</span>Site Improvements</div>
+  <table class="cost-table">
+    <thead><tr><th>Line Item</th><th>Basis</th><th class="right">Unit Cost</th><th class="right">Qty</th><th class="right">Amount</th></tr></thead>
+    <tbody>
+      <tr><td>Driveway — concrete (20 ft RW × ~100 ft, 6" reinforced)</td><td class="basis">East side lot to rear alley per Review 2; 2,155 SF existing, expansion 25 SF</td><td class="right">$14/SF</td><td class="right">2,155 SF</td><td class="right">$30,170</td></tr>
+      <tr><td>Concrete walkway</td><td class="basis">Per Review 2: 417.68 SF</td><td class="right">$12/SF</td><td class="right">418 SF</td><td class="right">$5,016</td></tr>
+      <tr><td>Trash enclosure — CMU walls, solid gate, 196.81 SF</td><td class="basis">Per Review 2; 3 trash + 3 recycling + 1 organics</td><td class="right">LS</td><td class="right">1</td><td class="right">$22,000</td></tr>
+      <tr><td>Covered parking stall (1)</td><td class="basis">Per Review 2; canopy structure + striping</td><td class="right">LS</td><td class="right">1</td><td class="right">$8,500</td></tr>
+      <tr><td>Landscaping — drought-tolerant (planters + 58 SF landscape)</td><td class="basis">Per Review 2 landscape 58.37 SF minimum</td><td class="right">LS</td><td class="right">1</td><td class="right">$6,500</td></tr>
+      <tr><td>Exterior lighting (bollards, wall packs, soffit)</td><td class="basis">CEC Title 24 outdoor</td><td class="right">LS</td><td class="right">1</td><td class="right">$12,000</td></tr>
+      <tr><td>Utility connections — water, sewer, gas, electric (new service)</td><td class="basis">City of SD + SDG&amp;E connection fees</td><td class="right">LS</td><td class="right">1</td><td class="right">$35,000</td></tr>
+      <tr><td>Sidewalk, curb, gutter repair — Euclid Ave frontage</td><td class="basis">~50 LF frontage per City standard</td><td class="right">$320/LF</td><td class="right">50 LF</td><td class="right">$16,000</td></tr>
+      <tr><td>Mailbox cluster unit (CBU) + canopy</td><td class="basis">USPS PO-632 compliant; 9 compartments + 2 parcel lockers</td><td class="right">LS</td><td class="right">1</td><td class="right">$8,500</td></tr>
+      <tr class="subtotal"><td colspan="4">Site Improvements Subtotal</td><td class="right">$143,686</td></tr>
+    </tbody>
+  </table>
+
+  <div class="sec-title"><span class="icon">🧾</span>General Conditions &amp; Contractor Overhead</div>
+  <table class="cost-table">
+    <thead><tr><th>Line Item</th><th>Basis</th><th class="right">Rate</th><th class="right">Base</th><th class="right">Amount</th></tr></thead>
+    <tbody>
+      <tr><td>General conditions (super, temp facilities, insurance)</td><td class="basis">~12% of direct costs</td><td class="right">12%</td><td class="right">$1,658,820</td><td class="right">$199,058</td></tr>
+      <tr><td>Contractor overhead + profit</td><td class="basis">8% of direct + GC</td><td class="right">8%</td><td class="right">$1,857,878</td><td class="right">$148,630</td></tr>
+      <tr><td>Builder's risk insurance</td><td class="basis">1% of hard cost</td><td class="right">1%</td><td class="right">$2,006,508</td><td class="right">$20,065</td></tr>
+      <tr><td>Construction contingency</td><td class="basis">10% — new construction Type V-A, 2-story</td><td class="right">10%</td><td class="right">$2,006,508</td><td class="right">$200,651</td></tr>
+      <tr class="subtotal"><td colspan="4">GC / OH / Contingency Subtotal</td><td class="right">$568,404</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note-box">✅ <strong>Construction Hard Cost Total: ~$1,658,820</strong> direct + ~$568,404 GC/OH/contingency = <strong>~$2,227,224</strong> &nbsp;|&nbsp; Rounded to <strong>$2,250,000</strong> for summary.</div>
+</div>
+
+<!-- ======================== ARCH / ENG ======================== -->
+<div class="panel" id="panel-arch">
+  <div class="sec-title"><span class="icon">📐</span>Architecture &amp; Engineering Fees</div>
+  <div class="assume-box">
+    <h3>⚙️ Basis</h3>
+    <ul>
+      <li>Architecture fees benchmarked at <strong>9–11% of construction cost</strong> for Type V-A mixed-use in San Diego (9 units + commercial, 4 attached blocks, fire-separation coordination).</li>
+      <li>Structural engineering included separately — 2-story attached row with 3 interior party walls (lateral + gravity coordination, simpler than detached buildings).</li>
+      <li>Civil / MEP / Title 24 are additional specialized scopes.</li>
+    </ul>
+  </div>
+  <table class="cost-table">
+    <thead><tr><th>Line Item</th><th>Basis / Scope</th><th class="right">Rate</th><th class="right">Base</th><th class="right">Amount</th></tr></thead>
+    <tbody>
+      <tr class="group-header"><td colspan="5">Architecture</td></tr>
+      <tr><td>Schematic Design (SD)</td><td class="basis">Site plan, massing, unit layouts, 3D study model</td><td class="right">15% of fee</td><td class="right">$175,000</td><td class="right">$26,250</td></tr>
+      <tr><td>Design Development (DD)</td><td class="basis">Exterior elevations, material selection, code analysis</td><td class="right">20% of fee</td><td class="right">$175,000</td><td class="right">$35,000</td></tr>
+      <tr><td>Construction Documents (CD)</td><td class="basis">Full permit set: floor plans, elevations, sections, details, fire-rating drawings, party wall details</td><td class="right">40% of fee</td><td class="right">$175,000</td><td class="right">$70,000</td></tr>
+      <tr><td>Permit Coordination (PC)</td><td class="basis">Plan check responses, corrections, DSD coordination</td><td class="right">10% of fee</td><td class="right">$175,000</td><td class="right">$17,500</td></tr>
+      <tr><td>Construction Administration (CA)</td><td class="basis">Site visits, RFIs, submittals, punch list</td><td class="right">15% of fee</td><td class="right">$175,000</td><td class="right">$26,250</td></tr>
+      <tr class="subtotal"><td colspan="4">Architecture Subtotal</td><td class="right">$175,000</td></tr>
+
+      <tr class="group-header"><td colspan="5">Structural Engineering</td></tr>
+      <tr><td>Structural engineering — foundations, framing, seismic</td><td class="basis">2-story attached row, Type V-A; 3 party walls; SD seismic zone D2</td><td class="right">LS</td><td class="right">—</td><td class="right">$38,000</td></tr>
+      <tr class="subtotal"><td colspan="4">Structural Subtotal</td><td class="right">$38,000</td></tr>
+
+      <tr class="group-header"><td colspan="5">Civil Engineering</td></tr>
+      <tr><td>Civil / site plan — grading, drainage, utility plan</td><td class="basis">Site plan for permit; storm drain, utility layout, driveway profile</td><td class="right">LS</td><td class="right">—</td><td class="right">$22,000</td></tr>
+      <tr><td>Topographic survey (boundary + topo)</td><td class="basis">Required for civil plan; 6,250 SF lot</td><td class="right">LS</td><td class="right">—</td><td class="right">$6,500</td></tr>
+      <tr><td>Stormwater management plan / BMP design</td><td class="basis">Required if PDP triggered; bioretention or alt. compliance</td><td class="right">LS</td><td class="right">—</td><td class="right">$6,500</td></tr>
+      <tr class="subtotal"><td colspan="4">Civil Subtotal</td><td class="right">$35,000</td></tr>
+
+      <tr class="group-header"><td colspan="5">MEP Engineering</td></tr>
+      <tr><td>Mechanical engineering — HVAC, Title 24 forms</td><td class="basis">9 resi mini-splits + commercial RTU; CF1R documentation</td><td class="right">LS</td><td class="right">—</td><td class="right">$14,000</td></tr>
+      <tr><td>Electrical engineering — load calcs, panel schedule, SDG&amp;E coordination</td><td class="basis">400A service, 9 sub-panels, EV, solar</td><td class="right">LS</td><td class="right">—</td><td class="right">$14,000</td></tr>
+      <tr><td>Plumbing engineering — water/sewer plan, fixture schedule</td><td class="basis">9 units + commercial; connect to City mains</td><td class="right">LS</td><td class="right">—</td><td class="right">$10,000</td></tr>
+      <tr><td>Fire protection engineering — NFPA 13 sprinkler design</td><td class="basis">4 block risers; DSD-Fire Suppression plan check</td><td class="right">LS</td><td class="right">—</td><td class="right">$12,000</td></tr>
+      <tr class="subtotal"><td colspan="4">MEP Engineering Subtotal</td><td class="right">$50,000</td></tr>
+
+      <tr class="group-header"><td colspan="5">Special Inspections &amp; Geotechnical</td></tr>
+      <tr><td>Geotechnical report (soils investigation)</td><td class="basis">Required for CBC; 2 borings typical for 6,250 SF lot</td><td class="right">LS</td><td class="right">—</td><td class="right">$6,500</td></tr>
+      <tr><td>Special inspections — concrete, bolts, shear walls, welds</td><td class="basis">IBC §1705; required for Type V-A 2-story</td><td class="right">LS</td><td class="right">—</td><td class="right">$12,000</td></tr>
+      <tr class="subtotal"><td colspan="4">Inspections &amp; Geotech Subtotal</td><td class="right">$18,500</td></tr>
+
+      <tr class="group-header"><td colspan="5">Other Consultant Fees</td></tr>
+      <tr><td>Title 24 energy consultant (CF1R, CF2R, CF3R)</td><td class="basis">HERS verification; 9 units</td><td class="right">LS</td><td class="right">—</td><td class="right">$6,500</td></tr>
+      <tr><td>Acoustical consultant (STC/IIC party wall certification)</td><td class="basis">CBC §1206; verify 6" double-stud assembly per UL U905</td><td class="right">LS</td><td class="right">—</td><td class="right">$5,000</td></tr>
+      <tr class="subtotal"><td colspan="4">Other Consultants Subtotal</td><td class="right">$11,500</td></tr>
+
+      <tr style="background:#1a3a6e; color:#fff; font-weight:800;"><td colspan="4">TOTAL ARCHITECTURE &amp; ENGINEERING</td><td class="right">$328,000</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ======================== PERMITS ======================== -->
+<div class="panel" id="panel-permits">
+  <div class="sec-title"><span class="icon">🏛️</span>Permits, Fees &amp; Entitlements</div>
+  <div class="assume-box">
+    <h3>⚙️ Basis — City of San Diego 2025–2026 Fee Schedule</h3>
+    <ul>
+      <li>Building permit fees based on IB-501 (FY2026 valuation schedule); construction value ~$1.76M (resi $305/SF × 5,218 SF + commercial $270/SF × 640 SF).</li>
+      <li>DIF (Development Impact Fees) based on City DIF Calculator — Residential: ~$15,000/unit; Commercial: varies by use.</li>
+      <li>NEF (Neighborhood Enhancement Fund): $11.78/SF × 6,250 SF = $73,625 (waived if 100% affordable; not waived under base zone market-rate).</li>
+      <li>School fees per IB-146 (Sweetwater Union / San Diego USD per APN — City Heights is San Diego USD).</li>
+    </ul>
+  </div>
+
+  <table class="cost-table">
+    <thead><tr><th>Fee / Permit</th><th>Basis / Authority</th><th class="right">Rate</th><th class="right">Qty</th><th class="right">Amount</th></tr></thead>
+    <tbody>
+      <tr class="group-header"><td colspan="5">Preliminary Review</td></tr>
+      <tr><td>DS-375 Multiple Discipline Preliminary Review</td><td class="basis">IB-513 flat fee (FY2026)</td><td class="right">$12,106</td><td class="right">1</td><td class="right">$12,106</td></tr>
+      <tr><td>Mapping fee</td><td class="basis">IB-513</td><td class="right">$11</td><td class="right">1</td><td class="right">$11</td></tr>
+
+      <tr class="group-header"><td colspan="5">Building Permits (DSD IB-501)</td></tr>
+      <tr><td>Building permit — residential (9 units, 5,218 SF per Review 2)</td><td class="basis">IB-501 valuation $305/SF × 5,218 SF = $1.591M → fee ~1.8%</td><td class="right">1.8%</td><td class="right">$1,591,490</td><td class="right">$28,647</td></tr>
+      <tr><td>Building permit — commercial shell (640 SF)</td><td class="basis">IB-501 valuation $270/SF → ~$172,800</td><td class="right">1.8%</td><td class="right">$172,800</td><td class="right">$3,110</td></tr>
+      <tr><td>Plan check fee (65% of building permit fee)</td><td class="basis">IB-501 standard rate</td><td class="right">65%</td><td class="right">$31,757</td><td class="right">$20,642</td></tr>
+      <tr><td>Electrical permit</td><td class="basis">IB-103</td><td class="right">LS</td><td class="right">1</td><td class="right">$4,200</td></tr>
+      <tr><td>Mechanical permit</td><td class="basis">IB-103</td><td class="right">LS</td><td class="right">1</td><td class="right">$2,800</td></tr>
+      <tr><td>Plumbing permit</td><td class="basis">IB-103</td><td class="right">LS</td><td class="right">1</td><td class="right">$3,200</td></tr>
+      <tr><td>Grading permit (minor grading)</td><td class="basis">IB-502; &lt;100 CY</td><td class="right">LS</td><td class="right">1</td><td class="right">$1,400</td></tr>
+      <tr><td>Fire sprinkler plan check + permit</td><td class="basis">DSD-Fire Suppression</td><td class="right">LS</td><td class="right">1</td><td class="right">$5,500</td></tr>
+      <tr><td>Fire alarm plan check + permit</td><td class="basis">DSD-Fire Alarm</td><td class="right">LS</td><td class="right">1</td><td class="right">$2,800</td></tr>
+
+      <tr class="group-header"><td colspan="5">Development Impact Fees (DIF)</td></tr>
+      <tr><td>Residential DIF (9 units)</td><td class="basis">City DIF Calculator — City Heights; ~$15,000/DU</td><td class="right">$15,000</td><td class="right">9</td><td class="right">$135,000</td></tr>
+      <tr><td>Commercial DIF (640 SF retail)</td><td class="basis">City DIF — commercial rate ~$12/SF</td><td class="right">$12</td><td class="right">640 SF</td><td class="right">$7,680</td></tr>
+      <tr><td>Transportation/RTCIP fee (residential)</td><td class="basis">~$2,500/unit</td><td class="right">$2,500</td><td class="right">9</td><td class="right">$22,500</td></tr>
+
+      <tr class="group-header"><td colspan="5">Neighborhood Enhancement Fund (NEF)</td></tr>
+      <tr><td>NEF — base zone pathway (market-rate)</td><td class="basis">$11.78/SF × 6,250 SF lot (CCHS §143.1025)</td><td class="right">$11.78/SF</td><td class="right">6,250 SF</td><td class="right">$73,625</td></tr>
+
+      <tr class="group-header"><td colspan="5">School Fees (IB-146)</td></tr>
+      <tr><td>School impact fee — residential (San Diego USD)</td><td class="basis">IB-146; ~$5.20/SF residential (2025 rate)</td><td class="right">$5.20</td><td class="right">5,218 SF</td><td class="right">$27,134</td></tr>
+      <tr><td>School impact fee — commercial</td><td class="basis">IB-146; ~$0.84/SF commercial</td><td class="right">$0.84</td><td class="right">640 SF</td><td class="right">$538</td></tr>
+
+      <tr class="group-header"><td colspan="5">Water &amp; Sewer Fees</td></tr>
+      <tr><td>Water capacity charge (new meters × 9 units)</td><td class="basis">City of SD Water — 3/4" meter; ~$7,200/meter</td><td class="right">$7,200</td><td class="right">4</td><td class="right">$28,800</td></tr>
+      <tr><td>Sewer capacity charge</td><td class="basis">City of SD; ~$5,800/DU equivalent</td><td class="right">$5,800</td><td class="right">10</td><td class="right">$58,000</td></tr>
+      <tr><td>SDG&amp;E service connection (gas + electric)</td><td class="basis">Estimated; developer cost</td><td class="right">LS</td><td class="right">1</td><td class="right">$12,000</td></tr>
+
+      <tr class="group-header"><td colspan="5">C&amp;D Deposits &amp; Other</td></tr>
+      <tr><td>Construction &amp; Demolition (C&amp;D) deposit</td><td class="basis">$0.40/SF resi + $0.20/SF comm (65% diversion)</td><td class="right">Mixed</td><td class="right">—</td><td class="right">$3,800</td></tr>
+      <tr><td>SB 330 Preliminary Application fee (if separate)</td><td class="basis">Included in Multiple Discipline Prelim fee above</td><td class="right">—</td><td class="right">—</td><td class="right">$0</td></tr>
+      <tr><td>Covenant / deed recording (affordable, if CCHS)</td><td class="basis">County Recorder; ~$20/page</td><td class="right">LS</td><td class="right">—</td><td class="right">$800</td></tr>
+      <tr><td>Title / escrow / misc. permitting</td><td class="basis">Owner cost; ALTA survey, title insurance</td><td class="right">LS</td><td class="right">—</td><td class="right">$8,500</td></tr>
+
+      <tr style="background:#1a3a6e; color:#fff; font-weight:800;"><td colspan="4">TOTAL PERMITS &amp; FEES</td><td class="right">$465,693</td></tr>
+    </tbody>
+  </table>
+  <div class="note-box">✅ Rounded to <strong>$485,000</strong> in summary to include minor plan-check corrections, inspection overtime, and any unanticipated agency fees.</div>
+  <div class="warn-box">⚠️ NEF ($73,625) is <strong>waived</strong> if project pursues CCHS and provides 100% affordable units. DIF may also be reduced/waived for units deed-restricted at ≤50% AMI. Confirm with DSD-Planning Review and Planning-Facilities Financing at Prelim Review.</div>
+</div>
+
+<!-- ======================== OVERVIEW CHART ======================== -->
+<div class="panel" id="panel-overview">
+  <div class="sec-title"><span class="icon">📊</span>Cost Distribution</div>
+  <div class="bar-container">
+    <div class="bar-row">
+      <div class="bar-label"><span class="name">🏗️ Construction Hard Costs</span><span class="val">$1,658,820</span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:50.3%; background:#1a5fa8;"></div></div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label"><span class="name">⚙️ GC / OH / Contingency (10%)</span><span class="val">$568,404</span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:17.2%; background:#2980b9;"></div></div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label"><span class="name">📐 Architecture &amp; Engineering</span><span class="val">$328,000</span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:9.9%; background:#00a0b0;"></div></div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label"><span class="name">🏛️ Permits, DIF, &amp; Fees</span><span class="val">$465,693</span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:14.1%; background:#e67e22;"></div></div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label"><span class="name">📏 Soft Costs (legal, insurance, financing)</span><span class="val">$280,000</span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:8.5%; background:#7f8c8d;"></div></div>
+    </div>
+  </div>
+
+  <div class="sec-title"><span class="icon">🏢</span>Construction Cost by Category</div>
+  <div class="bar-container">
+    <div class="bar-row">
+      <div class="bar-label"><span class="name">MEP Systems</span><span class="val">$384,180</span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:100%; background:#1a5fa8;"></div></div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label"><span class="name">Framing &amp; Structural</span><span class="val">$331,368</span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:86%; background:#1a5fa8;"></div></div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label"><span class="name">Interior Finishes</span><span class="val">$301,120</span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:78%; background:#2980b9;"></div></div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label"><span class="name">Exterior Envelope</span><span class="val">$252,808</span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:66%; background:#00a0b0;"></div></div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label"><span class="name">Site Improvements</span><span class="val">$143,686</span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:37%; background:#7f8c8d;"></div></div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label"><span class="name">Fire-Rated Assemblies</span><span class="val">$132,929</span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:35%; background:#e67e22;"></div></div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label"><span class="name">Foundations</span><span class="val">$74,259</span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:19%; background:#7f8c8d;"></div></div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label"><span class="name">Demo &amp; Site Work</span><span class="val">$38,470</span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:10%; background:#bdc3c7;"></div></div>
+    </div>
+  </div>
+
+  <div class="sec-title"><span class="icon">📏</span>Key Metrics</div>
+  <table class="cost-table">
+    <thead><tr><th>Metric</th><th class="right">Value</th></tr></thead>
+    <tbody>
+      <tr><td>Total project cost</td><td class="right"><strong>$3,300,000</strong></td></tr>
+      <tr><td>Cost per SF (GBA ~6,845 SF per Review 2)</td><td class="right"><strong>$482/SF</strong></td></tr>
+      <tr><td>Cost per residential unit (9 units)</td><td class="right"><strong>$366,667/unit</strong></td></tr>
+      <tr><td>Hard cost per SF (construction only)</td><td class="right"><strong>$305/SF</strong></td></tr>
+      <tr><td>Soft cost ratio (A/E + permits + fees + soft)</td><td class="right"><strong>32% of total</strong></td></tr>
+      <tr><td>DIF + NEF + school fees (total impact fees)</td><td class="right"><strong>$266,477</strong></td></tr>
+      <tr><td>Permits &amp; fees as % of hard cost</td><td class="right"><strong>20.9%</strong></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ======================== SCHEDULE ======================== -->
+<div class="panel" id="panel-schedule">
+  <div class="sec-title"><span class="icon">📅</span>Cost Disbursement by Project Phase</div>
+  <div class="timeline">
+    <div class="phase">
+      <div class="ph-label">Phase 1</div>
+      <div class="ph-name">Pre-Design</div>
+      <div class="ph-dur">Mo 1–2</div>
+      <div class="ph-cost">$50,000</div>
+      <div class="ph-items">Survey, geotech, Prelim Review fee, title, CEQA clearance</div>
+    </div>
+    <div class="phase">
+      <div class="ph-label">Phase 2</div>
+      <div class="ph-name">Design (SD/DD)</div>
+      <div class="ph-dur">Mo 2–5</div>
+      <div class="ph-cost">$115,000</div>
+      <div class="ph-items">Architecture SD+DD, structural, civil, MEP coordination</div>
+    </div>
+    <div class="phase">
+      <div class="ph-label">Phase 3</div>
+      <div class="ph-name">Construction Docs</div>
+      <div class="ph-dur">Mo 5–7</div>
+      <div class="ph-cost">$140,000</div>
+      <div class="ph-items">Full permit set, fire engineering, Title 24, plan check submittal</div>
+    </div>
+    <div class="phase">
+      <div class="ph-label">Phase 4</div>
+      <div class="ph-name">Permitting</div>
+      <div class="ph-dur">Mo 7–11</div>
+      <div class="ph-cost">$130,000</div>
+      <div class="ph-items">Plan check fees, plan check corrections (1–2 rounds), DSD approvals</div>
+    </div>
+    <div class="phase">
+      <div class="ph-label">Phase 5</div>
+      <div class="ph-name">Construction — Foundation</div>
+      <div class="ph-dur">Mo 11–13</div>
+      <div class="ph-cost">$250,000</div>
+      <div class="ph-items">Demo, grading, footings, slab, underground MEP</div>
+    </div>
+    <div class="phase">
+      <div class="ph-label">Phase 6</div>
+      <div class="ph-name">Construction — Frame/Shell</div>
+      <div class="ph-dur">Mo 13–16</div>
+      <div class="ph-cost">$750,000</div>
+      <div class="ph-items">Framing, party walls, roof, windows, doors, sheathing, fire-rating</div>
+    </div>
+    <div class="phase">
+      <div class="ph-label">Phase 7</div>
+      <div class="ph-name">Construction — MEP/Finishes</div>
+      <div class="ph-dur">Mo 16–19</div>
+      <div class="ph-cost">$900,000</div>
+      <div class="ph-items">MEP rough-in + finish, insulation, drywall, finishes, appliances</div>
+    </div>
+    <div class="phase">
+      <div class="ph-label">Phase 8</div>
+      <div class="ph-name">Closeout / CO</div>
+      <div class="ph-dur">Mo 19–20</div>
+      <div class="ph-cost">$200,000</div>
+      <div class="ph-items">Punchlist, final inspections, DIF payments, utility connections, CO</div>
+    </div>
+  </div>
+
+  <table class="cost-table">
+    <thead><tr><th>Phase</th><th>Timing</th><th class="right">Cumulative Spend</th><th class="right">% of Total</th></tr></thead>
+    <tbody>
+      <tr><td>Pre-Design</td><td>Mo 1–2</td><td class="right">$50,000</td><td class="right">1.5%</td></tr>
+      <tr><td>Design (SD+DD)</td><td>Mo 2–5</td><td class="right">$165,000</td><td class="right">5.0%</td></tr>
+      <tr><td>Construction Docs</td><td>Mo 5–7</td><td class="right">$305,000</td><td class="right">9.2%</td></tr>
+      <tr><td>Permitting</td><td>Mo 7–11</td><td class="right">$435,000</td><td class="right">13.2%</td></tr>
+      <tr><td>Construction — Foundation</td><td>Mo 11–13</td><td class="right">$685,000</td><td class="right">20.8%</td></tr>
+      <tr><td>Construction — Frame/Shell</td><td>Mo 13–16</td><td class="right">$1,435,000</td><td class="right">43.5%</td></tr>
+      <tr><td>Construction — MEP/Finishes</td><td>Mo 16–19</td><td class="right">$2,335,000</td><td class="right">70.8%</td></tr>
+      <tr><td>Closeout / Certificate of Occupancy</td><td>Mo 19–20</td><td class="right">$2,535,000</td><td class="right">76.8%</td></tr>
+      <tr><td>DIF / Fees at CO + financing costs</td><td>Mo 20</td><td class="right">$3,300,000</td><td class="right">100%</td></tr>
+    </tbody>
+  </table>
+  <div class="note-box">⏱️ Total project timeline: <strong>~20 months</strong> from Prelim Review to Certificate of Occupancy. Plan check in San Diego for a 2-story Type V-A mixed-use typically runs 2–4 months (1 correction cycle).</div>
+</div>
+
+<!-- ======================== SENSITIVITY ======================== -->
+<div class="panel" id="panel-sensitivity">
+  <div class="sec-title"><span class="icon">🎛️</span>Sensitivity &amp; Scenario Analysis</div>
+  <div class="slider-wrap">
+    <label for="cont-slider">Construction Contingency: <span id="cont-pct">10%</span></label>
+    <input type="range" id="cont-slider" min="5" max="25" value="10" step="1" oninput="updateSensitivity()">
+    <div>Contingency amount: <span class="slider-output" id="cont-amt">$208,763</span></div>
+  </div>
+  <div class="slider-wrap">
+    <label for="psf-slider">Hard Cost Rate: <span id="psf-val">$305/SF</span></label>
+    <input type="range" id="psf-slider" min="250" max="380" value="305" step="5" oninput="updateSensitivity()">
+    <div>Revised construction: <span class="slider-output" id="hard-total">$2,087,725</span></div>
+  </div>
+  <div class="slider-wrap">
+    <label>Estimated Total Project Cost:</label>
+    <div class="slider-output" id="sensitivity-total" style="font-size:20pt; color:#1a3a6e;">$3,300,000</div>
+    <div style="font-size:10pt; color:#777; margin-top:4px;" id="sensitivity-psf">~$482/SF GBA</div>
+  </div>
+
+  <div class="sec-title">Scenario Comparison</div>
+  <table class="cost-table">
+    <thead><tr><th>Scenario</th><th>Description</th><th class="right">Hard Cost</th><th class="right">Total Project</th><th class="right">$/SF GBA</th></tr></thead>
+    <tbody>
+      <tr style="background:#e8f5e9;"><td><strong>Base (Current — Review 2)</strong></td><td>Type V-A, 2-story, 9 units + commercial, 6,845 SF GBA, $305/SF, 10% contingency</td><td class="right">$2,087,725</td><td class="right">$3,300,000</td><td class="right">$482</td></tr>
+      <tr><td>Optimistic</td><td>Value-engineer finishes, favorable bids, $275/SF</td><td class="right">$1,882,375</td><td class="right">$3,050,000</td><td class="right">$446</td></tr>
+      <tr><td>Conservative</td><td>Labor escalation, supply chain, $340/SF + 15% cont.</td><td class="right">$2,327,300</td><td class="right">$3,650,000</td><td class="right">$533</td></tr>
+      <tr><td>CCHS Tier 3 (6.5 FAR)</td><td>Expand to ~16 units, likely Type III-A, 3 stories, ~12,500 SF, $360/SF</td><td class="right">$4,500,000</td><td class="right">$6,400,000</td><td class="right">$512</td></tr>
+      <tr><td>NEF Waived (CCHS + affordability)</td><td>Base scenario minus $73,625 NEF</td><td class="right">$2,087,725</td><td class="right">$3,226,000</td><td class="right">$471</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<script>
+function switchTab(name) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelector(`#panel-${name}`).classList.add('active');
+  event.target.classList.add('active');
+}
+
+function updateSensitivity() {
+  const cont = parseInt(document.getElementById('cont-slider').value);
+  const psf = parseInt(document.getElementById('psf-slider').value);
+  const GBA = 6845;
+  document.getElementById('cont-pct').textContent = cont + '%';
+  document.getElementById('psf-val').textContent = '$' + psf + '/SF';
+  const hardCost = psf * GBA;
+  const contAmt = Math.round(hardCost * (cont / 100));
+  document.getElementById('cont-amt').textContent = '$' + contAmt.toLocaleString();
+  document.getElementById('hard-total').textContent = '$' + hardCost.toLocaleString();
+  const total = hardCost + contAmt + 328000 + 465693 + 280000;
+  document.getElementById('sensitivity-total').textContent = '$' + total.toLocaleString();
+  document.getElementById('sensitivity-psf').textContent = '~$' + Math.round(total/GBA) + '/SF GBA';
+}
+</script>
+</body>
+</html>

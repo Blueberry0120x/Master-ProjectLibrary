@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<!-- Site Info Sheet — 1905 Rohn Rd, Escondido CA 92025 — CA-1905_ROHN -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#0f4c81">
+    <meta name="description" content="Site Info Sheet – 1905 Rohn Rd, Escondido CA 92025 | APN 236-411-06-00 | Zone RE-20 | SB 9 Analysis">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x1f3d7;</text></svg>">
+    <title>Site Info — Rohn Rd, Escondido</title>
+
+    <script>
+        // Theme init (before render to prevent flash)
+        (function(){
+            var s = localStorage.getItem('theme');
+            if (s === 'dark' || (s !== 'light' && window.matchMedia('(prefers-color-scheme:dark)').matches))
+                document.documentElement.setAttribute('data-theme', 'dark');
+        })();
+    </script>
+
+    <style>
+/* ==========================================
+   VARIABLES & RESET
+   ========================================== */
+:root {
+    --primary:   #0f4c81;
+    --secondary: #e2e8f0;
+    --accent:    #d9381e;
+    --text:      #2d3748;
+    --bg:        #f4f7fb;
+    --card:      #ffffff;
+    --line:      #dbe3ee;
+    --sb9-green: #15803d;
+    --sb9-amber: #b45309;
+    --sb9-red:   #b91c1c;
+}
+html[data-theme="dark"] {
+    --primary:   #93c5fd;
+    --secondary: #2d3748;
+    --accent:    #ff6b6b;
+    --text:      #e2e8f0;
+    --bg:        #0f172a;
+    --card:      #1e293b;
+    --line:      #334155;
+    --sb9-green: #4ade80;
+    --sb9-amber: #fbbf24;
+    --sb9-red:   #f87171;
+    color-scheme: dark;
+}
+
+/* Thin scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #475569; border-radius: 3px; }
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    margin: 0;
+    padding: 0 16px 40px;
+    padding-top: calc(4px + env(safe-area-inset-top));
+    padding-bottom: calc(40px + env(safe-area-inset-bottom));
+    padding-left: max(12px, env(safe-area-inset-left));
+    padding-right: max(12px, env(safe-area-inset-right));
+    font-size: clamp(13px, 2.4vw, 15px);
+    background: var(--bg);
+    color: var(--text);
+    -webkit-tap-highlight-color: transparent;
+    overscroll-behavior-y: contain;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Focus ring — WCAG 2.1 AA */
+:focus-visible {
+    outline: 3px solid var(--primary);
+    outline-offset: 2px;
+    border-radius: 3px;
+}
+a { color: var(--primary); }
+
+/* ==========================================
+   LAYOUT WRAPPER
+   ========================================== */
+.wrap { max-width: 1100px; margin: 0 auto; }
+
+/* ==========================================
+   SUITE BAR
+   ========================================== */
+.suite-bar {
+    display: flex; align-items: center;
+    background: #0f4c81; border-radius: 0;
+    padding: 0 12px; height: 34px; margin-bottom: 10px;
+    font-size: 12px; font-weight: 600; letter-spacing: 0.3px;
+    overflow-x: auto; white-space: nowrap;
+    scrollbar-width: none;
+}
+.suite-bar::-webkit-scrollbar { display: none; }
+html[data-theme="dark"] .suite-bar { background: #1e293b; }
+.suite-bar-active {
+    color: #fff; border-bottom: 2px solid #fff;
+    height: 32px; display: flex; align-items: center; padding: 0 10px;
+}
+.suite-bar-link {
+    color: rgba(255,255,255,.6); text-decoration: none;
+    padding: 0 10px; height: 32px; display: flex; align-items: center;
+    transition: .15s;
+}
+.suite-bar-link:hover { color: #fff; background: rgba(255,255,255,.1); }
+.suite-bar-sep { color: rgba(255,255,255,.25); padding: 0 3px; }
+.suite-bar-ext { margin-left: auto; display: flex; gap: 6px; align-items: center; flex-shrink: 0; }
+.suite-bar-extlink {
+    color: #fff; text-decoration: none; padding: 0 8px; height: 22px;
+    display: flex; align-items: center; border-radius: 4px;
+    font-size: 11px; font-weight: 600; border: 1.5px solid rgba(255,255,255,.4);
+    transition: .15s; white-space: nowrap;
+}
+.suite-bar-extlink:hover { background: rgba(255,255,255,.15); border-color: #fff; }
+.suite-bar-extlink-amber { color: #fbbf24; border-color: rgba(251,191,36,.5); }
+.suite-bar-extlink-amber:hover { background: rgba(251,191,36,.12); border-color: #fbbf24; }
+.suite-bar-extlink-sky { color: #38bdf8; border-color: rgba(56,189,248,.5); }
+.suite-bar-extlink-sky:hover { background: rgba(56,189,248,.12); border-color: #38bdf8; }
+
+/* ==========================================
+   PAGE HEADER
+   ========================================== */
+.page-header {
+    border-bottom: 3px solid var(--primary);
+    padding-bottom: 10px; margin-bottom: 14px;
+    display: flex; justify-content: space-between;
+    align-items: flex-start; flex-wrap: wrap; gap: 8px;
+}
+.page-header-left { display: flex; flex-direction: column; gap: 2px; }
+.page-header h1 {
+    margin: 0; font-size: clamp(18px, 4vw, 26px);
+    color: var(--primary); line-height: 1.2;
+}
+.page-header .subhead {
+    font-size: 0.8em; color: #64748b; font-weight: 600;
+    display: flex; flex-wrap: wrap; gap: 6px; align-items: center;
+}
+.page-header .subhead span { background: var(--secondary); border-radius: 4px; padding: 1px 7px; }
+html[data-theme="dark"] .page-header .subhead span { background: #334155; color: #94a3b8; }
+.theme-toggle {
+    position: fixed; top: 44px; right: 12px; z-index: 9999;
+    width: 36px; height: 36px; border-radius: 50%;
+    border: 1.5px solid var(--line); background: var(--card);
+    cursor: pointer; font-size: 18px;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,.15);
+    transition: background .2s, border-color .2s;
+}
+.theme-toggle:hover { border-color: var(--primary); }
+
+/* ==========================================
+   PROPERTY BANNER
+   ========================================== */
+.banner {
+    background: var(--primary); color: #fff;
+    border-radius: 8px; padding: 0;
+    display: flex; flex-wrap: nowrap; overflow-x: auto;
+    margin-bottom: 14px;
+    box-shadow: 0 4px 6px rgba(15,76,129,.18);
+    scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.25) transparent;
+    -webkit-overflow-scrolling: touch;
+}
+.banner::-webkit-scrollbar { height: 4px; }
+.banner::-webkit-scrollbar-thumb { background: rgba(255,255,255,.25); border-radius: 2px; }
+.banner-stat {
+    display: flex; flex-direction: column; padding: 8px 14px;
+    flex: 0 0 auto; border-right: 1px solid rgba(255,255,255,.13);
+    min-width: 0;
+}
+.banner-stat:last-child { border-right: none; }
+.b-lbl {
+    font-size: 0.68em; text-transform: uppercase; letter-spacing: 0.6px;
+    opacity: .7; margin-bottom: 4px; font-weight: 600; white-space: nowrap;
+}
+.b-val {
+    font-size: 1.0em; font-weight: 700; line-height: 1.25;
+    white-space: nowrap; color: #fff;
+}
+html[data-theme="dark"] .banner { background: #0c2d4a; }
+
+/* ==========================================
+   SB 9 ANALYSIS CARD
+   ========================================== */
+.sb9-card {
+    background: var(--card); border: 2px solid var(--sb9-green);
+    border-radius: 10px; padding: 16px 20px 20px;
+    margin-bottom: 16px;
+    box-shadow: 0 4px 12px rgba(21,128,61,.1);
+}
+html[data-theme="dark"] .sb9-card { border-color: #4ade80; box-shadow: 0 4px 12px rgba(74,222,128,.07); }
+
+.sb9-header {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 14px; flex-wrap: wrap;
+}
+.sb9-header h2 { margin: 0; font-size: 1.05em; color: var(--primary); font-weight: 800; }
+.badge {
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 4px 12px; border-radius: 20px; font-size: 0.78em;
+    font-weight: 800; letter-spacing: .04em; text-transform: uppercase;
+    white-space: nowrap;
+}
+.badge-eligible  { background: #dcfce7; color: #15803d; }
+.badge-caution   { background: #fef9c3; color: #a16207; }
+.badge-blocked   { background: #fee2e2; color: #991b1b; }
+html[data-theme="dark"] .badge-eligible  { background: #14532d; color: #4ade80; }
+html[data-theme="dark"] .badge-caution   { background: #422006; color: #fbbf24; }
+html[data-theme="dark"] .badge-blocked   { background: #450a0a; color: #f87171; }
+
+.sb9-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+}
+
+.sb9-section { display: flex; flex-direction: column; gap: 6px; }
+.sb9-section h3 {
+    margin: 0; font-size: 0.74em; font-weight: 800;
+    text-transform: uppercase; letter-spacing: .05em;
+    color: var(--primary); border-bottom: 1px solid var(--line);
+    padding-bottom: 4px; margin-bottom: 2px;
+}
+.sb9-table { width: 100%; border-collapse: collapse; font-size: 0.82em; }
+.sb9-table th,
+.sb9-table td { padding: 5px 8px; border-bottom: 1px solid var(--line); text-align: left; }
+.sb9-table th { font-weight: 700; color: #4a5568; white-space: nowrap; width: 46%; }
+html[data-theme="dark"] .sb9-table th { color: #94a3b8; }
+.sb9-table tr:last-child th,
+.sb9-table tr:last-child td { border-bottom: none; }
+.sb9-table td .check  { color: var(--sb9-green); font-weight: 800; }
+.sb9-table td .warn   { color: var(--sb9-amber); font-weight: 700; }
+.sb9-table td .block  { color: var(--sb9-red); font-weight: 800; }
+
+/* Path pills */
+.path-pill {
+    display: inline-block; padding: 3px 10px; border-radius: 12px;
+    font-size: 0.78em; font-weight: 700; margin: 2px 2px 0 0;
+    background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe;
+}
+html[data-theme="dark"] .path-pill {
+    background: #1e3a5f; color: #93c5fd; border-color: #1d4ed8;
+}
+.path-pill-clean {
+    background: #f0fdf4; color: #15803d; border-color: #bbf7d0;
+}
+html[data-theme="dark"] .path-pill-clean {
+    background: #14532d; color: #4ade80; border-color: #166534;
+}
+
+/* Bottom-line note */
+.sb9-bottomline {
+    grid-column: 1 / -1;
+    background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 6px;
+    padding: 10px 14px; font-size: 0.84em; line-height: 1.5;
+}
+html[data-theme="dark"] .sb9-bottomline {
+    background: #052e16; border-color: #166534; color: #d1fae5;
+}
+.sb9-bottomline strong { color: var(--sb9-green); }
+html[data-theme="dark"] .sb9-bottomline strong { color: #4ade80; }
+
+/* Scope metrics row */
+.metrics-row {
+    grid-column: 1 / -1;
+    display: flex; flex-wrap: wrap; gap: 8px;
+    align-items: stretch;
+}
+.metric-box {
+    flex: 1 1 140px; background: var(--secondary);
+    border-radius: 6px; padding: 8px 12px;
+    display: flex; flex-direction: column; gap: 2px;
+    min-width: 0;
+}
+html[data-theme="dark"] .metric-box { background: #334155; }
+.metric-box .m-lbl { font-size: 0.68em; text-transform: uppercase; letter-spacing: .5px; color: #64748b; font-weight: 700; }
+html[data-theme="dark"] .metric-box .m-lbl { color: #94a3b8; }
+.metric-box .m-val { font-size: 1.05em; font-weight: 800; color: var(--primary); }
+.metric-box .m-note { font-size: 0.72em; color: #64748b; }
+html[data-theme="dark"] .metric-box .m-note { color: #94a3b8; }
+
+/* ==========================================
+   INFO TABLES (CAD-style)
+   ========================================== */
+.info-two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 16px;
+}
+.info-card {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 8px; overflow: hidden;
+    box-shadow: 0 2px 4px rgba(17,24,39,.04);
+}
+.info-card summary, .info-card-header {
+    background: #1a2a3a; color: #e2e8f0;
+    padding: 7px 14px; font-size: 0.74em;
+    font-weight: 800; text-transform: uppercase; letter-spacing: .05em;
+    cursor: pointer; user-select: none; list-style: none;
+    display: flex; align-items: center; justify-content: space-between;
+}
+.info-card summary::-webkit-details-marker { display: none; }
+.info-card summary::after { content: '\25BE'; font-size: 1.1em; color: #94a3b8; }
+details.info-card[open] summary::after { content: '\25B4'; }
+html[data-theme="dark"] .info-card summary, html[data-theme="dark"] .info-card-header {
+    background: #0f172a;
+}
+.cad-table { width: 100%; border-collapse: collapse; font-size: 0.82em; }
+.cad-table th, .cad-table td {
+    padding: 5px 10px; border-bottom: 1px solid var(--line);
+    text-align: left; vertical-align: top;
+}
+.cad-table th {
+    font-weight: 700; color: #4a5568; white-space: nowrap;
+    width: 42%; background: rgba(0,0,0,.025);
+}
+html[data-theme="dark"] .cad-table th { color: #94a3b8; background: rgba(255,255,255,.03); }
+.cad-table tr:last-child th, .cad-table tr:last-child td { border-bottom: none; }
+
+/* Scope section */
+.scope-card {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 8px; padding: 12px 16px; margin-bottom: 14px;
+    font-size: 0.9em; line-height: 1.6; color: #475569;
+}
+html[data-theme="dark"] .scope-card { color: #94a3b8; }
+.scope-card h3 { margin: 0 0 6px; font-size: 0.74em; font-weight: 800; text-transform: uppercase; letter-spacing: .05em; color: var(--primary); }
+
+/* ==========================================
+   EXPORT SECTION
+   ========================================== */
+.export-section { margin-top: 14px; }
+.btn-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; }
+.btn {
+    flex: 1 1 120px; padding: 9px 14px; border: none; border-radius: 6px;
+    font-weight: 700; font-size: 0.82em; cursor: pointer; color: #fff;
+    transition: background .18s; white-space: nowrap; min-height: 40px;
+    -webkit-appearance: none; touch-action: manipulation;
+}
+.btn-lisp  { background: var(--accent); }
+.btn-lisp:hover  { background: #b92b15; }
+.btn-excel { background: #15803d; }
+.btn-excel:hover { background: #166534; }
+.btn-print { background: var(--primary); }
+.btn-print:hover { background: #0a3a6e; }
+.lisp-out {
+    width: 100%; height: 110px; padding: 8px;
+    font-family: 'Consolas', monospace; font-size: 0.78em;
+    background: #1a202c; color: #a0aec0;
+    box-sizing: border-box; resize: vertical;
+    border: none; border-radius: 4px;
+}
+
+/* ==========================================
+   MOBILE — ≤767px
+   ========================================== */
+@media (max-width: 767px) {
+    body { font-size: 14px; }
+    .page-header h1 { font-size: 18px; }
+    .suite-bar-ext { display: none; }
+
+    /* Banner: wrap to 2-col grid on very small screens */
+    .banner { flex-wrap: wrap; }
+    .banner-stat { flex: 1 1 calc(50% - 1px); border-right: 1px solid rgba(255,255,255,.13); }
+    .banner-stat:nth-child(even) { border-right: none; }
+
+    /* SB 9 grid: single column */
+    .sb9-grid { grid-template-columns: 1fr; }
+    .sb9-bottomline { grid-column: 1; }
+    .metrics-row { grid-column: 1; }
+
+    /* Info two-col: stack */
+    .info-two-col { grid-template-columns: 1fr; }
+
+    /* Touch targets */
+    .btn { min-height: 44px; }
+    .info-card summary { min-height: 40px; }
+    input, select, textarea { font-size: 16px !important; }
+    button { touch-action: manipulation; }
+
+    /* Theme toggle adjusts for mobile */
+    .theme-toggle { top: auto; bottom: calc(14px + env(safe-area-inset-bottom)); }
+}
+
+/* ==========================================
+   PRINT
+   ========================================== */
+@media print {
+    .suite-bar, .export-section, .theme-toggle, .no-print { display: none !important; }
+    body { padding: 8px !important; }
+    .sb9-card { border: 2px solid #15803d !important; }
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+}
+
+/* ==========================================
+   DARK MODE TABLE / CARD OVERRIDES
+   ========================================== */
+html[data-theme="dark"] .info-card { background: #1e293b; border-color: #334155; }
+html[data-theme="dark"] .cad-table td { color: #cbd5e1; }
+html[data-theme="dark"] .scope-card { background: #1e293b; border-color: #334155; }
+html[data-theme="dark"] .sb9-card { background: #1e293b; }
+html[data-theme="dark"] body { background: #0f172a; color: #e2e8f0; }
+html[data-theme="dark"] .lisp-out { background: #0a0a0a; color: #e0e0e0; }
+html[data-theme="dark"] .page-header h1 { color: #93c5fd; }
+html[data-theme="dark"] .info-two-col .info-card summary,
+html[data-theme="dark"] .info-two-col details > summary { color: #e2e8f0; }
+    </style>
+</head>
+<body>
+
+<!-- ── SITE DATA ── -->
+<script>
+window.__SITE_DEFAULTS__ = {
+  "project":"ProjectBook-Planner",
+  "siteId":"CA-1905_ROHN",
+  "address":"1905 Rohn Rd, Escondido, CA 92025",
+  "apn":"236-411-06-00",
+  "legalDescription":"Lot 6, Montview Terrace, Map No. 004221, City of Escondido, County of San Diego, State of California",
+  "yearBuilt":"~1960",
+  "occupancyGroup":"R-3",
+  "zoning":"RE-20",
+  "cadZone":"CA_VI",
+  "lotWidth":164,
+  "lotDepth":211,
+  "lotSF":23962,
+  "commercialDepth":0,
+  "baseFAR":0.5,
+  "commFAR":0,
+  "maxHeight":35,
+  "baseHeightLimit":35,
+  "cchsMaxHeight":0,
+  "frontSetback":25,
+  "rearSetback":20,
+  "sideSetback":10,
+  "densityPerSF":20000,
+  "nefRatePerSF":0,
+  "affordabilityPct":0,
+  "difPerUnit":0,
+  "difWaiverSF":0,
+  "projectType":"",
+  "architect":"",
+  "scopeOfWork":"",
+  "notes":"ESCONDIDO INDEPENDENT CITY -- NOT governed by City of San Diego SDMC. All zoning refs are Escondido Municipal Code (EMC) Article 6. General Plan designation E2 (Estate Residential). Council District 4. Lot is trapezoidal/irregular -- lotWidth 164 ft and lotDepth 211 ft are bounding box estimates from GIS polygon, NOT surveyed dimensions; obtain parcel map from SDARCC for actual lot lines. Lot SF 23,962 is GIS-confirmed. Lot is conforming under RE-20 (min 20,000 SF). | TBD - A: legalDescription -- SDARCC recorder lookup by APN 236-411-06-00. yearBuilt ~1960 estimated from comparables -- confirm via SD County Assessor secured roll or ParcelQuest. | TBD - C: All zoning standards (FAR, height, setbacks) -- Escondido Municipal Code Article 6, RE-20 zone. City of Escondido Planning Dept (760) 839-4671. | TBD - D: TPA status unconfirmed -- likely NOT in TPA (no light rail proximity); verify via SANDAG GIS. CCHS does not apply (SD-specific overlay). No CCHS tier. | TBD - E: Fees -- City of Escondido Building Division fee schedule (NOT SD DSD). Impact fees per Escondido schedule. | TBD - F: Project type, architect, scope of work. | TBD - G: Inspector contacts -- City of Escondido Building Division (760) 839-4647. | TBD - H: Map rotation -- estimate from aerial. Parcel polygon irregular -- trace vertices from SD County GIS or Escondido parcel lookup (escondido.gov/209/Parcel-Lookup).",
+  "inspectors":[
+    {"name":"Building (Combination)","val":"-- TBD: City of Escondido Building Division (760) 839-4647"},
+    {"name":"Structural","val":"-- TBD: City of Escondido Building Division"},
+    {"name":"Electrical","val":"-- TBD: City of Escondido Building Division"},
+    {"name":"Mechanical","val":"-- TBD: City of Escondido Building Division"},
+    {"name":"Grading / Civil","val":"-- TBD: City of Escondido Public Works or Engineering (760) 839-4671"}
+  ],
+  "planningAreas":[
+    {"name":"GENERAL PLAN AREA","val":"City of Escondido -- E2 (Estate Residential)"},
+    {"name":"COUNCIL DISTRICT","val":"District 4"},
+    {"name":"LAND USE DESIGNATION","val":"-- TBD: Escondido General Plan (2012) land use map -- contact Planning (760) 839-4671"},
+    {"name":"TRANSIT PRIORITY AREA (TPA)","val":"-- TBD: Likely No (no Sprinter station proximity) -- verify via SANDAG GIS"},
+    {"name":"PARKING STANDARDS (PSTPA)","val":"-- TBD: Confirm if TPA applies"},
+    {"name":"ANIMAL OVERLAY (AO)","val":"-- TBD: RE-20 permits animals by right; AO zone adds enhanced regs -- verify"}
+  ],
+  "overlayZones":[
+    {"name":"AIRPORT INFLUENCE AREA","val":"No (confirmed -- SD County GIS)"},
+    {"name":"COASTAL OVERLAY","val":"No (~18 mi inland)"},
+    {"name":"VERY HIGH FIRE HAZARD","val":"No -- RATE: NoWildland (Escondido Fire GIS confirmed)"},
+    {"name":"FAULT ZONE (ALQUIST-PRIOLO)","val":"No (confirmed -- CGS statewide GIS)"},
+    {"name":"FEMA FLOOD ZONE","val":"Zone X -- minimal hazard (confirmed -- FEMA NFHL)"},
+    {"name":"CCHS (HOUSING SOLUTIONS)","val":"N/A -- City of San Diego overlay, does not apply to Escondido"}
+  ],
+  "parcelPolygon":[
+    [33.10000181,-117.08553282],[33.10011525,-117.08615299],
+    [33.1004517,-117.08606605],[33.1003454,-117.08552624],
+    [33.10034086,-117.08551086],[33.10033392,-117.08549679],
+    [33.10032486,-117.08548455],[33.10031401,-117.08547458],
+    [33.10030175,-117.08546725],[33.10028854,-117.08546282],
+    [33.10027487,-117.08546147],[33.10026123,-117.08546324]
+  ],
+  "existingDwellingSF":1518,
+  "lat":33.10027952,"lng":-117.08559164,"rotation":14.1,
+  "locked":true,
+  "setbacks":{"front":25,"rear":20,"sideL":10,"sideR":10},
+  "buildings":[
+    {"orientation":166.7,"W":30,"D":60,"offsetX":-56.1,"offsetY":-20.9,"spacing":0,"count":1,"stackSpacing":0,"anchor":"center","stories":1,"floorHeight":9,"stackAngle":0,"locked":false},
+    {"orientation":166.9,"W":30,"D":60,"offsetX":-122.1,"offsetY":22.3,"spacing":0,"count":1,"stackSpacing":0,"stackAngle":0,"anchor":"center","stories":1,"floorHeight":9,"locked":false}
+  ],
+  "activeBuilding":1,"commFront":false,"showBldgDims":true,
+  "hiddenDimKeys":[],"mergedDimKeys":[],"chainWOffset":2.28,"chainDOffset":5.81,
+  "propDimOffsets":{},"mapOpacity":60,"setbacksApplied":false,
+  "freeDrag":true,"snapEdge":true,"siteNorthDeg":14.1,"frontBearing":282.69,
+  "vehicles":[],"activeVehicle":-1,"existingBuildings":[],"activeExBuilding":-1,
+  "_geoOffsets":true,"siteFileName":"ca-1905_Rohn.json"
+};
+</script>
+
+<div class="wrap">
+
+    <!-- SUITE BAR -->
+    <nav class="suite-bar no-print" role="navigation" aria-label="Suite navigation">
+        <a href="InteractiveMap.html" class="suite-bar-link">Map</a>
+        <span class="suite-bar-sep" aria-hidden="true">|</span>
+        <span class="suite-bar-active" aria-current="page">Site Info</span>
+        <span class="suite-bar-sep" aria-hidden="true">|</span>
+        <a href="PreApp_Checklist.html" class="suite-bar-link">Checklist</a>
+        <div class="suite-bar-ext" aria-label="External links">
+            <a href="https://assr.parcelquest.com/Home/" target="_blank" rel="noopener noreferrer" class="suite-bar-extlink suite-bar-extlink-amber" aria-label="Open ParcelQuest in new tab">ParcelQuest &#x2197;</a>
+            <a href="https://sandiego.maps.arcgis.com/" target="_blank" rel="noopener noreferrer" class="suite-bar-extlink suite-bar-extlink-sky" aria-label="Open SanDag GIS in new tab">SanDag GIS &#x2197;</a>
+        </div>
+    </nav>
+
+    <!-- THEME TOGGLE -->
+    <button class="theme-toggle no-print" onclick="toggleTheme()" aria-label="Toggle dark/light theme" title="Toggle theme">🌙</button>
+
+    <!-- PAGE HEADER -->
+    <header class="page-header">
+        <div class="page-header-left">
+            <h1>1905 Rohn Rd, Escondido, CA 92025</h1>
+            <div class="subhead">
+                <span>APN&nbsp;236-411-06-00</span>
+                <span>Zone&nbsp;RE-20</span>
+                <span>Lot&nbsp;6 · Montview Terrace</span>
+                <span>23,962&nbsp;SF</span>
+                <span>Council District 4</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- PROPERTY BANNER -->
+    <div class="banner" role="region" aria-label="Key site metrics">
+        <div class="banner-stat"><span class="b-lbl">Lot (bbox)</span><span class="b-val">164&prime; &times; 211&prime;</span></div>
+        <div class="banner-stat"><span class="b-lbl">Lot SF</span><span class="b-val">23,962 SF</span></div>
+        <div class="banner-stat"><span class="b-lbl">Ex. Dwelling</span><span class="b-val">1,518 SF</span></div>
+        <div class="banner-stat"><span class="b-lbl">Zoning</span><span class="b-val">RE-20</span></div>
+        <div class="banner-stat"><span class="b-lbl">Density</span><span class="b-val">1 DU / 20k SF</span></div>
+        <div class="banner-stat"><span class="b-lbl">FAR</span><span class="b-val">0.5 base</span></div>
+        <div class="banner-stat"><span class="b-lbl">Max Height</span><span class="b-val">35 FT</span></div>
+        <div class="banner-stat"><span class="b-lbl">Setbacks</span><span class="b-val">F25 / S10 / R20</span></div>
+        <div class="banner-stat"><span class="b-lbl">Max FAR Build</span><span class="b-val">11,981 SF</span></div>
+    </div>
+
+    <!-- SB 9 ANALYSIS CARD -->
+    <section class="sb9-card" aria-labelledby="sb9-heading">
+        <div class="sb9-header">
+            <h2 id="sb9-heading">&#9889; SB 9 Analysis — CA Gov Code §65852.21</h2>
+            <span class="badge badge-eligible" role="status" aria-label="SB 9 status: Eligible">&#10003; ELIGIBLE</span>
+        </div>
+
+        <div class="sb9-grid">
+
+            <!-- DISQUALIFIERS -->
+            <div class="sb9-section">
+                <h3>Disqualifier Check</h3>
+                <table class="sb9-table" aria-label="SB 9 disqualifier check results">
+                    <thead>
+                        <tr><th scope="col">Disqualifier</th><th scope="col">Status</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Very High Fire Hazard (VHFHSZ)</td><td><span class="check">&#10003; Clear — NoWildland confirmed</span></td></tr>
+                        <tr><td>Alquist-Priolo Fault Zone</td><td><span class="check">&#10003; Clear — CGS GIS confirmed</span></td></tr>
+                        <tr><td>FEMA Flood Zone</td><td><span class="check">&#10003; Zone X — minimal hazard</span></td></tr>
+                        <tr><td>Coastal Zone</td><td><span class="check">&#10003; Clear — ~18 mi inland</span></td></tr>
+                        <tr><td>Historic District</td><td><span class="check">&#10003; No indication</span></td></tr>
+                        <tr><td>Airport Influence Area</td><td><span class="check">&#10003; Clear — SD County GIS confirmed</span></td></tr>
+                        <tr><td>Municipality (must comply)</td><td><span class="check">&#10003; Incorporated city — state preempts local</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- ENTITLEMENT PATHS -->
+            <div class="sb9-section">
+                <h3>Entitlement Paths</h3>
+                <table class="sb9-table" aria-label="SB 9 entitlement options">
+                    <thead>
+                        <tr><th scope="col">Path</th><th scope="col">What it Unlocks</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="path-pill path-pill-clean">Duplex (no split)</span></td>
+                            <td>2 units on existing lot — <strong>no owner-occupancy clock</strong></td>
+                        </tr>
+                        <tr>
+                            <td><span class="path-pill">Urban Lot Split</span></td>
+                            <td>2 lots, each ≥40% of 23,962 SF = ≥9,585 SF min</td>
+                        </tr>
+                        <tr>
+                            <td><span class="path-pill">Split + Duplex per Lot</span></td>
+                            <td>Up to 4 units total (requires owner-occupancy intent)</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div style="margin-top:10px;font-size:0.82em;line-height:1.5;color:#475569;">
+                    <strong>Lot split feasibility:</strong><br>
+                    23,962 ÷ 2 ≈ 11,981 SF each &rarr; both exceed the 9,585 SF minimum. Split is geometrically viable, but the trapezoidal shape and street frontage require surveyor verification.<br><br>
+                    <strong>Owner-occupancy caveat:</strong> Lot split requires owner to intend to occupy one unit for 3 years. If investment-only, the <em>duplex path (no split)</em> avoids that obligation.
+                </div>
+            </div>
+
+            <!-- SCOPE vs ENVELOPE -->
+            <div class="sb9-section">
+                <h3>Scope Fit vs. Envelope</h3>
+                <table class="sb9-table" aria-label="Scope fit versus zoning envelope">
+                    <thead>
+                        <tr><th scope="col">Constraint</th><th scope="col">Limit</th><th scope="col">Current Scope</th><th scope="col">Status</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>FAR 0.5</td>
+                            <td>11,981 SF</td>
+                            <td>3,600 SF new + 1,518 SF existing = 5,118 SF</td>
+                            <td><span class="check">&#10003; Well under</span></td>
+                        </tr>
+                        <tr>
+                            <td>Base density</td>
+                            <td>1 DU (base)</td>
+                            <td>2 buildings = likely 2 DU</td>
+                            <td><span class="warn">&#9888; Needs SB 9 or lot split</span></td>
+                        </tr>
+                        <tr>
+                            <td>Height</td>
+                            <td>35 ft</td>
+                            <td>1 story (~10 ft)</td>
+                            <td><span class="check">&#10003; OK</span></td>
+                        </tr>
+                        <tr>
+                            <td>Setbacks</td>
+                            <td>F:25 / R:20 / S:10</td>
+                            <td>Lot large enough</td>
+                            <td><span class="check">&#10003; OK</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- BUILDABLE METRICS -->
+            <div class="sb9-section">
+                <h3>Buildable Envelope (Approx.)</h3>
+                <div class="metrics-row">
+                    <div class="metric-box">
+                        <span class="m-lbl">Bounding Box (less setbacks)</span>
+                        <span class="m-val">23,904 SF/floor</span>
+                        <span class="m-note">(164−20)×(211−45)</span>
+                    </div>
+                    <div class="metric-box">
+                        <span class="m-lbl">Lot Efficiency (bbox)</span>
+                        <span class="m-val">~69%</span>
+                        <span class="m-note">23,962 ÷ 34,604 bbox</span>
+                    </div>
+                    <div class="metric-box">
+                        <span class="m-lbl">Est. Actual Buildable</span>
+                        <span class="m-val">~16,500 SF/floor</span>
+                        <span class="m-note">rough — needs polygon calc</span>
+                    </div>
+                    <div class="metric-box">
+                        <span class="m-lbl">Max FAR Build (0.5 × lot)</span>
+                        <span class="m-val">11,981 SF</span>
+                        <span class="m-note">binding FAR cap</span>
+                    </div>
+                    <div class="metric-box">
+                        <span class="m-lbl">Each SB9 Split Lot</span>
+                        <span class="m-val">~11,981 SF</span>
+                        <span class="m-note">vs 9,585 minimum ✓</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BOTTOM LINE -->
+            <div class="sb9-bottomline" role="note" aria-label="SB 9 bottom line summary">
+                <strong>Bottom Line:</strong>
+                SB 9 is <strong>ELIGIBLE</strong> for this site — RE-20 is a single-family zone with no disqualifying overlays.
+                <strong>Base density (1 DU) is the binding constraint</strong> — if scope is 2+ units, SB 9 is the required path.
+                The <strong>duplex route (no split)</strong> is cleanest for investment use — no owner-occupancy 3-year clock.
+                Lot split → 4 units is feasible if geometry works after surveyor review.
+                All zoning refs are EMC (Escondido Municipal Code Article 6), not SDMC.
+                <em>Scope note: scopeOfWork field is currently blank — verify and fill before checklist review.</em>
+            </div>
+
+        </div><!-- end sb9-grid -->
+    </section><!-- end sb9-card -->
+
+    <!-- SCOPE OF WORK -->
+    <div class="scope-card">
+        <h3>Scope of Work</h3>
+        <p id="scope-text" style="margin:0;color:inherit">-- (Not yet defined — see SB 9 analysis above for options)</p>
+    </div>
+
+    <!-- INFO TABLES -->
+    <div class="info-two-col">
+
+        <!-- LEFT: Project Info + Land Coverage -->
+        <div style="display:flex;flex-direction:column;gap:14px;">
+            <details class="info-card" open>
+                <summary>Project Information</summary>
+                <table class="cad-table" aria-label="Project information">
+                    <tr><th scope="row">Address</th><td>1905 Rohn Rd, Escondido, CA 92025</td></tr>
+                    <tr><th scope="row">Legal Description</th><td>Lot 6, Montview Terrace, Map 004221, City of Escondido, SD County</td></tr>
+                    <tr><th scope="row">APN</th><td>236-411-06-00</td></tr>
+                    <tr><th scope="row">Existing Dwelling SF</th><td>1,518 SF</td></tr>
+                    <tr><th scope="row">Year Built</th><td>~1960 (estimated)</td></tr>
+                    <tr><th scope="row">Base Zone</th><td>RE-20 (Residential Estate, 20,000 SF min)</td></tr>
+                    <tr><th scope="row">Occupancy Group</th><td>R-3</td></tr>
+                    <tr><th scope="row">General Plan</th><td>E2 — Estate Residential</td></tr>
+                    <tr><th scope="row">Council District</th><td>District 4</td></tr>
+                    <tr><th scope="row">Lot Dims (bbox)</th><td>164 ft W × 211 ft D (bounding box, NOT surveyed)</td></tr>
+                    <tr><th scope="row">Height Limit</th><td>35 ft</td></tr>
+                    <tr><th scope="row">Standard Setbacks</th><td>(F) 25 ft | (S) 10 ft | (R) 20 ft</td></tr>
+                    <tr><th scope="row">Project Type</th><td>-- TBD</td></tr>
+                    <tr><th scope="row">Architect</th><td>-- TBD</td></tr>
+                </table>
+            </details>
+
+            <details class="info-card" open>
+                <summary>Land Coverage</summary>
+                <table class="cad-table" aria-label="Land coverage calculations">
+                    <tr><th scope="row">Lot Size</th><td>23,962 SF (GIS-confirmed)</td></tr>
+                    <tr><th scope="row">Existing Bldg</th><td>1,518 SF (~6.3% of lot)</td></tr>
+                    <tr><th scope="row">Min Lot / Density</th><td>20,000 SF per DU</td></tr>
+                    <tr><th scope="row">Max FAR</th><td>0.5</td></tr>
+                    <tr><th scope="row">Buildable FAR (0.5 × lot)</th><td>11,981 SF</td></tr>
+                    <tr><th scope="row">Proposed FAR (2 bldgs)</th><td>3,600 SF (2 × 30×60)</td></tr>
+                    <tr><th scope="row">Total FAR (proposed + existing)</th><td>5,118 SF</td></tr>
+                    <tr><th scope="row">FAR Check</th><td>5,118 / 11,981 = 42.7% — <strong>under limit</strong></td></tr>
+                </table>
+            </details>
+        </div>
+
+        <!-- RIGHT: Zoning + Planning + Overlays + Inspectors -->
+        <div style="display:flex;flex-direction:column;gap:14px;">
+            <details class="info-card" open>
+                <summary>Zoning Parameters (RE-20 — EMC Article 6)</summary>
+                <table class="cad-table" aria-label="Zoning parameters">
+                    <tr><th scope="row">Zone</th><td>RE-20 — Residential Estate</td></tr>
+                    <tr><th scope="row">Base Density</th><td>1 DU per 20,000 SF</td></tr>
+                    <tr><th scope="row">Base FAR</th><td>0.5</td></tr>
+                    <tr><th scope="row">Commercial FAR</th><td>N/A</td></tr>
+                    <tr><th scope="row">Max Height</th><td>35 ft</td></tr>
+                    <tr><th scope="row">Front Setback</th><td>25 ft</td></tr>
+                    <tr><th scope="row">Rear Setback</th><td>20 ft</td></tr>
+                    <tr><th scope="row">Side Setback</th><td>10 ft</td></tr>
+                    <tr><th scope="row">Code Reference</th><td>Escondido Municipal Code (EMC) Article 6 — NOT SDMC</td></tr>
+                    <tr><th scope="row">Notes</th><td>Lot is conforming (23,962 SF &gt; 20,000 SF minimum). Lot dims are bounding-box estimates — get surveyed parcel map from SDARCC for actual lot lines.</td></tr>
+                </table>
+            </details>
+
+            <details class="info-card" open>
+                <summary>Planning &amp; Transit Areas</summary>
+                <table class="cad-table" id="planning-table" aria-label="Planning areas"></table>
+            </details>
+
+            <details class="info-card" open>
+                <summary>Overlay Zones</summary>
+                <table class="cad-table" id="overlay-table" aria-label="Overlay zones"></table>
+            </details>
+
+            <details class="info-card" open>
+                <summary>City Inspector Contacts</summary>
+                <table class="cad-table" id="inspector-table" aria-label="City inspector contacts"></table>
+            </details>
+        </div>
+
+    </div><!-- end info-two-col -->
+
+    <!-- EXPORT SECTION -->
+    <div class="export-section no-print">
+        <div class="btn-row" role="group" aria-label="Export options">
+            <button class="btn btn-lisp" id="btnExportLisp" aria-label="Export LISP file">&#9654; Export LISP</button>
+            <button class="btn btn-excel" id="btnExportExcel" aria-label="Export Excel file">&#9654; Export Excel</button>
+            <button class="btn btn-print" onclick="window.print()" aria-label="Print or save as PDF">&#128438; Print / PDF</button>
+        </div>
+        <textarea id="lispOut" class="lisp-out" readonly aria-label="Generated LISP code output" placeholder="LISP output will appear here after clicking Export LISP…"></textarea>
+    </div>
+
+</div><!-- end wrap -->
+
+<script>
+/* ==========================================
+   INIT — populate dynamic tables
+   ========================================== */
+(function() {
+    var sd = window.__SITE_DEFAULTS__ || {};
+
+    /* Scope of work */
+    var scopeEl = document.getElementById('scope-text');
+    if (scopeEl && sd.scopeOfWork) {
+        scopeEl.textContent = sd.scopeOfWork;
+    }
+
+    /* Dynamic planning areas table */
+    var planTable = document.getElementById('planning-table');
+    if (planTable && sd.planningAreas && sd.planningAreas.length) {
+        planTable.innerHTML = '';
+        (sd.planningAreas || []).forEach(function(r) {
+            var tr = document.createElement('tr');
+            var th = document.createElement('th'); th.setAttribute('scope','row');
+            th.textContent = r.name || '';
+            var td = document.createElement('td'); td.textContent = r.val || '--';
+            tr.appendChild(th); tr.appendChild(td);
+            planTable.appendChild(tr);
+        });
+    }
+
+    /* Dynamic overlay zones table */
+    var ovTable = document.getElementById('overlay-table');
+    if (ovTable && sd.overlayZones && sd.overlayZones.length) {
+        ovTable.innerHTML = '';
+        (sd.overlayZones || []).forEach(function(r) {
+            var tr = document.createElement('tr');
+            var th = document.createElement('th'); th.setAttribute('scope','row');
+            th.textContent = r.name || '';
+            var td = document.createElement('td'); td.textContent = r.val || '--';
+            tr.appendChild(th); tr.appendChild(td);
+            ovTable.appendChild(tr);
+        });
+    }
+
+    /* Dynamic inspectors table */
+    var inspTable = document.getElementById('inspector-table');
+    if (inspTable && sd.inspectors && sd.inspectors.length) {
+        inspTable.innerHTML = '';
+        (sd.inspectors || []).forEach(function(r) {
+            var tr = document.createElement('tr');
+            var th = document.createElement('th'); th.setAttribute('scope','row');
+            th.textContent = r.name || '';
+            var td = document.createElement('td'); td.textContent = r.val || '--';
+            tr.appendChild(th); tr.appendChild(td);
+            inspTable.appendChild(tr);
+        });
+    }
+
+    /* ── LISP Export ── */
+    document.getElementById('btnExportLisp').addEventListener('click', function() {
+        var lisp = generateLISP(sd);
+        document.getElementById('lispOut').value = lisp;
+        var blob = new Blob([lisp], { type: 'text/plain' });
+        var a = document.createElement('a');
+        a.download = 'SiteProjectInfo_Rohn_236-411-06-00.lsp';
+        a.href = URL.createObjectURL(blob);
+        a.click();
+        URL.revokeObjectURL(a.href);
+    });
+
+    /* ── Excel Export ── */
+    document.getElementById('btnExportExcel').addEventListener('click', function() {
+        generateExcel(sd);
+    });
+})();
+
+/* ==========================================
+   THEME TOGGLE
+   ========================================== */
+function toggleTheme() {
+    var html = document.documentElement;
+    var btn  = document.querySelector('.theme-toggle');
+    var dark = html.getAttribute('data-theme') === 'dark';
+    html.setAttribute('data-theme', dark ? 'light' : 'dark');
+    localStorage.setItem('theme', dark ? 'light' : 'dark');
+    if (btn) btn.textContent = dark ? '🌙' : '☀️';
+}
+(function() {
+    var btn = document.querySelector('.theme-toggle');
+    if (btn) {
+        btn.textContent = document.documentElement.getAttribute('data-theme') === 'dark' ? '☀️' : '🌙';
+    }
+})();
+
+/* ==========================================
+   LISP GENERATOR
+   ========================================== */
+function generateLISP(sd) {
+    var today = new Date().toLocaleDateString('en-US', { year:'numeric', month:'2-digit', day:'2-digit' });
+    function q(v) { return '"' + String(v || '').replace(/"/g, "'") + '"'; }
+    function n1(v) { return Number(v || 0).toFixed(1); }
+    function n2(v) { return Number(v || 0).toFixed(2); }
+    var fSb = sd.frontSetback || 25;
+    var rSb = sd.rearSetback  || 20;
+    var sSb = sd.sideSetback  || 10;
+    var lotSF   = sd.lotSF    || 23962;
+    var baseFAR = sd.baseFAR  != null ? sd.baseFAR  : 0.5;
+    var maxHt   = sd.maxHeight != null ? sd.maxHeight : 35;
+    var densPS  = sd.densityPerSF || 20000;
+    var exSF    = sd.existingDwellingSF || 1518;
+
+    var bldgs = sd.buildings || [];
+    var bldgLines = [];
+    var totalSF = 0;
+    bldgs.forEach(function(b, i) {
+        var n = i + 1;
+        var sf = Math.round((b.W||0) * (b.D||0) * (b.count||1));
+        totalSF += sf;
+        bldgLines.push(
+            '(setq SPI:Bldg' + n + 'W       ' + n1(b.W)        + ')',
+            '(setq SPI:Bldg' + n + 'D       ' + n1(b.D)        + ')',
+            '(setq SPI:Bldg' + n + 'Stories ' + (b.stories||1) + ')',
+            '(setq SPI:Bldg' + n + 'SF      ' + sf             + ')'
+        );
+    });
+
+    var planLines = (sd.planningAreas||[]).map(function(r,i){
+        return '(setq SPI:PA'+(i+1)+'_Name '+q(r.name||'')+') (setq SPI:PA'+(i+1)+'_Val '+q(r.val||'')+')';
+    });
+    var ozLines = (sd.overlayZones||[]).map(function(r,i){
+        return '(setq SPI:OZ'+(i+1)+'_Name '+q(r.name||'')+') (setq SPI:OZ'+(i+1)+'_Val '+q(r.val||'')+')';
+    });
+
+    return [
+        ';;; ====================================================================',
+        ';;; SiteProjectInfo_Rohn.lsp  — 1905 Rohn Rd, Escondido CA 92025',
+        ';;; APN: 236-411-06-00  |  Zone: RE-20  |  Escondido Municipal Code',
+        ';;; GENERATED: ' + today + ' by ProjectBook-Planner',
+        ';;; SB 9 Status: ELIGIBLE — no disqualifying overlays',
+        ';;; ====================================================================',
+        '',
+        '(vl-load-com)',
+        '',
+        ';; -- IDENTITY --',
+        '(setq SPI:Address     ' + q(sd.address)   + ')',
+        '(setq SPI:APN         "236-411-06-00")',
+        '(setq SPI:Zone        "RE-20")',
+        '(setq SPI:LegalDesc   "Lot 6, Montview Terrace, Map 004221")',
+        '(setq SPI:YearBuilt   "~1960")',
+        '(setq SPI:OccGroup    "R-3")',
+        '',
+        ';; -- LOT --',
+        '(setq SPI:LotWidth    164.0)   ; ft (bounding box estimate)',
+        '(setq SPI:LotDepth    211.0)   ; ft (bounding box estimate)',
+        '(setq SPI:LotSF       23962)   ; sq ft (GIS-confirmed)',
+        '(setq SPI:ExBldgSF    1518)',
+        '',
+        ';; -- SETBACKS (EMC Article 6) --',
+        '(setq SPI:FrontSb     ' + n1(fSb) + ')   ; ft',
+        '(setq SPI:RearSb      ' + n1(rSb) + ')   ; ft',
+        '(setq SPI:SideSb      ' + n1(sSb) + ')   ; ft',
+        '',
+        ';; -- ZONING --',
+        '(setq SPI:BaseFAR      ' + n2(baseFAR) + ')',
+        '(setq SPI:MaxHeight    ' + n1(maxHt)   + ')   ; ft',
+        '(setq SPI:DensityPerSF ' + Math.round(densPS) + ')',
+        '(setq SPI:BuildableSF  (fix (* SPI:LotSF SPI:BaseFAR)))',
+        '',
+        ';; -- SB 9 --',
+        '(setq SPI:SB9Eligible   "YES")',
+        '(setq SPI:SB9Path       "Duplex (no split) preferred for investment")',
+        '(setq SPI:SB9SplitMinSF 9585)   ; 40% of 23,962 SF',
+        '(setq SPI:SB9EachLotSF  11981)  ; 23,962 / 2',
+        '',
+        ';; -- PLANNING AREAS --',
+    ].concat(planLines).concat([
+        '',
+        ';; -- OVERLAY ZONES --',
+    ]).concat(ozLines).concat([
+        '',
+        ';; -- BUILDINGS (' + bldgs.length + ') --',
+        '(setq SPI:BldgCount ' + bldgs.length + ')',
+    ]).concat(bldgLines).concat([
+        '(setq SPI:TotalProposedSF ' + totalSF + ')',
+        '',
+        '(defun c:SPI ()',
+        '  (textscr)',
+        '  (princ "\\n=== SITE PROJECT INFO: ROHN =============================")',
+        '  (princ (strcat "\\n  Address:    " SPI:Address))',
+        '  (princ (strcat "\\n  APN:        " SPI:APN))',
+        '  (princ (strcat "\\n  Zone:       " SPI:Zone " (EMC Article 6)"))',
+        '  (princ "\\n-------------------------------------------------------")',
+        '  (princ (strcat "\\n  Lot SF:     " (itoa SPI:LotSF) " sq.ft."))',
+        '  (princ (strcat "\\n  Ex Bldg:    " (itoa SPI:ExBldgSF) " sq.ft."))',
+        '  (princ (strcat "\\n  FAR Max:    " (rtos SPI:BaseFAR 2 2)))',
+        '  (princ (strcat "\\n  Build Max:  " (itoa SPI:BuildableSF) " sq.ft."))',
+        '  (princ "\\n-------------------------------------------------------")',
+        '  (princ (strcat "\\n  SB9:        " SPI:SB9Eligible))',
+        '  (princ (strcat "\\n  SB9 Path:   " SPI:SB9Path))',
+        '  (princ "\\n=======================================================")',
+        '  (princ)',
+        ')',
+        '',
+        '(princ "\\n:: SiteProjectInfo_Rohn.lsp loaded. Type SPI to view.")',
+        '(princ)',
+    ]).join('\n');
+}
+
+/* ==========================================
+   EXCEL GENERATOR
+   ========================================== */
+function generateExcel(sd) {
+    var lotSF   = sd.lotSF   || 23962;
+    var baseFAR = sd.baseFAR != null ? sd.baseFAR : 0.5;
+    var exSF    = sd.existingDwellingSF || 1518;
+    var fSb = sd.frontSetback || 25;
+    var rSb = sd.rearSetback  || 20;
+    var sSb = sd.sideSetback  || 10;
+    var maxHt = sd.maxHeight  || 35;
+    var lotAC = (lotSF / 43560).toFixed(3);
+
+    function v(val, unit) {
+        if (val == null || val === '') return '--';
+        return unit ? val + ' ' + unit : String(val);
+    }
+    function esc(s) {
+        return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+    var C = { HDR:'#1e3a5c', SEC:'#0f4c81', ODD:'#f0f7ff', W:'#ffffff' };
+
+    var rows = [];
+    function sec(title) { rows.push({ type:'sec', title:title }); }
+    function row(field, value, source, alt) { rows.push({ type:'row', field:field, value:value, source:source, alt:!!alt }); }
+
+    sec('A. Parcel Identity');
+    row('Address', '1905 Rohn Rd, Escondido, CA 92025', 'County Assessor');
+    row('APN', '236-411-06-00', 'County Assessor / ParcelQuest', true);
+    row('Legal Description', 'Lot 6, Montview Terrace, Map 004221', 'Deed / Assessor record');
+    row('Year Built', '~1960 (estimated)', 'Assessor — confirm via ParcelQuest', true);
+    row('Occupancy Group', 'R-3', 'Building permit history');
+
+    sec('B. Lot Dimensions');
+    row('Lot Width (bbox estimate)', '164 ft', 'GIS polygon — NOT surveyed', true);
+    row('Lot Depth (bbox estimate)', '211 ft', 'GIS polygon — NOT surveyed');
+    row('Lot SF', Math.round(lotSF).toLocaleString() + ' SF', 'GIS-confirmed', true);
+    row('Lot Acres', lotAC + ' AC', 'Calculated');
+    row('Lot Shape', 'Trapezoidal / irregular (12-vertex polygon captured)', 'SD County GIS', true);
+    row('Survey needed?', 'YES — obtain parcel map from SDARCC by APN', 'SDARCC Recorder');
+
+    sec('C. Zoning Standards (EMC Article 6 — RE-20)');
+    row('Zone', 'RE-20 — Residential Estate', 'Escondido Municipal Code Art. 6', true);
+    row('Jurisdiction', 'City of Escondido — NOT City of San Diego', 'Escondido Planning (760) 839-4671');
+    row('Base FAR', '0.5', 'EMC Art. 6', true);
+    row('Max Buildable SF', (Math.round(lotSF * baseFAR)).toLocaleString() + ' SF', 'Lot SF × FAR');
+    row('Max Height', maxHt + ' ft', 'EMC Art. 6', true);
+    row('Front Setback', fSb + ' ft', 'EMC Art. 6');
+    row('Rear Setback', rSb + ' ft', 'EMC Art. 6', true);
+    row('Side Setback', sSb + ' ft', 'EMC Art. 6');
+    row('Min Lot Size', '20,000 SF', 'EMC Art. 6 RE-20', true);
+    row('Lot Conforming?', 'YES — 23,962 SF > 20,000 SF min', 'EMC Art. 6');
+
+    sec('D. SB 9 Analysis');
+    row('SB 9 Status', 'ELIGIBLE — all disqualifiers clear', 'CA Gov Code §65852.21', true);
+    row('VHFHSZ', 'No — NoWildland confirmed', 'Escondido Fire GIS');
+    row('Alquist-Priolo Fault Zone', 'No — CGS GIS confirmed', 'CGS statewide GIS', true);
+    row('FEMA Flood Zone', 'Zone X — minimal hazard', 'FEMA NFHL');
+    row('Coastal Zone', 'No — ~18 mi inland', 'SD County GIS', true);
+    row('Airport Influence Area', 'No — confirmed', 'SD County GIS');
+    row('Path recommendation', 'Duplex (no split) — no owner-occupancy clock (investment use)', 'CA Gov Code §65852.21', true);
+    row('Lot split feasibility', '23,962 ÷ 2 = 11,981 SF each (>9,585 SF min). Trapezoidal — surveyor required', 'SB 9 40% rule');
+    row('Max units via SB 9 split', '4 total (2 per resulting lot)', 'CA Gov Code §65852.21', true);
+
+    sec('E. Planning Overlays');
+    (sd.planningAreas||[]).forEach(function(r,i){ row(r.name||('Area '+(i+1)), r.val||'--', 'City General Plan', i%2===0); });
+    (sd.overlayZones||[]).forEach(function(r,i)  { row(r.name||('Zone '+(i+1)), r.val||'--', 'SD County GIS / ZIMS', i%2===0); });
+
+    sec('F. Fees');
+    row('NEF rate per SF', 'N/A (Escondido — not SD DSD)', 'City of Escondido Building Division', true);
+    row('Impact fees', 'TBD — Escondido fee schedule', 'Escondido Building Division', false);
+    row('Contact', 'Escondido Building Division (760) 839-4647', '', true);
+
+    sec('G. Project Info (TBD)');
+    row('Project type', '-- TBD', '', true);
+    row('Architect', '-- TBD', '');
+    row('Scope of work', '-- TBD — fill before checklist review', '', true);
+    row('Existing dwelling SF', '1,518 SF', 'Assessor record');
+    row('Notes', 'ESCONDIDO independent city. All refs to EMC, not SDMC. CCHS does not apply.', '', true);
+
+    sec('H. Inspector Contacts');
+    (sd.inspectors||[]).forEach(function(r,i){ row(r.name||('Inspector '+(i+1)), r.val||'--', 'Escondido Building Division', i%2===0); });
+
+    var html = [
+        '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel">',
+        '<head><meta charset="UTF-8">',
+        '<style>body{font-family:Calibri,Arial,sans-serif;font-size:10pt}',
+        'table{border-collapse:collapse;width:100%}',
+        'td,th{border:1px solid #999;padding:4px 6px;vertical-align:top;font-size:10pt}',
+        '.b{font-weight:bold}</style></head><body>',
+        '<table>',
+        '<tr><td colspan="5" class="b" style="background:#1e3a5c;color:#fff;font-size:13pt;padding:6px 8px;border:1px solid #999">SITE DATA SHEET — 1905 Rohn Rd, Escondido CA 92025 &nbsp;|&nbsp; APN 236-411-06-00 &nbsp;|&nbsp; RE-20 &nbsp;|&nbsp; SB 9 ELIGIBLE</td></tr>',
+        '<tr>',
+        '<th style="background:#1e3a5c;color:#fff;width:140px">SECTION</th>',
+        '<th style="background:#1e3a5c;color:#fff;width:260px">FIELD</th>',
+        '<th style="background:#1e3a5c;color:#fff;width:40px">DONE</th>',
+        '<th style="background:#1e3a5c;color:#fff;width:240px">VALUE</th>',
+        '<th style="background:#1e3a5c;color:#fff;width:220px">SOURCE</th>',
+        '</tr>',
+    ];
+
+    rows.forEach(function(r) {
+        if (r.type === 'sec') {
+            html.push('<tr><td colspan="5" class="b" style="background:#0f4c81;color:#fff;border:1px solid #999;padding:4px 6px">'+esc(r.title)+'</td></tr>');
+        } else {
+            var a = r.alt ? C.ODD : C.W;
+            var done = (r.value && r.value !== '--') ? '&#10003;' : '';
+            html.push('<tr>');
+            html.push('<td style="background:'+a+';border:1px solid #999;padding:4px 6px"></td>');
+            html.push('<td style="background:'+a+';border:1px solid #999;padding:4px 6px">'+esc(r.field)+'</td>');
+            html.push('<td style="background:#fff;border:1px solid #999;text-align:center">'+done+'</td>');
+            html.push('<td style="background:'+a+';border:1px solid #999;padding:4px 6px">'+esc(r.value)+'</td>');
+            html.push('<td style="background:'+a+';border:1px solid #999;padding:4px 6px;font-size:9pt">'+esc(r.source)+'</td>');
+            html.push('</tr>');
+        }
+    });
+    html.push('</table></body></html>');
+
+    var blob = new Blob([html.join('\n')], { type: 'application/vnd.ms-excel;charset=utf-8' });
+    var a = document.createElement('a');
+    a.download = 'SiteData_Rohn_236-411-06-00.xls';
+    a.href = URL.createObjectURL(blob);
+    a.click();
+    URL.revokeObjectURL(a.href);
+}
+</script>
+
+</body>
+</html>

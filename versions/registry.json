@@ -1,0 +1,15 @@
+{
+  "versions": {
+    "1.0.0": {
+      "version": "1.0.0",
+      "port": 3041,
+      "snapshot_path": "versions/v1.0.0",
+      "files": [
+        "InteractiveMap.html",
+        "PreApp_Checklist.html",
+        "architecture-dev0.html",
+        "architecture.html"
+      ]
+    }
+  }
+}
