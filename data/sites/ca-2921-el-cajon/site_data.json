@@ -11,17 +11,38 @@
   },
   "site": {
     "apn": "446-232-04-00",
+    "zoning": "CC-3-9",
     "legal_description": "Block 119, Lots 7 & 8, University Heights D'Hemecourt Map (Amended), City of San Diego, County of San Diego, State of California",
     "community_plan": "North Park",
     "base_zone": "CC-3-9",
     "lot_sf": 7039,
+    "lotSF": 7039,
     "lot_width": 49,
+    "lotWidth": 49,
     "lot_depth": 144,
+    "lotDepth": 144,
+    "cadZone": "CA_VI",
+    "parcelPolygon": [
+      [32.75472599035348, -117.13089185144067],
+      [32.754725501443225, -117.13096033160872],
+      [32.75481619557008, -117.13096048720650],
+      [32.75492888916509, -117.13096068350124],
+      [32.75511853365214, -117.13096100895713],
+      [32.75511909094138, -117.13088295043677],
+      [32.75511964818886, -117.13080489084834],
+      [32.75472663919634, -117.13080096177241]
+    ],
     "year_built_existing": "~1950",
     "cchs_tier": 3,
     "tpa": true,
     "airport_influence": true,
     "airport_influence_area": "SDIA Review Area 2"
+  },
+  "saved": {
+    "lat": 32.75491006,
+    "lng": -117.13090290,
+    "rotation": 0,
+    "frontBearing": 0
   },
   "project": {
     "prj": "",

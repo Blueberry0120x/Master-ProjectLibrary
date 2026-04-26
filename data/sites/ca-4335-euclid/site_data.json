@@ -14,13 +14,35 @@
     "legal_description": "Lot 16, Block 4, EUCLID MANOR, Map No. 3482, City of San Diego",
     "community_plan": "Mid-City: City Heights",
     "base_zone": "CUPD-CU-2-4",
+    "zoning": "CUPD-CU-2-4",
     "lot_sf": 6250,
+    "lotSF": 6250,
     "lot_width": 50,
+    "lotWidth": 50,
     "lot_depth": 125,
+    "lotDepth": 125,
+    "cadZone": "CA_VI",
+    "parcelPolygon": [
+      [32.755573868896526, -117.09171233465206],
+      [32.75551066651322, -117.09171320136456],
+      [32.75551343130846, -117.09211812179221],
+      [32.75565636327361, -117.09211623531150],
+      [32.75565538925730, -117.09204464035555],
+      [32.75565432480701, -117.09196660213888],
+      [32.75565317349655, -117.09188199157069],
+      [32.755652114287976, -117.09180396301336],
+      [32.755650855630805, -117.09171127841809]
+    ],
     "year_built_existing": "~1952",
     "cchs_tier": 3,
     "tpa": true,
     "airport_influence": false
+  },
+  "saved": {
+    "lat": 32.75561335,
+    "lng": -117.09189649,
+    "rotation": 0,
+    "frontBearing": 270
   },
   "project": {
     "prj": "",
