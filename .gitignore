@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+
+# Node
+node_modules/
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/settings.local.json
+*.bak
+*.tmp
+*.orig
+*~
+
+# Claude Code
+.claude/settings.local.json
+controller-note/.last-read
+
+# Build outputs (tracked separately in docs/ for Pages)
+app/Output/*.html
+
+# Secrets
+.env
+*.pem
+*.key

@@ -1,0 +1,97 @@
+{
+  "_comment": "MPL canonical. Legacy: PlanCheck-Planner/data/sites/4335-euclid/ (archived).",
+  "site_id": "ca-4335-euclid",
+  "project_book_id": "CA-4335_EUCLID",
+  "address": {
+    "full": "4335 Euclid Avenue, San Diego, CA 92105",
+    "street": "4335 Euclid Avenue",
+    "city": "San Diego",
+    "state": "CA",
+    "zip": "92105"
+  },
+  "site": {
+    "apn": "471-271-16-00",
+    "legal_description": "Lot 16, Block 4, EUCLID MANOR, Map No. 3482, City of San Diego",
+    "community_plan": "Mid-City: City Heights",
+    "base_zone": "CUPD-CU-2-4",
+    "lot_sf": 6250,
+    "lot_width": 50,
+    "lot_depth": 125,
+    "year_built_existing": "~1952",
+    "cchs_tier": 3,
+    "tpa": true,
+    "airport_influence": false
+  },
+  "project": {
+    "prj": "",
+    "title": "Mixed-Use Development — 4335 Euclid Ave",
+    "permit_type": "Building",
+    "forms": [
+      "ds375",
+      "ds3032",
+      "ds420"
+    ],
+    "scope": "Demolish existing 1,225 SF single-story commercial building (auto repair, built ~1952, Group B) and construct a new 2-story mixed-use development on a 6,250 SF lot (CUPD-CU-2-4 zone). Proposed program: 9 residential units, all 2-bedroom (Group R-2) — Units 1–4 ground floor (568.59 SF each), Units 5–8 second floor (568.59 SF each), Unit 9 second floor (669.80 SF); total net residential 5,218.52 SF. Ground-floor commercial space (Group B): 640.38 SF. Building footprint: 3,422.47 SF (54.76% lot coverage). FAR: 1.10 (max 2.0 permitted). Stories: 2. TPA zone — 0 auto parking required (AB 2097). Common open space: ~361 SF covered area (former carport converted). Trash enclosure: 5' × 25', east side. NFPA 13R sprinklers per Q2 resolution. Rear 17-ft one-way aisle, alley access. SB 330 Preliminary Application filed concurrently.",
+    "existing": {
+      "sf": "1,225",
+      "stories": "1",
+      "construction_type": "V-B (assumed — auto repair, ~1952)",
+      "occupancy": "B (auto repair)",
+      "use": "commercial"
+    },
+    "proposed": {
+      "sf": "~6,845 SF GBA (3,422.47 SF footprint × 2 stories)",
+      "stories": "2",
+      "construction_type": "V-A or V-B (TBD per Q2 party-wall/fire-wall path)",
+      "occupancy": "R-2 (9 units) + B (640.38 SF)",
+      "use": "mixed"
+    },
+    "is_45_years": true,
+    "fire_sprinklers": false,
+    "parking_ratio": "0 required — TPA/AB 2097 (SDMC 142.0523)",
+    "deviations": "Side setbacks 0 ft both sides per CUPD optional standard — complies per plans.",
+    "earthwork_quantities": "Min. grading for new foundation; est. <200 CY; TBD per soils report.",
+    "public_improvements": "Driveway approach removal and utility lateral trench in Euclid Ave ROW per Q5; no curb/gutter/sidewalk replacement proposed."
+  },
+  "ds375": {
+    "community_plan_amend": false,
+    "rezone": false,
+    "mhpa": false,
+    "historically_significant": false,
+    "runoff": true,
+    "policy_questions": "Q1 [Building Plan Review] Per CBC 11B-206.2.3 Exception 1, for a 2-story Group R-2 building with 5 dwelling units on the second floor, does the residential elevator exemption apply, or is a vertical accessibility element required to serve the upper floor units?\n\nQ2 [Building Plan Review] If the 9 R-2 units are separated by CBC 706 fire walls (structurally independent, continuous through roof sheathing per CBC 706.6), may the occupancy be classified as Group R-3 per CBC 310.5 (townhouse), thereby removing the CBC 903.2.8 NFPA 13R automatic sprinkler requirement?\n\nQ3 [Planning Review] Under SDMC 1531.0302, does a 9-unit Group R-2 + 640.38 SF Group B mixed-use development with FAR 1.10, 54.76% lot coverage, and 0-ft side/rear setbacks in CUPD-CU-2-4 require a Site Development Permit, Neighborhood Development Permit, or Conditional Use Permit, or is it permitted by-right with a building permit only?\n\nQ4 [Land Development Review — Inclusionary Housing] For 9 net-new market-rate R-2 dwelling units at APN 471-271-16-00 in Mid-City: City Heights, what is the current SDMC 142.1301 Inclusionary Housing Ordinance in-lieu fee per market-rate unit?\n\nQ5 [Engineering — Right-of-Way] If the applicant closes the existing driveway approach and proposes only utility lateral trenching in the Euclid Avenue right-of-way (no driveway expansion, no curb/gutter/sidewalk replacement), is a DS-3037 Public Improvement Plan required, or is a standalone encroachment permit sufficient?\n\nQ6 [Public Utilities — Water] For a new 9-unit Group R-2 + 640.38 SF Group B mixed-use building at APN 471-271-16-00, does San Diego Public Utilities Department require individual 3/4-inch domestic meters per dwelling unit, a master meter with sub-metering per Civil Code 1954.201 (SB 7), or a single domestic meter sized for the combined program?\n\nQ7 [Stormwater Review] For a 6,250 SF lot with existing 100% impervious cover (auto-repair site) and proposed 5,577 SF impervious cover, does the City's Stormwater Standards Manual v3 net-new impervious calculation method classify this project as a Priority Development Project, or does the existing impervious credit reduce net-new area below the PDP threshold?\n\nQ8 [Fire Plan Review] Per CFC 503 and CFC Table D105.1, is 17 feet of clear width on a one-way rear service aisle sufficient fire apparatus access for a 2-story Group R-2 + Group B mixed-use building, or is 20 feet required?\n\nQ9 [Geology / Soils Review] For a 2-story wood-frame structure on a flat 6,250 SF urban infill lot at APN 471-271-16-00, does IB-515 require a full geotechnical investigation, or will a geotechnical letter of opinion with site reconnaissance suffice?\n\nQ10 [Hazardous Materials / Environmental Review] For a redevelopment site with prior auto-repair use since approximately 1952 (petroleum hydrocarbon exposure presumed) and an applicant-commissioned soil assessment concluding no Phase II remediation is required, is a San Diego County Department of Environmental Health Voluntary Assistance Program closure letter required prior to grading or building permit issuance?"
+  },
+  "applicant": {
+    "name": "ADEC Group",
+    "company": "ADEC Group",
+    "phone": "",
+    "email": "passio.engineering@gmail.com",
+    "title": "Engineer of Record",
+    "license_no": ""
+  },
+  "owner": {
+    "name": "ADEC Group",
+    "phone": "",
+    "address": "7201 Garden Grove Blvd, STE A",
+    "city": "Garden Grove",
+    "state": "CA",
+    "zip": "92841",
+    "email": "passio.engineering@gmail.com"
+  },
+  "_sync": {
+    "last_synced_from": "ProjectBook CA-4335_EUCLID",
+    "synced_fields": [
+      "address",
+      "site.apn",
+      "site.lot_sf",
+      "project.scope",
+      "project.proposed.stories"
+    ],
+    "preserve_target_fields": [
+      "applicant",
+      "owner",
+      "project.prj",
+      "ds375.policy_questions"
+    ]
+  }
+}
