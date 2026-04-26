@@ -1,0 +1,262 @@
+{
+  "project": "ProjectBook-Planner",
+  "site": {
+    "siteId": "CA-12652_LAUX",
+    "address": "12652 Laux Ave, Garden Grove, CA 92840",
+    "apn": "231-544-02",
+    "legalDescription": "N TR 1698 BLK LOT 27",
+    "yearBuilt": "1954",
+    "occupancyGroup": "R-3",
+    "zoning": "R-1",
+    "cadZone": "CA_V",
+    "lotWidth": 70,
+    "lotDepth": 103.0,
+    "lotSF": 7210,
+    "lotWidthSouth": 60,
+    "lotWidthNorth": 60,
+    "lotDepthWest": 120,
+    "lotDepthEast": 120,
+    "lotAcres": 0.17,
+    "commercialDepth": 0,
+    "baseFAR": 0,
+    "commFAR": 0,
+    "maxHeight": 35,
+    "baseHeightLimit": 35,
+    "cchsMaxHeight": 0,
+    "frontSetback": 20,
+    "rearSetback": 10,
+    "sideSetback": 5,
+    "densityPerSF": 7200,
+    "nefRatePerSF": 0,
+    "affordabilityPct": 0,
+    "difPerUnit": 0,
+    "difWaiverSF": 0,
+    "unitCount": 1,
+    "unitDensity": 0,
+    "projectType": "SFR + ADU",
+    "architect": "-- TBD",
+    "scopeOfWork": "Existing 1,041 SF SFR (1954) on 7,210 SF R-1 lot. ADU plans paid and pending city approval. R-1 allows 1 ADU (1,200 SF max) + 1 JADU (500 SF max). 50% lot coverage limit (3,605 SF max). ADU setbacks: 4ft side/rear.",
+    "cornerVisibilityTriangle": false,
+    "cornerVisTriSize": 0,
+    "cornerVisCorner": "",
+    "densityBonus": false,
+    "notes": "Assessor map Book 231 Page 54. Map shows 70ft frontage, ~89.24ft partial depth. Full depth 103ft reconciles with 7210 SF (70x103=7210). Prior data had 60x120 which was wrong.",
+    "inspectors": [
+      {
+        "name": "Building (Combination)",
+        "val": "Garden Grove Building and Safety Division — (714) 741-5307 | building@ggcity.org | 11222 Acacia Pkwy, Garden Grove CA 92840 | M–Th 7:30am–5:30pm, Fri 7:30am–5pm | Schedule: ch.ci.garden-grove.ca.us/permitsoft/inspections/new"
+      },
+      {
+        "name": "Structural",
+        "val": "Garden Grove Building and Safety Division — (714) 741-5307 (same counter as combination)"
+      },
+      {
+        "name": "Electrical",
+        "val": "Garden Grove Building and Safety Division — (714) 741-5307"
+      },
+      {
+        "name": "Mechanical",
+        "val": "Garden Grove Building and Safety Division — (714) 741-5307"
+      },
+      {
+        "name": "Grading / Civil",
+        "val": "Garden Grove Public Works — (714) 741-5119 | 11222 Acacia Pkwy | For grading/drainage; contact Building & Safety first to confirm routing"
+      }
+    ],
+    "planningAreas": [
+      {
+        "name": "COMMUNITY PLAN AREA",
+        "val": "City of Garden Grove — General Plan Land Use Element (2021)"
+      },
+      {
+        "name": "LAND USE DESIGNATION",
+        "val": "Low Density Residential (LDR) — 1–11 du/acre, single-family detached. Source: Garden Grove General Plan Land Use Element (2021 public review); R-1 parcels carry LDR designation."
+      },
+      {
+        "name": "TRANSIT PRIORITY AREA (TPA)",
+        "val": "TBD — check SCAG TPA map (hub.scag.ca.gov) for 12652 Laux Ave. Garden Grove has OCTA bus routes but no rail; no qualifying 15-min high-frequency service confirmed near this address."
+      },
+      {
+        "name": "PARKING STANDARDS (PSTPA)",
+        "val": "TBD — follows from TPA determination above. If Not TPA: standard R-1 parking requirements apply."
+      },
+      {
+        "name": "MOBILITY CHOICES",
+        "val": "N/A -- Garden Grove (not SD Municipal Code)"
+      }
+    ],
+    "overlayZones": [
+      {
+        "name": "AIRPORT INFLUENCE AREA",
+        "val": "TBD — possibly in outer zone of Fullerton Municipal Airport (FMA) ALUCP (~6.5 mi NW); John Wayne (SNA) ~8 mi S, outside. Check FMA AELUP PDF outer boundary map (files.ocair.com/media/2021-02/AELUP%20for%20FMA%2005092019.pdf) or OC ALUC (ocair.com). Source: OC ALUC research 2026-04-15."
+      },
+      {
+        "name": "COASTAL OVERLAY",
+        "val": "No -- inland location"
+      },
+      {
+        "name": "VERY HIGH FIRE HAZARD",
+        "val": "Not Designated — Garden Grove is fully urbanized suburban Orange County; no LRA or SRA FHSZ designation. Source: CAL FIRE FHSZ viewer; OCFA FHSZ maps (confirmed 2026-04-15)."
+      },
+      {
+        "name": "FAULT ZONE",
+        "val": "No Alquist-Priolo fault zone at this address; likely in CGS Liquefaction Hazard Zone (alluvial soils, high groundwater). Confirm at maps.conservation.ca.gov/cgs/informationwarehouse/eqzapp/. Source: Garden Grove Safety Element (2021)."
+      },
+      {
+        "name": "FEMA FLOOD ZONE",
+        "val": "Likely Zone X — minimal hazard (Orange County flatlands; panel series 06059C). Confirm at msc.fema.gov. Source: OC Flood Insurance Study 06059CV001C (2026-04-15)."
+      }
+    ],
+    "maxLotCoverage": 50,
+    "existingDwellingSF": 1041,
+    "existingBedBath": "3bd / 2ba",
+    "parcelPolygon": [
+      [
+        33.78083431,
+        -117.912232
+      ],
+      [
+        33.78083334,
+        -117.91246567
+      ],
+      [
+        33.78055023,
+        -117.91246408
+      ],
+      [
+        33.78055066,
+        -117.91234889
+      ],
+      [
+        33.78055114,
+        -117.91223042
+      ]
+    ]
+  },
+  "saved": {
+    "lat": 33.78066394,
+    "lng": -117.91234821,
+    "rotation": 0,
+    "locked": false,
+    "setbacks": {
+      "front": 20,
+      "rear": 4,
+      "sideL": 4,
+      "sideR": 4
+    },
+    "buildings": [
+      {
+        "orientation": 0,
+        "W": 39,
+        "D": 26,
+        "offsetX": -2.5,
+        "offsetY": 42.3,
+        "spacing": 0,
+        "count": 1,
+        "stackSpacing": 0,
+        "anchor": "front",
+        "stories": 1,
+        "floorHeight": 9,
+        "stackAngle": 0,
+        "locked": false
+      },
+      {
+        "orientation": 0,
+        "W": 20,
+        "D": 20,
+        "offsetX": -32.8,
+        "offsetY": 42.5,
+        "spacing": 0,
+        "count": 1,
+        "stackSpacing": 0,
+        "stackAngle": 0,
+        "anchor": "center",
+        "stories": 1,
+        "floorHeight": 9,
+        "locked": false
+      },
+      {
+        "orientation": 0,
+        "W": 60,
+        "D": 20,
+        "offsetX": 14.6,
+        "offsetY": -9.5,
+        "spacing": 28.6,
+        "count": 1,
+        "stackSpacing": 0,
+        "stackAngle": 0,
+        "anchor": "center",
+        "stories": 1,
+        "floorHeight": 9,
+        "locked": false
+      }
+    ],
+    "activeBuilding": 0,
+    "commFront": false,
+    "showBldgDims": true,
+    "hiddenDimKeys": [],
+    "mergedDimKeys": [],
+    "chainWOffset": 30.807109008422238,
+    "chainDOffset": -10,
+    "propDimOffsets": {},
+    "parcelPolygon": [
+      [
+        33.78083431,
+        -117.912232
+      ],
+      [
+        33.78083334,
+        -117.91246567
+      ],
+      [
+        33.78055023,
+        -117.91246408
+      ],
+      [
+        33.78055066,
+        -117.91234889
+      ],
+      [
+        33.78055114,
+        -117.91223042
+      ]
+    ],
+    "mapOpacity": 58,
+    "setbacksApplied": false,
+    "freeDrag": true,
+    "snapEdge": false,
+    "siteNorthDeg": 0,
+    "frontBearing": 270,
+    "vehicles": [],
+    "activeVehicle": -1,
+    "existingBuildings": [
+      {
+        "polygon": [
+          [
+            33.78069136987552,
+            -117.91239762242932
+          ],
+          [
+            33.78069136987552,
+            -117.91229879757068
+          ],
+          [
+            33.780636510124474,
+            -117.91229879757068
+          ],
+          [
+            33.780636510124474,
+            -117.91239762242932
+          ]
+        ],
+        "locked": false
+      }
+    ],
+    "activeExBuilding": 0,
+    "_geoOffsets": true
+  },
+  "checklist": null,
+  "_mpl_id": "ca-12652-laux",
+  "_legacy_source": "ProjectBook-Planner/data/sites/ca-12652_Laux.json",
+  "_schema": "legacy-projectbook -- migrate to MPL schema when site becomes active"
+}

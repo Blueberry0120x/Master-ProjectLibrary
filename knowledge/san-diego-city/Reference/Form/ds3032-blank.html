@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>DS-3032 — General Application Building Permit (BLANK)</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Arial, sans-serif; font-size: 10.5pt; background: #e8e8e8; color: #111; }
+  .page { background: #fff; width: 8.5in; margin: 0.4in auto; padding: 0.55in 0.6in; border: 1px solid #ccc; }
+  .form-header { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 14px; }
+  .sd-logo { display: flex; flex-direction: column; align-items: center; justify-content: center; background: #00a0b0; color: #fff; width: 72px; min-width: 72px; height: 72px; font-size: 8pt; font-weight: bold; text-align: center; line-height: 1.3; }
+  .sd-logo .fn { font-size: 16pt; font-weight: 900; }
+  .header-text h1 { font-size: 16pt; font-weight: 700; }
+  .header-text .sub { font-size: 9pt; color: #444; margin-top: 3px; }
+  .blank-banner { background: #fffbe6; border: 1.5px solid #f0c040; padding: 5px 12px; font-size: 9pt; text-align: center; margin-bottom: 10px; color: #5a4000; font-weight: bold; }
+  .section-bar { background: #007a85; color: #fff; padding: 4px 10px; font-weight: bold; font-size: 10pt; margin-top: 10px; }
+  .field-row { border: 1px solid #555; margin-bottom: -1px; padding: 4px 8px; min-height: 34px; display: flex; flex-wrap: wrap; gap: 8px; }
+  .field-row.tall { min-height: 70px; }
+  .field-block { flex: 1; min-width: 140px; }
+  .field-block.full { flex: 100; min-width: 100%; }
+  .field-block.half { flex: 2; }
+  .field-block.third { flex: 1; }
+  .field-label { font-size: 8pt; font-weight: bold; color: #555; text-transform: uppercase; }
+  .blank-line { border-bottom: 1px solid #aaa; min-height: 22px; margin-top: 4px; }
+  .inline-check { display: inline-flex; align-items: center; gap: 5px; font-size: 9.5pt; }
+  .box { display: inline-block; width: 12px; height: 12px; border: 1.5px solid #333; vertical-align: middle; }
+  table.permits { width: 100%; border-collapse: collapse; margin-top: 6px; font-size: 10pt; }
+  table.permits th { background: #e0f4f7; padding: 4px 8px; border: 1px solid #999; font-weight: bold; text-align: left; }
+  table.permits td { padding: 6px 8px; border: 1px solid #999; }
+  .sig-row { display: flex; gap: 20px; margin-top: 14px; }
+  .sig-block { flex: 1; border-top: 1px solid #333; padding-top: 4px; font-size: 9pt; color: #555; }
+  .form-footer { text-align: center; font-size: 8pt; color: #666; margin-top: 14px; border-top: 1px solid #ccc; padding-top: 6px; }
+  @media print { body { background: #fff; } .page { width: 100%; margin: 0; padding: 0.5in; border: none; } }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="form-header">
+    <div class="sd-logo">
+      <div>FORM</div>
+      <div class="fn">DS-3032</div>
+      <div style="font-size:7pt;">Rev. 2024</div>
+    </div>
+    <div class="header-text">
+      <h1>General Application — Building Permit</h1>
+      <div class="sub">City of San Diego — Development Services Department | (619) 446-5000 | permits.sandiego.gov | Submit via Accela</div>
+      <div class="sub">Source: sandiego.gov/sites/default/files/legacy/development-services/pdf/industry/forms/ds3032.pdf</div>
+    </div>
+  </div>
+  <div class="blank-banner">⬜ BLANK REFERENCE FORM — Copy to ProjectBook/{project}/ and fill before submittal</div>
+
+  <div class="section-bar">SECTION 1 — PROJECT / JOB SITE INFORMATION</div>
+  <div class="field-row">
+    <div class="field-block full"><div class="field-label">Job Site Address</div><div class="blank-line"></div></div>
+  </div>
+  <div class="field-row">
+    <div class="field-block half"><div class="field-label">APN</div><div class="blank-line"></div></div>
+    <div class="field-block half"><div class="field-label">PRJ / Reference Number</div><div class="blank-line"></div></div>
+  </div>
+  <div class="field-row">
+    <div class="field-block full"><div class="field-label">Legal Description</div><div class="blank-line"></div></div>
+  </div>
+  <div class="field-row">
+    <div class="field-block half"><div class="field-label">Zoning</div><div class="blank-line"></div></div>
+    <div class="field-block half"><div class="field-label">Community Plan Area</div><div class="blank-line"></div></div>
+  </div>
+  <div class="field-row">
+    <div class="field-block full"><div class="field-label">Overlays (TPA / SDA / TAOZ / ALUCP / Coastal / MHPA)</div><div class="blank-line"></div></div>
+  </div>
+
+  <div class="section-bar">SECTION 2 — PROPERTY OWNER</div>
+  <div class="field-row">
+    <div class="field-block full"><div class="field-label">Owner Name</div><div class="blank-line"></div></div>
+  </div>
+  <div class="field-row">
+    <div class="field-block full"><div class="field-label">Owner Mailing Address</div><div class="blank-line"></div></div>
+  </div>
+  <div class="field-row">
+    <div class="field-block half"><div class="field-label">Owner Phone</div><div class="blank-line"></div></div>
+    <div class="field-block half"><div class="field-label">Owner Email</div><div class="blank-line"></div></div>
+  </div>
+
+  <div class="section-bar">SECTION 3 — APPLICANT / AGENT</div>
+  <div class="field-row">
+    <div class="field-block half"><div class="field-label">Agent Name</div><div class="blank-line"></div></div>
+    <div class="field-block half"><div class="field-label">Company</div><div class="blank-line"></div></div>
+  </div>
+  <div class="field-row">
+    <div class="field-block half"><div class="field-label">Agent Phone</div><div class="blank-line"></div></div>
+    <div class="field-block half"><div class="field-label">Agent Email</div><div class="blank-line"></div></div>
+  </div>
+  <div class="field-row">
+    <div class="field-block half"><div class="field-label">Inspector — Combination</div><div class="blank-line"></div></div>
+    <div class="field-block half"><div class="field-label">Inspector — Structural</div><div class="blank-line"></div></div>
+  </div>
+
+  <div class="section-bar">SECTION 4 — SCOPE OF WORK</div>
+  <div class="field-row tall">
+    <div class="field-block full"><div class="field-label">Description of Work</div><div class="blank-line" style="min-height:55px;"></div></div>
+  </div>
+
+  <div class="section-bar">SECTION 5 — BUILDING PERMIT INFORMATION</div>
+  <table class="permits">
+    <tr><th style="width:35%">Field</th><th>Existing</th><th>Proposed</th></tr>
+    <tr><td><strong>Permit Type</strong></td><td><span class="inline-check"><span class="box"></span> Demo</span>&nbsp;<span class="inline-check"><span class="box"></span> New Const.</span>&nbsp;<span class="inline-check"><span class="box"></span> Addition</span>&nbsp;<span class="inline-check"><span class="box"></span> Alteration</span></td><td></td></tr>
+    <tr><td><strong>Occupancy Group (CBC)</strong></td><td></td><td></td></tr>
+    <tr><td><strong>Construction Type (CBC)</strong></td><td></td><td></td></tr>
+    <tr><td><strong>Building Area (SF)</strong></td><td></td><td></td></tr>
+    <tr><td><strong>Number of Stories</strong></td><td></td><td></td></tr>
+    <tr><td><strong>Dwelling Units</strong></td><td></td><td></td></tr>
+    <tr><td><strong>Parking Spaces</strong></td><td></td><td></td></tr>
+    <tr><td><strong>Fire Sprinklers</strong></td><td><span class="inline-check"><span class="box"></span> Yes</span>&nbsp;<span class="inline-check"><span class="box"></span> No</span></td><td><span class="inline-check"><span class="box"></span> Yes — NFPA ___</span>&nbsp;<span class="inline-check"><span class="box"></span> No</span></td></tr>
+    <tr><td><strong>Estimated Valuation</strong></td><td>—</td><td>$</td></tr>
+  </table>
+
+  <div class="section-bar">SECTION 6 — TRADE PERMITS</div>
+  <table class="permits">
+    <tr><th>Trade</th><th>Required?</th><th>Notes</th></tr>
+    <tr><td>Electrical</td><td><span class="inline-check"><span class="box"></span> Yes</span>&nbsp;<span class="inline-check"><span class="box"></span> No</span></td><td></td></tr>
+    <tr><td>Mechanical / HVAC</td><td><span class="inline-check"><span class="box"></span> Yes</span>&nbsp;<span class="inline-check"><span class="box"></span> No</span></td><td></td></tr>
+    <tr><td>Plumbing</td><td><span class="inline-check"><span class="box"></span> Yes</span>&nbsp;<span class="inline-check"><span class="box"></span> No</span></td><td></td></tr>
+    <tr><td>Grading / ROW (DS-3037)</td><td><span class="inline-check"><span class="box"></span> Yes</span>&nbsp;<span class="inline-check"><span class="box"></span> No</span></td><td></td></tr>
+    <tr><td>Demolition</td><td><span class="inline-check"><span class="box"></span> Yes</span>&nbsp;<span class="inline-check"><span class="box"></span> No</span></td><td></td></tr>
+  </table>
+
+  <div class="section-bar">SECTION 7 — REQUIRED ATTACHMENTS</div>
+  <div style="padding:6px 12px;border:1px solid #aaa;font-size:10pt;line-height:2.1;">
+    ☐ DS-420 Owner Authorization (signed)<br>
+    ☐ DS-530 Affordable Housing Checklist (if ≥ threshold DU)<br>
+    ☐ DS-375 Preliminary Review response (file separately)<br>
+    ☐ CALGreen Residential / Non-Residential Checklist<br>
+    ☐ CF1R — Title 24 Energy Compliance<br>
+    ☐ WMF — Waste Management Form (SeamlessDocs)<br>
+    ☐ DS-560 — Stormwater Requirements Applicability Checklist<br>
+    ☐ School Fee Certificate (SDUSD / SDCCD)<br>
+    ☐ Historic Resources Evaluation (if structure ≥ 45 years)<br>
+    ☐ Other: _______________________________________________________
+  </div>
+
+  <div class="sig-row">
+    <div class="sig-block">Owner Signature / Date<br><br><br></div>
+    <div class="sig-block">Agent Signature / Date<br><br><br></div>
+    <div class="sig-block">Contractor / License # / Date<br><br><br></div>
+  </div>
+
+  <div class="form-footer">City of San Diego DSD | DS-3032 General Application — Building Permit | BLANK REFERENCE COPY | Source: permits.sandiego.gov (Accela) + sandiego.gov/development-services/forms-publications | Rev. 2024</div>
+</div>
+</body>
+</html>

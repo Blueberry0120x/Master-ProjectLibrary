@@ -1,0 +1,96 @@
+{
+  "_notes": {
+    "base_factor_lbs_per_sf": 4.0,
+    "source": "CalRecycle new residential wood-frame construction rule of thumb",
+    "stucco_2story_modifier": 1.04,
+    "diversion_requirement_pct": 65,
+    "applicable_since": "July 1, 2016"
+  },
+  "new_construction_wood_frame": {
+    "Asphalt & Concrete": {
+      "recycle_fraction": 1.0,
+      "pct_of_total": 0.0,
+      "notes": "Only if site has existing AC paving being demolished - not applicable here"
+    },
+    "Brick / Masonry / Tile": {
+      "recycle_fraction": 1.0,
+      "pct_of_total": 0.0,
+      "notes": "Not applicable - new construction, no masonry demo"
+    },
+    "Cabinets, Doors, Fixtures, Windows": {
+      "recycle_fraction": 0.0,
+      "pct_of_total": 0.0,
+      "notes": "New install - packaging waste captured under Cardboard"
+    },
+    "Cardboard": {
+      "recycle_fraction": 1.0,
+      "pct_of_total": 0.06,
+      "notes": "Packaging from windows, fixtures, appliances, materials"
+    },
+    "Carpet, Padding / Foam": {
+      "recycle_fraction": 0.0,
+      "pct_of_total": 0.0,
+      "notes": "Not applicable - new construction"
+    },
+    "Ceiling Tile (acoustic)": {
+      "recycle_fraction": 0.0,
+      "pct_of_total": 0.0,
+      "notes": "Not applicable - residential ADU"
+    },
+    "Dirt": {
+      "recycle_fraction": 1.0,
+      "pct_of_total": 0.08,
+      "notes": "Foundation/footing excavation; 2-story increases footing depth/size"
+    },
+    "Drywall": {
+      "recycle_fraction": 1.0,
+      "pct_of_total": 0.16,
+      "notes": "Interior walls + ceilings, 2 floors; cutoff waste ~10-15% of installed area"
+    },
+    "Landscape Debris": {
+      "recycle_fraction": 1.0,
+      "pct_of_total": 0.04,
+      "notes": "Site clearing; minimal for infill ADU"
+    },
+    "Mixed C&D Debris": {
+      "recycle_fraction": 0.50,
+      "pct_of_total": 0.08,
+      "notes": "Residual mixed waste from framing; 50% diverted via certified C&D facility"
+    },
+    "Mixed Inerts": {
+      "recycle_fraction": 0.0,
+      "pct_of_total": 0.0,
+      "notes": "Not applicable"
+    },
+    "Roofing Materials": {
+      "recycle_fraction": 0.75,
+      "pct_of_total": 0.08,
+      "notes": "New install packaging + underlayment waste; comp shingle offcuts"
+    },
+    "Scrap Metal": {
+      "recycle_fraction": 1.0,
+      "pct_of_total": 0.04,
+      "notes": "Framing connectors, hangers, conduit offcuts, plumbing"
+    },
+    "Stucco": {
+      "recycle_fraction": 0.875,
+      "pct_of_total": 0.16,
+      "notes": "2-story = ~2,500+ SF exterior wall area; application waste ~10-15%; significant category"
+    },
+    "Unpainted Wood & Pallets": {
+      "recycle_fraction": 0.909,
+      "pct_of_total": 0.22,
+      "notes": "Framing cutoffs; largest single category for wood-frame; pallets from delivery"
+    },
+    "Garbage / Trash": {
+      "recycle_fraction": 0.0,
+      "pct_of_total": 0.08,
+      "notes": "General site trash; no recycle credit; goes to landfill"
+    },
+    "Other": {
+      "recycle_fraction": 0.0,
+      "pct_of_total": 0.0,
+      "notes": "Leave blank unless specific material identified"
+    }
+  }
+}

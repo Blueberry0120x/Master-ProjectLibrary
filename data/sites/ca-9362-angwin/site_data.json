@@ -1,0 +1,255 @@
+{
+  "project": "ProjectBook-Planner",
+  "site": {
+    "siteId": "CA-9362_ANGWIN",
+    "address": "9362 Angwin Pl, San Diego, CA 92123",
+    "apn": "429-562-08-00",
+    "legalDescription": "Lot 1719, Mission Village Unit #18, Map 4252, City of San Diego, County of San Diego, State of California",
+    "yearBuilt": "1960",
+    "occupancyGroup": "R-3",
+    "zoning": "RS-1-7",
+    "cadZone": "CA_VI",
+    "lotWidth": 60,
+    "lotDepth": 110,
+    "lotSF": 6600,
+    "commercialDepth": 0,
+    "baseFAR": 0.6,
+    "commFAR": 0,
+    "maxHeight": 30,
+    "baseHeightLimit": 30,
+    "cchsMaxHeight": 0,
+    "frontSetback": 15,
+    "rearSetback": 13,
+    "sideSetback": 5,
+    "densityPerSF": 5000,
+    "nefRatePerSF": 0,
+    "affordabilityPct": 0,
+    "difPerUnit": 0,
+    "difWaiverSF": 0,
+    "projectType": "New Construction",
+    "architect": "ADEC INC.",
+    "scopeOfWork": "",
+    "cornerVisibilityTriangle": false,
+    "cornerVisTriSize": 25,
+    "cornerVisCorner": "SW",
+    "densityBonus": false,
+    "notes": "Lot dims estimated 60x110 (~6,600 SF) -- verify via tract map (Map 4252). Comps 0.14 ac (~6,098 SF). House SF 1,781 (4bd/2ba, per Zillow). Geologic Hazard Cat 52, slopes 25%+. Elevation ~365 ft. Cultural/Paleo sensitivity: Moderate.",
+    "inspectors": [
+      {
+        "name": "Combination",
+        "val": "Carl Paiz-Snodgrass | 619-533-3636 | CPaizSnodgra@sandiego.gov"
+      },
+      {
+        "name": "Structural",
+        "val": "Juan Perez | 858-627-2092 | JuanPerez@sandiego.gov"
+      },
+      {
+        "name": "Electrical",
+        "val": "Reina Montoya | 858-627-2077 | MontoyaR@sandiego.gov"
+      },
+      {
+        "name": "Mechanical",
+        "val": "Chad Menges | 858-627-2069 | CMenges@sandiego.gov"
+      },
+      {
+        "name": "Grading / Civil",
+        "val": "Alejandro Ruiz | 858-627-2034 | ARuiz@sandiego.gov"
+      },
+      {
+        "name": "Elect-Fire Alarm",
+        "val": "Reina Montoya | 858-627-2077 | MontoyaR@sandiego.gov"
+      },
+      {
+        "name": "Mech-Fire Suppression",
+        "val": "Jesus Vallejo | 619-533-6797 | JVallejo@sandiego.gov"
+      },
+      {
+        "name": "FIT Electrical",
+        "val": "Ahmed Ali | 619-865-2955 | AhmedA@sandiego.gov"
+      },
+      {
+        "name": "FIT Traffic",
+        "val": "Solomon Abraham | 619-533-4456 | SAbraham@sandiego.gov"
+      },
+      {
+        "name": "FIT Civil",
+        "val": "Fadi Bety | 619-236-6099 | FBety@sandiego.gov"
+      }
+    ],
+    "planningAreas": [
+      {
+        "name": "COMMUNITY PLAN AREA",
+        "val": "SERRA MESA"
+      },
+      {
+        "name": "LAND USE DESIGNATION",
+        "val": "Low Density Residential (5-9 du/ac)"
+      },
+      {
+        "name": "CCHS (HOUSING SOLUTIONS)",
+        "val": "No"
+      },
+      {
+        "name": "TRANSIT PRIORITY AREA (TPA)",
+        "val": "No"
+      },
+      {
+        "name": "PARKING STANDARDS (PSTPA)",
+        "val": "No"
+      },
+      {
+        "name": "MOBILITY CHOICES",
+        "val": "Yes -- Mobility Zone 4"
+      },
+      {
+        "name": "AFFORDABLE HOUSING PARKING DEMAND",
+        "val": "High"
+      }
+    ],
+    "overlayZones": [
+      {
+        "name": "HEIGHT LIMIT OVERLAY",
+        "val": "No (RS-1-7 base 30 ft applies)"
+      },
+      {
+        "name": "TRANSIT AREA OVERLAY",
+        "val": "No"
+      },
+      {
+        "name": "AIRPORT INFLUENCE AREA",
+        "val": "YES -- Montgomery Field Review Area 1, Safety Zone 6, FAA Part 77 (457-462 ft MSL, 3000-3500 ft from runway)"
+      },
+      {
+        "name": "COASTAL OVERLAY",
+        "val": "No"
+      },
+      {
+        "name": "VERY HIGH FIRE HAZARD",
+        "val": "YES (VHFHSZ 2025 + 2009)"
+      },
+      {
+        "name": "FAULT ZONE",
+        "val": "No"
+      },
+      {
+        "name": "GEOLOGIC HAZARD",
+        "val": "Cat 52 -- slopes 25%+ present"
+      },
+      {
+        "name": "FLOOD ZONE",
+        "val": "Zone X -- minimal flood hazard"
+      }
+    ],
+    "parcelPolygon": [
+      [
+        32.80372968,
+        -117.12713514
+      ],
+      [
+        32.80349733,
+        -117.12712961
+      ],
+      [
+        32.80349737,
+        -117.12733467
+      ],
+      [
+        32.80373246,
+        -117.12734349
+      ]
+    ],
+    "existingDwellingSF": 1781
+  },
+  "saved": {
+    "lat": 32.80368563223815,
+    "lng": -117.12719764357803,
+    "rotation": 180,
+    "locked": true,
+    "setbacks": {
+      "front": 15,
+      "rear": 4,
+      "sideL": 4,
+      "sideR": 4
+    },
+    "buildings": [
+      {
+        "orientation": 0,
+        "W": 16.5,
+        "D": 32,
+        "offsetX": -1.6,
+        "offsetY": -25.6,
+        "spacing": 0,
+        "count": 1,
+        "stackSpacing": 0,
+        "stackAngle": 0,
+        "anchor": "center",
+        "stories": 1,
+        "floorHeight": 9,
+        "locked": false
+      }
+    ],
+    "activeBuilding": 0,
+    "commFront": false,
+    "showBldgDims": true,
+    "hiddenDimKeys": [],
+    "mergedDimKeys": [],
+    "chainWOffset": 6.44425652769786,
+    "chainDOffset": 7.755552240412605,
+    "propDimOffsets": {},
+    "parcelPolygon": [
+      [
+        32.80372968,
+        -117.12713514
+      ],
+      [
+        32.80349733,
+        -117.12712961
+      ],
+      [
+        32.80349737,
+        -117.12733467
+      ],
+      [
+        32.80373246,
+        -117.12734349
+      ]
+    ],
+    "mapOpacity": 70,
+    "setbacksApplied": true,
+    "freeDrag": true,
+    "snapEdge": false,
+    "siteNorthDeg": 180,
+    "frontBearing": 180.01,
+    "vehicles": [],
+    "activeVehicle": -1,
+    "existingBuildings": [
+      {
+        "polygon": [
+          [
+            32.80371306211367,
+            -117.12724650578377
+          ],
+          [
+            32.80371306211367,
+            -117.12714878137228
+          ],
+          [
+            32.80365820236263,
+            -117.12714878137228
+          ],
+          [
+            32.80365820236263,
+            -117.12724650578377
+          ]
+        ],
+        "locked": false
+      }
+    ],
+    "activeExBuilding": 0,
+    "_geoOffsets": true
+  },
+  "checklist": null,
+  "_mpl_id": "ca-9362-angwin",
+  "_legacy_source": "ProjectBook-Planner/data/sites/ca-9362_Angwin.json",
+  "_schema": "legacy-projectbook -- migrate to MPL schema when site becomes active"
+}

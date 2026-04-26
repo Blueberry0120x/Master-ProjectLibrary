@@ -1,0 +1,138 @@
+{
+    "_comment": "Master site registry. One entry per site. status: skeleton | partial | complete. file: relative to data/sites/. Add new sites here when creating JSON.",
+    "version": "1.0",
+    "sites": [
+        {
+            "id": "CA-4335_EUCLID",
+            "label": "4335 Euclid Ave",
+            "address": "4335 Euclid Avenue, San Diego, CA 92115",
+            "file": "ca-4335_Euclid.json",
+            "state": "CA",
+            "city": "San Diego",
+            "zoning": "CUPD-CU-2-4",
+            "status": "complete",
+            "lastUpdated": "2026-03-26"
+        },
+        {
+            "id": "CA-11001_WESTMINSTER",
+            "label": "11001-11025 Westminster Ave",
+            "address": "11001-11025 Westminster Ave, Garden Grove, CA 92843",
+            "file": "ca-11001_Westminster.json",
+            "state": "CA",
+            "city": "Garden Grove",
+            "zoning": "R-3",
+            "status": "complete",
+            "lastUpdated": "2026-03-27"
+        },
+        {
+            "id": "WA-405_126TH",
+            "label": "405 SW 126th St",
+            "address": "405 SW 126th St, Burien, WA",
+            "file": "wa-405_126th.json",
+            "state": "WA",
+            "city": "Burien",
+            "zoning": "R2",
+            "status": "partial",
+            "lastUpdated": "2026-03-28"
+        },
+        {
+            "id": "CA-4876_CANNINGTON",
+            "label": "4876 Cannington Dr",
+            "address": "4876 Cannington Dr, San Diego, CA 92117",
+            "file": "ca-4876_Cannington.json",
+            "state": "CA",
+            "city": "San Diego",
+            "zoning": "RS-1-7",
+            "status": "complete",
+            "lastUpdated": "2026-03-27"
+        },
+        {
+            "id": "CA-1905_ROHN",
+            "label": "1905 Rohn Rd",
+            "address": "1905 Rohn Rd, Escondido, CA 92025",
+            "file": "ca-1905_Rohn.json",
+            "state": "CA",
+            "city": "Escondido",
+            "zoning": "RE-20",
+            "status": "partial",
+            "lastUpdated": "2026-03-28"
+        },
+        {
+            "id": "CA-12652_LAUX",
+            "label": "12652 Laux Ave",
+            "address": "12652 Laux Ave, Garden Grove, CA 92840",
+            "file": "ca-12652_Laux.json",
+            "state": "CA",
+            "city": "Garden Grove",
+            "zoning": "R-1",
+            "status": "partial",
+            "lastUpdated": "2026-03-28"
+        },
+        {
+            "id": "CA-2921_ELCAJON",
+            "label": "2921-2923 El Cajon Blvd",
+            "address": "2921-2923 El Cajon Blvd, San Diego, CA 92104",
+            "file": "ca-2921_ElCajon.json",
+            "state": "CA",
+            "city": "San Diego",
+            "zoning": "CC-3-9",
+            "status": "partial",
+            "lastUpdated": "2026-03-28"
+        },
+        {
+            "id": "WA-10404_KIRKLAND",
+            "label": "10404 NE 124th St",
+            "address": "10404 NE 124th St, Kirkland, WA 98034",
+            "file": "wa-10404_Kirkland.json",
+            "state": "WA",
+            "city": "Kirkland",
+            "zoning": "TBD",
+            "status": "skeleton",
+            "lastUpdated": "2026-04-03"
+        },
+        {
+            "id": "CA-9362_ANGWIN",
+            "label": "9362 Angwin Pl",
+            "address": "9362 Angwin Pl, San Diego, CA 92123",
+            "file": "ca-9362_Angwin.json",
+            "state": "CA",
+            "city": "San Diego",
+            "zoning": "RS-1-7",
+            "status": "skeleton",
+            "lastUpdated": "2026-04-07"
+        },
+        {
+            "id": "CA-3063_CABRILLOMESA",
+            "label": "3063 Cabrillo Mesa Dr",
+            "address": "3063 Cabrillo Mesa Dr, San Diego, CA 92123",
+            "file": "ca-3063_CabrilloMesa.json",
+            "state": "CA",
+            "city": "San Diego",
+            "zoning": "RS-1-7",
+            "status": "skeleton",
+            "lastUpdated": "2026-04-07"
+        },
+        {
+            "id": "CA-5251_PALMYRA",
+            "label": "5251 Palmyra Ave",
+            "address": "5251 Palmyra Ave, San Diego, CA 92117",
+            "file": "ca-5251_Palmyra.json",
+            "state": "CA",
+            "city": "San Diego",
+            "zoning": "RS-1-7",
+            "status": "skeleton",
+            "lastUpdated": "2026-04-07"
+        },
+        {
+            "id": "WA-12843_175TH",
+            "label": "12843 175th Ave SE",
+            "address": "12843 175th Ave SE, Renton, WA 98059",
+            "file": "wa-12843_175th.json",
+            "state": "WA",
+            "city": "Renton",
+            "zoning": "R-4",
+            "status": "skeleton",
+            "lastUpdated": "2026-04-15"
+        }
+    ]
+}

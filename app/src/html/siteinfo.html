@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<!-- Site Info Sheet — Development Shell -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#0f4c81">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x1f3d7;</text></svg>">
+    <title>Site Info Sheet</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <script>(function(){var s=localStorage.getItem('theme');if(s==='dark'||(s!=='light'&&window.matchMedia('(prefers-color-scheme:dark)').matches))document.documentElement.setAttribute('data-theme','dark');})()</script>
+    <style>
+        /* Page-specific layout */
+        .siteinfo-wrap { max-width: 1200px; margin: 0 auto; padding: 0 12px 40px; }
+        .siteinfo-header { padding: 10px 0 6px; }
+        .siteinfo-header h2 { font-size: 0.95em; font-weight: 700; color: var(--cad-gold, #d4a843); letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 2px; }
+        .siteinfo-header .si-apn  { font-size: 0.75em; color: #94a3b8; }
+
+        /* Export section */
+        .siteinfo-export { margin-top: 14px; }
+        .siteinfo-export .align-btn-row { margin-bottom: 6px; }
+
+        /* Print: hide export controls, show everything else */
+        @media print {
+            .no-print, .suite-bar { display: none !important; }
+            body { padding: 8px !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        }
+    </style>
+</head>
+<body>
+<div class="page-wrapper">
+
+    <!-- SUITE BAR -->
+    <div class="suite-bar no-print">
+        <a href="/map" class="suite-bar-link" onclick="if(location.protocol==='file:')this.href='InteractiveMap.html'">Map</a>
+        <span class="suite-bar-sep">|</span>
+        <span class="suite-bar-active">Site Info</span>
+        <span class="suite-bar-sep">|</span>
+        <a href="/checklist" class="suite-bar-link" onclick="if(location.protocol==='file:')this.href='PreApp_Checklist.html'">Checklist</a>
+        <div class="suite-bar-ext">
+            <a href="https://assr.parcelquest.com/Home/" target="_blank" class="suite-bar-extlink suite-bar-extlink-amber">ParcelQuest &#x2197;</a>
+            <a href="https://sandiego.maps.arcgis.com/" target="_blank" class="suite-bar-extlink suite-bar-extlink-sky">SanDag GIS &#x2197;</a>
+        </div>
+    </div>
+
+    <div class="siteinfo-wrap">
+
+        <!-- SITE HEADER -->
+        <div class="siteinfo-header">
+            <h2 id="si-address">Site Info Sheet</h2>
+            <span class="si-apn">APN: <span id="si-apn">--</span> &nbsp;|&nbsp; Zone: <span id="si-zone">--</span></span>
+        </div>
+
+        <!-- PROPERTY BANNER -->
+        <div class="property-banner" id="propertyBanner">
+            <div class="banner-stat"><span class="banner-label">Lot Dims</span><span class="banner-value"><span id="ui-w">--</span>' &times; <span id="ui-d">--</span>'</span></div>
+            <div class="banner-stat"><span class="banner-label">Lot Size</span><span class="banner-value" id="ui-sqft">--</span></div>
+            <div class="banner-stat"><span class="banner-label">Ex. Bldg SF</span><span class="banner-value" id="ui-exbldg">--</span></div>
+            <div class="banner-stat"><span class="banner-label">Zoning</span><span class="banner-value" id="ui-zoning">--</span></div>
+            <div class="banner-stat"><span class="banner-label">Base Density</span><span class="banner-value" id="ui-density">--</span></div>
+            <div class="banner-stat"><span class="banner-label">FAR [Base / Comm]</span><span class="banner-value" id="ui-far">--</span></div>
+            <div class="banner-stat"><span class="banner-label">Max Height</span><span class="banner-value" id="ui-maxht">--</span></div>
+            <div class="banner-stat"><span class="banner-label">Setbacks (F/S/R)</span><span class="banner-value" id="ui-setbacks">--</span></div>
+        </div>
+
+        <!-- SCOPE OF WORK -->
+        <details class="info-scope-section" open>
+            <summary>SCOPE OF WORK</summary>
+            <p id="info-scope-work" class="info-scope-text">--</p>
+        </details>
+
+        <!-- INFO BOTTOM — same two-column layout as map page -->
+        <div class="info-bottom" id="infoBottom">
+            <div class="info-col-left" id="infoColLeft">
+                <details open>
+                    <summary>PROJECT INFORMATION</summary>
+                    <table class="cad-table">
+                        <tr><th>PROJECT ADDRESS:</th><td id="info-address"></td></tr>
+                        <tr><th>LEGAL DESCRIPTION:</th><td id="info-legal">--</td></tr>
+                        <tr><th>PARCEL #:</th><td id="info-apn"></td></tr>
+                        <tr><th>EX. BLDG SF:</th><td id="info-exbldg-proj">--</td></tr>
+                        <tr><th>YEAR BUILT:</th><td id="info-year-built">--</td></tr>
+                        <tr><th>BASE ZONE:</th><td id="info-zone"></td></tr>
+                        <tr><th>OCCUPANCY GROUP:</th><td id="info-occupancy">--</td></tr>
+                        <tr><th>AVG ELEVATION:</th><td id="info-avg-elev">--</td></tr>
+                        <tr><th>PROJECT TYPE:</th><td id="info-sl-projtype">--</td></tr>
+                        <tr><th>ARCHITECT:</th><td id="info-sl-architect">--</td></tr>
+                        <tr><th>LOT WIDTH:</th><td id="info-w"></td></tr>
+                        <tr><th>HEIGHT RESTRICTION:</th><td id="info-height">--</td></tr>
+                        <tr><th>STANDARD SETBACKS:</th><td id="info-setbacks">--</td></tr>
+                    </table>
+                </details>
+                <details open>
+                    <summary>LAND COVERAGE</summary>
+                    <table class="cad-table">
+                        <tr><th>LOT SIZE:</th><td id="info-lotsize">--</td></tr>
+                        <tr><th>EX. BLD:</th><td id="info-exbldg-land">--</td></tr>
+                        <tr><th>MIN LOT / DENSITY:</th><td id="info-density-lot">--</td></tr>
+                        <tr><th>MAX FAR:</th><td id="info-max-far">--</td></tr>
+                        <tr><th>BUILDABLE FAR:</th><td id="info-buildable-far">--</td></tr>
+                        <tr><th>PROPOSED FAR:</th><td id="info-proposed-far">--</td></tr>
+                        <tr><th>TOTAL FAR:</th><td id="info-total-far">--</td></tr>
+                        <tr><th>FAR CHECK:</th><td id="info-far-check">--</td></tr>
+                    </table>
+                </details>
+            </div>
+            <div class="info-col-gap"></div>
+            <div class="info-col-right" id="infoColRight">
+                <details open>
+                    <summary id="info-zoning-header">ZONING PARAMETERS</summary>
+                    <table class="cad-table">
+                        <tr><th>BASE DENSITY:</th><td id="info-zp-density">--</td></tr>
+                        <tr><th>BASE FAR:</th><td id="info-zp-basefar">--</td></tr>
+                        <tr><th>COMM FAR:</th><td id="info-zp-commfar">--</td></tr>
+                        <tr><th>MAX HEIGHT:</th><td id="info-zp-maxht">--</td></tr>
+                        <tr><th>FRONT SETBACK:</th><td id="info-zp-front">--</td></tr>
+                        <tr><th>REAR SETBACK:</th><td id="info-zp-rear">--</td></tr>
+                        <tr><th>SIDE SETBACK:</th><td id="info-zp-side">--</td></tr>
+                        <tr><th>NOTES:</th><td id="info-zp-notes">--</td></tr>
+                    </table>
+                </details>
+                <details id="info-planning-section" open>
+                    <summary>PLANNING &amp; TRANSIT AREAS</summary>
+                    <table class="cad-table" id="info-planning-table"></table>
+                </details>
+                <details id="info-overlay-section" open>
+                    <summary>OVERLAY ZONES</summary>
+                    <table class="cad-table" id="info-overlay-table"></table>
+                </details>
+                <details id="info-inspectors-section" open>
+                    <summary>CITY INSPECTOR CONTACTS</summary>
+                    <table class="cad-table" id="info-inspectors-table"></table>
+                </details>
+            </div>
+        </div>
+
+        <!-- EXPORT LISP SECTION -->
+        <div class="siteinfo-export no-print">
+            <div class="align-btn-row">
+                <button id="siteInfoExportBtn"  class="btn-align btn-align-lisp">&#9654; Export LISP</button>
+                <button id="siteInfoExcelBtn"   class="btn-align btn-align-excel">&#9654; Export Excel</button>
+                <button id="siteInfoPrintBtn"   class="btn-align btn-align-img" onclick="window.print()">&#128438; Print / PDF</button>
+            </div>
+            <textarea id="siteInfoLispOutput" class="lisp-output" readonly placeholder="LISP code will appear here after clicking Export LISP&#x2026;"></textarea>
+        </div>
+
+    </div><!-- end siteinfo-wrap -->
+</div><!-- end page-wrapper -->
+
+<script>
+/* ==========================================
+   SITE INFO SHEET — self-contained init
+   Reads from window.__SITE_DEFAULTS__ (injected at build time).
+   No engine dependencies.
+   ========================================== */
+(function() {
+    var sd = window.__SITE_DEFAULTS__ || {};
+
+    var lotW  = sd.lotWidth  || 0;
+    var lotD  = sd.lotDepth  || 0;
+    var lotSF = (sd.lotSF && sd.lotSF > 0) ? sd.lotSF : (lotW * lotD);
+
+    var baseFAR  = sd.baseFAR  != null ? sd.baseFAR  : 2.0;
+    var commFAR  = sd.commFAR  != null ? sd.commFAR  : 0;
+    var maxHt    = sd.maxHeight != null ? sd.maxHeight : 50;
+    var densPS   = sd.densityPerSF != null ? sd.densityPerSF : 600;
+    var fSb      = sd.frontSetback != null ? sd.frontSetback : 10;
+    var rSb      = sd.rearSetback  != null ? sd.rearSetback  : 10;
+    var sSb      = sd.sideSetback  != null ? sd.sideSetback  : 0;
+    var exSF     = sd.existingDwellingSF || 0;
+
+    function _set(id, val) {
+        var el = document.getElementById(id);
+        if (el) el.innerText = val;
+    }
+    function _n(v, dec) { return (dec != null) ? Number(v).toFixed(dec) : Number(v); }
+
+    /* ── Header ── */
+    _set('si-address', sd.address || '--');
+    _set('si-apn',     sd.apn     || '--');
+    _set('si-zone',    sd.zoning  || '--');
+
+    /* ── Property banner ── */
+    _set('ui-w',        _n(lotW, 1));
+    _set('ui-d',        _n(lotD, 1));
+    _set('ui-sqft',     Math.round(lotSF).toLocaleString() + ' SF');
+    _set('ui-exbldg',   exSF > 0 ? exSF.toLocaleString() + ' SF' : '--');
+    _set('ui-zoning',   sd.zoning  || '--');
+    _set('ui-density',  densPS > 0 ? '1 DU / ' + densPS + ' SF' : '--');
+    _set('ui-far',      baseFAR + ' / ' + commFAR);
+    _set('ui-maxht',    maxHt + ' FT');
+    _set('ui-setbacks', fSb + "\' / " + sSb + "\' / " + rSb + "\'");
+
+    /* ── Scope of work ── */
+    _set('info-scope-work', sd.scopeOfWork || '--');
+
+    /* ── Project info table ── */
+    var exSFText = exSF > 0 ? exSF.toLocaleString() + ' SF' : '--';
+    _set('info-address',   sd.address || '--');
+    _set('info-legal',     sd.legalDescription || '--');
+    _set('info-apn',       sd.apn     || '--');
+    _set('info-exbldg-proj', exSFText);
+    _set('info-year-built',  sd.yearBuilt      || '--');
+    _set('info-zone',        sd.zoning         || '--');
+    _set('info-occupancy',   sd.occupancyGroup || '--');
+    _set('info-sl-projtype', sd.projectType    || '--');
+    _set('info-sl-architect', sd.architect     || '--');
+    _set('info-w',           _n(lotW, 1) + ' FT');
+    _set('info-height',      maxHt > 0 ? maxHt + '.0 FT' : '--');
+    _set('info-setbacks',    '(F) ' + fSb + '-FT | (R) ' + rSb + '-FT | (S) ' + sSb + '-FT');
+
+    /* ── Land coverage table ── */
+    _set('info-lotsize',       Math.round(lotSF).toLocaleString() + ' S.F.');
+    _set('info-exbldg-land',   exSFText);
+    _set('info-density-lot',   _n(lotSF, 1) + ' S.F.');
+    _set('info-max-far',       baseFAR > 0 ? baseFAR.toString() : 'N/A');
+    _set('info-buildable-far', (lotSF * baseFAR).toFixed(1) + ' S.F.');
+
+    /* ── Zoning params table ── */
+    if (document.getElementById('info-zoning-header'))
+        document.getElementById('info-zoning-header').textContent = 'ZONING PARAMETERS (' + (sd.zoning || '--') + ')';
+    _set('info-zp-density', densPS > 0 ? '1 DU per ' + densPS + ' sq. ft.' : 'Per zoning overlay');
+    _set('info-zp-basefar', baseFAR > 0 ? baseFAR.toString() : 'N/A');
+    _set('info-zp-commfar', commFAR > 0 ? commFAR + ' FAR' : 'N/A');
+    _set('info-zp-maxht',   maxHt > 0 ? maxHt + ' Feet' : '--');
+    _set('info-zp-front',   fSb + ' FT');
+    _set('info-zp-rear',    rSb + ' FT');
+    _set('info-zp-side',    sSb + ' FT');
+    _set('info-zp-notes',   sd.notes || '--');
+
+    /* ── Planning areas (dynamic) ── */
+    var planTable = document.getElementById('info-planning-table');
+    if (planTable) {
+        var areas = sd.planningAreas || [];
+        if (areas.length > 0) {
+            planTable.innerHTML = '';
+            areas.forEach(function(r) {
+                var tr = document.createElement('tr');
+                var th = document.createElement('th'); th.textContent = (r.name || '').toUpperCase() + ':';
+                var td = document.createElement('td'); td.textContent = r.val || '--';
+                tr.appendChild(th); tr.appendChild(td); planTable.appendChild(tr);
+            });
+        } else {
+            planTable.innerHTML = '<tr><td>No planning data assigned</td></tr>';
+        }
+    }
+
+    /* ── Overlay zones (dynamic) ── */
+    var overlayTable = document.getElementById('info-overlay-table');
+    if (overlayTable) {
+        var zones = sd.overlayZones || [];
+        if (zones.length > 0) {
+            overlayTable.innerHTML = '';
+            zones.forEach(function(r) {
+                var tr = document.createElement('tr');
+                var th = document.createElement('th'); th.textContent = (r.name || '').toUpperCase() + ':';
+                var td = document.createElement('td'); td.textContent = r.val || '--';
+                tr.appendChild(th); tr.appendChild(td); overlayTable.appendChild(tr);
+            });
+        } else {
+            overlayTable.innerHTML = '<tr><td>No overlay zones assigned</td></tr>';
+        }
+    }
+
+    /* ── Inspectors (dynamic) ── */
+    var inspTable = document.getElementById('info-inspectors-table');
+    if (inspTable) {
+        var insp = sd.inspectors || [];
+        if (insp.length > 0) {
+            inspTable.innerHTML = '';
+            insp.forEach(function(ins) {
+                var tr = document.createElement('tr');
+                var th = document.createElement('th'); th.textContent = (ins.name || '').toUpperCase() + ':';
+                var td = document.createElement('td'); td.textContent = ins.val || '--';
+                tr.appendChild(th); tr.appendChild(td); inspTable.appendChild(tr);
+            });
+        } else {
+            inspTable.innerHTML = '<tr><td>No inspectors assigned</td></tr>';
+        }
+    }
+
+    /* ── Export Excel ── */
+    document.getElementById('siteInfoExcelBtn').addEventListener('click', function() {
+        // Delegate to ExportEngine if available (loaded on map page),
+        // otherwise call the standalone generator below.
+        if (typeof ExportEngine !== 'undefined' && ExportEngine.generateExcel) {
+            ExportEngine.generateExcel();
+        } else {
+            generateSiteInfoExcel(sd, lotSF, baseFAR, commFAR, maxHt, densPS, fSb, rSb, sSb);
+        }
+    });
+
+    /* ── Export LISP ── */
+    document.getElementById('siteInfoExportBtn').addEventListener('click', function() {
+        var lispCode = generateSiteInfoLISP(sd, lotSF, baseFAR, commFAR, maxHt, densPS, fSb, rSb, sSb, exSF);
+        document.getElementById('siteInfoLispOutput').value = lispCode;
+        var blob = new Blob([lispCode], { type: 'text/plain' });
+        var a = document.createElement('a');
+        a.download = 'SiteProjectInfo_' + (sd.apn || 'Site').replace(/[^a-zA-Z0-9-]/g, '_') + '.lsp';
+        a.href = URL.createObjectURL(blob);
+        a.click();
+        URL.revokeObjectURL(a.href);
+    });
+
+})();
+
+
+/* ==========================================
+   LISP GENERATOR — SiteProjectInfo
+   ========================================== */
+function generateSiteInfoLISP(sd, lotSF, baseFAR, commFAR, maxHt, densPS, fSb, rSb, sSb, exSF) {
+
+    var today = new Date().toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' });
+    function q(v)  { return '"' + String(v || '').replace(/"/g, "'") + '"'; }
+    function n1(v) { return Number(v || 0).toFixed(1); }
+    function n2(v) { return Number(v || 0).toFixed(2); }
+
+    /* Buildings */
+    var bldgs = sd.buildings || [];
+    var bldgLines = [];
+    var totalProposedSF = 0;
+    bldgs.forEach(function(b, i) {
+        var n = i + 1;
+        var sf = Math.round((b.W || 0) * (b.D || 0) * (b.count || 1));
+        totalProposedSF += sf;
+        bldgLines.push(
+            '(setq SPI:Bldg' + n + 'W       ' + n1(b.W)        + ')   ; ft',
+            '(setq SPI:Bldg' + n + 'D       ' + n1(b.D)        + ')   ; ft',
+            '(setq SPI:Bldg' + n + 'Count   ' + (b.count || 1) + ')',
+            '(setq SPI:Bldg' + n + 'Stories ' + (b.stories || 1) + ')',
+            '(setq SPI:Bldg' + n + 'SF      ' + sf              + ')   ; W x D x Count'
+        );
+    });
+
+    /* Planning areas — individual vars + list */
+    var planAreas = sd.planningAreas || [];
+    var planVarLines = planAreas.map(function(r, i) {
+        var n = i + 1;
+        return [
+            '(setq SPI:PA' + n + '_Name ' + q(r.name || '') + ')',
+            '(setq SPI:PA' + n + '_Val  ' + q(r.val  || '') + ')'
+        ].join('\n');
+    });
+    var planListLines = planAreas.map(function(r) {
+        return '  (list ' + q(r.name || '') + ' ' + q(r.val || '') + ')';
+    });
+
+    /* Overlay zones */
+    var overlays = sd.overlayZones || [];
+    var ozVarLines = overlays.map(function(r, i) {
+        var n = i + 1;
+        return [
+            '(setq SPI:OZ' + n + '_Name ' + q(r.name || '') + ')',
+            '(setq SPI:OZ' + n + '_Val  ' + q(r.val  || '') + ')'
+        ].join('\n');
+    });
+    var ozListLines = overlays.map(function(r) {
+        return '  (list ' + q(r.name || '') + ' ' + q(r.val || '') + ')';
+    });
+
+    /* Inspector contacts */
+    var inspectors = sd.inspectors || [];
+    var inspVarLines = inspectors.map(function(r, i) {
+        var n = i + 1;
+        return [
+            '(setq SPI:Insp' + n + '_Role ' + q(r.name || '') + ')',
+            '(setq SPI:Insp' + n + '_Val  ' + q(r.val  || '') + ')'
+        ].join('\n');
+    });
+
+    /* ── CONFIG section ── */
+    var config = [
+        ';; -- PROJECT IDENTITY --',
+        '(setq SPI:Address     ' + q(sd.address || '')         + ')',
+        '(setq SPI:APN         ' + q(sd.apn     || '')         + ')',
+        '(setq SPI:Zone        ' + q(sd.zoning  || '')         + ')',
+        '(setq SPI:LegalDesc   ' + q(sd.legalDescription || '') + ')',
+        '(setq SPI:YearBuilt   ' + q(sd.yearBuilt   || '--')   + ')',
+        '(setq SPI:OccGroup    ' + q(sd.occupancyGroup || '--') + ')',
+        '(setq SPI:ProjType    ' + q(sd.projectType  || '--')  + ')',
+        '(setq SPI:Architect   ' + q(sd.architect    || '--')  + ')',
+        '',
+        ';; -- LOT DIMENSIONS --',
+        '(setq SPI:LotWidth    ' + n1(sd.lotWidth || 0) + ')   ; ft',
+        '(setq SPI:LotDepth    ' + n1(sd.lotDepth || 0) + ')   ; ft',
+        '(setq SPI:LotSF       ' + Math.round(lotSF) + ')   ; sq ft',
+        '(setq SPI:ExBldgSF    ' + Math.round(exSF)  + ')   ; sq ft',
+        '',
+        ';; -- SETBACKS --',
+        '(setq SPI:FrontSb     ' + n1(fSb) + ')   ; ft',
+        '(setq SPI:RearSb      ' + n1(rSb) + ')   ; ft',
+        '(setq SPI:SideSb      ' + n1(sSb) + ')   ; ft',
+        '',
+        ';; -- ZONING PARAMETERS --',
+        '(setq SPI:BaseFAR      ' + n2(baseFAR) + ')',
+        '(setq SPI:CommFAR      ' + n2(commFAR) + ')',
+        '(setq SPI:MaxHeight    ' + n1(maxHt)   + ')   ; ft',
+        '(setq SPI:DensityPerSF ' + Math.round(densPS) + ')',
+        '(setq SPI:BuildableSF  (fix (* SPI:LotSF SPI:BaseFAR)))',
+        '',
+        ';; -- PLANNING & TRANSIT AREAS (' + planAreas.length + ') --',
+    ].concat(planVarLines).concat([
+        '(setq SPI:PlanningAreas (list',
+        planListLines.length ? planListLines.join('\n') : '  nil',
+        '))',
+        '',
+        ';; -- OVERLAY ZONES (' + overlays.length + ') --',
+    ]).concat(ozVarLines).concat([
+        '(setq SPI:OverlayZones (list',
+        ozListLines.length ? ozListLines.join('\n') : '  nil',
+        '))',
+        '',
+        ';; -- INSPECTOR CONTACTS (' + inspectors.length + ') --',
+    ]).concat(inspVarLines).concat([
+        '',
+        ';; -- PROPOSED BUILDINGS (' + bldgs.length + ') --',
+        '(setq SPI:BldgCount      ' + bldgs.length + ')',
+    ]).concat(bldgLines).concat([
+        '(setq SPI:TotalProposedSF ' + totalProposedSF + ')   ; sum of all building SFs',
+    ]).join('\n');
+
+    /* ── Commands ── */
+    var cmds = [
+        '(defun c:SPI ()',
+        '  (textscr)',
+        '  (princ "\\n=======================================================")',
+        '  (princ "\\n  SITE PROJECT INFO")',
+        '  (princ "\\n=======================================================")',
+        '  (princ (strcat "\\n  Address:       " SPI:Address))',
+        '  (princ (strcat "\\n  APN:           " SPI:APN))',
+        '  (princ (strcat "\\n  Zone:          " SPI:Zone))',
+        '  (princ (strcat "\\n  Legal:         " SPI:LegalDesc))',
+        '  (princ (strcat "\\n  Year Built:    " SPI:YearBuilt))',
+        '  (princ (strcat "\\n  Occupancy:     " SPI:OccGroup))',
+        '  (princ (strcat "\\n  Project Type:  " SPI:ProjType))',
+        '  (princ (strcat "\\n  Architect:     " SPI:Architect))',
+        '  (princ "\\n-------------------------------------------------------")',
+        '  (princ (strcat "\\n  Lot Width:     " (rtos SPI:LotWidth  2 1) " ft"))',
+        '  (princ (strcat "\\n  Lot Depth:     " (rtos SPI:LotDepth  2 1) " ft"))',
+        '  (princ (strcat "\\n  Lot SF:        " (itoa SPI:LotSF) " sq.ft."))',
+        '  (princ (strcat "\\n  Ex. Bldg SF:   " (itoa SPI:ExBldgSF) " sq.ft."))',
+        '  (princ "\\n-------------------------------------------------------")',
+        '  (princ (strcat "\\n  Front Setback: " (rtos SPI:FrontSb 2 1) " ft"))',
+        '  (princ (strcat "\\n  Rear Setback:  " (rtos SPI:RearSb  2 1) " ft"))',
+        '  (princ (strcat "\\n  Side Setback:  " (rtos SPI:SideSb  2 1) " ft"))',
+        '  (princ "\\n-------------------------------------------------------")',
+        '  (princ (strcat "\\n  Base FAR:      " (rtos SPI:BaseFAR     2 2)))',
+        '  (princ (strcat "\\n  Comm FAR:      " (rtos SPI:CommFAR     2 2)))',
+        '  (princ (strcat "\\n  Max Height:    " (rtos SPI:MaxHeight   2 1) " ft"))',
+        '  (princ (strcat "\\n  Buildable SF:  " (itoa SPI:BuildableSF) " sq.ft."))',
+        '  (princ "\\n-------------------------------------------------------")',
+        '  (princ (strcat "\\n  Buildings:     " (itoa SPI:BldgCount)))',
+        '  (princ (strcat "\\n  Proposed SF:   " (itoa SPI:TotalProposedSF) " sq.ft."))',
+        '  (princ "\\n=======================================================")',
+        '  (princ)',
+        ')',
+        '',
+        '(defun c:SiteProjectInfo () (c:SPI))',
+        '',
+        ';;; ==========================================================================',
+        ';;; COMMAND: SPI_Vars -- list all SPI: variable values',
+        ';;; ==========================================================================',
+        '',
+        '(defun c:SPI_Vars (/ _lst _pair)',
+        '  (textscr)',
+        '  (princ "\\n[SPI] Variables:")',
+        '  (setq _lst (list',
+        '    (cons "SPI:Address"      SPI:Address)',
+        '    (cons "SPI:APN"          SPI:APN)',
+        '    (cons "SPI:Zone"         SPI:Zone)',
+        '    (cons "SPI:LotSF"        (itoa SPI:LotSF))',
+        '    (cons "SPI:FrontSb"      (rtos SPI:FrontSb 2 1))',
+        '    (cons "SPI:RearSb"       (rtos SPI:RearSb  2 1))',
+        '    (cons "SPI:SideSb"       (rtos SPI:SideSb  2 1))',
+        '    (cons "SPI:BaseFAR"      (rtos SPI:BaseFAR 2 2))',
+        '    (cons "SPI:MaxHeight"    (rtos SPI:MaxHeight 2 1))',
+        '    (cons "SPI:BuildableSF"  (itoa SPI:BuildableSF))',
+        '    (cons "SPI:BldgCount"    (itoa SPI:BldgCount))',
+        '    (cons "SPI:TotalProposedSF" (itoa SPI:TotalProposedSF))',
+        '  ))',
+        '  (foreach _pair _lst',
+        '    (princ (strcat "\\n  " (car _pair) ": " (cdr _pair)))',
+        '  )',
+        '  (princ)',
+        ')',
+    ].join('\n');
+
+    /* ── Full skeleton ── */
+    return [
+        ';;; ====================================================================',
+        ';;; SiteProjectInfo.lsp',
+        ';;; ====================================================================',
+        ';;; PURPOSE:',
+        ';;;   Load site project data into AutoCAD session variables.',
+        ';;;   All variables use the SPI: namespace and persist for the session.',
+        ';;;',
+        ';;; COMMANDS:',
+        ';;;   SPI         -> Display formatted site info report',
+        ';;;   SPI_Vars    -> List all SPI: variable values',
+        ';;;',
+        ';;; GENERATED: ' + today + ' by ProjectBook-Planner',
+        ';;; ====================================================================',
+        '',
+        '(vl-load-com)',
+        '',
+        ';;; ==========================================================================',
+        ';;; CONFIG',
+        ';;; APN:     ' + (sd.apn || ''),
+        ';;; Address: ' + (sd.address || ''),
+        ';;; ==========================================================================',
+        '',
+        config,
+        '',
+        ';;; ==========================================================================',
+        ';;; COMMANDS',
+        ';;; ==========================================================================',
+        '',
+        cmds,
+        '',
+        ';;; ==========================================================================',
+        ';;; LOAD MESSAGE',
+        ';;; ==========================================================================',
+        '',
+        '(princ "\\n=======================================================")',
+        '(princ "\\n :: SiteProjectInfo.lsp [SPI] Loaded")',
+        '(princ (strcat "\\n :: APN:     " SPI:APN))',
+        '(princ (strcat "\\n :: Address: " SPI:Address))',
+        '(princ "\\n :: Commands: SPI | SPI_Vars")',
+        '(princ "\\n=======================================================")',
+        '(princ)',
+    ].join('\n');
+}
+
+/* ==========================================
+   EXCEL GENERATOR (standalone for siteinfo page)
+   Mirrors ExportEngine.generateExcel() — no engine dependency.
+   ========================================== */
+function generateSiteInfoExcel(sd, lotSF, baseFAR, commFAR, maxHt, densPS, fSb, rSb, sSb) {
+    var hasPolygon = sd.parcelPolygon && sd.parcelPolygon.length > 0;
+    var lotAC = (lotSF / 43560).toFixed(3);
+    function v(val, unit) {
+        if (val == null || val === '' || (val === 0 && unit)) return '--';
+        return unit ? val + ' ' + unit : String(val);
+    }
+    function esc(s) {
+        return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    var ROWS = [];
+    function sec(label) { ROWS.push({ type:'sec', label:label }); }
+    function row(field, value, source, even) { ROWS.push({ type:'row', field:field, value:value, source:source, even:even }); }
+
+    sec('A. Parcel Identity');
+    row('Full street address',           v(sd.address),               'County Assessor / ParcelQuest', true);
+    row('APN',                           v(sd.apn),                   'County Assessor / ParcelQuest', false);
+    row('Legal description',             v(sd.legalDescription),      'Deed or Assessor record', true);
+    row('Year built',                    v(sd.yearBuilt),             'Assessor record', false);
+    row('Occupancy group (existing)',    v(sd.occupancyGroup),        'Building permit history or existing plans', true);
+
+    sec('B. Lot Dimensions');
+    row('Lot width (ft)',                v(sd.lotWidth,'ft'),         'Assessor record or GIS parcel data', true);
+    row('Lot depth (ft)',                v(sd.lotDepth,'ft'),         'Assessor record or GIS parcel data', false);
+    row('Lot SF',                        lotSF>0 ? Math.round(lotSF).toLocaleString()+' SF' : '--', 'Assessor record', true);
+    row('Lot acres',                     lotSF>0 ? lotAC+' AC' : '--', 'Calculated', false);
+    row('Irregular lot?',                hasPolygon ? 'Yes — polygon captured ('+sd.parcelPolygon.length+' vertices)' : 'No (rectangular)', 'GIS parcel polygon', true);
+
+    sec('C. Zoning Standards');
+    row('Zone designation',              v(sd.zoning),                'City zoning map / ZIMS', true);
+    row('Base FAR',                      v(sd.baseFAR),               'Municipal code', false);
+    row('Commercial FAR',                v(sd.commFAR),               'Municipal code — mixed-use/CCHS', true);
+    row('Max height base (ft)',          v(sd.baseHeightLimit||sd.maxHeight,'ft'), 'Municipal code', false);
+    row('Max height with bonus (ft)',    v(maxHt,'ft'),               'CCHS / density bonus provisions', true);
+    row('CCHS max height cap (ft)',      v(sd.cchsMaxHeight,'ft'),    'San Diego CCHS Tier table', false);
+    row('Front setback (ft)',            v(fSb,'ft'),                 'Municipal code', true);
+    row('Rear setback (ft)',             v(rSb,'ft'),                 'Municipal code', false);
+    row('Side setback (ft)',             v(sSb,'ft'),                 'Municipal code', true);
+    row('Density: SF per unit',          densPS>0 ? '1 DU per '+densPS+' SF' : '--', 'Municipal code', false);
+    row('Commercial frontage depth',     v(sd.commercialDepth,'ft'), 'CUPD/mixed-use code', true);
+
+    sec('D. Planning Overlays');
+    var areas = sd.planningAreas || [];
+    if (areas.length>0) { areas.forEach(function(r,i){ row(r.name||('Area '+(i+1)), r.val||'--', 'City General Plan', i%2===0); }); }
+    else { row('Planning areas','--','City General Plan / community plan document',true); }
+    var ozs = sd.overlayZones || [];
+    if (ozs.length>0) { ozs.forEach(function(r,i){ row(r.name||('Zone '+(i+1)), r.val||'--', 'ZIMS zoning inquiry', i%2===0); }); }
+    else { row('Overlay zones','--','ZIMS zoning inquiry',false); }
+
+    sec('E. Fees');
+    row('NEF rate per SF',               v(sd.nefRatePerSF),         'City DSD Fee Schedule', true);
+    row('Affordability target %',        v(sd.affordabilityPct,'%'), 'State Gov Code 65915', false);
+    row('DIF per unit',                  v(sd.difPerUnit),           'City DSD DIF schedule', true);
+    row('DIF waiver SF threshold',       v(sd.difWaiverSF,'SF'),     'City affordable housing DIF waiver policy', false);
+
+    sec('F. Project Info');
+    row('Project type',                  v(sd.projectType),          'e.g. 3-Story Townhome', true);
+    row('Architect / firm name',         v(sd.architect),            'Project team', false);
+    row('Scope of work',                 v(sd.scopeOfWork),          'What is demolished / built / program', true);
+    row('Notes',                         v(sd.notes),                'Unusual conditions, easements', false);
+    row('Existing dwelling SF',          sd.existingDwellingSF>0 ? sd.existingDwellingSF.toLocaleString()+' SF' : '--', 'Assessor record', true);
+
+    sec('G. Inspector Contacts');
+    var insp = sd.inspectors || [];
+    if (insp.length>0) { insp.forEach(function(r,i){ row(r.name||('Inspector '+(i+1)), r.val||'--', 'City permit office / DSD', i%2===0); }); }
+    else { row('Inspectors','--','City permit office / DSD staff directory',true); }
+
+    sec('H. Map Setup');
+    row('Parcel polygon vertices',       hasPolygon ? sd.parcelPolygon.length+' vertices captured' : 'Not set', 'County GIS portal', true);
+    row('Map rotation (degrees)',        v(sd.rotation != null ? Number(sd.rotation).toFixed(1)+'°' : null), 'Estimate from aerial', false);
+
+    var C = { TITLE:'#64381F', HDR:'#64381F', SEC:'#C47244', ODD_A:'#66D9FF', ODD_B:'#F2F2F2', W:'#FFFFFF' };
+    function td(bg, bold, wrap, extra) {
+        return 'style="background:'+bg+';color:'+(bg===C.TITLE||bg===C.HDR||bg===C.SEC?'#fff':'#1a1a1a')+';"'
+            + (bold?' class="b"':'') + (extra||'');
+    }
+
+    var lines = [
+        '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel">',
+        '<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">',
+        '<style>body{font-family:Calibri,Arial,sans-serif;font-size:10pt}',
+        'table{border-collapse:collapse;width:100%}',
+        'td,th{border:1px solid #999;padding:4px 6px;vertical-align:top;font-size:10pt;white-space:normal;word-wrap:break-word}',
+        '.b{font-weight:bold}</style></head><body>',
+        '<table>',
+        '<tr><td colspan="5" style="background:#64381F;color:#fff;font-weight:bold;font-size:13pt;padding:6px 8px;border:1px solid #999">PROJECTBOOK-PLANNER — SITE DATA COLLECTION CHECKLIST &nbsp; '+esc(sd.address||'')+'</td></tr>',
+        '<tr>',
+        '<th style="background:#64381F;color:#fff;width:140px">SECTION</th>',
+        '<th style="background:#64381F;color:#fff;width:260px">FIELD / DATA POINT</th>',
+        '<th style="background:#64381F;color:#fff;width:50px">DONE</th>',
+        '<th style="background:#64381F;color:#fff;width:240px">VALUE COLLECTED</th>',
+        '<th style="background:#64381F;color:#fff;width:240px">SOURCE / WHERE TO GET IT</th>',
+        '</tr>',
+    ];
+
+    ROWS.forEach(function(r) {
+        if (r.type==='sec') {
+            lines.push('<tr><td colspan="5" class="b" style="background:#C47244;color:#fff;border:1px solid #999;padding:4px 6px">'+esc(r.label)+'</td></tr>');
+        } else {
+            var a = r.even ? C.W : C.ODD_A;
+            var b = r.even ? C.W : C.ODD_B;
+            var done = (r.value && r.value!=='--') ? '&#10003;' : '';
+            lines.push('<tr>');
+            lines.push('<td style="background:'+a+';border:1px solid #999;padding:4px 6px"></td>');
+            lines.push('<td style="background:'+b+';border:1px solid #999;padding:4px 6px">'+esc(r.field)+'</td>');
+            lines.push('<td style="background:#fff;border:1px solid #999;text-align:center">'+done+'</td>');
+            lines.push('<td style="background:'+a+';border:1px solid #999;padding:4px 6px">'+esc(r.value)+'</td>');
+            lines.push('<td style="background:'+b+';border:1px solid #999;padding:4px 6px;font-size:9pt">'+esc(r.source)+'</td>');
+            lines.push('</tr>');
+        }
+    });
+    lines.push('</table></body></html>');
+
+    var blob = new Blob([lines.join('\n')], { type: 'application/vnd.ms-excel;charset=utf-8' });
+    var a = document.createElement('a');
+    a.download = 'SiteDataChecklist_' + (sd.apn||'Site').replace(/[^a-zA-Z0-9-]/g,'_') + '.xls';
+    a.href = URL.createObjectURL(blob);
+    a.click();
+    URL.revokeObjectURL(a.href);
+}
+</script>
+
+</body>
+</html>

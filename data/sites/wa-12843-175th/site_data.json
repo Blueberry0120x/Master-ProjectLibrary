@@ -1,0 +1,234 @@
+{
+  "project": "ProjectBook-Planner",
+  "site": {
+    "siteId": "WA-12843_175TH",
+    "address": "12843 175th Ave SE, Renton, WA 98059",
+    "apn": "7229900345",
+    "legalDescription": "-- TBD: King County Recorder via iMap (gis.kingcounty.gov) by APN -- Subdivision / Block / Lot from recorded plat map",
+    "yearBuilt": "N/A",
+    "occupancyGroup": "N/A -- vacant lot",
+    "zoning": "R-4",
+    "cadZone": "WA_N",
+    "lotWidth": 114,
+    "lotDepth": 132,
+    "lotSF": 15029,
+    "commercialDepth": 0,
+    "baseFAR": 0,
+    "commFAR": 0,
+    "maxHeight": 30,
+    "baseHeightLimit": 30,
+    "cchsMaxHeight": 0,
+    "frontSetback": 15,
+    "rearSetback": 20,
+    "sideSetback": 5,
+    "densityPerSF": 0,
+    "nefRatePerSF": 0,
+    "affordabilityPct": 0,
+    "difPerUnit": 0,
+    "difWaiverSF": 0,
+    "projectType": "",
+    "architect": "",
+    "scopeOfWork": "",
+    "notes": "VACANT LOT — no structure. Assessed land value $116,000; total assessed value = land only (no improvement value) per city-data.com 2016 tax record. Owner: Ernest E Rensink & Elizabeth M Rensink. Owner ALSO owns adjacent 12853 175th Ave SE (same owners per city-data) — potential combined-parcel development opportunity (~30,000 SF total). Water: Water District connection. Sewer: Private (likely septic — verify with KC Public Health). Street: Public, paved. | PIN/APN 7229900345 — confirmed 2026-04-15 via KC GIS bbox spatial query; polygon area ~15,024 SF matches recorded 15,029 SF; centroid at 47.486470, -122.107315. Verify in KC eReal Property (blue.kingcounty.gov/assessor) for full legal description and ownership chain. | lotWidth 114 ft × lotDepth 132 ft — GIS-measured from polygon vertices (2026-04-15); not estimated. lotSF 15,029 from city-data.com tax record. | TBD - C: All zoning standards are from Renton Municipal Code (RMC) 4-2-110A Table — verify current values at codepublishing.com/WA/Renton. Ordinance 6161 (June 2025) added middle housing (HB 1110 compliance): up to 4 units per lot allowed outright; up to 6 with affordable housing bonus. Types: duplexes, triplexes, fourplexes, townhouses, stacked flats, courtyard apts. Height and setbacks unchanged for middle housing. Corner lot: not confirmed — verify if 175th Ave SE is the only frontage or if there is a cross-street. | TBD - C2: Zoning designation confirmed as R-4 from neighborhood property search; verify exact zone code via Renton iMap (gismaps.rentonwa.gov) or Renton CED permit portal. Confirm lot is within City of Renton limits (not unincorporated KC). | TBD - D: All overlay zones unconfirmed — verify via Renton iMap and external sources listed below. | TBD - E: Fees — City of Renton permit fee schedule (rentonwa.gov/permits). WA has no NEF. Impact fees and utility connection fees via Renton CED. Permit center: (425) 430-7200. | TBD - G: Inspector contacts — City of Renton Development Services (425) 430-7200. | TBD - H: Coordinates from USCB geocoder (47.487244, -122.107018) — verify lat/lng by right-clicking lot center in Google Maps. Rotation: estimate from aerial. Parcel polygon: extract from KC iMap if irregular.",
+    "inspectors": [
+      {
+        "name": "Building Inspector",
+        "val": "City of Renton Permit Services — (425) 430-7200 (main CED/Development Services) | (425) 430-7215 (permit services direct) | (425) 430-7202 (inspection scheduling) | 1055 S Grady Way, Renton WA 98057 | permitting.rentonwa.gov"
+      },
+      {
+        "name": "Structural",
+        "val": "City of Renton Permit Services — (425) 430-7200 (same counter)"
+      },
+      {
+        "name": "Electrical",
+        "val": "City of Renton Permit Services — (425) 430-7200"
+      },
+      {
+        "name": "Mechanical",
+        "val": "City of Renton Permit Services — (425) 430-7200"
+      },
+      {
+        "name": "Grading / Civil",
+        "val": "City of Renton Public Works — (425) 430-7200 | route through Permit Services; geotechnical review required per RMC 4-3-050 for vacant lot development"
+      }
+    ],
+    "planningAreas": [
+      {
+        "name": "COMPREHENSIVE PLAN AREA",
+        "val": "Residential Low Density (RLD) — City of Renton 2024 Comprehensive Plan (eff. Jan 1, 2025, covers 2025–2044). R-4 zone implements RLD designation per RMC 4-2-010. Source: RMC 4-2-010; rentonwa.gov 2024 Comp Plan (2026-04-15)."
+      },
+      {
+        "name": "LAND USE DESIGNATION",
+        "val": "Residential Low Density (RLD) — 4 du/net acre base; middle housing (up to 4 units) per Ord. 6161 (June 2025). Source: RMC 4-2-010; Renton 2024 Comp Plan (2026-04-15)."
+      },
+      {
+        "name": "CITY LIMITS",
+        "val": "Within City of Renton — APN 7229900345 confirmed via KC GIS spatial query (2026-04-15); PIN in 7229 series is City of Renton parcels. Verify via Renton iMap (gismaps.rentonwa.gov) if needed."
+      },
+      {
+        "name": "TRANSIT PRIORITY AREA",
+        "val": "Not in TPA — East Renton Highlands at 175th Ave SE has no high-frequency transit within 0.5 mi. No Sound Transit, BRT, or RapidRide line serves this area. Nearest transit center ~6 mi west (downtown Renton). Source: King County Metro route maps (2026-04-15)."
+      },
+      {
+        "name": "URBAN GROWTH AREA (UGA)",
+        "val": "Yes -- Renton is within King County UGA"
+      },
+      {
+        "name": "MIDDLE HOUSING (HB 1110)",
+        "val": "Yes -- Renton adopted Ord. 6161 (June 2025); up to 4 units per lot outright in R-4"
+      }
+    ],
+    "overlayZones": [
+      {
+        "name": "AIRPORT INFLUENCE AREA",
+        "val": "Likely no formal overlay — Renton Municipal Airport (RNT) ~6.5 mi west; FAR Part 77 transitional surfaces do not impose height restrictions on SFR at this distance. BFI (Boeing Field) ~8 mi NW; 65 DNL contour does not extend to 98059. Confirm RMC 4-3-020 airport height boundary map for east Renton does not reach 175th Ave SE. FAA OE/AAA filing only required for structures ≥~70–100 ft AGL. Source: Wikipedia RNT; RMC 4-3-020; FAA airport data (2026-04-15)."
+      },
+      {
+        "name": "COASTAL / SHORELINE",
+        "val": "No — inland location; ~0.9 mi north of Soos Creek; no SMA shoreline designation. Soos Creek main channel ~1.5–2 mi south/southwest. Source: WA Ecology Coastal Atlas (2026-04-15)."
+      },
+      {
+        "name": "VERY HIGH FIRE HAZARD",
+        "val": "No — East Renton Highlands is suburban with no WUI designation. WA DNR Wildfire Hazard draft map (not finalized 2026-04) does not designate standard suburban King County parcels. Source: WA DNR Wildfire Hazard and Risk Mapping draft (2026-04-15)."
+      },
+      {
+        "name": "SEISMIC / FAULT ZONE",
+        "val": "Seismic Hazard Area — site at 47.486°N is south of Seattle Fault main trace (~47.61°N); footwall zone, significant seismic hazard from both Seattle Fault (M7+) and Cascadia Subduction Zone. Elevated East Renton Highlands terrain = lower liquefaction risk vs Cedar River valley. RMC 4-3-050 requires geotechnical report if designated seismic hazard soils present. Source: WA DNR GM-41 liquefaction susceptibility; Renton Hazard Mitigation Plan; RMC 4-3-050 (2026-04-15)."
+      },
+      {
+        "name": "FEMA FLOOD ZONE",
+        "val": "Likely Zone X — elevated East Renton Highlands; outside Cedar River, Green River, and Soos Creek floodplains at this location. Confirm at msc.fema.gov or KC iMap (gismaps.kingcounty.gov/parcelviewer2/). Source: KC Flood Control District; FEMA MSC (2026-04-15)."
+      },
+      {
+        "name": "CRITICAL AREAS (RMC 4-3)",
+        "val": "CAR REQUIRED — vacant lot in Soos Creek watershed area (Soos Creek ~1.5–2 mi S). Wetland delineation may be required if hydric soils, drainage swales, or ponding present on the vacant parcel. Submit environmental checklist at pre-application meeting per RMC 4-3-050. Source: Soos Creek Water and Sewer District; King County wetlands GIS; RMC 4-3-050 (2026-04-15)."
+      },
+      {
+        "name": "WELLHEAD PROTECTION",
+        "val": "TBD — East Renton area has some Zone 1/2 wellhead protection areas; verify via Renton iMap (gismaps.rentonwa.gov) wellhead protection layer. Soos Creek Water and Sewer District serves this address. Source: Soos Creek W&S District (sooscreek.com); Renton iMap (2026-04-15)."
+      }
+    ],
+    "devRef": {
+      "source": "Census geocoder lat/lng; city-data.com 2016 tax record (lot SF, owner, land value); Renton Ord. 6161 middle housing (June 2025); RMC 4-2-110A (R-4 standards from knowledge base — verify at codepublishing.com/WA/Renton).",
+      "lotSF": 15029,
+      "lotWidthEstimate_ft": 80,
+      "lotDepthEstimate_ft": 188,
+      "note_dimensions": "Width and depth are rough estimates only (80 × 188 ≈ 15,040 SF). Confirm from KC Assessor parcel map or surveyor before any design work.",
+      "setbacksApplied": {
+        "front_ft": 15,
+        "rear_ft": 20,
+        "side_ft": 5
+      },
+      "buildableEnvelope": {
+        "footprintSF_estimate": 6012,
+        "pctOfLot": 40.0,
+        "note": "40% max lot coverage = 15,029 × 0.40 = 6,012 SF max footprint. Actual buildable zone within setbacks ~70 ft × 153 ft = 10,710 SF (usable area, not max coverage)."
+      },
+      "imperviousLimit": {
+        "pct": 55,
+        "maxSF": 8266,
+        "note": "15,029 × 0.55 = 8,266 SF max impervious total (structures + driveway + hardscape)."
+      },
+      "units": {
+        "baselineSingleFamily": 1,
+        "middleHousing_4unit": 4,
+        "bonusAffordable_6unit": 6,
+        "note": "R-4 base = 1 SFR. After Ord. 6161 (HB 1110, June 2025): 4 units per lot outright; 6 with affordable bonus. Types: duplex, triplex, fourplex, townhouse, stacked flat, courtyard apt."
+      },
+      "adjacentParcel": {
+        "address": "12853 175th Ave SE, Renton, WA 98059",
+        "owner": "Ernest E Rensink & Elizabeth M Rensink (same owner)",
+        "note": "Combined development of both parcels (~30,058 SF total) could unlock larger unit count and simplified site layout. Requires lot line adjustment or joint permit. Verify APN of 12853 via KC Assessor."
+      }
+    },
+    "existingDwellingSF": 0,
+    "parcelPolygon": [
+      [
+        47.486636,
+        -122.107585
+      ],
+      [
+        47.486618,
+        -122.107048
+      ],
+      [
+        47.486303,
+        -122.107045
+      ],
+      [
+        47.486323,
+        -122.107583
+      ]
+    ]
+  },
+  "saved": {
+    "lat": 47.48647,
+    "lng": -122.107254,
+    "rotation": 0,
+    "locked": false,
+    "setbacks": {
+      "front": 15,
+      "rear": 20,
+      "sideL": 5,
+      "sideR": 5
+    },
+    "buildings": [
+      {
+        "orientation": 0,
+        "W": 30,
+        "D": 60,
+        "offsetX": 0,
+        "offsetY": 0,
+        "spacing": 0,
+        "count": 1,
+        "stackSpacing": 0,
+        "anchor": "center",
+        "stories": 1,
+        "floorHeight": 9,
+        "locked": false,
+        "stackAngle": 0
+      }
+    ],
+    "activeBuilding": 0,
+    "commFront": false,
+    "showBldgDims": true,
+    "hiddenDimKeys": [],
+    "mergedDimKeys": [],
+    "chainWOffset": 0,
+    "chainDOffset": 0,
+    "propDimOffsets": {},
+    "parcelPolygon": [
+      [
+        47.486636,
+        -122.107585
+      ],
+      [
+        47.486618,
+        -122.107048
+      ],
+      [
+        47.486303,
+        -122.107045
+      ],
+      [
+        47.486323,
+        -122.107583
+      ]
+    ],
+    "mapOpacity": 100,
+    "setbacksApplied": false,
+    "freeDrag": true,
+    "snapEdge": false,
+    "siteNorthDeg": 0,
+    "frontBearing": 270,
+    "vehicles": [],
+    "activeVehicle": -1,
+    "existingBuildings": [],
+    "activeExBuilding": -1,
+    "_geoOffsets": true
+  },
+  "checklist": null,
+  "_mpl_id": "wa-12843-175th",
+  "_legacy_source": "ProjectBook-Planner/data/sites/wa-12843_175th.json",
+  "_schema": "legacy-projectbook -- migrate to MPL schema when site becomes active"
+}

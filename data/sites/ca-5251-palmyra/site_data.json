@@ -1,0 +1,231 @@
+{
+  "project": "ProjectBook-Planner",
+  "site": {
+    "siteId": "CA-5251_PALMYRA",
+    "address": "5251 Palmyra Ave, San Diego, CA 92117",
+    "apn": "355-441-13-00",
+    "legalDescription": "Lot 49, University View Estates Unit No. 2, Map No. 004985, City of San Diego, County of San Diego, State of California",
+    "yearBuilt": "1963",
+    "occupancyGroup": "R-3",
+    "zoning": "RS-1-7",
+    "cadZone": "CA_VI",
+    "lotWidth": 55,
+    "lotDepth": 100,
+    "lotSF": 5509,
+    "commercialDepth": 0,
+    "baseFAR": 0.6,
+    "commFAR": 0,
+    "maxHeight": 30,
+    "baseHeightLimit": 30,
+    "cchsMaxHeight": 0,
+    "frontSetback": 15,
+    "rearSetback": 13,
+    "sideSetback": 5,
+    "densityPerSF": 5000,
+    "nefRatePerSF": 0,
+    "affordabilityPct": 0,
+    "difPerUnit": 0,
+    "difWaiverSF": 0,
+    "projectType": "",
+    "architect": "",
+    "scopeOfWork": "",
+    "cornerVisibilityTriangle": false,
+    "cornerVisTriSize": 25,
+    "cornerVisCorner": "SW",
+    "densityBonus": false,
+    "notes": "TBD - A: Lot is irregular 5-sided polygon (~55x100), 5,509 SF -- legal nonconforming under RS-1-7 (min 7,000 SF). Verify dims via assessor tract map (Map 4985). | TBD - B: Existing house 1,066 SF, 3bd/1.5ba, built 1963. | TBD - C: baseFAR 0.6, setbacks 15/13/5 from RS-1-7 defaults. Clairemont plan update Dec 2025 may affect -- verify current code. | TBD - D: Airport YES (MCAS Miramar Review Area 1, 60-65 CNEL + Montgomery Field Review Area 2). Very High Fire Hazard YES (300 ft brush buffer). Height limit 30 ft (Clairemont Mesa overlay O-22048). | TBD - E: NEF, DIF, affordability -- City DSD Fee Schedule. | TBD - F: Project type, architect, scope. | TBD - G: Inspector contacts.",
+    "inspectors": [
+      {
+        "name": "Combination",
+        "val": "City of San Diego DSD Inspection Services — (858) 581-7111 | M–F 7am–3:30pm questions; 7:15–7:45am inspector direct; 24/7 automated scheduling | Grading/Civil: (619) 446-5242 / fit_dsd@sandiego.gov | PM support: DSD-inspection-proj-mgr@sandiego.gov | sandiego.gov/development-services/inspections"
+      },
+      {
+        "name": "Structural",
+        "val": "City of San Diego DSD Inspection Services — (858) 581-7111 | M–F 7am–3:30pm questions; 7:15–7:45am inspector direct; 24/7 automated scheduling | Grading/Civil: (619) 446-5242 / fit_dsd@sandiego.gov | PM support: DSD-inspection-proj-mgr@sandiego.gov | sandiego.gov/development-services/inspections"
+      },
+      {
+        "name": "Electrical",
+        "val": "City of San Diego DSD Inspection Services — (858) 581-7111 | M–F 7am–3:30pm questions; 7:15–7:45am inspector direct; 24/7 automated scheduling | Grading/Civil: (619) 446-5242 / fit_dsd@sandiego.gov | PM support: DSD-inspection-proj-mgr@sandiego.gov | sandiego.gov/development-services/inspections"
+      },
+      {
+        "name": "Mechanical",
+        "val": "City of San Diego DSD Inspection Services — (858) 581-7111 | M–F 7am–3:30pm questions; 7:15–7:45am inspector direct; 24/7 automated scheduling | Grading/Civil: (619) 446-5242 / fit_dsd@sandiego.gov | PM support: DSD-inspection-proj-mgr@sandiego.gov | sandiego.gov/development-services/inspections"
+      },
+      {
+        "name": "Grading / Civil",
+        "val": "City of San Diego DSD Inspection Services — (858) 581-7111 | M–F 7am–3:30pm questions; 7:15–7:45am inspector direct; 24/7 automated scheduling | Grading/Civil: (619) 446-5242 / fit_dsd@sandiego.gov | PM support: DSD-inspection-proj-mgr@sandiego.gov | sandiego.gov/development-services/inspections"
+      }
+    ],
+    "planningAreas": [
+      {
+        "name": "COMMUNITY PLAN AREA",
+        "val": "CLAIREMONT MESA"
+      },
+      {
+        "name": "LAND USE DESIGNATION",
+        "val": "Residential Low-2 (5-9 du/ac)"
+      },
+      {
+        "name": "CCHS (HOUSING SOLUTIONS)",
+        "val": "Not in CCHS — RS-1-7 residential zone is not a CCHS-eligible commercial corridor zone. CCHS applies to CC, CN, CV, and certain mixed-use zones per SD Ord. 21866. Source: SDMC §143.0710; SD Planning (2026-04-15)."
+      },
+      {
+        "name": "TRANSIT PRIORITY AREA (TPA)",
+        "val": "Not in TPA — Palmyra Ave is an interior residential street in Clairemont Mesa. No MTS/NCTD rapid bus or rail within 0.5 mi. Standard residential parking applies. Source: MTS route map; SDMTS.com (2026-04-15)."
+      },
+      {
+        "name": "PARKING STANDARDS (PSTPA)",
+        "val": "Not in PSTPA — no TPA designation; standard RS-1-7 parking applies (2 spaces per unit). Source: SDMC §142.0528 (2026-04-15)."
+      },
+      {
+        "name": "MOBILITY CHOICES",
+        "val": "-- TBD: SD Municipal Code Appendix A Fig A-1"
+      }
+    ],
+    "overlayZones": [
+      {
+        "name": "HEIGHT LIMIT OVERLAY",
+        "val": "Yes -- 30 ft (Clairemont Mesa, O-22048)"
+      },
+      {
+        "name": "TRANSIT AREA OVERLAY",
+        "val": "No — interior Clairemont Mesa residential; no TAOZ designation. Source: SD Zoning Data Portal (2026-04-15)."
+      },
+      {
+        "name": "AIRPORT INFLUENCE AREA",
+        "val": "YES -- MCAS Miramar Review Area 1 (60-65 CNEL) + Montgomery Field Review Area 2"
+      },
+      {
+        "name": "COASTAL OVERLAY",
+        "val": "No"
+      },
+      {
+        "name": "VERY HIGH FIRE HAZARD",
+        "val": "YES -- within 300 ft brush zone buffer"
+      },
+      {
+        "name": "FAULT ZONE",
+        "val": "No (not in Alquist-Priolo zone)"
+      }
+    ],
+    "parcelPolygon": [
+      [
+        32.8415535,
+        -117.17756154
+      ],
+      [
+        32.84151114,
+        -117.17769124
+      ],
+      [
+        32.84149677,
+        -117.17773001
+      ],
+      [
+        32.84174129,
+        -117.17786654
+      ],
+      [
+        32.84180297,
+        -117.17770112
+      ]
+    ],
+    "existingDwellingSF": 1066
+  },
+  "saved": {
+    "lat": 32.84167121505937,
+    "lng": -117.17774311970788,
+    "rotation": 335,
+    "locked": true,
+    "setbacks": {
+      "front": 4,
+      "rear": 4,
+      "sideL": 4,
+      "sideR": 15
+    },
+    "buildings": [
+      {
+        "orientation": 0,
+        "W": 5,
+        "D": 5,
+        "offsetX": 10.3,
+        "offsetY": 37.1,
+        "spacing": 0,
+        "count": 1,
+        "stackSpacing": 0,
+        "anchor": "center",
+        "stories": 1,
+        "floorHeight": 9,
+        "stackAngle": 360,
+        "locked": false
+      }
+    ],
+    "activeBuilding": 0,
+    "commFront": false,
+    "showBldgDims": true,
+    "hiddenDimKeys": [],
+    "mergedDimKeys": [],
+    "chainWOffset": 6.401567474405599,
+    "chainDOffset": 11.21143477916904,
+    "propDimOffsets": {},
+    "parcelPolygon": [
+      [
+        32.8415535,
+        -117.17756154
+      ],
+      [
+        32.84151114,
+        -117.17769124
+      ],
+      [
+        32.84149677,
+        -117.17773001
+      ],
+      [
+        32.84174129,
+        -117.17786654
+      ],
+      [
+        32.84180297,
+        -117.17770112
+      ]
+    ],
+    "mapOpacity": 75,
+    "setbacksApplied": true,
+    "freeDrag": false,
+    "snapEdge": false,
+    "siteNorthDeg": 335,
+    "frontBearing": 240,
+    "vehicles": [],
+    "activeVehicle": -1,
+    "existingBuildings": [
+      {
+        "polygon": [
+          [
+            32.841677429875524,
+            -117.17779888309342
+          ],
+          [
+            32.841677429875524,
+            -117.17770111690659
+          ],
+          [
+            32.84162257012448,
+            -117.17770111690659
+          ],
+          [
+            32.84162257012448,
+            -117.17779888309342
+          ]
+        ],
+        "locked": false
+      }
+    ],
+    "activeExBuilding": 0,
+    "_geoOffsets": true
+  },
+  "checklist": null,
+  "_mpl_id": "ca-5251-palmyra",
+  "_legacy_source": "ProjectBook-Planner/data/sites/ca-5251_Palmyra.json",
+  "_schema": "legacy-projectbook -- migrate to MPL schema when site becomes active"
+}

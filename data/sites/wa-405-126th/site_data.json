@@ -1,0 +1,903 @@
+{
+  "project": "ProjectBook-Planner",
+  "site": {
+    "siteId": "WA-405_126TH",
+    "address": "405 SW 126th St, Burien, WA 98146",
+    "apn": "0723049368",
+    "legalDescription": "N 120 FT OF E 1/2 OF SE 1/4 OF SW 1/4 OF SE 1/4 LESS W 180 FT LESS CO RDS",
+    "yearBuilt": "1949",
+    "occupancyGroup": "R-3",
+    "zoning": "R2",
+    "cadZone": "WA_N",
+    "lotWidth": 94,
+    "lotDepth": 95,
+    "lotSF": 10879,
+    "commercialDepth": 0,
+    "baseFAR": 0,
+    "commFAR": 0,
+    "maxHeight": 35,
+    "baseHeightLimit": 35,
+    "cchsMaxHeight": 0,
+    "frontSetback": 15,
+    "rearSetback": 5,
+    "sideSetback": 5,
+    "densityPerSF": 0,
+    "nefRatePerSF": 0,
+    "affordabilityPct": 0,
+    "difPerUnit": 0,
+    "difWaiverSF": 0,
+    "projectType": "",
+    "architect": "",
+    "scopeOfWork": "",
+    "notes": "ZONING SOURCE: Burien Ordinance 868 (effective July 9, 2025) amended BMC Title 19 -- all R-zone standards below are from Ord. 868, Table 19.15.015.2.B and .2.C. R-2 zone (Residential 2 -- Low Density): front setback=15ft, interior setback (all non-front sides including rear)=5ft, max height=35ft, min lot size=5,000sf, max impervious=70%, baseline units per lot=4 outright (+1 bonus if affordable or within 1/4mi of qualifying transit stop, +1 preservation bonus if existing primary dwelling preserved). Corner lot note: WA-405 is a corner lot (curved polygon corner at SE); both street frontages require 15ft setback. Short plat (BMC Ch.17.35): divides land into 4 or fewer lots, Type 1 review, Director decision, ~180 days to preliminary decision, 36-month window to record final plat after preliminary approval. Pre-application meeting required (submit via MyBuildingPermit). Lot must meet minimum R-2 lot size (5,000sf) per resulting lot. Surveyor required. At 10,879sf, lot could theoretically be split into 2 lots of ~5,440sf each -- but corner lot geometry and street frontage must be verified. Note: 4 units allowed outright on existing lot WITHOUT a short plat; short plat only needed if selling lots separately. Unit Lot Subdivision (SB 5258, 2023) available for condo-style ownership without traditional lot division -- Burien must adopt by 2027. | TBD - A: legalDescription -- King County Recorder / iMap (gis.kingcounty.gov). yearBuilt and existing occupancy -- King County Assessor (blue.kingcounty.gov/assessor). | TBD - D: community plan, transit overlays -- City of Burien Comprehensive Plan; TPA check -- PSRC / Sound Transit GIS. Airport influence -- SEA (SeaTac) ALUCP. Fault zone -- USGS seismic. | TBD - E: Fees -- 2026 City of Burien fee schedule (burienwa.gov permits page); WA has no NEF; check impact fees and connection fees. Short plat filing fee on MyBuildingPermit. | TBD - G: Inspector contacts -- City of Burien Permit Center (206) 248-5510. | TBD - H: Map rotation from aerial. Parcel polygon captured.",
+    "inspectors": [
+      {
+        "name": "Building Inspector",
+        "val": "City of Burien Permit Center — (206) 241-4647 (main) | (206) 248-5525 (inspection scheduling) | permittech@burienwa.gov | 400 SW 152nd St Suite 300, Burien WA 98166 | M–Th 9am–noon in-person, 9am–4pm phone | MyBuildingPermit.com"
+      },
+      {
+        "name": "Structural",
+        "val": "City of Burien Permit Center — (206) 241-4647 (same counter as building)"
+      },
+      {
+        "name": "Electrical",
+        "val": "City of Burien Permit Center — (206) 241-4647"
+      },
+      {
+        "name": "Mechanical",
+        "val": "City of Burien Permit Center — (206) 241-4647"
+      },
+      {
+        "name": "Grading / Civil",
+        "val": "City of Burien Public Works — (206) 241-4647 (route via Permit Center); King County Permitting for unincorporated areas (206) 296-6600"
+      }
+    ],
+    "planningAreas": [
+      {
+        "name": "COMPREHENSIVE PLAN AREA",
+        "val": "Residential Low 1 (RL-1) — Burien 2044 Comprehensive Plan (adopted Oct 28, 2024). R2 zone implements RL-1. Source: connect.burienwa.gov; Ord. 868 (eff. July 9, 2025)."
+      },
+      {
+        "name": "LAND USE DESIGNATION",
+        "val": "Residential Low 1 (RL-1) — medium-density infill residential; up to 6 units/lot on 5,000 SF parcels under Ord. 868. Source: Burien 2044 Comp Plan; Ord. 868."
+      },
+      {
+        "name": "TRANSIT PRIORITY AREA",
+        "val": "Likely YES — RapidRide H Line stop at SW 128th St on Ambaum Blvd SW is ~0.15 mi from site; H Line operates 10–15 min headways. Qualifies as frequent transit service area under WA HB 1110 if walking distance <0.5 mi. Confirm walking route distance. Source: King County Metro RapidRide H Line (2026-04-15)."
+      },
+      {
+        "name": "URBAN GROWTH AREA (UGA)",
+        "val": "Yes -- Burien is within King County UGA"
+      },
+      {
+        "name": "MOBILITY / TRANSIT ACCESS",
+        "val": "RapidRide H Line on Ambaum Blvd SW (~0.15 mi W); Burien Transit Center ~1 mi E (A Line, H Line, multiple KC Metro routes). Source: King County Metro (2026-04-15)."
+      }
+    ],
+    "overlayZones": [
+      {
+        "name": "AIRPORT INFLUENCE AREA",
+        "val": "YES — Burien is directly under SeaTac (SEA) flight paths. Aircraft Noise Reduction per BMC Chapter 15.12 applies to all new construction. Site at ~1.8 mi SW of SEA — near or within DNL 65 noise contour. Check Port Package eligibility at seatacnoise.info and 2032 NEM at seapart150.com. Permit submittal requires Aircraft Noise Reduction Submittal Checklist (Burien Permit Center). FAR Part 77 height thresholds not triggered by SFR. Source: BMC 15.12; seapart150.com; Port of Seattle 2023 NEM (2026-04-15)."
+      },
+      {
+        "name": "COASTAL / SHORELINE",
+        "val": "No SMA shoreline designation — ~0.9 mi east of Puget Sound OHWM; outside 200 ft SMA buffer. Site-specific CAR required at permit stage for drainage/wetlands. Source: WA Ecology Coastal Atlas (2026-04-15)."
+      },
+      {
+        "name": "VERY HIGH FIRE HAZARD",
+        "val": "No — urban Burien is not a WUI area; WA DNR Wildfire Hazard draft map (not finalized as of 2026-04) does not designate fully suburban King County neighborhoods. No high/very-high wildfire hazard expected. Source: WA DNR Wildfire Hazard and Risk Mapping draft (2026-04-15)."
+      },
+      {
+        "name": "SEISMIC / FAULT ZONE",
+        "val": "Seismic Hazard Area — site is south of Seattle Fault main trace (~47.61°N; site at 47.490°N). Both Seattle Fault and Cascadia Subduction Zone applicable. No Special Fault Rupture Hazard Zone designation. Standard seismic design (ASCE 7/IBC). Liquefaction potential exists in low-lying areas; upland site lower risk. Source: Seattle Fault Wikipedia; King County Earthquake Soils Hazard Map (2026-04-15)."
+      },
+      {
+        "name": "FEMA FLOOD ZONE",
+        "val": "Likely Zone X — minimal hazard; FIRM panels 0935F, 0953F, 0955F (King County, eff. Aug 19, 2020). Confirm at msc.fema.gov or KC iMap. Source: burienwa.gov FIRM page; KC 2020 FIRM update (2026-04-15)."
+      },
+      {
+        "name": "CRITICAL AREAS (WA)",
+        "val": "No critical areas flag identified; ~0.9 mi from Puget Sound, no creek/wetland at this address per search. Site-specific Critical Areas Review (CAR) required at permit submittal. Source: City of Burien planning (2026-04-15)."
+      }
+    ],
+    "parcelPolygon": [
+      [
+        47.49023293,
+        -122.33933165
+      ],
+      [
+        47.49022964,
+        -122.33932467
+      ],
+      [
+        47.49022597,
+        -122.33931812
+      ],
+      [
+        47.49022195,
+        -122.33931205
+      ],
+      [
+        47.49021759,
+        -122.3393065
+      ],
+      [
+        47.49021293,
+        -122.33930151
+      ],
+      [
+        47.490208,
+        -122.33929712
+      ],
+      [
+        47.49020284,
+        -122.33929335
+      ],
+      [
+        47.49019748,
+        -122.33929023
+      ],
+      [
+        47.49019196,
+        -122.33928779
+      ],
+      [
+        47.49018633,
+        -122.33928604
+      ],
+      [
+        47.49018061,
+        -122.33928464
+      ],
+      [
+        47.49017486,
+        -122.33928466
+      ],
+      [
+        47.48998254,
+        -122.33928539
+      ],
+      [
+        47.48998177,
+        -122.33976728
+      ],
+      [
+        47.49022738,
+        -122.33976487
+      ],
+      [
+        47.49022742,
+        -122.3396207
+      ],
+      [
+        47.49022753,
+        -122.33961666
+      ],
+      [
+        47.49022764,
+        -122.33961262
+      ],
+      [
+        47.49022776,
+        -122.33960858
+      ],
+      [
+        47.49022789,
+        -122.33960453
+      ],
+      [
+        47.49022802,
+        -122.3396005
+      ],
+      [
+        47.49022816,
+        -122.33959646
+      ],
+      [
+        47.4902283,
+        -122.33959242
+      ],
+      [
+        47.49022845,
+        -122.33958838
+      ],
+      [
+        47.4902286,
+        -122.33958434
+      ],
+      [
+        47.49022876,
+        -122.3395803
+      ],
+      [
+        47.49022893,
+        -122.33957627
+      ],
+      [
+        47.4902291,
+        -122.33957223
+      ],
+      [
+        47.49022928,
+        -122.33956819
+      ],
+      [
+        47.49022947,
+        -122.33956416
+      ],
+      [
+        47.49022966,
+        -122.33956013
+      ],
+      [
+        47.49022986,
+        -122.33955609
+      ],
+      [
+        47.49023006,
+        -122.33955206
+      ],
+      [
+        47.49023027,
+        -122.33954802
+      ],
+      [
+        47.49023049,
+        -122.33954399
+      ],
+      [
+        47.49023071,
+        -122.33953996
+      ],
+      [
+        47.49023094,
+        -122.33953593
+      ],
+      [
+        47.49023117,
+        -122.3395319
+      ],
+      [
+        47.49023141,
+        -122.33952787
+      ],
+      [
+        47.49023166,
+        -122.33952384
+      ],
+      [
+        47.49023191,
+        -122.33951981
+      ],
+      [
+        47.49023217,
+        -122.33951579
+      ],
+      [
+        47.49023243,
+        -122.33951176
+      ],
+      [
+        47.4902327,
+        -122.33950774
+      ],
+      [
+        47.49023298,
+        -122.33950371
+      ],
+      [
+        47.49023326,
+        -122.33949969
+      ],
+      [
+        47.49023355,
+        -122.33949566
+      ],
+      [
+        47.49023384,
+        -122.33949165
+      ],
+      [
+        47.49023415,
+        -122.33948763
+      ],
+      [
+        47.49023445,
+        -122.33948361
+      ],
+      [
+        47.49023476,
+        -122.33947959
+      ],
+      [
+        47.49023508,
+        -122.33947557
+      ],
+      [
+        47.4902354,
+        -122.33947155
+      ],
+      [
+        47.49023574,
+        -122.33946754
+      ],
+      [
+        47.49023607,
+        -122.33946353
+      ],
+      [
+        47.49023642,
+        -122.33945951
+      ],
+      [
+        47.49023677,
+        -122.3394555
+      ],
+      [
+        47.49023712,
+        -122.33945149
+      ],
+      [
+        47.49023748,
+        -122.33944747
+      ],
+      [
+        47.49023785,
+        -122.33944347
+      ],
+      [
+        47.49023822,
+        -122.33943947
+      ],
+      [
+        47.4902386,
+        -122.33943546
+      ],
+      [
+        47.49023898,
+        -122.33943145
+      ],
+      [
+        47.49023938,
+        -122.33942745
+      ],
+      [
+        47.49023977,
+        -122.33942345
+      ],
+      [
+        47.49024018,
+        -122.33941945
+      ],
+      [
+        47.49024059,
+        -122.33941545
+      ],
+      [
+        47.490241,
+        -122.33941145
+      ],
+      [
+        47.49024142,
+        -122.33940745
+      ],
+      [
+        47.49024185,
+        -122.33940346
+      ],
+      [
+        47.49024228,
+        -122.33939946
+      ],
+      [
+        47.49024272,
+        -122.33939547
+      ],
+      [
+        47.49024317,
+        -122.33939148
+      ],
+      [
+        47.49024356,
+        -122.33938815
+      ],
+      [
+        47.49024345,
+        -122.33937965
+      ],
+      [
+        47.49024286,
+        -122.3393712
+      ],
+      [
+        47.49024179,
+        -122.33936285
+      ],
+      [
+        47.49024025,
+        -122.33935467
+      ],
+      [
+        47.49023825,
+        -122.3393467
+      ],
+      [
+        47.49023581,
+        -122.33933901
+      ]
+    ],
+    "existingDwellingSF": 599,
+    "devRef": {
+      "source": "Burien Ord. 868 (eff. Jul 9, 2025) — BMC Table 19.15.015.2.B/.2.C. Geometry computed from parcelPolygon.",
+      "lotSF": 10879,
+      "frontages": {
+        "primary_SW126thSt_ft": 118.7,
+        "secondary_eastSt_ft": 70.1,
+        "west_interior_ft": 89.5
+      },
+      "setbacksApplied": {
+        "south_front_ft": 15,
+        "east_cornerFront_ft": 15,
+        "north_interior_ft": 5,
+        "west_interior_ft": 5
+      },
+      "buildableEnvelope": {
+        "footprintSF": 6824,
+        "pctOfLot": 62.7,
+        "note": "Polygon-inset grid calc (2 ft res). Corner lot: both street frontages at 15 ft. Surveyor confirmation required."
+      },
+      "imperviousLimit": {
+        "pct": 70,
+        "maxSF": 7615,
+        "remainingAfterFootprint": 791,
+        "note": "791 sq ft remaining for driveway + walkways after max footprint build-out."
+      },
+      "units": {
+        "baseline": 4,
+        "bonusTransitOrAffordable": 1,
+        "bonusPreservation": 1,
+        "maxTotal": 6,
+        "noFARLimit": true,
+        "heightLimitFt": 35
+      },
+      "developmentScenarios": {
+        "twoStory": {
+          "totalGFA_SF": 13648,
+          "perUnit4_SF": 3412,
+          "impliedFAR": 1.25
+        },
+        "threeStory": {
+          "totalGFA_SF": 20472,
+          "perUnit4_SF": 5118,
+          "impliedFAR": 1.88
+        }
+      },
+      "existingBuilding": {
+        "sfFromPolygon": 599,
+        "dimensions": "~20 ft N-S x 29.9 ft E-W",
+        "yearBuilt": 1949,
+        "verifyWith": "King County Assessor (blue.kingcounty.gov/assessor) -- polygon is rough estimate",
+        "preservationBonus": "R-2 allows +1 unit above baseline if primary dwelling preserved per BMC 19.17.155. Verify criteria."
+      },
+      "shortPlat": {
+        "eligible": true,
+        "maxLots": 2,
+        "minLotSF": 5000,
+        "note": "10,879 sf / 5,000 min = 2 lots max. Each lot must meet 5,000 sf min, maintain street frontage, pass SEPA. BMC Ch.17.35 Type 1 review, ~180 days preliminary. Short plat NOT needed for 4-unit build on existing lot — only required if selling lots separately."
+      }
+    }
+  },
+  "saved": {
+    "lat": 47.49020440935354,
+    "lng": -122.3395711091351,
+    "rotation": 0,
+    "locked": true,
+    "setbacks": {
+      "front": 15,
+      "rear": 5,
+      "sideL": 15,
+      "sideR": 5
+    },
+    "buildings": [
+      {
+        "orientation": 0,
+        "offsetX": -32.9,
+        "offsetY": -21.4,
+        "count": 1,
+        "stackSpacing": 0,
+        "anchor": "front",
+        "stories": 2,
+        "floorHeight": 9,
+        "W": 30,
+        "D": 40,
+        "stackAngle": 0,
+        "locked": false
+      }
+    ],
+    "activeBuilding": 0,
+    "commFront": false,
+    "showBldgDims": true,
+    "hiddenDimKeys": [],
+    "mergedDimKeys": [],
+    "chainWOffset": -9.79097921411255,
+    "chainDOffset": 30,
+    "propDimOffsets": {},
+    "parcelPolygon": [
+      [
+        47.49023293,
+        -122.33933165
+      ],
+      [
+        47.49022964,
+        -122.33932467
+      ],
+      [
+        47.49022597,
+        -122.33931812
+      ],
+      [
+        47.49022195,
+        -122.33931205
+      ],
+      [
+        47.49021759,
+        -122.3393065
+      ],
+      [
+        47.49021293,
+        -122.33930151
+      ],
+      [
+        47.490208,
+        -122.33929712
+      ],
+      [
+        47.49020284,
+        -122.33929335
+      ],
+      [
+        47.49019748,
+        -122.33929023
+      ],
+      [
+        47.49019196,
+        -122.33928779
+      ],
+      [
+        47.49018633,
+        -122.33928604
+      ],
+      [
+        47.49018061,
+        -122.33928464
+      ],
+      [
+        47.49017486,
+        -122.33928466
+      ],
+      [
+        47.48998254,
+        -122.33928539
+      ],
+      [
+        47.48998177,
+        -122.33976728
+      ],
+      [
+        47.49022738,
+        -122.33976487
+      ],
+      [
+        47.49022742,
+        -122.3396207
+      ],
+      [
+        47.49022753,
+        -122.33961666
+      ],
+      [
+        47.49022764,
+        -122.33961262
+      ],
+      [
+        47.49022776,
+        -122.33960858
+      ],
+      [
+        47.49022789,
+        -122.33960453
+      ],
+      [
+        47.49022802,
+        -122.3396005
+      ],
+      [
+        47.49022816,
+        -122.33959646
+      ],
+      [
+        47.4902283,
+        -122.33959242
+      ],
+      [
+        47.49022845,
+        -122.33958838
+      ],
+      [
+        47.4902286,
+        -122.33958434
+      ],
+      [
+        47.49022876,
+        -122.3395803
+      ],
+      [
+        47.49022893,
+        -122.33957627
+      ],
+      [
+        47.4902291,
+        -122.33957223
+      ],
+      [
+        47.49022928,
+        -122.33956819
+      ],
+      [
+        47.49022947,
+        -122.33956416
+      ],
+      [
+        47.49022966,
+        -122.33956013
+      ],
+      [
+        47.49022986,
+        -122.33955609
+      ],
+      [
+        47.49023006,
+        -122.33955206
+      ],
+      [
+        47.49023027,
+        -122.33954802
+      ],
+      [
+        47.49023049,
+        -122.33954399
+      ],
+      [
+        47.49023071,
+        -122.33953996
+      ],
+      [
+        47.49023094,
+        -122.33953593
+      ],
+      [
+        47.49023117,
+        -122.3395319
+      ],
+      [
+        47.49023141,
+        -122.33952787
+      ],
+      [
+        47.49023166,
+        -122.33952384
+      ],
+      [
+        47.49023191,
+        -122.33951981
+      ],
+      [
+        47.49023217,
+        -122.33951579
+      ],
+      [
+        47.49023243,
+        -122.33951176
+      ],
+      [
+        47.4902327,
+        -122.33950774
+      ],
+      [
+        47.49023298,
+        -122.33950371
+      ],
+      [
+        47.49023326,
+        -122.33949969
+      ],
+      [
+        47.49023355,
+        -122.33949566
+      ],
+      [
+        47.49023384,
+        -122.33949165
+      ],
+      [
+        47.49023415,
+        -122.33948763
+      ],
+      [
+        47.49023445,
+        -122.33948361
+      ],
+      [
+        47.49023476,
+        -122.33947959
+      ],
+      [
+        47.49023508,
+        -122.33947557
+      ],
+      [
+        47.4902354,
+        -122.33947155
+      ],
+      [
+        47.49023574,
+        -122.33946754
+      ],
+      [
+        47.49023607,
+        -122.33946353
+      ],
+      [
+        47.49023642,
+        -122.33945951
+      ],
+      [
+        47.49023677,
+        -122.3394555
+      ],
+      [
+        47.49023712,
+        -122.33945149
+      ],
+      [
+        47.49023748,
+        -122.33944747
+      ],
+      [
+        47.49023785,
+        -122.33944347
+      ],
+      [
+        47.49023822,
+        -122.33943947
+      ],
+      [
+        47.4902386,
+        -122.33943546
+      ],
+      [
+        47.49023898,
+        -122.33943145
+      ],
+      [
+        47.49023938,
+        -122.33942745
+      ],
+      [
+        47.49023977,
+        -122.33942345
+      ],
+      [
+        47.49024018,
+        -122.33941945
+      ],
+      [
+        47.49024059,
+        -122.33941545
+      ],
+      [
+        47.490241,
+        -122.33941145
+      ],
+      [
+        47.49024142,
+        -122.33940745
+      ],
+      [
+        47.49024185,
+        -122.33940346
+      ],
+      [
+        47.49024228,
+        -122.33939946
+      ],
+      [
+        47.49024272,
+        -122.33939547
+      ],
+      [
+        47.49024317,
+        -122.33939148
+      ],
+      [
+        47.49024356,
+        -122.33938815
+      ],
+      [
+        47.49024345,
+        -122.33937965
+      ],
+      [
+        47.49024286,
+        -122.3393712
+      ],
+      [
+        47.49024179,
+        -122.33936285
+      ],
+      [
+        47.49024025,
+        -122.33935467
+      ],
+      [
+        47.49023825,
+        -122.3393467
+      ],
+      [
+        47.49023581,
+        -122.33933901
+      ]
+    ],
+    "mapOpacity": 85,
+    "setbacksApplied": true,
+    "freeDrag": true,
+    "snapEdge": false,
+    "siteNorthDeg": 0,
+    "frontBearing": 90.15,
+    "vehicles": [],
+    "activeVehicle": -1,
+    "existingBuildings": [
+      {
+        "polygon": [
+          [
+            47.49015742958625,
+            -122.33958421903574
+          ],
+          [
+            47.49015742958625,
+            -122.33946265843753
+          ],
+          [
+            47.4901025698352,
+            -122.33946265843753
+          ],
+          [
+            47.4901025698352,
+            -122.33958421903574
+          ]
+        ],
+        "locked": false
+      }
+    ],
+    "activeExBuilding": 0,
+    "_geoOffsets": true
+  },
+  "checklist": {
+    "ck": {},
+    "sel": {},
+    "notes": {},
+    "bldgs": [
+      {
+        "type": "Residential",
+        "w": 30,
+        "d": 35,
+        "stories": 1,
+        "unitsPerFloor": 1
+      }
+    ],
+    "mapLocked": true
+  },
+  "_mpl_id": "wa-405-126th",
+  "_legacy_source": "ProjectBook-Planner/data/sites/wa-405_126th.json",
+  "_schema": "legacy-projectbook -- migrate to MPL schema when site becomes active"
+}

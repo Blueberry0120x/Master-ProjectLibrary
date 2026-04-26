@@ -1,0 +1,223 @@
+{
+  "project": "ProjectBook-Planner",
+  "site": {
+    "siteId": "CA-3063_CABRILLOMESA",
+    "address": "3063 Cabrillo Mesa Dr, San Diego, CA 92123",
+    "apn": "428-232-04-00",
+    "legalDescription": "Lot 83, Cabrillo Mesa, Map No. 003385, City of San Diego, County of San Diego, State of California",
+    "yearBuilt": "1958",
+    "occupancyGroup": "R-3",
+    "zoning": "RS-1-7",
+    "cadZone": "CA_VI",
+    "lotWidth": 61,
+    "lotDepth": 100,
+    "lotSF": 6100,
+    "commercialDepth": 0,
+    "baseFAR": 0.6,
+    "commFAR": 0,
+    "maxHeight": 30,
+    "baseHeightLimit": 30,
+    "cchsMaxHeight": 0,
+    "frontSetback": 15,
+    "rearSetback": 13,
+    "sideSetback": 5,
+    "densityPerSF": 5000,
+    "nefRatePerSF": 0,
+    "affordabilityPct": 0,
+    "difPerUnit": 0,
+    "difWaiverSF": 0,
+    "projectType": "",
+    "architect": "",
+    "scopeOfWork": "",
+    "cornerVisibilityTriangle": false,
+    "cornerVisTriSize": 25,
+    "cornerVisCorner": "SW",
+    "densityBonus": false,
+    "notes": "TBD - A: lotWidth/lotDepth estimated 61x100 from 6,100 SF lot -- verify via assessor tract map. | TBD - B: Existing house 1,138 SF, 3bd/2ba, built 1958. | TBD - C: baseFAR 0.6 and setbacks 15/13/5 from RS-1-7 SD Municipal Code defaults -- confirm against current code. | TBD - D: Airport influence area likely YES (Montgomery Field). Transit, fire, fault zones -- verify via ZAPP portal. | TBD - E: NEF rate, DIF, affordability -- City DSD Fee Schedule. | TBD - F: Project type, architect, scope of work. | TBD - G: Inspector contacts -- City DSD staff directory.",
+    "inspectors": [
+      {
+        "name": "Combination",
+        "val": "City of San Diego DSD Inspection Services — (858) 581-7111 | M–F 7am–3:30pm questions; 7:15–7:45am inspector direct; 24/7 automated scheduling | Grading/Civil: (619) 446-5242 / fit_dsd@sandiego.gov | PM support: DSD-inspection-proj-mgr@sandiego.gov | sandiego.gov/development-services/inspections"
+      },
+      {
+        "name": "Structural",
+        "val": "City of San Diego DSD Inspection Services — (858) 581-7111 | M–F 7am–3:30pm questions; 7:15–7:45am inspector direct; 24/7 automated scheduling | Grading/Civil: (619) 446-5242 / fit_dsd@sandiego.gov | PM support: DSD-inspection-proj-mgr@sandiego.gov | sandiego.gov/development-services/inspections"
+      },
+      {
+        "name": "Electrical",
+        "val": "City of San Diego DSD Inspection Services — (858) 581-7111 | M–F 7am–3:30pm questions; 7:15–7:45am inspector direct; 24/7 automated scheduling | Grading/Civil: (619) 446-5242 / fit_dsd@sandiego.gov | PM support: DSD-inspection-proj-mgr@sandiego.gov | sandiego.gov/development-services/inspections"
+      },
+      {
+        "name": "Mechanical",
+        "val": "City of San Diego DSD Inspection Services — (858) 581-7111 | M–F 7am–3:30pm questions; 7:15–7:45am inspector direct; 24/7 automated scheduling | Grading/Civil: (619) 446-5242 / fit_dsd@sandiego.gov | PM support: DSD-inspection-proj-mgr@sandiego.gov | sandiego.gov/development-services/inspections"
+      },
+      {
+        "name": "Grading / Civil",
+        "val": "City of San Diego DSD Inspection Services — (858) 581-7111 | M–F 7am–3:30pm questions; 7:15–7:45am inspector direct; 24/7 automated scheduling | Grading/Civil: (619) 446-5242 / fit_dsd@sandiego.gov | PM support: DSD-inspection-proj-mgr@sandiego.gov | sandiego.gov/development-services/inspections"
+      }
+    ],
+    "planningAreas": [
+      {
+        "name": "COMMUNITY PLAN AREA",
+        "val": "SERRA MESA"
+      },
+      {
+        "name": "LAND USE DESIGNATION",
+        "val": "Residential Low (5-9 du/ac)"
+      },
+      {
+        "name": "CCHS (HOUSING SOLUTIONS)",
+        "val": "Not in CCHS — RS-1-7 residential zone is not CCHS-eligible. Source: SDMC §143.0710 (2026-04-15)."
+      },
+      {
+        "name": "TRANSIT PRIORITY AREA (TPA)",
+        "val": "Not in TPA — Serra Mesa interior residential; no high-frequency transit within 0.5 mi. Source: MTS route map; SDMTS.com (2026-04-15)."
+      },
+      {
+        "name": "PARKING STANDARDS (PSTPA)",
+        "val": "Not in PSTPA — no TPA designation; standard RS-1-7 parking (2 spaces per unit). Source: SDMC §142.0528 (2026-04-15)."
+      },
+      {
+        "name": "MOBILITY CHOICES",
+        "val": "-- TBD: SD Municipal Code Appendix A Fig A-1"
+      }
+    ],
+    "overlayZones": [
+      {
+        "name": "HEIGHT LIMIT OVERLAY",
+        "val": "30 ft (RS-1-7 base zone)"
+      },
+      {
+        "name": "TRANSIT AREA OVERLAY",
+        "val": "No — Serra Mesa interior residential; no TAOZ designation per SD Zoning Map. Source: SD Zoning Data Portal (2026-04-15)."
+      },
+      {
+        "name": "AIRPORT INFLUENCE AREA",
+        "val": "YES — Montgomery Field (MYF) ALUCP Review Area 1 (~55-60 CNEL). Site at 32.800°N is ~1.3 mi south of MYF runway 28L/10R. Noise attenuation required for new residential per SDMC §132.0403 Airport Overlay Zone. Verify exact contour via SDMC Appendix F Fig 132-03G or SDCRAA APN lookup. Source: MYF ALUCP; SDMC §132.0403 (2026-04-15)."
+      },
+      {
+        "name": "COASTAL OVERLAY",
+        "val": "No"
+      },
+      {
+        "name": "VERY HIGH FIRE HAZARD",
+        "val": "Likely No — Serra Mesa is a fully developed mid-city neighborhood; no SRA or LRA designation expected. Verify via SD ZAPP portal or CAL FIRE FHSZ map (2025 update). Source: CAL FIRE FHSZ viewer 2025 (2026-04-15)."
+      },
+      {
+        "name": "FAULT ZONE",
+        "val": "Likely No — Serra Mesa is ~1.5 mi north of Mission Valley (Rose Canyon Fault trace). AP fault zone boundary is narrow (~50 ft of fault trace) and does not extend to this location. SEISMIC HAZARD still applies (Rose Canyon Fault M6.9 max, ~1.5 mi; Geotech required per SDMC §113.0271). Source: CGS AP Zone GIS; SDMC §132.0105 (2026-04-15)."
+      }
+    ],
+    "parcelPolygon": [
+      [
+        32.80013922,
+        -117.13942465
+      ],
+      [
+        32.80009523,
+        -117.139444
+      ],
+      [
+        32.79998184,
+        -117.13949388
+      ],
+      [
+        32.80007064,
+        -117.13979501
+      ],
+      [
+        32.80022476,
+        -117.13972734
+      ]
+    ],
+    "existingDwellingSF": 1138
+  },
+  "saved": {
+    "lat": 32.80010234,
+    "lng": -117.13957698,
+    "rotation": 0,
+    "locked": true,
+    "setbacks": {
+      "front": 15,
+      "rear": 13,
+      "sideL": 5,
+      "sideR": 5
+    },
+    "buildings": [
+      {
+        "orientation": 0,
+        "W": 30,
+        "D": 40,
+        "offsetX": 0,
+        "offsetY": 0,
+        "spacing": 0,
+        "count": 1,
+        "stackSpacing": 0,
+        "anchor": "center",
+        "stories": 1,
+        "floorHeight": 9,
+        "stackAngle": 0,
+        "locked": false
+      }
+    ],
+    "activeBuilding": 0,
+    "commFront": false,
+    "showBldgDims": false,
+    "hiddenDimKeys": [],
+    "mergedDimKeys": [],
+    "chainWOffset": 0,
+    "chainDOffset": 0,
+    "propDimOffsets": {},
+    "parcelPolygon": [
+      [
+        32.80013922,
+        -117.13942465
+      ],
+      [
+        32.80009523,
+        -117.139444
+      ],
+      [
+        32.79998184,
+        -117.13949388
+      ],
+      [
+        32.80007064,
+        -117.13979501
+      ],
+      [
+        32.80022476,
+        -117.13972734
+      ]
+    ],
+    "mapOpacity": 70,
+    "setbacksApplied": false,
+    "freeDrag": false,
+    "snapEdge": false,
+    "siteNorthDeg": 0,
+    "vehicles": [],
+    "activeVehicle": -1,
+    "existingBuildings": [],
+    "activeExBuilding": -1,
+    "frontBearing": 290.29,
+    "_geoOffsets": true
+  },
+  "checklist": {
+    "ck": {},
+    "sel": {},
+    "notes": {},
+    "bldgs": [
+      {
+        "type": "Residential",
+        "w": 30,
+        "d": 35,
+        "stories": 1,
+        "unitsPerFloor": 1
+      }
+    ],
+    "mapLocked": true
+  },
+  "_mpl_id": "ca-3063-cabrillo-mesa",
+  "_legacy_source": "ProjectBook-Planner/data/sites/ca-3063_CabrilloMesa.json",
+  "_schema": "legacy-projectbook -- migrate to MPL schema when site becomes active"
+}

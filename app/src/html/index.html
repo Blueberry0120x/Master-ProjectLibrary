@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<!-- ProjectBook-Planner — Development Shell -->
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#0f4c81">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x1f3d7;</text></svg>">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%230c3d6b' width='100' height='100' rx='20'/><text y='.78em' x='.12em' font-size='72'>&#x1f3d7;</text></svg>">
+    <title>Master Site Analysis Dashboard</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link href="https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css" rel="stylesheet" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/@geoman-io/leaflet-geoman-free@2.16.0/dist/leaflet-geoman.min.css" />
+    <script src="https://unpkg.com/@geoman-io/leaflet-geoman-free@2.16.0/dist/leaflet-geoman.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.9.0/proj4.js"></script>
+    <script src="https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js"></script>
+    <script src="https://unpkg.com/leaflet-rotate@0.2.8/dist/leaflet-rotate-src.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <!-- Leaflet-Google-Mutant: bridges Leaflet with Google Maps tile API -->
+    <script src="https://unpkg.com/leaflet.gridlayer.googlemutant@latest/dist/Leaflet.GoogleMutant.js"></script>
+    <!-- Google Maps API loader — only fires when __GOOGLE_MAPS_KEY__ is set in UserPref.json -->
+    <script>
+    (function(){
+        var k = window.__GOOGLE_MAPS_KEY__;
+        if (k) {
+            window._gmCallback = function() { document.dispatchEvent(new Event('googlemapsready')); };
+            var s = document.createElement('script');
+            s.async = true; s.defer = true;
+            s.src = 'https://maps.googleapis.com/maps/api/js?key=' + k + '&callback=_gmCallback&loading=async';
+            document.head.appendChild(s);
+        }
+    })();
+    </script>
+
+    <link rel="stylesheet" href="../css/style.css" />
+    <script>(function(){var s=localStorage.getItem('theme');if(s==='dark'||(s!=='light'&&window.matchMedia('(prefers-color-scheme:dark)').matches))document.documentElement.setAttribute('data-theme','dark');})()</script>
+</head>
+<body>
+<div class="page-wrapper">
+
+    <!-- SUITE BAR -->
+    <div class="suite-bar no-print">
+        <span class="suite-bar-active">Map</span>
+        <span class="suite-bar-sep">|</span>
+        <a href="checklist" class="suite-bar-link" onclick="if(location.protocol==='file:')this.href='PreApp_Checklist.html'">Checklist</a>
+        <div class="suite-bar-state">
+            <label>State</label>
+            <select id="state-filter" aria-label="Filter by state"></select>
+        </div>
+        <div class="suite-bar-ext">
+            <a href="https://assr.parcelquest.com/Home/" target="_blank" class="suite-bar-extlink suite-bar-extlink-amber">ParcelQuest &#x2197;</a>
+            <a href="https://sandiego.maps.arcgis.com/" target="_blank" class="suite-bar-extlink suite-bar-extlink-sky">SanDag GIS &#x2197;</a>
+            <span class="suite-bar-dropdown">
+                <span class="suite-bar-extlink suite-bar-extlink-rose" style="cursor:pointer">PermitFinder &#x25BE;</span>
+                <span class="suite-bar-dd-menu">
+                    <a href="https://www.arcgis.com/apps/instant/sidebar/index.html?appid=b9641fb06e8d4c6ab45d1c5ca8411840" target="_blank">By Map</a>
+                    <a href="https://opendsd.sandiego.gov/web/approvals/" target="_blank">By Database</a>
+                </span>
+            </span>
+        </div>
+    </div>
+
+    <!-- HEADER -->
+    <div class="header">
+        <div class="header-left">
+            <div class="header-title-row">
+                <div class="header-title-stack">
+                    <h1 id="project-title">ProjectBook-Planner</h1>
+                    <p>Interactive Planning &amp; Concept Design</p>
+                </div>
+                <div class="header-address-pair">
+                    <div class="header-address" id="addr-cell">
+                        <span class="banner-label">Address</span>
+                        <select id="site-switcher" class="site-select" aria-label="Select project site" onchange="if(this.value&&window.switchSite)window.switchSite(this.value)">
+                        </select>
+                    </div>
+                    <div class="header-address"><span class="banner-label">APN</span><span class="banner-value" id="header-ui-apn"></span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DRAGGABLE PROPERTY BANNER -->
+    <div class="property-banner" id="propertyBanner">
+        <div class="banner-stat" draggable="true"><span class="banner-label">Dimensions</span><span class="banner-value"><span id="ui-w"></span>' &times; <span id="ui-d"></span>'</span></div>
+        <div class="banner-stat" draggable="true"><span class="banner-label">Lot Size</span><span class="banner-value" id="ui-sqft"></span></div>
+        <div class="banner-stat" draggable="true"><span class="banner-label">Ex. Bldg SF</span><span class="banner-value" id="ui-exbldg"></span></div>
+        <div class="banner-stat" draggable="true"><span class="banner-label">Zoning</span><span class="banner-value" id="ui-zoning"></span></div>
+        <div class="banner-stat" draggable="true"><span class="banner-label">Base Density</span><span class="banner-value" id="ui-density"></span></div>
+        <div class="banner-stat" draggable="true"><span class="banner-label">Max FAR [Base / Comm]</span><span class="banner-value" id="ui-far"></span></div>
+        <div class="banner-stat" draggable="true"><span class="banner-label">Max Height</span><span class="banner-value" id="ui-maxht"></span></div>
+        <div class="banner-stat" draggable="true"><span class="banner-label">Setbacks (F/S/R)</span><span class="banner-value" id="ui-setbacks"></span></div>
+    </div>
+
+    <!-- SCOPE OF WORK -->
+    <details class="info-scope-section" open>
+        <summary>SCOPE OF WORK</summary>
+        <p id="info-scope-work" class="info-scope-text">--</p>
+    </details>
+
+    <!-- MAIN: SIDEBAR | DIVIDER | MAP -->
+    <div class="main-container" id="mainContainer">
+
+        <!-- SIDEBAR -->
+        <div class="sidebar" id="sidebarPanel">
+
+            <!-- ALIGN MAP TOOLS -->
+            <div class="sidebar-box">
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;border-bottom:2px solid var(--secondary);padding-bottom:6px;cursor:pointer;" onclick="this.parentElement.classList.toggle('collapsed')" role="button" tabindex="0" aria-label="Toggle Align Map section">
+                    <h2 class="box-toggle" style="margin:0;border:none;padding:0;">Align Map</h2>
+                    <div style="display:flex;align-items:center;gap:6px;" onclick="event.stopPropagation()">
+                        <span style="font-size:0.85em;font-weight:700;color:#64748b">COORD:</span>
+                        <select id="cadZoneSelect" aria-label="CAD coordinate system" style="font-size:0.85em;font-weight:700;padding:2px 4px;border:1px solid #cbd5e1;border-radius:3px;background:#f8fafc;font-family:inherit;cursor:pointer" onchange="var sys=ConfigEngine.CAD_SYSTEMS[this.value];if(sys){ConfigEngine.cad.projection=sys.projection;ConfigEngine.cad.proj4Def=sys.proj4Def;ConfigEngine.data.cadZone=this.value;ExportEngine.save();}">
+                        </select>
+                        <span id="cadZoneLabel" style="display:none"></span>
+                    </div>
+                </div>
+                <div class="box-body">
+                <div class="align-grid">
+                    <!-- Row 1: Snap to Grid + Save Boundary -->
+                    <strong>Snap to Grid:</strong>
+                    <label class="switch"><input type="checkbox" id="snapToggle" aria-label="Snap to grid"><span class="slider"></span></label>
+                    <div style="display:flex; gap:4px;">
+                        <button id="saveBoundaryBtn" class="btn-save-boundary">Save Boundary</button>
+                        <button id="lockPositionBtn" class="btn-lock-position">Lock Position</button>
+                    </div>
+                    <!-- Row 2: Rotation -->
+                    <strong>Rotation:</strong>
+                    <div class="deg-input-wrap">
+                        <input type="number" id="degInput" class="align-angle-input" value="0.0" step="0.1">
+                        <span style="font-weight:bold;">&#176;</span>
+                    </div>
+                    <input type="range" id="rotationSlider" aria-label="Map rotation angle" min="0" max="360" value="0" step="0.1" style="width:100%; margin:0;">
+                </div>
+
+                <div class="align-btn-row">
+                    <button id="recordBtn"      class="btn-align btn-align-lisp">Export LISP</button>
+                    <button id="imageExportBtn" class="btn-align btn-align-img">Export Image</button>
+                    <button id="resetBtn"       class="btn-align btn-align-reset">Reset</button>
+                </div>
+                <div class="align-btn-row">
+                    <button id="saveSettingsBtn" class="btn-align btn-align-file" onclick="ExportEngine.saveToFile()">Save to File</button>
+                </div>
+                <textarea id="outputCoords" class="lisp-output" readonly placeholder="LISP code will appear here&#x2026;"></textarea>
+
+                <!-- ELEVATION TOOL -->
+                <div class="elev-wrap">
+                    <button id="elevToggleBtn" class="btn-align btn-elev-toggle">&#x25B3; Elevation</button>
+                    <div id="elevTools" class="elev-tools">
+                        <button id="elevSampleBtn" class="btn-align btn-elev-sample">&#x25CE; Sample</button>
+                        <button id="elevClearBtn"  class="btn-align btn-elev-clear">Clear</button>
+                    </div>
+                </div>
+                </div><!-- end box-body -->
+            </div>
+
+            <!-- CONCEPT DESIGN -->
+            <div class="sidebar-box">
+                <div class="box-header">
+                    <h2>Concept Design</h2>
+                </div>
+                <div class="setback-config-wrap">
+                    <div class="box-header" style="margin-bottom:8px;">
+                        <h3 class="sub-toggle" onclick="this.closest('.setback-config-wrap').classList.toggle('collapsed')" role="button" tabindex="0" style="margin:0; cursor:pointer;">Setback Configuration</h3>
+                        <div style="display:flex;gap:5px;flex-wrap:wrap;align-items:center;">
+                            <button id="setFrontEdgeBtn" class="btn-save-config btn-set-front">&#x25BA; Set Front Edge</button>
+                            <span style="font-size:0.82em;color:#6b7280;white-space:nowrap;min-width:80px;padding-right:10px;">Front: <strong id="frontBearingCardinal" style="color:#0f4c81;">W</strong></span>
+                            <input type="hidden" id="frontBearingInput" value="270">
+                        </div>
+                    </div>
+                    <div class="sub-body">
+                    <div class="setback-grid">
+                        <div class="setback-field">
+                            <label for="sb-front">Front (ft)</label>
+                            <input type="number" id="sb-front"  value="10" min="0" step="0.5">
+                        </div>
+                        <div class="setback-field">
+                            <label for="sb-rear">Rear (ft)</label>
+                            <input type="number" id="sb-rear"   value="10" min="0" step="0.5">
+                        </div>
+                        <div class="setback-field">
+                            <label for="sb-side-l">Side Left (ft)</label>
+                            <input type="number" id="sb-side-l" value="0"  min="0" step="0.5">
+                        </div>
+                        <div class="setback-field">
+                            <label for="sb-side-r">Side Right (ft)</label>
+                            <input type="number" id="sb-side-r" value="0"  min="0" step="0.5">
+                        </div>
+                    </div>
+                    <button class="btn-accept" onclick="SetbackEngine.applySetbacks()">&#x2714; Accept &#x2014; Draw Setback Lines</button>
+                    <button id="saveSetbackBtn" class="btn-save-setback">Save Setbacks</button>
+                    </div><!-- end setback sub-body -->
+                </div><!-- end setback-config-wrap -->
+
+                <!-- BUILDING CONFIG -->
+                <div class="building-config-wrap">
+                    <div class="box-header" style="margin-bottom:8px;">
+                        <h3 class="sub-toggle" onclick="this.closest('.building-config-wrap').classList.toggle('collapsed')" role="button" tabindex="0" style="margin:0; cursor:pointer;">Building Config</h3>
+                        <div style="display:flex;gap:5px;flex-wrap:wrap;">
+                            <button id="bldgDimBtn"    class="btn-save-config btn-dim-bldg">Show Dims</button>
+                            <button id="saveConfigBtn" class="btn-save-config">Save Config</button>
+                            <button id="snapEdgeBtn"   class="btn-save-config" onclick="MapEngine.toggleSnapEdge()" title="Toggle snap-to-edge — snap to nearest edge while dragging">Snap Edge</button>
+                            <button id="vtxEditBtn"    class="btn-save-config" onclick="VertexEngine.startBldgEdit(ConfigEngine.state.activeBuilding)" title="Edit building vertices — reshape the active building as a freeform polygon" style="background:#7c3aed;color:#fff;">&#9632; Verts</button>
+                        </div>
+                    </div>
+                    <div class="sub-body">
+                    <div class="building-grid">
+                        <strong>Orientation:</strong>
+                        <div class="deg-input-wrap">
+                            <input type="number" id="bldgOrientInput" class="align-angle-input" value="0.0" step="0.1">
+                            <span>&#176;</span>
+                        </div>
+                        <input type="range" id="bldgOrientSlider" aria-label="Building orientation angle" min="0" max="360" value="0" step="0.1" style="width:140px;">
+                        <strong>Footprint:</strong>
+                        <div class="aligned-ctrl-row">
+                            <label for="bldgW">W</label><input type="number" id="bldgW" class="inline-val" value="30.0" min="1" step="0.5"><input type="range" id="bldgWSlider" aria-label="Building width" class="inline-slider" min="5" max="200" value="30" step="0.5">
+                            <label for="bldgD">D</label><input type="number" id="bldgD" class="inline-val" value="60.0" min="1" step="0.5"><input type="range" id="bldgDSlider" aria-label="Building depth" class="inline-slider" min="5" max="200" value="60" step="0.5">
+                            <label for="bldgFootprintArea">A</label><input type="text" id="bldgFootprintArea" class="inline-val" readonly tabindex="-1"><span class="ft-label">sf</span>
+                        </div>
+                        <strong>Offset:</strong>
+                        <div class="aligned-ctrl-row">
+                            <label for="bldgOffsetX">X</label><input type="number" id="bldgOffsetX" class="inline-val" value="0" step="0.5"><input type="range" id="bldgOffsetXSlider" aria-label="X offset" class="inline-slider" min="-100" max="100" value="0" step="0.5">
+                            <label for="bldgOffsetY">Y</label><input type="number" id="bldgOffsetY" class="inline-val" value="0" step="0.5"><input type="range" id="bldgOffsetYSlider" aria-label="Y offset" class="inline-slider" min="-100" max="100" value="0" step="0.5">
+                            <label for="bldgSpacing" title="Gap">S</label><input type="number" id="bldgSpacing" class="inline-val" value="0" step="0.5" disabled><span class="ft-label"><span id="spacingHint" class="s-hint" title="Max: —">?</span></span>
+                        </div>
+                        <strong>Buildings:</strong>
+                        <div id="bldgSelector" class="bldg-selector" style="grid-column: 2 / -1;">
+                            <button id="bldgAddBtn" class="bldg-tab-add">+ Add</button>
+                            <button id="bldgDelBtn" class="bldg-tab-del">&#xD7; Del</button>
+                        </div>
+                        <strong>Stack:</strong>
+                        <div class="aligned-ctrl-row">
+                            <label for="bldgCount">N</label><input type="number" id="bldgCount" class="inline-val" value="1" min="1" step="1"><span></span>
+                            <label for="bldgStackSpacing">G</label><input type="number" id="bldgStackSpacing" class="inline-val" value="0" min="0" step="0.5"><span class="ft-label">ft</span>
+                            <label for="bldgStackAngleSlider">&theta;</label><button id="bldgStackDirBtn" class="anchor-btn" title="Cycle stack angle" aria-label="Cycle stack direction angle" style="padding:2px 4px;font-size:0.85em;width:52px;">0&#176;</button>
+                            <input type="number" id="bldgStackAngle" class="inline-val" value="0" min="0" max="360" step="1" title="Stack angle °" style="display:none;"><input type="range" id="bldgStackAngleSlider" aria-label="Stack angle" class="bldg-slider" min="0" max="360" value="0" step="1">
+                        </div>
+                        <strong>Anchor:</strong>
+                        <div class="anchor-track">
+                            <button id="anchorFront"  class="anchor-btn">&#8592; Front</button>
+                            <button id="anchorCenter" class="anchor-btn active">Center</button>
+                            <button id="anchorRear"   class="anchor-btn">Rear &#8594;</button>
+                        </div>
+                        <strong>Stories:</strong>
+                        <div class="footprint-inputs">
+                            <label>N</label>
+                            <input type="number" id="bldgStories" class="align-angle-input" value="1" min="1" step="1">
+                            <span class="ft-label">flr</span>
+                            <label>H</label>
+                            <input type="number" id="bldgFloorHeight" class="align-angle-input" value="9" min="1" step="0.5">
+                            <span class="ft-label">ft</span>
+                            <label>=</label>
+                            <input type="text" id="bldgTotalHeight" class="align-angle-input" readonly tabindex="-1">
+                            <span class="ft-label">ft</span>
+                        </div>
+                        <strong>Zone:</strong>
+                        <div style="grid-column: 2 / -1; padding-left: 12px; display: flex; align-items: center; justify-content: space-between;">
+                            <label style="display:flex; align-items:center; gap:5px; cursor:pointer; font-weight:600;">
+                                <input type="checkbox" id="commFrontCheck"> Comm. Front
+                            </label>
+                            <span id="maxFARLabel" style="color:#0f4c81; font-weight:700; font-size:0.85em;">Base: 2.0 FAR</span>
+                        </div>
+                        <strong>Total Area:</strong>
+                        <div style="grid-column: 2 / -1; padding-left: 12px; display: flex; justify-content: space-between; align-items: baseline; gap: 6px;">
+                            <span id="bldgTotalArea" style="font-weight: 700; color: #2d3748; font-size: 1.05em;">—</span>
+                            <span id="bldgBuildable" style="font-weight: 600; color: #2f855a; white-space: nowrap; font-size: 1em;">—</span>
+                        </div>
+                        <strong>FAR:</strong>
+                        <div style="grid-column: 2 / -1; padding-left: 12px; display: flex; justify-content: space-between; align-items: baseline; gap: 6px;">
+                            <span id="bldgFAR" style="font-weight: 700; color: #0f4c81; font-size: 1.05em;">—</span>
+                            <span id="bldgFARCheck" style="font-weight: 700; font-size: 0.9em;">—</span>
+                        </div>
+                        <strong>Density:</strong>
+                        <div style="grid-column: 2 / -1; padding-left: 12px; display: flex; justify-content: space-between; align-items: baseline; gap: 6px;">
+                            <span id="bldgDensity" style="font-weight: 700; color: #0f4c81; font-size: 1.05em;">—</span>
+                            <span id="bldgDensityCheck" style="font-weight: 700; font-size: 0.9em;">—</span>
+                        </div>
+                    </div>
+                    </div><!-- end building sub-body -->
+                </div>
+            </div>
+
+            <!-- VEHICLE PLACEMENT -->
+            <div class="sidebar-box">
+                <h2 class="box-toggle" onclick="this.parentElement.classList.toggle('collapsed')" role="button" tabindex="0">Vehicle Overlay</h2>
+                <div class="box-body">
+                    <div class="building-grid">
+                        <strong>Vehicles:</strong>
+                        <div id="vehSelector" class="bldg-selector" style="grid-column: span 2">
+                            <button class="bldg-tab-add veh-tab-add" onclick="MapEngine.addVehicle()">+ Place</button>
+                            <button class="bldg-tab-del" onclick="MapEngine.removeVehicle()">Del</button>
+                        </div>
+                        <strong>Type:</strong>
+                        <select id="vehType" class="align-angle-input" aria-label="Vehicle type" style="grid-column: span 2">
+                            <option value="compact">Compact (5.5' x 13.5')</option>
+                            <option value="sedan" selected>Sedan (6' x 15')</option>
+                            <option value="suv">SUV (6.5' x 17')</option>
+                            <option value="pickup">Pickup (6.5' x 20')</option>
+                            <option value="van">Van (7' x 18')</option>
+                            <option value="firetruck">Fire Truck (8.5' x 35')</option>
+                            <option value="bus">Bus (8.5' x 40')</option>
+                            <option value="trash">Trash Truck (8' x 28')</option>
+                        </select>
+                        <strong>Size:</strong>
+                        <span id="vehSizeLabel" style="grid-column: span 2; font-weight:700; color:#4a5568; font-size:0.88em">6' x 15'</span>
+                        <strong>Rotate:</strong>
+                        <div class="footprint-inputs" style="grid-column: span 2">
+                            <input type="number" id="vehOrient" class="align-angle-input" value="0" step="1" min="-180" max="180" style="width:60px">
+                            <span class="ft-label">&deg;</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- end sidebar -->
+
+        <!-- RESIZE DIVIDER -->
+        <div class="col-divider" id="colDivider"></div>
+
+        <!-- MAP PANEL -->
+        <div class="map-panel" id="mapPanel">
+            <div id="map"></div>
+        </div>
+
+    </div><!-- end main-container -->
+
+    <!-- INFO BOTTOM — columns aligned to sidebar / map split -->
+    <div class="info-bottom" id="infoBottom">
+        <div class="info-col-left" id="infoColLeft">
+            <details open>
+                <summary>PROJECT INFORMATION</summary>
+                <table class="cad-table">
+                    <tr><th>PROJECT ADDRESS:</th><td id="info-address"></td></tr>
+                    <tr><th>LEGAL DESCRIPTION:</th><td id="info-legal">--</td></tr>
+                    <tr><th>PARCEL #:</th><td id="info-apn"></td></tr>
+                    <tr><th>EX. BLDG SF:</th><td id="info-exbldg-proj">--</td></tr>
+                    <tr><th>YEAR BUILT:</th><td id="info-year-built">--</td></tr>
+                    <tr><th>BASE ZONE:</th><td id="info-zone"></td></tr>
+                    <tr><th>OCCUPANCY GROUP:</th><td id="info-occupancy">--</td></tr>
+                    <tr><th>AVG ELEVATION:</th><td id="info-avg-elev">--</td></tr>
+                    <tr><th>PROJECT TYPE:</th><td id="info-sl-projtype">--</td></tr>
+                    <tr><th>ARCHITECT:</th><td id="info-sl-architect">--</td></tr>
+                    <tr><th>LOT WIDTH:</th><td id="info-w"></td></tr>
+                    <tr><th>HEIGHT RESTRICTION:</th><td id="info-height">--</td></tr>
+                    <tr><th>STANDARD SETBACKS:</th><td id="info-setbacks">--</td></tr>
+                </table>
+            </details>
+            <details open>
+                <summary>LAND COVERAGE</summary>
+                <table class="cad-table">
+                    <tr>
+                        <th>LOT SIZE: <button id="unitToggleBtn" class="unit-toggle">SF</button></th>
+                        <td id="info-lotsize"></td>
+                    </tr>
+                    <tr><th>EX. BLD:</th><td id="info-exbldg-land">--</td></tr>
+                    <tr><th>MIN LOT / DENSITY:</th><td id="info-density-lot"></td></tr>
+                    <tr><th>MAX FAR:</th><td id="info-max-far">--</td></tr>
+                    <tr><th>BUILDABLE FAR:</th><td id="info-buildable-far"></td></tr>
+                    <tr><th>PROPOSED FAR:</th><td id="info-proposed-far">--</td></tr>
+                    <tr><th>TOTAL FAR:</th><td id="info-total-far">--</td></tr>
+                    <tr><th>FAR CHECK:</th><td id="info-far-check">--</td></tr>
+                </table>
+            </details>
+        </div>
+        <div class="info-col-gap" id="infoColGap"></div>
+        <div class="info-col-right" id="infoColRight">
+            <details open>
+                <summary id="info-zoning-header">ZONING PARAMETERS</summary>
+                <table class="cad-table">
+                    <tr><th>BASE DENSITY:</th><td id="info-zp-density">--</td></tr>
+                    <tr><th>BASE FAR:</th><td id="info-zp-basefar">--</td></tr>
+                    <tr><th>COMM FAR:</th><td id="info-zp-commfar">--</td></tr>
+                    <tr><th>MAX HEIGHT:</th><td id="info-zp-maxht">--</td></tr>
+                    <tr><th>FRONT SETBACK:</th><td id="info-zp-front">--</td></tr>
+                    <tr><th>REAR SETBACK:</th><td id="info-zp-rear">--</td></tr>
+                    <tr><th>SIDE SETBACK:</th><td id="info-zp-side">--</td></tr>
+                    <tr><th>NOTES:</th><td id="info-zp-notes">--</td></tr>
+                </table>
+            </details>
+            <details id="info-planning-section" open>
+                <summary>PLANNING &amp; TRANSIT AREAS</summary>
+                <table class="cad-table" id="info-planning-table"></table>
+            </details>
+            <details id="info-overlay-section" open>
+                <summary>OVERLAY ZONES</summary>
+                <table class="cad-table" id="info-overlay-table"></table>
+            </details>
+            <details id="info-inspectors-section" open>
+                <summary>CITY INSPECTOR CONTACTS</summary>
+                <table class="cad-table" id="info-inspectors-table">
+                </table>
+            </details>
+        </div>
+    </div>
+
+    <!-- INFO BOTTOM ACTIONS -->
+    <div class="info-bottom-footer no-print">
+        <button class="btn-extract-info-lisp"  onclick="ExportEngine.generateInfoLISP()">&#9654; Extract LISP</button>
+        <button class="btn-extract-info-excel" onclick="ExportEngine.generateExcel()">&#9654; Export Excel</button>
+    </div>
+
+</div><!-- end page-wrapper -->
+
+<!-- Floating FAB — Edit Site Info + Save + Print -->
+<div id="map-fab" class="no-print" style="position:fixed;bottom:24px;right:24px;z-index:9998;display:flex;flex-direction:column;align-items:flex-end;gap:8px;pointer-events:none;">
+    <button onclick="UIEngine.openSiteEditor()" class="fab-btn fab-btn-edit" aria-label="Edit site information">&#9998; Edit Site Info</button>
+    <button onclick="ExportEngine.downloadConfig()" class="fab-btn fab-btn-save" aria-label="Download site configuration file" title="Downloads site-data.json to your Downloads folder. Move it back to this same folder to keep your work synced.">&#128190; Save Config</button>
+    <button onclick="window.print()" class="fab-btn fab-btn-print" aria-label="Print or export as PDF">&#128438; Print / PDF</button>
+</div>
+
+<!-- Site Info Editor Modal -->
+<div id="site-edit-modal" role="dialog" aria-modal="true" aria-labelledby="sei-dialog-title">
+  <div class="sei-dialog">
+    <div class="sei-header">
+      <h3 id="sei-dialog-title">&#9998; Edit Site Info &mdash; <span id="sei-site-name"></span></h3>
+      <button class="sei-close" onclick="UIEngine.closeSiteEditor()" aria-label="Close site editor" title="Close">&times;</button>
+    </div>
+    <div class="sei-body">
+      <div class="sei-section">Project Identity</div>
+      <div class="sei-row"><label>Legal Description</label><textarea id="sei-legal" rows="2"></textarea></div>
+      <div class="sei-row"><label>Year Built</label><input id="sei-yearbuilt" type="text" /></div>
+      <div class="sei-row"><label>Occupancy Group</label><input id="sei-occupancy" type="text" /></div>
+      <div class="sei-row"><label>Project Type</label><input id="sei-projtype" type="text" /></div>
+      <div class="sei-row"><label>Architect</label><input id="sei-architect" type="text" /></div>
+
+      <div class="sei-section">Scope of Work</div>
+      <div class="sei-row"><label>Scope</label><textarea id="sei-scope" rows="8"></textarea></div>
+
+      <div class="sei-section">Existing Building</div>
+      <div class="sei-row"><label>Existing Dwelling SF</label><input id="sei-exdwelling" type="number" min="0" step="1" placeholder="e.g. 1200" /></div>
+
+      <div class="sei-section">Notes</div>
+      <div class="sei-row"><label>Notes</label><textarea id="sei-notes" rows="3"></textarea></div>
+
+      <div class="sei-section">City Inspector Contacts</div>
+      <div id="sei-inspectors" class="sei-array-wrap"></div>
+      <button class="sei-add-row" onclick="UIEngine._seiAddRow('sei-inspectors','Role','Name (Phone)')">+ Add Inspector</button>
+
+      <div class="sei-section">Planning &amp; Transit Areas</div>
+      <div id="sei-planning" class="sei-array-wrap"></div>
+      <button class="sei-add-row" onclick="UIEngine._seiAddRow('sei-planning','Label','Value')">+ Add Row</button>
+
+      <div class="sei-section">Overlay Zones</div>
+      <div id="sei-overlay" class="sei-array-wrap"></div>
+      <button class="sei-add-row" onclick="UIEngine._seiAddRow('sei-overlay','Zone','Yes / No')">+ Add Row</button>
+    </div>
+    <div class="sei-footer">
+      <div class="sei-status" id="sei-status"></div>
+      <button class="sei-btn-cancel" onclick="UIEngine.closeSiteEditor()">Cancel</button>
+      <button class="sei-btn-save" id="sei-save-btn" onclick="UIEngine.saveSiteInfo()">Save &amp; Rebuild</button>
+    </div>
+  </div>
+</div>
+
+<!-- Auto-save flash badge -->
+<div id="map-save-flash" style="display:none;position:fixed;bottom:24px;right:24px;z-index:9999;
+  background:#166534;color:#dcfce7;padding:7px 16px;border-radius:20px;font-size:12px;
+  font-weight:700;box-shadow:0 4px 16px rgba(0,0,0,.28);pointer-events:none;
+  font-family:'Segoe UI',sans-serif;animation:mapFlashIn .2s ease;">
+  &#10003; Auto-saved
+</div>
+<style>
+@keyframes mapFlashIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+@media print{
+  .no-print,.suite-bar{display:none!important}
+  #map-save-flash,#map-fab{display:none!important}
+  body{padding:8px!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+
+<script src="../js/engine-config.js"></script>
+<script src="../js/engine-ui.js"></script>
+<script src="../js/engine-map.js"></script>
+<script src="../js/engine-elevation.js"></script>
+<script src="../js/engine-setback.js"></script>
+<script src="../js/engine-export.js"></script>
+<script src="../js/engine-resize.js"></script>
+<script src="../js/bootstrap.js"></script>
+<!-- Keyboard accessibility: Enter/Space trigger click on [role="button"] elements -->
+<script>
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' || e.key === ' ') {
+        var t = e.target;
+        if (t.getAttribute('role') === 'button' && t.tagName !== 'BUTTON') {
+            e.preventDefault();
+            t.click();
+        }
+    }
+});
+// ESC closes site editor modal
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && window.UIEngine && document.getElementById('site-edit-modal').classList.contains('open')) {
+        UIEngine.closeSiteEditor();
+    }
+});
+</script>
+<button class="theme-toggle" onclick="(function(){var d=document.documentElement,t=d.getAttribute('data-theme')==='dark'?'light':'dark';d.setAttribute('data-theme',t);localStorage.setItem('theme',t);document.querySelector('.theme-toggle').textContent=t==='dark'?'\u2600\ufe0f':'\ud83c\udf19';})()" aria-label="Toggle dark mode"><script>document.write(document.documentElement.getAttribute('data-theme')==='dark'?'\u2600\ufe0f':'\ud83c\udf19')</script></button>
+</body>
+</html>

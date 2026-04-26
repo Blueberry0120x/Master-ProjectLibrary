@@ -1,0 +1,201 @@
+{
+  "project": "ProjectBook-Planner",
+  "site": {
+    "siteId": "WA-10404_KIRKLAND",
+    "address": "10404 NE 124th St, Kirkland, WA 98034",
+    "apn": "2926059206",
+    "legalDescription": "W 1/2 OF SW 1/4 OF SE 1/4 OF NW 1/4 LESS E 211.59 FT LESS N 400 FT LESS CO RD TGW E 7.5 FT OF SE 1/4 OF SW 1/4 OF NW 1/4 LESS N 400 FT LESS CO RD",
+    "yearBuilt": "1939",
+    "occupancyGroup": "R-3",
+    "zoning": "RSX 7.2",
+    "cadZone": "WA_N",
+    "lotWidth": 122,
+    "lotDepth": 233,
+    "lotSF": 28314,
+    "commercialDepth": 0,
+    "baseFAR": 0.5,
+    "commFAR": 0,
+    "maxHeight": 30,
+    "baseHeightLimit": 30,
+    "cchsMaxHeight": 0,
+    "frontSetback": 20,
+    "rearSetback": 10,
+    "sideSetback": 5,
+    "densityPerSF": 0,
+    "nefRatePerSF": 0,
+    "affordabilityPct": 0,
+    "difPerUnit": 0,
+    "difWaiverSF": 0,
+    "projectType": "",
+    "architect": "",
+    "scopeOfWork": "",
+    "notes": "CONFIRMED (King County Assessor + GIS, 2026-04-10): APN 2926059206, legalDescription from eReal Property, yearBuilt 1939, lotSF 28,314 SF (GIS: 27,823 SF). RSX 7.2 zoning from listing data (pending ePlanning confirm). Standards from KZC Ch 15.30 Ord. 4196: height 30 ft, front 20 ft, rear 10 ft, side 5 ft, max lot coverage 50%. lat/lng from KC GIS polygon centroid -- verify via geocode. lotWidth/lotDepth are bounding-box estimates (irregular parcel, 7-vertex polygon); confirm via King County tract map. baseFAR 0.5 = 50% lot coverage approx equivalent (KZC uses coverage not FAR; placeholder only). | TBD - D: community plan + transit overlays -- Kirkland Comprehensive Plan; TPA check -- PSRC GIS. Airport -- BFI (Boeing Field) ALUCP, not SeaTac (site is Kingsgate area). Seismic -- Seattle fault zone proximity. | TBD - E: Fees -- City of Kirkland permit fee schedule; impact fees and utility connection fees. | TBD - F: Project type, architect, scope of work. | TBD - G: Inspector contacts -- City of Kirkland Permit Center (425) 587-3600. | TBD - H: Parcel polygon -- pending KC GIS vertex extract. Map rotation from aerial.",
+    "inspectors": [
+      {
+        "name": "Building Inspector",
+        "val": "City of Kirkland Development Services Center — (425) 587-3600 (main/planning & building counter) | (425) 587-3225 (inspection scheduling) | 123 Fifth Ave, Kirkland WA 98033 | MyBuildingPermit.com"
+      },
+      {
+        "name": "Structural",
+        "val": "City of Kirkland Development Services Center — (425) 587-3600 (same counter)"
+      },
+      {
+        "name": "Electrical",
+        "val": "City of Kirkland Development Services Center — (425) 587-3600"
+      },
+      {
+        "name": "Mechanical",
+        "val": "City of Kirkland Development Services Center — (425) 587-3600"
+      },
+      {
+        "name": "Grading / Civil",
+        "val": "City of Kirkland Public Works — (425) 587-3800 | route through Development Services Center for permit coordination"
+      }
+    ],
+    "planningAreas": [
+      {
+        "name": "COMPREHENSIVE PLAN AREA",
+        "val": "Kingsgate Neighborhood — Single Family / Low Density Residential. Kirkland 2044 Comprehensive Plan (adopted Dec 2024). Outside Totem Lake Urban Center boundary. Source: Kirkland Kingsgate Neighborhood Plan; 2044 Comp Plan."
+      },
+      {
+        "name": "LAND USE DESIGNATION",
+        "val": "Single Family Residential / Low Density Residential — RSX 7.2 zone (7,200 SF min lot), Kingsgate area. Verify exact parcel designation on Kirkland GIS (kirklandwa.gov/gis). Source: KZC Chapter 15; Kirkland 2044 Comp Plan (2026-04-15)."
+      },
+      {
+        "name": "TRANSIT PRIORITY AREA",
+        "val": "TBD — KC Metro stop #74714 at Totem Lake Blvd & NE 124th St is ~0.5–0.8 mi west. Measure walking distance; if <0.5 mi qualifies under WA HB 1110 frequent transit area. Lot size (28,314 SF) likely already permits middle housing without TPA bonus. Source: pugetsndtransit.org stop #74714 (2026-04-15)."
+      },
+      {
+        "name": "URBAN GROWTH AREA (UGA)",
+        "val": "Yes -- Kirkland is within King County UGA"
+      },
+      {
+        "name": "MOBILITY / TRANSIT ACCESS",
+        "val": "KC Metro routes 225 and 239 stop at Totem Lake Blvd & NE 124th St (~0.5–0.8 mi W). Totem Lake Urban Center with planned I-405 BRT proximity. Source: King County Metro (2026-04-15)."
+      }
+    ],
+    "overlayZones": [
+      {
+        "name": "AIRPORT INFLUENCE AREA",
+        "val": "No — outside all airport noise contours. BFI (Boeing Field) ~8 mi SW; 65 DNL contour does not reach Kirkland at this distance (~11 mi from runway). Paine Field (PAE) ~14 mi N, contours do not extend south. No Kirkland airport overlay or noise district in KZC. FAR Part 77 notification applies only for structures ≥200 ft AGL (not applicable to SFR). Source: BFI Part 150 Study; FAA BFI noise compatibility program (federalregister.gov 2025-10587) (2026-04-15)."
+      },
+      {
+        "name": "COASTAL / SHORELINE",
+        "val": "No Lake Washington shoreline designation — ~2.5–3 mi east of Lake Washington; outside 200 ft SMA buffer. Standard site-specific CAR required. Source: Kirkland Shoreline Master Program (2026-04-15)."
+      },
+      {
+        "name": "VERY HIGH FIRE HAZARD",
+        "val": "No — Kingsgate is fully developed suburban Kirkland. WA DNR Wildfire Hazard draft map (not finalized 2026-04) does not designate urbanized east-side King County neighborhoods. Source: WA DNR Wildfire Hazard and Risk Mapping draft (2026-04-15)."
+      },
+      {
+        "name": "SEISMIC / FAULT ZONE",
+        "val": "Seismic Hazard Area — site at 47.712°N is NORTH of Seattle Fault main trace (~47.61°N); lower fault rupture risk than south-of-fault sites. Cascadia Subduction Zone applicable. Upland Kingsgate soils = lower liquefaction risk. Standard seismic design (ASCE 7/IBC). Geotech review required for new multi-unit construction. Source: Seattle Fault Wikipedia; USGS Pacific NW seismic hazards (2026-04-15)."
+      },
+      {
+        "name": "FEMA FLOOD ZONE",
+        "val": "Likely Zone X — upland Kingsgate area, no flood-prone streams at NE 124th. Confirm via msc.fema.gov or KC iMap (gismaps.kingcounty.gov/parcelviewer2/). Source: FEMA MSC; KC iMap (2026-04-15)."
+      },
+      {
+        "name": "CRITICAL AREAS (WA)",
+        "val": "No critical areas flag identified at this address; no stream corridors or wetlands noted. Standard site-specific CAR required per KZC critical areas regulations at permit submittal. Source: King County wetlands GIS; Kirkland critical areas (2026-04-15)."
+      }
+    ],
+    "existingDwellingSF": 2230,
+    "parcelPolygon": [
+      [
+        47.711953957,
+        -122.202527073
+      ],
+      [
+        47.71195392,
+        -122.202502696
+      ],
+      [
+        47.711953736,
+        -122.202413029
+      ],
+      [
+        47.711952865,
+        -122.202040219
+      ],
+      [
+        47.711316461,
+        -122.202049854
+      ],
+      [
+        47.711317689,
+        -122.202536745
+      ],
+      [
+        47.711723649,
+        -122.202530588
+      ]
+    ]
+  },
+  "saved": {
+    "lat": 47.711651,
+    "lng": -122.202328,
+    "rotation": 0,
+    "locked": true,
+    "setbacks": {
+      "front": 20,
+      "rear": 10,
+      "sideL": 5,
+      "sideR": 5
+    },
+    "buildings": [],
+    "activeBuilding": 0,
+    "commFront": false,
+    "showBldgDims": false,
+    "hiddenDimKeys": [],
+    "mergedDimKeys": [],
+    "chainWOffset": 0,
+    "chainDOffset": 0,
+    "propDimOffsets": {},
+    "parcelPolygon": [
+      [
+        47.711953957,
+        -122.202527073
+      ],
+      [
+        47.71195392,
+        -122.202502696
+      ],
+      [
+        47.711953736,
+        -122.202413029
+      ],
+      [
+        47.711952865,
+        -122.202040219
+      ],
+      [
+        47.711316461,
+        -122.202049854
+      ],
+      [
+        47.711317689,
+        -122.202536745
+      ],
+      [
+        47.711723649,
+        -122.202530588
+      ]
+    ],
+    "mapOpacity": 60,
+    "setbacksApplied": false,
+    "freeDrag": true,
+    "snapEdge": true,
+    "siteNorthDeg": 0,
+    "vehicles": [],
+    "activeVehicle": -1,
+    "frontBearing": 270,
+    "existingBuildings": [],
+    "activeExBuilding": -1,
+    "_geoOffsets": true
+  },
+  "checklist": null,
+  "_mpl_id": "wa-10404-kirkland",
+  "_legacy_source": "ProjectBook-Planner/data/sites/wa-10404_Kirkland.json",
+  "_schema": "legacy-projectbook -- migrate to MPL schema when site becomes active"
+}
