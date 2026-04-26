@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#0f4c81">
+  <title>Site Master List</title>
+  <link rel="stylesheet" href="../app/src/css/style.css">
+  <style>
+/* ── layout ─────────────────────────────────────────────────────────── */
+.sm-wrap { max-width: 100%; padding: 0 12px 40px; overflow-x: auto; }
+.sm-title { font-size: 1em; font-weight: 700; color: var(--cad-gold,#d4a843);
+            letter-spacing:.04em; text-transform:uppercase; padding: 10px 0 6px; }
+.sm-updated { font-size:.72em; color:#94a3b8; margin-bottom:12px; }
+
+/* ── table ───────────────────────────────────────────────────────────── */
+.sm-table { width:100%; border-collapse:collapse; font-size:.78em;
+            background:var(--card,#fff); }
+.sm-table th { background:#0f4c81; color:#fff; font-weight:600;
+               padding:7px 8px; text-align:left; white-space:nowrap; }
+.sm-table td { padding:6px 8px; vertical-align:top; border-bottom:1px solid var(--border,#e2e8f0); }
+.sm-table tr:hover td { background:rgba(15,76,129,.05); }
+
+/* ── row county colours ──────────────────────────────────────────────── */
+.row-sd  td { background:#d6e4f0; }
+.row-oc  td { background:#fff3cd; }
+.row-wa  td { background:#d5f0d5; }
+.row-sd:hover td { background:#c2d9ee; }
+.row-oc:hover td { background:#ffedb5; }
+.row-wa:hover td { background:#bfe8bf; }
+
+/* ── step / file cells ───────────────────────────────────────────────── */
+.step-yes  { background:#c6efce !important; text-align:center; }
+.step-no   { background:#ffcccc !important; text-align:center; }
+.file-ok   { background:#c6efce !important; font-size:.7em; word-break:break-all; }
+.file-no   { background:#ffcccc !important; }
+
+/* ── legend ──────────────────────────────────────────────────────────── */
+.sm-legend { display:flex; gap:10px; flex-wrap:wrap; margin-top:14px; font-size:.74em; }
+.leg-item { display:flex; align-items:center; gap:5px; }
+.leg-swatch { width:16px; height:16px; border:1px solid #ccc; flex-shrink:0; }
+.leg-sd  { background:#d6e4f0; } .leg-oc { background:#fff3cd; }
+.leg-wa  { background:#d5f0d5; } .leg-y  { background:#c6efce; }
+.leg-n   { background:#ffcccc; }
+
+/* ── print ───────────────────────────────────────────────────────────── */
+@media print {
+    .suite-bar,.no-print { display:none !important; }
+    .sm-table th { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+}
+</style>
+</head>
+<body>
+<div class="page-wrapper">
+
+  <div class="suite-bar no-print">
+    <a href="InteractiveMap.html" class="suite-bar-link">Map</a>
+    <span class="suite-bar-sep">|</span>
+    <a href="SiteInfoSheet.html" class="suite-bar-link">Site Info</a>
+    <span class="suite-bar-sep">|</span>
+    <a href="PreApp_Checklist.html" class="suite-bar-link">Checklist</a>
+    <span class="suite-bar-sep">|</span>
+    <span class="suite-bar-active">Master List</span>
+  </div>
+
+  <div class="sm-wrap">
+    <div class="sm-title">Site Master List</div>
+    <div class="sm-updated no-print">Last generated: 2026-04-26 10:04 UTC</div>
+
+    <table class="sm-table">
+      <thead><tr><th>#</th><th>Site ID</th><th>Full Address</th><th>APN(s)</th><th>County</th><th>St</th><th>Zoning</th><th>Dropbox Folder</th><th>Parcel Map (repo)</th><th>Survey (repo)</th><th>S1<br>Proj Info</th><th>S2<br>APN</th><th>S3<br>Zoning</th><th>S7<br>Parcel Map</th><th>S5<br>Site Visit</th><th>S4<br>Photos</th><th>S6<br>Survey Req</th><th>S8<br>Survey Rcvd</th><th>Notes</th></tr></thead>
+      <tbody><tr class="row-sd"><td>1</td><td>ca-2921-el-cajon</td><td>2921-2923 El Cajon Boulevard, San Diego, CA 92104</td><td></td><td>San Diego</td><td>CA</td><td>CC-3-9</td><td>2921-2923 El Cajon Blvd/</td><td class="file-no"></td><td class="file-no"></td><td class="step-yes">Y</td><td class="step-no"></td><td class="step-yes">Y</td><td class="step-no"></td><td class="step-no"></td><td class="step-no"></td><td class="step-no"></td><td class="step-no"></td><td></td></tr><tr class="row-sd"><td>2</td><td>ca-3063-cabrillo-mesa</td><td></td><td></td><td></td><td>CA</td><td>RS-1-7</td><td></td><td class="file-no"></td><td class="file-no"></td><td class="step-no"></td><td class="step-no"></td><td class="step-yes">Y</td><td class="step-no"></td><td class="step-no"></td><td class="step-no"></td><td class="step-no"></td><td class="step-no"></td><td></td></tr><tr class="row-sd"><td>3</td><td>ca-4335-euclid</td><td>4335 Euclid Avenue, San Diego, CA 92105</td><td></td><td>San Diego</td><td>CA</td><td>CUPD-CU-2-4</td><td>4335 Euclid Ave San Diego, CA 92115/</td><td class="file-no"></td><td class="file-ok">Survey_c26006tha_TOPO_04-06-26.pdf; Survey_c26006tha_TOPO_04-06-26A.dwg</td><td class="step-yes">Y</td><td class="step-no"></td><td class="step-yes">Y</td><td class="step-no"></td><td class="step-yes">Y</td><td class="step-no"></td><td class="step-no"></td><td class="step-yes">Y</td><td></td></tr><tr class="row-sd"><td>4</td><td>ca-4876-cannington</td><td></td><td></td><td></td><td>CA</td><td>RS-1-7</td><td></td><td class="file-no"></td><td class="file-no"></td><td class="step-no"></td><td class="step-no"></td><td class="step-yes">Y</td><td class="step-no"></td><td class="step-yes">Y</td><td class="step-no"></td><td class="step-no"></td><td class="step-no"></td><td></td></tr><tr class="row-sd"><td>5</td><td>ca-5251-palmyra</td><td></td><td></td><td></td><td>CA</td><td>RS-1-7</td><td>5251 Palmyra Ave, San Diego CA 92117/</td><td class="file-no"></td><td class="file-no"></td><td class="step-no"></td><td class="step-no"></td><td class="step-yes">Y</td><td class="step-no"></td><td class="step-no"></td><td class="step-no"></td><td class="step-no"></td><td class="step-no"></td><td></td></tr><tr class="row-sd"><td>6</td><td>ca-9362-angwin</td><td></td><td></td><td></td><td>CA</td><td>RS-1-7</td><td>9362 Angwin Pl San Diego, CA 92123 United States/</td><td class="file-no"></td><td class="file-no"></td><td class="step-no"></td><td class="step-no"></td><td class="step-yes">Y</td><td class="step-no"></td><td class="step-no"></td><td class="step-no"></td><td class="step-no"></td><td class="step-no"></td><td></td></tr><tr class="row-sd"><td>7</td><td>ca-1905-rohn</td><td></td><td></td><td></td><td>CA</td><td>RE-20</td><td>1905 Rohn Rd Escondido, CA 92025/</td><td class="file-no"></td><td class="file-ok">1905 Rohn Rd.dwg; 1905_ROHN_SV-01.dwg</td><td class="step-no"></td><td class="step-no"></td><td class="step-yes">Y</td><td class="step-no"></td><td class="step-yes">Y</td><td class="step-no"></td><td class="step-no"></td><td class="step-yes">Y</td><td></td></tr><tr class="row-sd"><td>8</td><td>ca-11001-westminster</td><td></td><td></td><td></td><td>CA</td><td>R-3</td><td></td><td class="file-no"></td><td class="file-no"></td><td class="step-no"></td><td class="step-no"></td><td class="step-yes">Y</td><td class="step-no"></td><td class="step-yes">Y</td><td class="step-no"></td><td class="step-no"></td><td class="step-no"></td><td></td></tr><tr class="row-sd"><td>9</td><td>ca-12652-laux</td><td></td><td></td><td></td><td>CA</td><td>R-1</td><td>12652 Laux Ave, Garden Grove, CA 92840/</td><td class="file-no"></td><td class="file-no"></td><td class="step-no"></td><td class="step-no"></td><td class="step-yes">Y</td><td class="step-no"></td><td class="step-yes">Y</td><td class="step-no"></td><td class="step-no"></td><td class="step-no"></td><td></td></tr><tr class="row-wa"><td>10</td><td>wa-10404-kirkland</td><td></td><td></td><td></td><td>WA</td><td>RSX 7.2</td><td></td><td class="file-no"></td><td class="file-no"></td><td class="step-no"></td><td class="step-no"></td><td class="step-yes">Y</td><td class="step-no"></td><td class="step-no"></td><td class="step-no"></td><td class="step-no"></td><td class="step-no"></td><td></td></tr><tr class="row-wa"><td>11</td><td>wa-12843-175th</td><td></td><td></td><td></td><td>WA</td><td>R-4</td><td></td><td class="file-no"></td><td class="file-no"></td><td class="step-no"></td><td class="step-no"></td><td class="step-yes">Y</td><td class="step-no"></td><td class="step-no"></td><td class="step-no"></td><td class="step-no"></td><td class="step-no"></td><td></td></tr><tr class="row-wa"><td>12</td><td>wa-405-126th</td><td></td><td></td><td></td><td>WA</td><td>R2</td><td>405 SW 126th St Seattle, WA 98146/</td><td class="file-no"></td><td class="file-no"></td><td class="step-no"></td><td class="step-no"></td><td class="step-yes">Y</td><td class="step-no"></td><td class="step-yes">Y</td><td class="step-no"></td><td class="step-no"></td><td class="step-no"></td><td></td></tr></tbody>
+    </table>
+
+    
+<div class="sm-legend no-print">
+  <div class="leg-item"><div class="leg-swatch leg-sd"></div>San Diego County</div>
+  <div class="leg-item"><div class="leg-swatch leg-oc"></div>Orange County</div>
+  <div class="leg-item"><div class="leg-swatch leg-wa"></div>Washington</div>
+  <div class="leg-item"><div class="leg-swatch leg-y"></div>Complete / File present</div>
+  <div class="leg-item"><div class="leg-swatch leg-n"></div>Not done / Missing</div>
+</div>
+  </div>
+
+</div>
+</body>
+</html>
