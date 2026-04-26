@@ -391,6 +391,31 @@
     }
     .check { color: var(--green); font-weight: 700; }
     .cross { color: var(--red);   font-weight: 700; }
+    .badge.green { background: var(--green); }
+
+    /* ── SITE PLAN DIAGRAM ── */
+    .siteplan { max-width: 700px; margin: 0 auto; }
+    .sp-labels { display: flex; justify-content: space-between; font-size: 9px; font-weight: 700; color: var(--mid); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; }
+    .sp-lot { border: 2px solid #2e2e2e; }
+    .sp-setback { padding: 7px 12px; font-size: 9px; font-weight: 700; color: #888; text-align: center; letter-spacing: .5px; background: repeating-linear-gradient(45deg,transparent,transparent 5px,rgba(0,0,0,.04) 5px,rgba(0,0,0,.04) 10px); }
+    .sp-rear  { border-bottom: 1px dashed #aaa; }
+    .sp-front { border-top: 1px dashed #aaa; }
+    .sp-units { display: flex; height: 110px; }
+    .sp-block { flex: 1; display: flex; align-items: center; justify-content: center; text-align: center; padding: 8px 4px; }
+    .sp-block-label { font-size: 10px; font-weight: 700; line-height: 1.5; color: #333; }
+    .comm-plan { background: #dcdcdc; flex: 0 0 108px; border-right: 8px solid #2e2e2e; }
+    .res-plan  { background: #d5eaff; }
+    .sp-fw-v   { width: 8px; flex-shrink: 0; background: #2e2e2e; }
+    .sp-entries { display: flex; border-top: 2px dashed #888; }
+    .sp-entry-comm { flex: 0 0 108px; background: #ebebeb; font-size: 9px; font-weight: 700; color: #666; text-align: center; padding: 6px 4px; border-right: 8px solid #2e2e2e; }
+    .sp-entry-blank { width: 8px; flex-shrink: 0; background: #2e2e2e; }
+    .sp-entry-res { flex: 1; background: #fff; font-size: 9px; font-weight: 700; color: var(--accent2); text-align: center; padding: 6px 2px; border-right: 1px solid var(--border); }
+    .sp-street { background: #777; color: #fff; font-size: 10px; font-weight: 700; text-align: center; padding: 7px; margin-top: 3px; border-radius: 0 0 3px 3px; letter-spacing: .3px; }
+
+    /* ── UTILITY OVERRIDES ── */
+    .callout-mt  { margin-top: 20px; }
+    .note-sm     { font-size: 12px; color: var(--mid); }
+    .savings-total { text-align: center; font-weight: 700; color: var(--green); }
 
     /* ── FOOTER ── */
     .footer {
@@ -717,6 +742,12 @@
           <td class="check">&#10003; R-3 applies to each block</td>
         </tr>
         <tr>
+          <td><span class="badge green">IB-125 Ex. 4</span></td>
+          <td>DSD Classification Table — City of San Diego</td>
+          <td><strong>"New Townhouses Designed per CRC"</strong> → R-3, Combination Permit. City of San Diego's own Information Bulletin 125 (June 2025) explicitly confirms this project type as R-3. This project matches Example 4 exactly.</td>
+          <td class="check">&#10003; DSD confirms R-3 for new CRC townhouses — strongest direct authority</td>
+        </tr>
+        <tr>
           <td><span class="badge">CBC 903.2.8</span></td>
           <td>NFPA 13R Sprinkler Mandate</td>
           <td>Applies to Group R-2 only — not triggered for R-3</td>
@@ -737,7 +768,7 @@
       </tbody>
     </table>
 
-    <div class="callout amber" style="margin-top:20px;">
+    <div class="callout amber callout-mt">
       <div class="callout-icon">&#9888;</div>
       <div class="callout-body">
         <strong>Note on Sprinklers</strong>
@@ -797,7 +828,159 @@
         </tr>
       </tbody>
     </table>
-    <p style="font-size:12px;">Unit square footages are approximate and subject to final floor plan coordination. Total residential GBA ~4,560 SF net (adjust per actual stair enclosure dimensions). Commercial block retained at 640 SF ground floor.</p>
+    <p class="note-sm">Unit square footages are approximate and subject to final floor plan coordination. Total residential GBA ~4,560 SF net (adjust per actual stair enclosure dimensions). Commercial block retained at 640 SF ground floor.</p>
+  </section>
+
+  <!-- SITE PLAN VIEW -->
+  <section>
+    <h2>Site Plan — Schematic Layout (Top View)</h2>
+    <p>The 50 ft wide lot is organized with commercial at the street frontage and four residential unit blocks extending toward the rear. Each block runs front-to-back, with fire walls between every block. All residential entries face the street.</p>
+    <div class="diagram-wrap">
+      <div class="diagram-title">Site Plan — Top-Down View (Not to Scale)</div>
+      <div class="siteplan">
+        <!-- North arrow + label row -->
+        <div class="sp-labels">
+          <div class="sp-lbl-side">← REAR ALLEY / PROPERTY LINE</div>
+          <div class="sp-lbl-side">EUCLID AVENUE (FRONT) →</div>
+        </div>
+        <div class="sp-lot">
+          <!-- Rear setback -->
+          <div class="sp-setback sp-rear">Rear Setback — 10 ft</div>
+          <!-- Unit blocks (plan view) -->
+          <div class="sp-units">
+            <div class="sp-block comm-plan">
+              <div class="sp-block-label">Commercial<br>640 SF<br>Group B</div>
+            </div>
+            <div class="sp-fw-v"></div>
+            <div class="sp-block res-plan">
+              <div class="sp-block-label">Block 1<br>Unit 1 + Unit 5</div>
+            </div>
+            <div class="sp-fw-v"></div>
+            <div class="sp-block res-plan">
+              <div class="sp-block-label">Block 2<br>Unit 2 + Unit 6</div>
+            </div>
+            <div class="sp-fw-v"></div>
+            <div class="sp-block res-plan">
+              <div class="sp-block-label">Block 3<br>Unit 3 + Unit 7</div>
+            </div>
+            <div class="sp-fw-v"></div>
+            <div class="sp-block res-plan wider">
+              <div class="sp-block-label">Block 4<br>Unit 4 + Unit 8</div>
+            </div>
+          </div>
+          <!-- Front setback + entries -->
+          <div class="sp-setback sp-front">Front Setback — 10 ft</div>
+          <div class="sp-entries">
+            <div class="sp-entry-comm">&#8593; Comm.</div>
+            <div class="sp-entry-blank"></div>
+            <div class="sp-entry-res">&#8593; U1 &#8593; U5</div>
+            <div class="sp-entry-blank"></div>
+            <div class="sp-entry-res">&#8593; U2 &#8593; U6</div>
+            <div class="sp-entry-blank"></div>
+            <div class="sp-entry-res">&#8593; U3 &#8593; U7</div>
+            <div class="sp-entry-blank"></div>
+            <div class="sp-entry-res">&#8593; U4 &#8593; U8</div>
+          </div>
+        </div>
+        <div class="sp-street">EUCLID AVENUE — 50 ft Lot Width</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COST SAVINGS -->
+  <section>
+    <h2>Cost Savings — Sprinkler System</h2>
+    <p>The R-3 fire wall design eliminates the NFPA 13R commercial-grade system requirement and replaces it with NFPA 13D, a residential-grade system. The difference is significant in scope, cost, and ongoing maintenance.</p>
+    <table class="compare">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>NFPA 13R — Original (R-2 Path)</th>
+          <th>NFPA 13D — Proposed (R-3 Path)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>System Type</strong></td>
+          <td>Commercial-grade, full building</td>
+          <td>Residential-grade, per-unit living spaces</td>
+        </tr>
+        <tr>
+          <td><strong>Coverage Required</strong></td>
+          <td>All areas including corridors, utility spaces, attic</td>
+          <td>Living spaces only — attic and garage excluded per NFPA 13D</td>
+        </tr>
+        <tr>
+          <td><strong>Pipe Sizing</strong></td>
+          <td>Larger diameter, higher flow demand</td>
+          <td>Smaller diameter, residential flow rates</td>
+        </tr>
+        <tr>
+          <td><strong>Water Meter</strong></td>
+          <td>May require dedicated fire service meter</td>
+          <td>Can share domestic meter in most cases</td>
+        </tr>
+        <tr>
+          <td><strong>Estimated Installation (8 units)</strong></td>
+          <td>~$40,000 – $60,000</td>
+          <td>~$16,000 – $28,000</td>
+        </tr>
+        <tr>
+          <td><strong>Estimated Savings</strong></td>
+          <td colspan="2" class="savings-total">~$20,000 – $32,000 (pending sub quote)</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="callout amber">
+      <div class="callout-icon">&#9888;</div>
+      <div class="callout-body">
+        <strong>These are planning-level estimates only.</strong>
+        <span>Final cost depends on building layout, pipe routing, and the C-16 contractor's scope. A sub quote should be obtained before permit submittal to confirm savings and validate the design strategy financially.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- RISKS AND FALLBACK -->
+  <section>
+    <h2>Risks &amp; Fallback</h2>
+    <p>The R-3 fire wall strategy is well-supported by code and by DSD's own IB-125 Table 1 (Example 4). However, it is confirmed at plan check — not at a pre-application meeting. The following risks should be understood before submittal.</p>
+    <table class="compare">
+      <thead>
+        <tr>
+          <th>Risk</th>
+          <th>Likelihood</th>
+          <th>Impact</th>
+          <th>Mitigation</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Plan check rejects R-3 classification — classifies building as R-2</strong></td>
+          <td><span class="tag old">Low–Med</span></td>
+          <td>NFPA 13R required → ~$20K–32K additional cost; shared egress redesign</td>
+          <td>Lead permit set with IB-125 Ex. 4 citation + CBC 310.5 + CBC 706 code analysis sheet. Non-shared egress clearly shown on all plans.</td>
+        </tr>
+        <tr>
+          <td><strong>Fire wall structural independence detail challenged</strong></td>
+          <td><span class="tag old">Medium</span></td>
+          <td>Correction letter → design revision → resubmittal delay (4–8 weeks)</td>
+          <td>Provide complete CBC 706.4 structural independence detail at permit submittal. Show independent footing, wall framing, and roof connection on structural sheets.</td>
+        </tr>
+        <tr>
+          <td><strong>San Diego Fire-Rescue requires 13R instead of 13D</strong></td>
+          <td><span class="tag new">Low</span></td>
+          <td>Increased sprinkler system cost (~$20K–32K delta)</td>
+          <td>Confirm NFPA 13D acceptance for new R-3 townhouses at this address with Fire-Rescue before permit submittal. Site is not in a Fire Hazard Severity Zone.</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="callout green">
+      <div class="callout-icon">&#10003;</div>
+      <div class="callout-body">
+        <strong>Fallback position is well-defined.</strong>
+        <span>If R-3 classification is denied at plan check, the project reverts to R-2 with NFPA 13R. The floor plan layout (private entries, fire walls) is still a better building — only the sprinkler system scope changes. No redesign of the unit layout is required.</span>
+      </div>
+    </div>
   </section>
 
   <!-- NEXT STEPS -->
