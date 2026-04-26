@@ -100,39 +100,73 @@
     "snapEdge": true,
     "siteNorthDeg": 0,
     "vehicles": [],
-    "activeVehicle": -1
+    "activeVehicle": -1,
+    "parcelPolygon": [
+      [
+        32.75472599035348,
+        -117.13089185144067
+      ],
+      [
+        32.754725501443225,
+        -117.13096033160872
+      ],
+      [
+        32.75481619557008,
+        -117.1309604872065
+      ],
+      [
+        32.75492888916509,
+        -117.13096068350124
+      ],
+      [
+        32.75511853365214,
+        -117.13096100895713
+      ],
+      [
+        32.75511909094138,
+        -117.13088295043677
+      ],
+      [
+        32.75511964818886,
+        -117.13080489084834
+      ],
+      [
+        32.75472663919634,
+        -117.13080096177241
+      ]
+    ]
   },
   "project": {
     "prj": "",
-    "title": "Change of Occupancy \u2014 Rear Warehouse to R-3 Townhouses, 2921-2923 El Cajon Blvd",
+    "title": "Change of Occupancy — Rear Warehouse to R-3 Townhouses, 2921-2923 El Cajon Blvd",
     "permit_type": "Building",
     "forms": [
       "ds375",
       "ds3032",
       "ds420"
     ],
-    "scope": "Interior change of occupancy and remodel of the existing rear warehouse shell at APN 446-232-04-00 (Lots 7 & 8, Block 119, 7,039 SF total). Rear shell (~46' wide \u00d7 ~40' deep, ~22 ft tall, existing flat roof) fully retained \u2014 no exterior demolition, no new footprint. Interior work only: new structural floor deck at ~11 ft AFF creates 2 residential floors within the existing shell (10-ft ground floor + 1-ft floor assembly + 10-ft 2nd floor = 22 ft total, matching existing shell height exactly). Proposed program: 2 Group R-3 townhouse units (CBC 310.5), each 2-story (~20' wide \u00d7 40' deep per floor), separated by a single CBC 706 structurally-independent fire wall running continuously from foundation through new floor deck to existing flat roof plane. No shared corridor \u2014 each unit has a private internal staircase and private ground-floor exit directly to the rear alley. Upper-floor sleeping rooms: CBC 1030 emergency escape windows facing rear alley (subject to DS-375 Q5 confirmation). GBA of converted area: ~3,680 SF (1,840 SF/floor \u00d7 2 stories). R-3 classification via fire wall path avoids NFPA 13R sprinkler requirement \u2014 CBC 903.2.8 does not apply to R-3. Existing 4,550 SF + 1,910 SF mezzanine Group B commercial (Digital Gym Media Arts Center) at front of building RETAINED \u2014 no change to exterior, occupancy, or tenant. Zero parking (TPA). Rear alley access. SB 330 Preliminary Application filed concurrently.",
+    "scope": "Interior change of occupancy and remodel of the existing rear warehouse shell at APN 446-232-04-00 (Lots 7 & 8, Block 119, 7,039 SF total). Rear shell (~46' wide × ~40' deep, ~22 ft tall, existing flat roof) fully retained — no exterior demolition, no new footprint. Interior work only: new structural floor deck at ~11 ft AFF creates 2 residential floors within the existing shell (10-ft ground floor + 1-ft floor assembly + 10-ft 2nd floor = 22 ft total, matching existing shell height exactly). Proposed program: 2 Group R-3 townhouse units (CBC 310.5), each 2-story (~20' wide × 40' deep per floor), separated by a single CBC 706 structurally-independent fire wall running continuously from foundation through new floor deck to existing flat roof plane. No shared corridor — each unit has a private internal staircase and private ground-floor exit directly to the rear alley. Upper-floor sleeping rooms: CBC 1030 emergency escape windows facing rear alley (subject to DS-375 Q5 confirmation). GBA of converted area: ~3,680 SF (1,840 SF/floor × 2 stories). R-3 classification via fire wall path avoids NFPA 13R sprinkler requirement — CBC 903.2.8 does not apply to R-3. Existing 4,550 SF + 1,910 SF mezzanine Group B commercial (Digital Gym Media Arts Center) at front of building RETAINED — no change to exterior, occupancy, or tenant. Zero parking (TPA). Rear alley access. SB 330 Preliminary Application filed concurrently.",
     "existing": {
-      "sf": "~6,460 SF total (4,550 SF + 1,910 SF mezzanine, Group B \u2014 RETAINED); rear warehouse shell ~1,840 SF/floor",
+      "sf": "~6,460 SF total (4,550 SF + 1,910 SF mezzanine, Group B — RETAINED); rear warehouse shell ~1,840 SF/floor",
       "stories": "1 + mezzanine (front Group B); 1-story warehouse shell at rear (~22 ft to flat roof)",
-      "construction_type": "V-B (assumed \u2014 commercial/warehouse, ~1950, exterior shell retained)",
-      "occupancy": "B (Digital Gym front + warehouse rear \u2014 both Group B currently)",
+      "construction_type": "V-B (assumed — commercial/warehouse, ~1950, exterior shell retained)",
+      "occupancy": "B (Digital Gym front + warehouse rear — both Group B currently)",
       "use": "commercial"
     },
     "proposed": {
-      "sf": "~3,680 SF GBA (1,840 SF/floor \u00d7 2 stories, interior conversion of existing rear shell)",
-      "stories": "2 (new interior floor deck within existing 22-ft shell \u2014 no change to exterior height)",
+      "sf": "~3,680 SF GBA (1,840 SF/floor × 2 stories, interior conversion of existing rear shell)",
+      "stories": "2 (new interior floor deck within existing 22-ft shell — no change to exterior height)",
       "construction_type": "V-B (existing exterior shell retained; new interior floor framing and CBC 706 fire wall V-B)",
-      "occupancy": "B (front \u2014 Digital Gym retained) + R-3 (rear \u2014 2 townhouse units via COO, ~3,680 SF GBA)",
+      "occupancy": "B (front — Digital Gym retained) + R-3 (rear — 2 townhouse units via COO, ~3,680 SF GBA)",
       "use": "mixed (existing B front unchanged + new R-3 rear conversion)"
     },
     "is_45_years": true,
     "fire_sprinklers": false,
     "egress_analysis": false,
     "previously_graded": false,
-    "parking_ratio": "0 required \u2014 TPA/SDA; AB 2097 (SDMC 142.0523)",
-    "deviations": "None anticipated. No exterior modifications proposed. Existing shell height (~22 ft) unchanged. R-3 fire wall path (CBC 310.5 + CBC 706) is the design basis \u2014 CBC 903.2.8 sprinkler requirement does not apply to R-3.",
-    "earthwork_quantities": "No grading \u2014 interior work only within existing building shell. No new footprint.",
+    "parking_ratio": "0 required — TPA/SDA; AB 2097 (SDMC 142.0523)",
+    "deviations": "None anticipated. No exterior modifications proposed. Existing shell height (~22 ft) unchanged. R-3 fire wall path (CBC 310.5 + CBC 706) is the design basis — CBC 903.2.8 sprinkler requirement does not apply to R-3.",
+    "earthwork_quantities": "No grading — interior work only within existing building shell. No new footprint.",
     "public_improvements": "None anticipated from interior-only COO. El Cajon Blvd frontage improvements TBD per DS-375 Q10 response."
   },
   "ds375": {
@@ -141,7 +175,7 @@
     "mhpa": false,
     "historically_significant": false,
     "runoff": false,
-    "policy_questions": "Q1 [Building Plan Review \u2014 R-3 Classification via CBC 706 Fire Wall] Per CBC 310.5, if the 2 dwelling units within the rear warehouse conversion are each 2-story townhouses separated by a single CBC 706 fire wall (structurally independent, continuous from foundation through the new interior floor deck to the existing flat roof plane), may each unit be classified as Group R-3, thereby removing the CBC 903.2.8 NFPA 13R automatic sprinkler requirement for the conversion?\n\nQ2 [Building Plan Review \u2014 CBC 706 Fire Wall in Existing Shell] Per CBC 706.4, a fire wall must be structurally independent. For a new interior fire wall constructed within an existing ~22-ft warehouse shell \u2014 where the wall connects to the existing exterior walls at the perimeter and bears on a new interior footing \u2014 what structural independence detail does DSD require to satisfy CBC 706.4 in an existing-building change-of-occupancy context?\n\nQ3 [Building Plan Review \u2014 COO Compliance Path] Under IEBC Section 1001.2, what compliance path (prescriptive, work area, or performance) does DSD require for converting a Group B warehouse rear shell to 2 Group R-3 townhouse units via interior-only work, with the existing exterior shell fully retained and no structural modification to exterior walls or roof?\n\nQ4 [Building Plan Review \u2014 Occupancy Separation B/R-3 Interface] Per CBC 508.4, the retained front portion is Group B (Digital Gym) and the converted rear is Group R-3. What occupancy separation assembly is required at the interface between the existing Group B front area and the new Group R-3 rear area \u2014 specifically at (a) the ground-level covered underpass zone (~6 ft clear, belonging to the front B structure) and (b) the upper level where the front building's flat roof (~12 ft AFF) abuts the rear warehouse wall?\n\nQ5 [Building Plan Review \u2014 Emergency Escape, 2nd Floor Sleeping Rooms] Per CBC 1030.1, each sleeping room above the first floor in a non-sprinklered R-3 building requires an emergency escape and rescue opening. The 2nd floor of each townhouse unit (floor deck at ~11 ft AFF) is approximately level with the adjacent front Group B building's flat roof (~12 ft AFF). May the required CBC 1030 emergency escape openings face the front building's flat roof, given that the roof is accessible from grade via existing roof-access inside the Group B building? Or must openings face directly to a yard or public way (e.g., rear alley side)?\n\nQ6 [Building Plan Review \u2014 Structural: New Floor Deck in Existing Shell] Per IEBC Section 807 and ASCE 7, does inserting a new structural floor deck at ~11 ft AFF inside an existing ~22-ft warehouse shell \u2014 bearing on the existing exterior walls \u2014 require a structural analysis of the existing wall framing for the new tributary floor loads, and is a special inspection program required for the new floor-to-wall bearing connections?\n\nQ7 [Building Plan Review \u2014 Accessibility, COO] Per IEBC 705 and CBC 11B-202.4, does a change of occupancy from Group B to Group R-3 (2 townhouse units) in an existing building at APN 446-232-04-00 trigger path-of-travel upgrade requirements to the building entrance or accessible route, and does the 20% valuation cap under IEBC 705.1.1 apply to limit the scope of required upgrades?\n\nQ8 [Planning \u2014 CCHS/TAOZ and Density] Per SDMC 131.0436 (CC-3-9, 1 DU/400 SF base) and SDMC 131.0460 (CCHS Tier 3, 1 DU/200 SF), for an interior COO creating 2 Group R-3 townhouse units with no new exterior footprint at APN 446-232-04-00: (a) does the density formula apply to the converted GBA (~3,680 SF), the total lot SF (7,039 SF), or another measure; and (b) does the COO path qualify for CCHS Tier 3 incentives, or is density limited to the CC-3-9 base standard?\n\nQ9 [Land Development Review \u2014 Inclusionary Housing] Under SDMC 142.1301, for 2 net-new Group R-3 units created by COO in an existing building at APN 446-232-04-00 in North Park, is the IHO in-lieu fee obligation triggered at 2 units, or only at a higher unit-count threshold?\n\nQ10 [Engineering \u2014 Right-of-Way] Per SDMC 144.0130 and City Council Policy 600-37 (Complete Streets), does an interior-only change of occupancy at APN 446-232-04-00 with El Cajon Blvd frontage and no exterior construction activity trigger street improvement, sidewalk widening, or bicycle infrastructure requirements as a condition of building permit issuance?"
+    "policy_questions": "Q1 [Building Plan Review — R-3 Classification via CBC 706 Fire Wall] Per CBC 310.5, if the 2 dwelling units within the rear warehouse conversion are each 2-story townhouses separated by a single CBC 706 fire wall (structurally independent, continuous from foundation through the new interior floor deck to the existing flat roof plane), may each unit be classified as Group R-3, thereby removing the CBC 903.2.8 NFPA 13R automatic sprinkler requirement for the conversion?\n\nQ2 [Building Plan Review — CBC 706 Fire Wall in Existing Shell] Per CBC 706.4, a fire wall must be structurally independent. For a new interior fire wall constructed within an existing ~22-ft warehouse shell — where the wall connects to the existing exterior walls at the perimeter and bears on a new interior footing — what structural independence detail does DSD require to satisfy CBC 706.4 in an existing-building change-of-occupancy context?\n\nQ3 [Building Plan Review — COO Compliance Path] Under IEBC Section 1001.2, what compliance path (prescriptive, work area, or performance) does DSD require for converting a Group B warehouse rear shell to 2 Group R-3 townhouse units via interior-only work, with the existing exterior shell fully retained and no structural modification to exterior walls or roof?\n\nQ4 [Building Plan Review — Occupancy Separation B/R-3 Interface] Per CBC 508.4, the retained front portion is Group B (Digital Gym) and the converted rear is Group R-3. What occupancy separation assembly is required at the interface between the existing Group B front area and the new Group R-3 rear area — specifically at (a) the ground-level covered underpass zone (~6 ft clear, belonging to the front B structure) and (b) the upper level where the front building's flat roof (~12 ft AFF) abuts the rear warehouse wall?\n\nQ5 [Building Plan Review — Emergency Escape, 2nd Floor Sleeping Rooms] Per CBC 1030.1, each sleeping room above the first floor in a non-sprinklered R-3 building requires an emergency escape and rescue opening. The 2nd floor of each townhouse unit (floor deck at ~11 ft AFF) is approximately level with the adjacent front Group B building's flat roof (~12 ft AFF). May the required CBC 1030 emergency escape openings face the front building's flat roof, given that the roof is accessible from grade via existing roof-access inside the Group B building? Or must openings face directly to a yard or public way (e.g., rear alley side)?\n\nQ6 [Building Plan Review — Structural: New Floor Deck in Existing Shell] Per IEBC Section 807 and ASCE 7, does inserting a new structural floor deck at ~11 ft AFF inside an existing ~22-ft warehouse shell — bearing on the existing exterior walls — require a structural analysis of the existing wall framing for the new tributary floor loads, and is a special inspection program required for the new floor-to-wall bearing connections?\n\nQ7 [Building Plan Review — Accessibility, COO] Per IEBC 705 and CBC 11B-202.4, does a change of occupancy from Group B to Group R-3 (2 townhouse units) in an existing building at APN 446-232-04-00 trigger path-of-travel upgrade requirements to the building entrance or accessible route, and does the 20% valuation cap under IEBC 705.1.1 apply to limit the scope of required upgrades?\n\nQ8 [Planning — CCHS/TAOZ and Density] Per SDMC 131.0436 (CC-3-9, 1 DU/400 SF base) and SDMC 131.0460 (CCHS Tier 3, 1 DU/200 SF), for an interior COO creating 2 Group R-3 townhouse units with no new exterior footprint at APN 446-232-04-00: (a) does the density formula apply to the converted GBA (~3,680 SF), the total lot SF (7,039 SF), or another measure; and (b) does the COO path qualify for CCHS Tier 3 incentives, or is density limited to the CC-3-9 base standard?\n\nQ9 [Land Development Review — Inclusionary Housing] Under SDMC 142.1301, for 2 net-new Group R-3 units created by COO in an existing building at APN 446-232-04-00 in North Park, is the IHO in-lieu fee obligation triggered at 2 units, or only at a higher unit-count threshold?\n\nQ10 [Engineering — Right-of-Way] Per SDMC 144.0130 and City Council Policy 600-37 (Complete Streets), does an interior-only change of occupancy at APN 446-232-04-00 with El Cajon Blvd frontage and no exterior construction activity trigger street improvement, sidewalk widening, or bicycle infrastructure requirements as a condition of building permit issuance?"
   },
   "applicant": {
     "name": "ADEC Group",
