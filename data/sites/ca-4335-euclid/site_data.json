@@ -11,7 +11,7 @@
   },
   "site": {
     "apn": "471-271-16-00",
-    "legal_description": "Lot 16, Block 4, EUCLID MANOR, Map No. 3482, City of San Diego",
+    "legal_description": "Lots 6 & 7, Block 48, Fairmount Addition to City Heights, Map No. 1368, City of San Diego, County of San Diego, State of California",
     "community_plan": "Mid-City: City Heights",
     "base_zone": "CUPD-CU-2-4",
     "zoning": "CUPD-CU-2-4",
@@ -143,7 +143,7 @@
     "freeDrag": true,
     "snapEdge": true,
     "siteNorthDeg": 0,
-    "frontBearing": 90,
+    "frontBearing": 270,
     "vehicles": [],
     "activeVehicle": -1,
     "existingBuildings": [],
