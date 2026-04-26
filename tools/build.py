@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-build.py - Canonical build pipeline for ProjectBook-Planner.
+build.py - Canonical build pipeline for Master-ProjectLibrary.
 
-Compiles src/ into Output/InteractiveMap.html and Output/PreApp_Checklist.html.
+Compiles app/src/ into Output/InteractiveMap.html and Output/PreApp_Checklist.html.
 Optionally runs a local dev server with save/switch endpoints.
 
 Usage:
@@ -22,9 +22,10 @@ from pathlib import Path
 
 # ── Paths ─────────────────────────────────────────────────────────────────────
 BASE = Path(__file__).resolve().parent.parent
-SRC = BASE / "src"
+APP = BASE / "app"       # JS app lives here in MPL
+SRC = APP / "src"
 OUTPUT_DIR = BASE / "Output"
-DOCS_DIR = BASE / "docs"
+DOCS_DIR = APP / "docs"
 SITE_DATA_FILE = BASE / "data" / "site-data.json"
 SITES_DIR = BASE / "data" / "sites"
 
@@ -80,14 +81,13 @@ def _read_json(path: Path) -> dict:
 
 
 def get_site_file(site_id: str) -> Path | None:
-    """Find the .json path for a given siteId by scanning data/sites/."""
+    """Find the site_data.json path for a given siteId by scanning data/sites/."""
     if not SITES_DIR.is_dir():
         return None
-    for f in SITES_DIR.glob("*.json"):
+    for f in sorted(SITES_DIR.rglob("site_data.json")):
         try:
             raw = _read_json(f)
-            site = raw.get("site")
-            if site and str(site.get("siteId", "")) == site_id:
+            if raw.get("project_book_id") == site_id or raw.get("site_id") == site_id:
                 return f
         except Exception:
             continue
@@ -141,15 +141,17 @@ def get_site_list_script() -> str:
     if not SITES_DIR.is_dir():
         return ""
     entries = []
-    for f in sorted(SITES_DIR.glob("*.json")):
+    for f in sorted(SITES_DIR.rglob("site_data.json")):
         try:
             raw = _read_json(f)
-            site = raw.get("site")
-            if not site:
+            site_id = raw.get("project_book_id") or raw.get("site_id")
+            if not site_id:
                 continue
+            site = raw.get("site", {})
+            addr = raw.get("address", {})
             entries.append({
-                "siteId": site.get("siteId", ""),
-                "address": site.get("address", ""),
+                "siteId": site_id,
+                "address": addr.get("full") or site.get("address", ""),
                 "apn": site.get("apn", ""),
                 "file": f.name,
             })
@@ -166,13 +168,12 @@ def get_all_site_data_script() -> str:
     if not SITES_DIR.is_dir():
         return ""
     all_data = {}
-    for f in sorted(SITES_DIR.glob("*.json")):
+    for f in sorted(SITES_DIR.rglob("site_data.json")):
         try:
             sd = _read_json(f)
-            site = sd.get("site")
-            if not site or not site.get("siteId"):
+            site_id = sd.get("project_book_id") or sd.get("site_id")
+            if not site_id:
                 continue
-            site_id = str(site["siteId"])
             merged = _merge_site_data(sd)
             merged["siteFileName"] = f.name
             all_data[site_id] = merged
@@ -189,17 +190,19 @@ def get_sites_api_json() -> str:
     active_id = get_active_site_id()
     sites = []
     if SITES_DIR.is_dir():
-        for f in sorted(SITES_DIR.glob("*.json")):
+        for f in sorted(SITES_DIR.rglob("site_data.json")):
             try:
                 raw = _read_json(f)
-                site = raw.get("site")
-                if not site or not site.get("siteId"):
+                site_id = raw.get("project_book_id") or raw.get("site_id")
+                if not site_id:
                     continue
+                addr = raw.get("address", {})
+                site = raw.get("site", {})
                 sites.append({
-                    "id": str(site["siteId"]),
-                    "address": site.get("address", ""),
+                    "id": site_id,
+                    "address": addr.get("full") or site.get("address", ""),
                     "apn": site.get("apn", ""),
-                    "active": str(site["siteId"]) == active_id,
+                    "active": site_id == active_id,
                 })
             except Exception:
                 continue
@@ -225,7 +228,7 @@ def set_active_site(site_id: str) -> bool:
 
 def get_google_maps_key_script() -> str:
     """Read googleMapsApiKey from UserPref.json and emit window.__GOOGLE_MAPS_KEY__."""
-    pref_file = BASE / "UserPref.json"
+    pref_file = APP / "UserPref.json"
     key = ""
     if pref_file.exists():
         try:
@@ -443,7 +446,7 @@ def serve(port: int = PORT) -> None:
                     self.end_headers()
 
         def _handle_save(self, body: str):
-            """POST /save -- write to per-site file, preserve .site, overwrite .saved."""
+            """POST /save -- write to per-site file, update only saved/checklist fields."""
             try:
                 incoming = json.loads(body)
             except json.JSONDecodeError as e:
@@ -465,12 +468,12 @@ def serve(port: int = PORT) -> None:
 
             try:
                 existing = _read_json(site_file)
-                merged = {
-                    "project": incoming.get("project", "ProjectBook-Planner"),
-                    "site": existing.get("site"),
-                    "saved": incoming.get("saved"),
-                    "checklist": incoming.get("checklist"),
-                }
+                # Preserve all existing fields; only overwrite saved + checklist from incoming
+                merged = dict(existing)
+                if "saved" in incoming:
+                    merged["saved"] = incoming["saved"]
+                if "checklist" in incoming:
+                    merged["checklist"] = incoming["checklist"]
                 # Atomic write: write to temp then rename so a crash can't corrupt the file
                 tmp = site_file.with_suffix(".tmp")
                 tmp.write_text(json.dumps(merged, indent=2, ensure_ascii=False), encoding="utf-8")
@@ -537,7 +540,7 @@ def serve(port: int = PORT) -> None:
 
         def _serve_root_launcher(self):
             """Serve root index.html with href paths rewritten for the dev server."""
-            launcher = BASE / 'index.html'
+            launcher = APP / 'index.html'
             if launcher.exists():
                 html = launcher.read_text(encoding='utf-8')
                 html = html.replace('href="InteractiveMap.html"', 'href="/map"')
@@ -675,9 +678,7 @@ def validate_sites():
 
     if not SITES_DIR.is_dir():
         return
-    for f in sorted(SITES_DIR.glob("*.json")):
-        if f.name == "index.json":
-            continue
+    for f in sorted(SITES_DIR.rglob("site_data.json")):
         try:
             sd = _read_json(f)
         except Exception:
@@ -685,7 +686,7 @@ def validate_sites():
         saved = sd.get("saved")
         if not saved:
             continue
-        sid = sd.get("site", {}).get("siteId", f.stem)
+        sid = sd.get("project_book_id") or sd.get("site_id") or f.parent.name
         fixed = []
         for key, default in REQUIRED_SAVED.items():
             if key not in saved:

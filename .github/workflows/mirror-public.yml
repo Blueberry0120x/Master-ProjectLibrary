@@ -9,7 +9,7 @@ jobs:
   mirror:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout ProjectBook-Planner
+      - name: Checkout Master-ProjectLibrary
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
@@ -20,24 +20,27 @@ jobs:
           rm -rf .claude/ .vscode/ .github/
           rm -f  .env .env.*
 
-      - name: Transform docs/ for static hosting (fix cross-links)
+      - name: Transform app/docs/ for static hosting (fix cross-links)
         run: |
           python3 << 'PYEOF'
           import pathlib
 
           # Dark mode is baked into source files — only cross-links need fixing here
           fixes = {
-              'docs/InteractiveMap.html':   [('href="checklist"', 'href="PreApp_Checklist.html"')],
-              'docs/PreApp_Checklist.html':  [('href="/"', 'href="InteractiveMap.html"')],
+              'app/docs/InteractiveMap.html':   [('href="checklist"', 'href="PreApp_Checklist.html"')],
+              'app/docs/PreApp_Checklist.html':  [('href="/"', 'href="InteractiveMap.html"')],
           }
           for fname, replacements in fixes.items():
               p = pathlib.Path(fname)
+              if not p.exists():
+                  print(f"SKIP (not found): {fname}")
+                  continue
               html = p.read_text(encoding='utf-8')
               for old, new in replacements:
                   html = html.replace(old, new)
               p.write_text(html, encoding='utf-8')
 
-          print("Transformed 2 HTML files: cross-links fixed")
+          print("Transformed HTML files: cross-links fixed")
           PYEOF
 
       - name: Commit mirror snapshot
@@ -45,7 +48,7 @@ jobs:
           git config user.name "mirror-bot"
           git config user.email "mirror-bot@users.noreply.github.com"
           git add -A
-          git commit -m "Mirror from ProjectBook-Planner (real data, dark mode, links fixed, responsive)" --allow-empty
+          git commit -m "Mirror from Master-ProjectLibrary (real data, dark mode, links fixed, responsive)" --allow-empty
 
       - name: Force-push to ParcelDashboard gh-pages
         run: |

@@ -28,7 +28,7 @@ jobs:
       - name: Check for Output changes
         id: check
         run: |
-          if git diff --quiet Output/ docs/; then
+          if git diff --quiet Output/ app/docs/; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
           else
             echo "changed=true" >> "$GITHUB_OUTPUT"
@@ -39,7 +39,7 @@ jobs:
         run: |
           git config user.name "merge-bot"
           git config user.email "merge-bot@users.noreply.github.com"
-          git add Output/ docs/
+          git add Output/ app/docs/
           git commit -m "build: auto-rebuild Output after PR #${{ github.event.pull_request.number }} merge"
           git push
 
