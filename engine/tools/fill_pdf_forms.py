@@ -20,7 +20,7 @@ from pathlib import Path
 
 import fitz  # PyMuPDF
 
-ROOT = Path(__file__).resolve().parent.parent
+ROOT = Path(__file__).resolve().parent.parent.parent
 BLANK_DIR = ROOT / "knowledge/san-diego-city/Reference/Form"
 PROJECT_BOOK = ROOT / "knowledge/san-diego-city/ProjectBook"
 SITES_DIR = ROOT / "data/sites"

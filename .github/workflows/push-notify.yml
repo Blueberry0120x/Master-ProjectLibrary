@@ -1,0 +1,43 @@
+name: Notify on push to main
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Post push notification
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const commits = context.payload.commits || [];
+            const pusher = context.payload.pusher?.name || 'unknown';
+            const sha = context.sha;
+            const shortSha = sha.substring(0, 7);
+
+            const lines = [
+              `## Push to main: \`${shortSha}\``,
+              `**By:** ${pusher} | **Commits:** ${commits.length}`,
+              ``
+            ];
+
+            for (const c of commits.slice(0, 10)) {
+              lines.push(`- \`${c.id.substring(0,7)}\` ${c.message.split('\n')[0]}`);
+            }
+
+            lines.push(``, `> ${new Date().toISOString()}`);
+
+            // Comment on the HEAD commit — repo owner gets notified automatically
+            try {
+              await github.rest.repos.createCommitComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                commit_sha: sha,
+                body: lines.join('\n')
+              });
+              console.log('Commit comment posted on', shortSha);
+            } catch (e) {
+              console.log('Failed to post commit comment:', e.message);
+            }

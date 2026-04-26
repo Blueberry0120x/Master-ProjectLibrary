@@ -1,0 +1,185 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "py \"$CLAUDE_PROJECT_DIR/tools/session_guard_lite.py\"",
+            "timeout": 15,
+            "statusMessage": "session_guard: rules, pings, stale artifacts..."
+          }
+        ]
+      },
+      {
+        "matcher": "compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "py \"$CLAUDE_PROJECT_DIR/.claude/hooks/compact_reinject.py\"",
+            "timeout": 10,
+            "statusMessage": "Re-injecting critical context after compaction..."
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "py \"$CLAUDE_PROJECT_DIR/.claude/hooks/single_instance.py\"",
+            "timeout": 10,
+            "statusMessage": "Checking for duplicate sessions..."
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "py \"$CLAUDE_PROJECT_DIR/.claude/hooks/rules_memory_check.py\"",
+            "timeout": 10,
+            "statusMessage": "Verifying rules, hooks, and skills..."
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "py \"$CLAUDE_PROJECT_DIR/.claude/hooks/block_find_exe.py\"",
+            "timeout": 5
+          },
+          {
+            "type": "command",
+            "command": "py \"$CLAUDE_PROJECT_DIR/.claude/hooks/pre_commit_guard.py\"",
+            "timeout": 10
+          },
+          {
+            "type": "command",
+            "command": "py \"$CLAUDE_PROJECT_DIR/.claude/hooks/xplat_guard.py\"",
+            "timeout": 35,
+            "statusMessage": "XPLAT-001: checking cross-platform compliance..."
+          },
+          {
+            "type": "command",
+            "command": "py \"$CLAUDE_PROJECT_DIR/.claude/hooks/hook_chain_guard.py\"",
+            "timeout": 5
+          },
+          {
+            "type": "command",
+            "command": "py \"$CLAUDE_PROJECT_DIR/.claude/hooks/strictmode_check.py\"",
+            "timeout": 10
+          },
+          {
+            "type": "command",
+            "command": "py \"$CLAUDE_PROJECT_DIR/.claude/hooks/com_lifecycle_check.py\"",
+            "timeout": 10
+          },
+          {
+            "type": "command",
+            "command": "py \"$CLAUDE_PROJECT_DIR/.claude/hooks/branch_naming.py\"",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "py \"$CLAUDE_PROJECT_DIR/.claude/hooks/backup_config.py\"",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "py \"$CLAUDE_PROJECT_DIR/.claude/hooks/secret_scanner.py\"",
+            "timeout": 5
+          },
+          {
+            "type": "command",
+            "command": "py \"$CLAUDE_PROJECT_DIR/.claude/hooks/upnote_reminder.py\"",
+            "timeout": 5
+          },
+          {
+            "type": "command",
+            "command": "py \"$CLAUDE_PROJECT_DIR/.claude/hooks/cross_repo_ping.py\"",
+            "timeout": 5
+          },
+          {
+            "type": "command",
+            "command": "py \"$CLAUDE_PROJECT_DIR/.claude/hooks/post_action_notify.py\"",
+            "timeout": 20,
+            "statusMessage": "Checking if GitHub notification needed..."
+          }
+        ]
+      },
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "py \"$CLAUDE_PROJECT_DIR/.claude/hooks/auto_ping.py\"",
+            "timeout": 5
+          },
+          {
+            "type": "command",
+            "command": "py \"$CLAUDE_PROJECT_DIR/.claude/hooks/ether_sync_trigger.py\"",
+            "timeout": 5,
+            "statusMessage": "Checking for Ether sync trigger..."
+          }
+        ]
+      }
+    ],
+    "ConfigChange": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "py \"$CLAUDE_PROJECT_DIR/.claude/hooks/config_audit.py\"",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "py \"$CLAUDE_PROJECT_DIR/.claude/hooks/ping_check.py\"",
+            "timeout": 10
+          },
+          {
+            "type": "command",
+            "command": "py \"$CLAUDE_PROJECT_DIR/.claude/hooks/auto_commit.py\"",
+            "timeout": 20
+          }
+        ]
+      }
+    ]
+  },
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:docs.sandiego.gov)",
+      "WebFetch(domain:www.sandiego.gov)",
+      "WebFetch(domain:www.hcd.ca.gov)",
+      "WebFetch(domain:calrecycle.ca.gov)",
+      "WebFetch(domain:pe.usps.com)",
+      "WebFetch(domain:nalc.com)",
+      "WebFetch(domain:about.usps.com)",
+      "WebFetch(domain:www.usps.com)",
+      "WebFetch(domain:www.completecommunitiessd.org)"
+    ]
+  }
+}

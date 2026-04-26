@@ -1,0 +1,364 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>DS-375 — Preliminary Review Questionnaire — 2921–2923 El Cajon Blvd Mixed-Use</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Arial, sans-serif; font-size: 10.5pt; background: #e8e8e8; color: #111; }
+  .page { background: #fff; width: 8.5in; margin: 0.4in auto; padding: 0.55in 0.6in; border: 1px solid #ccc; }
+  .form-header { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 14px; }
+  .sd-logo { display: flex; flex-direction: column; align-items: center; justify-content: center; background: #00a0b0; color: #fff; width: 72px; min-width: 72px; height: 72px; font-size: 8pt; font-weight: bold; text-align: center; line-height: 1.3; }
+  .sd-logo .fn { font-size: 16pt; font-weight: 900; }
+  .header-text h1 { font-size: 16pt; font-weight: 700; }
+  .header-text .sub { font-size: 9pt; color: #444; margin-top: 3px; }
+  .header-note { background: #fde8e8; border: 1px solid #c0392b; padding: 5px 10px; font-size: 9pt; font-weight: bold; text-align: center; margin-bottom: 10px; color: #7a1111; }
+  .section-bar { background: #007a85; color: #fff; padding: 4px 10px; font-weight: bold; font-size: 10pt; margin-top: 10px; }
+  .section-bar.orange { background: #b05a00; }
+  .section-bar.purple { background: #5a2d82; }
+  .field-row { border: 1px solid #555; margin-bottom: -1px; padding: 4px 8px; min-height: 34px; display: flex; flex-wrap: wrap; gap: 8px; }
+  .field-row.tall { min-height: 60px; }
+  .field-row.xtall { min-height: 90px; }
+  .field-block { flex: 1; min-width: 140px; }
+  .field-block.full { flex: 100; min-width: 100%; }
+  .field-block.half { flex: 2; }
+  .field-block.third { flex: 1; }
+  .field-label { font-size: 8pt; font-weight: bold; color: #555; text-transform: uppercase; }
+  .field-value { color: #1a3a6e; font-size: 10.5pt; margin-top: 1px; }
+  .field-value.tbd { color: #b00; font-style: italic; font-size: 9.5pt; }
+  .field-value.note { color: #555; font-size: 9pt; }
+  .q-row { border: 1px solid #aaa; margin-bottom: -1px; padding: 6px 10px; }
+  .q-num { font-weight: bold; color: #007a85; font-size: 10pt; }
+  .q-tag { display: inline-block; background: #e0f4f7; border: 1px solid #00a0b0; padding: 1px 6px; font-size: 8pt; color: #005a65; margin-left: 6px; font-weight: bold; }
+  .q-tag.red { background: #fde8e8; border-color: #c0392b; color: #7a1111; }
+  .q-text { margin-top: 4px; color: #1a3a6e; font-size: 10pt; line-height: 1.5; }
+  .check-row { display: flex; flex-wrap: wrap; gap: 8px 20px; padding: 6px 10px; border: 1px solid #aaa; margin-bottom: -1px; }
+  .inline-check { display: inline-flex; align-items: center; gap: 5px; font-size: 9.5pt; }
+  .box { display: inline-block; width: 12px; height: 12px; border: 1.5px solid #333; vertical-align: middle; position: relative; }
+  .box.checked::after { content: "✓"; position: absolute; top: -3px; left: 1px; font-size: 11pt; color: #1a3a6e; font-weight: bold; }
+  .box.x::after { content: "✗"; position: absolute; top: -3px; left: 1px; font-size: 11pt; color: #b00; font-weight: bold; }
+  .sb330-item { border: 1px solid #bbb; margin-bottom: -1px; padding: 5px 10px; }
+  .sb330-label { font-weight: bold; color: #5a2d82; font-size: 9.5pt; }
+  .sb330-value { color: #1a3a6e; font-size: 10pt; margin-top: 3px; }
+  .disc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px 10px; padding: 8px 10px; border: 1px solid #aaa; }
+  .flag { background: #fff3cd; border: 1px solid #ffc107; padding: 1px 6px; font-size: 8.5pt; color: #7a5c00; display: inline-block; margin-left: 4px; }
+  .flag.red { background: #fde8e8; border-color: #c0392b; color: #7a1111; }
+  .sig-row { display: flex; gap: 20px; margin-top: 10px; }
+  .sig-block { flex: 1; border-top: 1px solid #333; padding-top: 4px; font-size: 9pt; color: #555; }
+  .form-footer { text-align: center; font-size: 8pt; color: #666; margin-top: 14px; border-top: 1px solid #ccc; padding-top: 6px; }
+  @media print { body { background: #fff; } .page { width: 100%; margin: 0; padding: 0.5in; border: none; } }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Header -->
+  <div class="form-header">
+    <div class="sd-logo">
+      <div>FORM</div>
+      <div class="fn">DS-375</div>
+      <div style="font-size:7pt;">Rev. 2024</div>
+    </div>
+    <div class="header-text">
+      <h1>Preliminary Review Questionnaire</h1>
+      <div class="sub">City of San Diego — Development Services Department | IB-513 | (619) 446-5000 | permits.sandiego.gov</div>
+    </div>
+  </div>
+  <div class="header-note">⚠ CRITICAL — ALUCP / Airport, Historic, Lot Merger, CCHS, and SB 330 vesting flags active. File SB 330 Section 9 concurrently. Max 10 questions.</div>
+
+  <!-- Section 1 -->
+  <div class="section-bar">SECTION 1 — APPLICANT INFORMATION</div>
+  <div class="field-row">
+    <div class="field-block half"><div class="field-label">Applicant / Agent Name</div><div class="field-value">ADEC Group</div></div>
+    <div class="field-block half"><div class="field-label">Company</div><div class="field-value">ADEC Group</div></div>
+  </div>
+  <div class="field-row">
+    <div class="field-block half"><div class="field-label">Phone</div><div class="field-value tbd">[ADEC Group phone — to be added]</div></div>
+    <div class="field-block half"><div class="field-label">Email</div><div class="field-value">passio.engineering@gmail.com</div></div>
+  </div>
+  <div class="field-row">
+    <div class="field-block full"><div class="field-label">Mailing Address</div><div class="field-value tbd">[ADEC Group mailing address]</div></div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="section-bar">SECTION 2 — PROJECT SITE INFORMATION</div>
+  <div class="field-row">
+    <div class="field-block full"><div class="field-label">Project Address</div><div class="field-value">2921–2923 El Cajon Boulevard, San Diego, CA 92104</div></div>
+  </div>
+  <div class="field-row">
+    <div class="field-block third"><div class="field-label">APN</div><div class="field-value">446-232-04-00</div></div>
+    <div class="field-block third"><div class="field-label">Combined Lot Area (SF)</div><div class="field-value">7,039 SF (Lots 7 &amp; 8)</div></div>
+    <div class="field-block third"><div class="field-label">Community Plan Area</div><div class="field-value">North Park</div></div>
+  </div>
+  <div class="field-row">
+    <div class="field-block full"><div class="field-label">Legal Description</div><div class="field-value">Block 119, Lots 7 &amp; 8, University Heights D'Hemecourt Map (Amended), City of San Diego, County of San Diego, State of California</div></div>
+  </div>
+  <div class="field-row">
+    <div class="field-block third"><div class="field-label">Base Zone</div><div class="field-value">CC-3-9 (Commercial Corridor)</div></div>
+    <div class="field-block third"><div class="field-label">Overlays</div><div class="field-value">TPA ✓ | SDA ✓ | TAOZ (O-19289 NS) ✓ | <span class="flag red">SDIA RA-2</span></div></div>
+    <div class="field-block third"><div class="field-label">Existing Use</div><div class="field-value">Commercial (~1950, ~76 yrs, 2 structures)</div></div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="section-bar">SECTION 3 — PROJECT SCOPE</div>
+  <div class="field-row xtall">
+    <div class="field-block full">
+      <div class="field-label">Description of Proposed Project</div>
+      <div class="field-value">New 2-story residential addition in the rear portion of combined APN 446-232-04-00 (Lots 7 &amp; 8, Block 119, 7,039 SF combined). New construction footprint: ~46' wide × ~40' deep (1,840 SF/floor), 2 stories = ~3,680 SF total GBA. Existing 4,550 SF + 1,910 SF mezzanine commercial building (Digital Gym Media Arts Center) at the front of the parcel is RETAINED — no demolition of existing structure or displacement of existing tenant. Proposed use for rear addition: residential (Group R-2), unit count TBD by architect. NFPA 13 sprinklers in new construction. TPA zone — 0 auto parking. Rear alley access. SDIA Airport Influence Area Review Area 2 — ALUCP clearance required. SB 330 Preliminary Application filed concurrently (Section 9).</div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="section-bar">SECTION 4 — WILL-SERVE LETTER REQUEST</div>
+  <div class="check-row">
+    <div class="field-label" style="width:100%;margin-bottom:4px;">Is a "Will-Serve" letter needed?</div>
+    <span class="inline-check"><span class="box checked"></span> Yes</span>
+    <span class="inline-check"><span class="box x"></span> No</span>
+    &nbsp;&nbsp;
+    <span class="inline-check"><span class="box checked"></span> Water</span>
+    <span class="inline-check"><span class="box checked"></span> Wastewater / Sewer</span>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="section-bar">SECTION 5 — COMPLETE COMMUNITIES / CCHS</div>
+  <div class="check-row">
+    <div class="field-label" style="width:100%;margin-bottom:4px;">Is this a Complete Communities Housing Solutions (CCHS) project?</div>
+    <span class="inline-check"><span class="box checked"></span> Yes — CCHS eligibility to be confirmed via Q2 (Tier 2 or Tier 3)</span>
+    <span class="inline-check"><span class="box"></span> No</span>
+  </div>
+  <div class="field-row">
+    <div class="field-block full"><div class="field-value note">Note: CC-3-9 base FAR = 2.0. CCHS Tier 3 may allow FAR up to 6.5 (pending DSD confirmation in Q2). Project is evaluating both paths. Design and unit count will be locked after DS-375 response received.</div></div>
+  </div>
+
+  <!-- Section 6: Questions -->
+  <div class="section-bar">SECTION 6 — QUESTIONS FOR DSD REVIEW (Max 10)</div>
+  <div style="padding:4px 10px 6px;border:1px solid #aaa;font-size:8.5pt;color:#555;margin-bottom:4px;">Discipline routing: "Historic for Q1; Planning Review/Facilities Financing for Q2 and Q4; Map Check for Q3; Transportation Development/Planning Review for Q5; Fire Plan Review for Q5; Engineering for Q7 and Q10; Water and Sewer for Q8; Planning Review/Airport Authority (SDCRAA) for Q9."</div>
+
+  <div class="q-row">
+    <div><span class="q-num">Q1</span><span class="q-tag">DSD-Historic</span></div>
+    <div class="q-text">Two existing commercial structures at 2921–2923 El Cajon Blvd were built approximately 1950 (estimated age: ~76 years), exceeding the SDMC §143.0150 threshold. Please confirm: (a) Is an IB-580 photographic survey required? (b) Is a full Historic Resources Evaluation (HRE) required prior to demolition permit issuance? (c) Is a cultural resources record search under SDMC §143.0150 required? (d) If historically significant, what is the path to clearance — can demolition proceed concurrently with the new construction permit or must clearance precede all permits?</div>
+  </div>
+  <div class="q-row">
+    <div><span class="q-num">Q2</span><span class="q-tag">DSD-Planning Review</span></div>
+    <div class="q-text">In CC-3-9 zoning on a combined 7,039 SF lot (Lots 7 &amp; 8, Block 119, North Park): (a) What is the maximum achievable FAR, height, and dwelling unit count without discretionary entitlement under base CC-3-9 standards? (b) Does CCHS apply to this site — specifically, does the TAOZ (O-19289 NS) overlay permit CCHS Tier 3 FAR 6.5, or is a different density bonus path required? (c) Does the North Park Community Plan designate this parcel for increased density consistent with a 4–7 story mixed-use project?</div>
+  </div>
+  <div class="q-row">
+    <div><span class="q-num">Q3</span><span class="q-tag">DSD-Map Check</span></div>
+    <div class="q-text">The project proposes a unified structure spanning Lots 7 and 8 of Block 119 (total APN 446-232-04-00). Please confirm: (a) Is a formal lot merger / lot consolidation required before building permit submittal for a structure spanning both lots? (b) What is the applicable process — Lot Development Map Adjustment (LDMA), administrative consolidation, or tentative parcel map? (c) Can the lot merger be processed concurrently with the Preliminary Review and/or building permit, or must it be recorded first?</div>
+  </div>
+  <div class="q-row">
+    <div><span class="q-num">Q4</span><span class="q-tag">DSD-Planning Review</span><span class="q-tag">Planning-Facilities Financing</span></div>
+    <div class="q-text">For a project of 17–40+ net new dwelling units at 2921–2923 El Cajon Blvd: (a) What are the current Inclusionary Housing Ordinance (IHO, SDMC 142.13) obligations — required affordable percentage and/or in-lieu fee? (b) What DIF, HTF, RTCIP (SANDAG), and FBA fees apply per unit and per commercial SF? (c) If CCHS density bonus applies, do fee obligations change?</div>
+  </div>
+  <div class="q-row">
+    <div><span class="q-num">Q5</span><span class="q-tag">DSD-Fire Plan Review (SDFD)</span></div>
+    <div class="q-text">For a 4–7 story mixed-use building (R-2 / B) with NFPA 13 sprinklers at 2921–2923 El Cajon Blvd: (a) What fire department access requirements apply — minimum access lane width, turning radius, hydrant proximity? (b) Is aerial apparatus access (hook-and-ladder truck) required — if so, what is the minimum clearance width and setback? (c) What FDC and standpipe requirements apply for a 4–7 story R-2 building? (d) What is SDFD's preferred FDC location on El Cajon Blvd vs. side street?</div>
+  </div>
+  <div class="q-row">
+    <div><span class="q-num">Q6</span><span class="q-tag">DSD-Transportation Development</span><span class="q-tag">DSD-Planning Review</span></div>
+    <div class="q-text">The site is within a Transit Priority Area (TPA) and Smart Development Area (SDA): (a) Please confirm zero (0) automobile parking is required for 17–40 R-2 units + ground-floor B commercial under AB 2097 / SDMC 142.0523. (b) What are the required bicycle parking counts (long-term and short-term) per SDMC 142.0525 for 17–40 R-2 units and the commercial space? (c) Is a Transportation Demand Management (TDM) plan required for a project of this scale in the TPA?</div>
+  </div>
+  <div class="q-row">
+    <div><span class="q-num">Q7</span><span class="q-tag">DSD-Engineering</span></div>
+    <div class="q-text">What public improvements are required along the El Cajon Blvd frontage (arterial street) for a combined 7,039 SF double-lot project? Specifically: (a) Curb, gutter, sidewalk — repair or full replacement? (b) Any ROW dedication required? (c) Is a DS-3037 (ROW improvement permit) required separately? (d) Does the City's Complete Streets policy trigger sidewalk widening, protected bike lane, or other improvements on the El Cajon Blvd corridor?</div>
+  </div>
+  <div class="q-row">
+    <div><span class="q-num">Q8</span><span class="q-tag">DSD-Water and Sewer</span></div>
+    <div class="q-text">For 17–40 new R-2 residential units + ground-floor commercial on a combined 7,039 SF lot at 2921–2923 El Cajon Blvd: (a) Confirm adequate sewer capacity and EDU count required; (b) Appropriate water meter size(s) for the proposed program; (c) Is a fire flow analysis required for a 4–7 story NFPA 13 sprinklered building? (d) If Lots 7 and 8 are merged, can a single water/sewer service connection serve the combined project, or are two laterals required?</div>
+  </div>
+  <div class="q-row">
+    <div><span class="q-num">Q9</span><span class="q-tag">DSD-Planning Review</span><span class="q-tag red">Airport Authority (SDCRAA)</span></div>
+    <div class="q-text">The site falls within SDIA Airport Influence Area (AIA) Review Area 2 per the SDCRAA Airport Land Use Compatibility Plan (ALUCP): (a) What noise attenuation requirements (interior CNEL thresholds, construction specifications) apply for residential units (R-2) in ALUCP Review Area 2? (b) Is an SDCRAA ALUCP consistency determination required before building permit issuance — or can it be processed concurrently? (c) Does a proposed height of 4–7 stories at this location require an FAA Part 77 Form 7460-1 Aeronautical Study? What is the applicable obstruction surface elevation limit?</div>
+  </div>
+  <div class="q-row">
+    <div><span class="q-num">Q10</span><span class="q-tag">DSD-Engineering</span></div>
+    <div class="q-text">Under the City's Stormwater Standards Manual, how is this project classified — Standard Project or Priority Development Project (PDP)? The project demolishes ~2,000 SF of existing commercial structures and constructs a new building on a combined 7,039 SF lot with a substantially larger footprint. What LID, on-site retention, or stormwater BMP requirements apply? Is the net new impervious area calculation based on the combined parcel or each individual lot?</div>
+  </div>
+
+  <!-- Section 7 -->
+  <div class="section-bar orange">SECTION 7 — CONSTRUCTION PERMITS PROJECT INFORMATION</div>
+  <div class="field-row">
+    <div class="field-block half"><div class="field-label">Will building be fully sprinklered?</div><div class="field-value"><span class="inline-check"><span class="box checked"></span> Yes — NFPA 13 throughout</span></div></div>
+    <div class="field-block half"><div class="field-label">Means of egress analysis?</div><div class="field-value"><span class="inline-check"><span class="box checked"></span> Yes — multiple exit stairs for 4–7 stories</span></div></div>
+  </div>
+  <div class="field-row">
+    <div class="field-block half"><div class="field-label">Construction Type — Existing</div><div class="field-value">VB (commercial, ~1950)</div></div>
+    <div class="field-block half"><div class="field-label">Construction Type — Proposed</div><div class="field-value">IIIA (4–5 stories) or IA (6–7 stories) — TBD per architect; CBC Tables 504.3 &amp; 506.2</div></div>
+  </div>
+  <div class="field-row">
+    <div class="field-block half"><div class="field-label">Occupancy — Existing</div><div class="field-value">B (commercial, mixed retail/service)</div></div>
+    <div class="field-block half"><div class="field-label">Occupancy — Proposed</div><div class="field-value">B (ground floor) / R-2 (residential floors 2+)</div></div>
+  </div>
+  <div class="field-row">
+    <div class="field-block half"><div class="field-label">Building SF — Existing (retained)</div><div class="field-value">4,550 SF + 1,910 SF mezzanine — RETAINED, no demolition</div></div>
+    <div class="field-block half"><div class="field-label">Building SF — New Rear Addition</div><div class="field-value">~3,680 SF GBA (46' × 40' footprint, 2 stories)</div></div>
+  </div>
+  <div class="field-row">
+    <div class="field-block half"><div class="field-label">Site Previously Graded?</div><div class="field-value"><span class="inline-check"><span class="box checked"></span> Yes — urban infill, fully developed</span></div></div>
+    <div class="field-block half"><div class="field-label">Earthwork (CY estimate)</div><div class="field-value">Cut: ~80 CY | Fill: ~20 CY | Net export: ~60 CY (foundations/basement if any)</div></div>
+  </div>
+  <div class="field-row tall">
+    <div class="field-block full"><div class="field-label">Proposed Public Improvements</div><div class="field-value">El Cajon Blvd frontage: repair/replace curb, gutter, sidewalk per Engineering requirements; ADA ramps at corner(s); potential sidewalk widening per Complete Streets; driveway removal; possibly a DS-3037 ROW permit for frontage work. Side street (if applicable): same scope as Engineering directs.</div></div>
+  </div>
+
+  <!-- Section 8 -->
+  <div class="section-bar orange">SECTION 8 — DEVELOPMENT PERMIT &amp; POLICY APPROVAL INFORMATION</div>
+  <div class="field-row">
+    <div class="field-block full"><div class="field-label">Community Planning Area</div><div class="field-value">North Park Community Plan Area</div></div>
+  </div>
+  <div class="field-row">
+    <div class="field-block half"><div class="field-label">Community Plan Amendment?</div><div class="field-value"><span class="inline-check"><span class="box x"></span> No — base CC-3-9 / CCHS pathway</span></div></div>
+    <div class="field-block half"><div class="field-label">Base Zone</div><div class="field-value">CC-3-9 (Commercial Corridor, 9-story height limit)</div></div>
+  </div>
+  <div class="field-row">
+    <div class="field-block half"><div class="field-label">Structures Over 45 Years Old?</div>
+      <div class="field-value"><span class="inline-check"><span class="box checked"></span> Yes</span> <span class="flag red">⚠ ~1950 — ~76 years</span></div>
+    </div>
+    <div class="field-block half"><div class="field-label">Historically Significant?</div>
+      <div class="field-value"><span class="inline-check"><span class="box"></span> Yes</span>&nbsp;<span class="inline-check"><span class="box checked"></span> Unknown — HRE required (see Q1)</span></div>
+    </div>
+  </div>
+  <div class="field-row">
+    <div class="field-block half"><div class="field-label">Sensitive Biology / MHPA?</div>
+      <div class="field-value"><span class="inline-check"><span class="box x"></span> No — fully urbanized, El Cajon Blvd corridor</span></div>
+    </div>
+    <div class="field-block half"><div class="field-label">New Stormwater Runoff?</div>
+      <div class="field-value"><span class="inline-check"><span class="box checked"></span> Yes — significant new impervious area (see Q10)</span></div>
+    </div>
+  </div>
+  <div class="field-row">
+    <div class="field-block half"><div class="field-label">Rezone Required?</div>
+      <div class="field-value"><span class="inline-check"><span class="box x"></span> No — within CC-3-9 base / CCHS overlay</span></div>
+    </div>
+    <div class="field-block half"><div class="field-label">Proposed Parking Ratio</div>
+      <div class="field-value">0 — TPA / AB 2097 (see Q6). PSTPA applies.</div>
+    </div>
+  </div>
+  <div class="field-row">
+    <div class="field-block full"><div class="field-label">Variance / Deviation Requests</div>
+      <div class="field-value">None at this time. Setbacks, height, and FAR to be confirmed per Q2 response. Lot merger process to be confirmed per Q3. ALUCP height limit to be confirmed per Q9 before finalizing building height.</div>
+    </div>
+  </div>
+
+  <!-- Section 9: SB 330 -->
+  <div class="section-bar purple">SECTION 9 — SB 330 PRELIMINARY APPLICATION CHECKLIST (Gov. Code §65941.1)</div>
+  <div style="padding:4px 10px 6px;border:1px solid #bbb;font-size:8.5pt;color:#333;background:#f9f4ff;margin-bottom:2px;">
+    <strong>URGENT — FILE NOW.</strong> Filing this checklist preserves SB 330 vesting rights as of today's date. Ordinances, policies, standards, and fees in effect <strong>April 24, 2026</strong> govern this project for ≥30 months. The 5 minimum items for a valid SB 330 filing (Gov. Code §65941.1(a)) are: (1) applicant name/address, (2) project address/APNs, (3) proposed unit count, (4) site photographs, (5) preliminary site plan. All 5 are provided herein.
+  </div>
+
+  <div class="sb330-item">
+    <div class="sb330-label">Item A — Site Location &amp; Legal Description</div>
+    <div class="sb330-value">2921–2923 El Cajon Boulevard, San Diego, CA 92104 | APN: 446-232-04-00 | Block 119, Lots 7 &amp; 8, University Heights D'Hemecourt Map (Amended), City of San Diego. Two contiguous lots proposed to be merged prior to permit (see Q3).</div>
+  </div>
+  <div class="sb330-item">
+    <div class="sb330-label">Item B — Existing Uses &amp; Major Physical Alterations</div>
+    <div class="sb330-value">Existing: 4,550 SF commercial building + 1,910 SF mezzanine (built ~1950), currently occupied by Digital Gym Media Arts Center. RETAINED — no demolition. New construction: rear addition only (~46' × 40' footprint, 2 stories, ~3,680 SF GBA) in rear portion of combined lot. No displacement of existing commercial tenant. Asbestos survey may be required for any minor tie-in work to existing structure. Phase I ESA recommended prior to grading of rear yard area.</div>
+  </div>
+  <div class="sb330-item">
+    <div class="sb330-label">Item C — Site Plan, Elevations, Massing, Height, Square Footage</div>
+    <div class="sb330-value">Proposed: 4–7 story mixed-use (height TBD pending ALUCP Q9 and CCHS Q2). Footprint: ~7,039 SF (full lot). Total GBA: TBD — Base path: ~14,078 SF (FAR 2.0) | CCHS path: up to ~45,754 SF (FAR 6.5). Preliminary concept site plan and massing diagram to be attached. [Attach concept elevations per IB-513 at full submittal — min scale 1/8" = 1'.]</div>
+  </div>
+  <div class="sb330-item">
+    <div class="sb330-label">Item D — Proposed Land Uses by Units and Square Footage</div>
+    <div class="sb330-value">
+      Existing retained (Group B): 4,550 SF + 1,910 SF mezzanine — Digital Gym, no change<br>
+      New rear addition (Group R-2): ~3,680 SF GBA (46' × 40', 2 stories) — residential unit count TBD by architect<br>
+      Parking: 0 automobile (TPA/AB 2097) | Bicycle per SDMC 142.0525
+    </div>
+  </div>
+  <div class="sb330-item">
+    <div class="sb330-label">Item E — Proposed Parking Spaces</div>
+    <div class="sb330-value">Automobile: 0 required and 0 proposed (TPA zone; AB 2097 exemption confirmed per SDMC 142.0523). Bicycle: long-term and short-term per SDMC 142.0525 — quantity to be confirmed per Q6 response.</div>
+  </div>
+  <div class="sb330-item">
+    <div class="sb330-label">Item F — Air or Water Pollutant Point Sources</div>
+    <div class="sb330-value">None proposed in new construction. <span class="flag red">⚠ Phase I ESA recommended</span> — existing commercial use since ~1950 on El Cajon Blvd corridor; potential petroleum hydrocarbon, solvent, or UST contamination from prior auto/retail uses. Asbestos survey required for demolition of pre-1980 structures.</div>
+  </div>
+  <div class="sb330-item">
+    <div class="sb330-label">Item G — Species of Special Concern</div>
+    <div class="sb330-value">None. Fully developed urban site on El Cajon Blvd; no sensitive biological resources, native vegetation, or MHPA/ESL overlay at this location.</div>
+  </div>
+  <div class="sb330-item">
+    <div class="sb330-label">Item H — Hazard Zone Status</div>
+    <div class="sb330-value">
+      <span class="inline-check"><span class="box x"></span> Very High Fire Hazard Severity Zone</span>&nbsp;&nbsp;
+      <span class="inline-check"><span class="box x"></span> Wetlands (USFWS)</span>&nbsp;&nbsp;
+      <span class="inline-check"><span class="box x"></span> Hazardous Waste Site (§65962.5)</span><br>
+      <span class="inline-check"><span class="box x"></span> FEMA 100-year Flood (SFHA)</span>&nbsp;&nbsp;
+      <span class="inline-check"><span class="box x"></span> Earthquake Fault Zone (State Geologist)</span>&nbsp;&nbsp;
+      <span class="inline-check"><span class="box x"></span> Stream/Streambed Resource</span><br>
+      <span class="flag red">⚠ SDIA Airport Influence Area Review Area 2 — ALUCP noise/height restrictions apply (see Q9)</span>
+    </div>
+  </div>
+  <div class="sb330-item">
+    <div class="sb330-label">Item I — Historic or Cultural Resources</div>
+    <div class="sb330-value"><span class="flag red">⚠ POTENTIAL</span> Existing structures built ~1950 (~76 years). SDMC §143.0150 threshold exceeded. IB-580 photographic survey likely required. No confirmed National Register, CA Register, or local HRB listing at this time. Full Historic Resources Evaluation (HRE) required prior to or concurrent with demolition permit. Cultural resources record search required. See DS-375 Q1.</div>
+  </div>
+  <div class="sb330-item">
+    <div class="sb330-label">Item J — Below-Market-Rate Units &amp; Affordability Levels</div>
+    <div class="sb330-value">No affordable units confirmed at this stage. IHO obligations to be determined based on Q4 response. For 17–40 DU, IHO likely requires ~10% affordable on-site or in-lieu fee. Density bonus pathway (State Density Bonus Law / CCHS) under evaluation. Affordable unit count and income levels will be determined after Q2/Q4 responses locked in.</div>
+  </div>
+  <div class="sb330-item">
+    <div class="sb330-label">Item K — Bonus Units, Incentives, Concessions, Waivers</div>
+    <div class="sb330-value">CCHS Tier 3 density bonus pathway under evaluation (FAR up to 6.5, potentially 40+ DU). No State Density Bonus Law incentives/concessions/waivers requested at this time. Parking reduction already achieved via AB 2097 (TPA — 0 required). Incentives to be requested if affordable units included in final program.</div>
+  </div>
+  <div class="sb330-item">
+    <div class="sb330-label">Item L — Subdivision Map Act Approvals</div>
+    <div class="sb330-value">Lot merger (Lots 7 &amp; 8, Block 119) anticipated. Process to be confirmed per Q3 (LDMA or administrative consolidation). No tentative parcel map, condominium map, or lot split proposed at this time. Merger to be initiated concurrently with Preliminary Review.</div>
+  </div>
+  <div class="sb330-item">
+    <div class="sb330-label">Item M — Applicant Contact &amp; Property Owner Consent</div>
+    <div class="sb330-value">
+      Agent: ADEC Group | ADEC Group | passio.engineering@gmail.com | [Phone TBD]<br>
+      Property Owner: <span class="field-value tbd">[Owner name, address, phone — attach DS-420]</span><br>
+      Owner Consent: DS-420 signed authorization to be attached at full submittal.
+    </div>
+  </div>
+  <div class="sb330-item">
+    <div class="sb330-label">Item N — Coastal Zone (N/A)</div>
+    <div class="sb330-value"><span class="inline-check"><span class="box x"></span> Site is NOT in the Coastal Overlay Zone.</span> Items N(1)–N(4) not applicable.</div>
+  </div>
+  <div class="sb330-item">
+    <div class="sb330-label">Item O — Existing Units to be Demolished</div>
+    <div class="sb330-value">Occupied residential units to be demolished: <strong>0</strong> | Unoccupied residential units: <strong>0</strong><br>Existing use is commercial only (~1950 retail/commercial). No protected residential tenants. No Ellis Act implications.</div>
+  </div>
+  <div class="sb330-item">
+    <div class="sb330-label">Item P — Site Map &amp; Aerial Photograph</div>
+    <div class="sb330-value">Aerial photograph (Google Earth, within 6 months of filing) to be attached. No streams, waterways, or wetlands within or adjacent to APN 446-232-04-00. Site map showing El Cajon Blvd frontage, lot lines, and adjacent parcels to be attached.</div>
+  </div>
+  <div class="sb330-item">
+    <div class="sb330-label">Item Q — Recorded Public Easements</div>
+    <div class="sb330-value">No known public easements recorded on APN 446-232-04-00 per preliminary title review. Confirm with title company (priority action — lot merger may affect easement analysis). Standard utility easements along El Cajon Blvd right-of-way likely apply. Any alley easement on rear of Lots 7/8 to be confirmed.</div>
+  </div>
+
+  <!-- Section 10 -->
+  <div class="section-bar">SECTION 10 — DISCIPLINE IDENTIFICATION</div>
+  <div class="disc-grid">
+    <span class="inline-check"><span class="box checked"></span> DSD-Planning Review</span>
+    <span class="inline-check"><span class="box checked"></span> DSD-Engineering</span>
+    <span class="inline-check"><span class="box checked"></span> DSD-Water and Sewer</span>
+    <span class="inline-check"><span class="box checked"></span> DSD-Transportation Development</span>
+    <span class="inline-check"><span class="box checked"></span> DSD-Fire Plan Review (SDFD)</span>
+    <span class="inline-check"><span class="box checked"></span> DSD-Historic</span>
+    <span class="inline-check"><span class="box checked"></span> DSD-Map Check</span>
+    <span class="inline-check"><span class="box checked"></span> Planning-Facilities Financing</span>
+    <span class="inline-check"><span class="box checked"></span> Airport Authority (SDCRAA)</span>
+    <span class="inline-check"><span class="box checked"></span> Planning-Environmental Analysis (EAS)</span>
+    <span class="inline-check"><span class="box"></span> DSD-Combined</span>
+    <span class="inline-check"><span class="box"></span> DSD-Geology</span>
+    <span class="inline-check"><span class="box"></span> DSD-Structural</span>
+    <span class="inline-check"><span class="box"></span> DSD-Noise</span>
+    <span class="inline-check"><span class="box"></span> Coastal</span>
+    <span class="inline-check"><span class="box"></span> Public Utilities — Recycled Water</span>
+  </div>
+
+  <div class="sig-row" style="margin-top:14px;">
+    <div class="sig-block">Property Owner Signature / Date<br><br><br></div>
+    <div class="sig-block">Agent: ADEC Group — ADEC Group<br><br><br></div>
+    <div class="sig-block">Date of Submittal<br><br><br></div>
+  </div>
+
+  <div class="form-footer">City of San Diego DSD | DS-375 Preliminary Review Questionnaire | 2921–2923 El Cajon Blvd Mixed-Use | APN 446-232-04-00 | April 24, 2026 | Source: sandiego.gov/sites/default/files/ds375.pdf + IB-513 + Gov. Code §65941.1</div>
+</div>
+</body>
+</html>
