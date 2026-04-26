@@ -1041,7 +1041,7 @@ html[data-theme="dark"] .s-hint { color: #93c5fd !important; border-color: #93c5
             <select id="state-filter" aria-label="Filter by state"></select>
         </div>
         <div class="suite-bar-ext">
-            <a href="https://assr.parcelquest.com/Home/" target="_blank" class="suite-bar-extlink suite-bar-extlink-amber">ParcelQuest &#x2197;</a>
+            <a href="https://assr.parcelquest.com/" target="_blank" class="suite-bar-extlink suite-bar-extlink-amber">ParcelQuest &#x2197;</a>
             <a href="https://sandiego.maps.arcgis.com/" target="_blank" class="suite-bar-extlink suite-bar-extlink-sky">SanDag GIS &#x2197;</a>
             <span class="suite-bar-dropdown">
                 <span class="suite-bar-extlink suite-bar-extlink-rose" style="cursor:pointer">PermitFinder &#x25BE;</span>
@@ -7146,7 +7146,7 @@ const ResizeEngine = {
         (function() {
             var sd = window.__SITE_DEFAULTS__ || {};
             var h1 = document.getElementById('project-title');
-            if (h1 && sd.project) h1.textContent = sd.project;
+            if (h1 && sd.project) h1.textContent = sd.project.title || sd.project;
         })();
 
         // Populate state filter + site switcher from __SITE_LIST__ (injected by build script)

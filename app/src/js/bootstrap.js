@@ -154,7 +154,7 @@
         (function() {
             var sd = window.__SITE_DEFAULTS__ || {};
             var h1 = document.getElementById('project-title');
-            if (h1 && sd.project) h1.textContent = sd.project;
+            if (h1 && sd.project) h1.textContent = sd.project.title || sd.project;
         })();
 
         // Populate state filter + site switcher from __SITE_LIST__ (injected by build script)
