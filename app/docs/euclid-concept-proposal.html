@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Concept Proposal — 4335 Euclid Ave</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:      #1a1a2e;
+      --mid:      #4a4a6a;
+      --light:    #f5f5f8;
+      --border:   #d8d8e8;
+      --accent:   #2e5baa;
+      --accent2:  #1a3a7a;
+      --green:    #1a7a4a;
+      --green-bg: #eaf7f0;
+      --amber:    #a06010;
+      --amber-bg: #fdf6e8;
+      --red:      #8b1a1a;
+      --red-bg:   #fdf0f0;
+      --wall:     #2e2e2e;
+      --unit-a:   #c8daf5;
+      --unit-b:   #d5eaff;
+      --unit-c:   #f5e8c8;
+      --unit-comm:#e8e8e8;
+      --stair:    #b8cfe8;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      font-size: 14px;
+      color: var(--ink);
+      background: #fff;
+      line-height: 1.55;
+    }
+
+    /* ── COVER ── */
+    .cover {
+      background: var(--accent2);
+      color: #fff;
+      padding: 48px 56px 40px;
+      border-bottom: 4px solid var(--accent);
+    }
+    .cover-label {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      opacity: .65;
+      margin-bottom: 12px;
+    }
+    .cover h1 {
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 1.25;
+      margin-bottom: 8px;
+    }
+    .cover-sub {
+      font-size: 15px;
+      opacity: .8;
+      margin-bottom: 24px;
+    }
+    .cover-meta {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+      border-top: 1px solid rgba(255,255,255,.2);
+      padding-top: 20px;
+      font-size: 13px;
+    }
+    .cover-meta dt { opacity: .6; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 2px; }
+    .cover-meta dd { font-weight: 600; }
+
+    /* ── LAYOUT ── */
+    .page { max-width: 960px; margin: 0 auto; padding: 40px 48px; }
+
+    section { margin-bottom: 48px; }
+
+    h2 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--accent2);
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 8px;
+      margin-bottom: 20px;
+    }
+    h3 {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--mid);
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      margin-bottom: 10px;
+      margin-top: 20px;
+    }
+    p { margin-bottom: 12px; color: var(--mid); }
+
+    /* ── CALLOUT BOX ── */
+    .callout {
+      border-radius: 6px;
+      padding: 16px 20px;
+      margin-bottom: 16px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+    .callout-icon { font-size: 20px; flex-shrink: 0; line-height: 1; margin-top: 1px; }
+    .callout-body { flex: 1; }
+    .callout-body strong { display: block; font-size: 13px; margin-bottom: 4px; }
+    .callout-body span { font-size: 13px; color: var(--mid); }
+    .callout.green  { background: var(--green-bg);  border-left: 4px solid var(--green); }
+    .callout.amber  { background: var(--amber-bg);  border-left: 4px solid var(--amber); }
+    .callout.blue   { background: #eef3fc;           border-left: 4px solid var(--accent); }
+
+    /* ── COMPARISON TABLE ── */
+    .compare {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      margin-bottom: 20px;
+    }
+    .compare th {
+      background: var(--ink);
+      color: #fff;
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 12px;
+      letter-spacing: .5px;
+    }
+    .compare td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    .compare tr:nth-child(even) td { background: var(--light); }
+    .compare .tag {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .4px;
+    }
+    .tag.old  { background: var(--red-bg);   color: var(--red);   }
+    .tag.new  { background: var(--green-bg); color: var(--green); }
+
+    /* ── BUILDING DIAGRAM ── */
+    .diagram-wrap {
+      background: var(--light);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 28px 24px 20px;
+      margin-bottom: 24px;
+      overflow-x: auto;
+    }
+    .diagram-title {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--mid);
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .sect-frame { max-width: 720px; margin: 0 auto; }
+    .sect-row   { display: flex; }
+    .sect-labels {
+      width: 62px; flex-shrink: 0;
+      display: flex; flex-direction: column;
+    }
+    .sect-lbl {
+      flex: 1;
+      display: flex; align-items: center; justify-content: flex-end;
+      padding-right: 8px;
+      font-size: 9px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .8px; color: var(--mid);
+    }
+    .sect-col { flex: 1; display: flex; flex-direction: column; }
+    .sect-bldg {
+      border: 2.5px solid #2e2e2e;
+      border-bottom: none;
+      display: grid;
+      grid-template-columns: 108px 8px 1fr 8px 1fr 8px 1fr 8px 1fr;
+      grid-template-rows: 92px 4px 92px;
+    }
+    .s-comm {
+      grid-column: 1; grid-row: 1 / 4;
+      background: #dcdcdc;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; padding: 10px 8px;
+      border-right: 2.5px solid #2e2e2e;
+    }
+    .s-fw {
+      grid-row: 1 / 4;
+      background: #2e2e2e;
+      position: relative;
+    }
+    .s-fw::after {
+      content: 'FW';
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%,-50%) rotate(-90deg);
+      font-size: 6.5px; font-weight: 800;
+      color: rgba(255,255,255,.55);
+      letter-spacing: 1.5px; white-space: nowrap;
+    }
+    .s-floorline { grid-column: 2 / 10; grid-row: 2; background: #2e2e2e; }
+    .s-u {
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; padding: 8px 6px;
+    }
+    .s-u.up { background: #c8daf5; }
+    .s-u.dn { background: #d5eaff; }
+    .s-u .un { font-size: 12px; font-weight: 700; color: #1a1a2e; }
+    .s-u .sf { font-size: 9px; color: #4a4a6a; margin-top: 2px; }
+    .s-u .r3 {
+      font-size: 9px; font-weight: 700; color: #1a7a4a;
+      margin-top: 5px; background: #eaf7f0;
+      padding: 1px 6px; border-radius: 8px;
+    }
+    /* entry zone — dashed top = grade line */
+    .sect-entry {
+      border: 2.5px solid #2e2e2e;
+      border-top: 2px dashed #888;
+      display: grid;
+      grid-template-columns: 108px 8px 1fr 8px 1fr 8px 1fr 8px 1fr;
+      min-height: 58px;
+    }
+    .se-comm {
+      grid-column: 1;
+      background: #ebebeb;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      border-right: 2.5px solid #2e2e2e;
+      font-size: 9px; font-weight: 700; color: #666;
+      text-align: center; gap: 2px; padding: 6px;
+    }
+    .se-fw { background: #2e2e2e; }
+    .se-block { display: flex; }
+    .se-door {
+      flex: 1;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; padding: 5px 3px;
+      font-size: 9px; font-weight: 700; line-height: 1.3;
+    }
+    .se-door.d-unit  { background: #fff; color: var(--accent2); }
+    .se-door.d-stair { background: #b8cfe8; color: var(--accent2); border-left: 1px solid rgba(0,0,0,.1); }
+    .se-door .da { font-size: 15px; display: block; line-height: 1.1; margin-bottom: 1px; }
+    .sect-street-row { display: flex; margin-top: 3px; }
+    .sect-street-spacer { width: 62px; flex-shrink: 0; }
+    .sect-street {
+      flex: 1; background: #777; color: #fff;
+      font-size: 10px; font-weight: 700;
+      text-align: center; padding: 7px;
+      border-radius: 0 0 3px 3px; letter-spacing: .3px;
+    }
+    .sect-note {
+      text-align: center; font-size: 10px;
+      color: var(--mid); font-style: italic; margin-top: 8px;
+    }
+    .s-comm-name { font-size: 11px; font-weight: 700; color: #444; }
+    .s-comm-sf   { font-size: 10px; color: #555; margin-top: 3px; }
+    .s-comm-tag  {
+      font-size: 9px; background: #888; color: #fff;
+      padding: 1px 7px; border-radius: 10px;
+      margin-top: 5px; letter-spacing: .3px;
+    }
+    .s-comm-note { font-size: 8px; color: #999; margin-top: 10px; font-style: italic; line-height: 1.6; }
+    .se-arrow    { font-size: 16px; line-height: 1; }
+
+    /* legend */
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 20px;
+      margin-top: 16px;
+      justify-content: center;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      color: var(--mid);
+    }
+    .legend-swatch {
+      width: 16px;
+      height: 16px;
+      border-radius: 3px;
+      border: 1px solid rgba(0,0,0,.1);
+      flex-shrink: 0;
+    }
+    .legend-wall { width: 8px; height: 16px; border-radius: 2px; background: var(--wall); flex-shrink: 0; }
+
+    /* ── EGRESS DIAGRAM ── */
+    .egress-wrap {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .egress-card {
+      background: var(--light);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 14px;
+    }
+    .egress-card .ec-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .6px;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+    .egress-card .ec-step {
+      font-size: 12px;
+      color: var(--mid);
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+      margin-bottom: 4px;
+    }
+    .ec-num {
+      background: var(--accent);
+      color: #fff;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      font-size: 9px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* ── BENEFITS GRID ── */
+    .benefits {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .benefit-card {
+      background: var(--light);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 16px;
+    }
+    .benefit-card .bc-icon { font-size: 22px; margin-bottom: 8px; }
+    .benefit-card .bc-title { font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+    .benefit-card .bc-body { font-size: 12px; color: var(--mid); }
+
+    /* ── CODE BADGE TABLE ── */
+    .code-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+    .code-table th {
+      background: var(--light);
+      padding: 8px 12px;
+      text-align: left;
+      font-weight: 700;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      color: var(--mid);
+      border-bottom: 2px solid var(--border);
+    }
+    .code-table td {
+      padding: 9px 12px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    .code-table .badge {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .3px;
+    }
+    .check { color: var(--green); font-weight: 700; }
+    .cross { color: var(--red);   font-weight: 700; }
+    .badge.green { background: var(--green); }
+
+    /* ── SITE PLAN DIAGRAM ── */
+    .siteplan { max-width: 700px; margin: 0 auto; }
+    .sp-labels { display: flex; justify-content: space-between; font-size: 9px; font-weight: 700; color: var(--mid); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; }
+    .sp-lot { border: 2px solid #2e2e2e; }
+    .sp-setback { padding: 7px 12px; font-size: 9px; font-weight: 700; color: #888; text-align: center; letter-spacing: .5px; background: repeating-linear-gradient(45deg,transparent,transparent 5px,rgba(0,0,0,.04) 5px,rgba(0,0,0,.04) 10px); }
+    .sp-rear  { border-bottom: 1px dashed #aaa; }
+    .sp-front { border-top: 1px dashed #aaa; }
+    .sp-units { display: flex; height: 110px; }
+    .sp-block { flex: 1; display: flex; align-items: center; justify-content: center; text-align: center; padding: 8px 4px; }
+    .sp-block-label { font-size: 10px; font-weight: 700; line-height: 1.5; color: #333; }
+    .comm-plan { background: #dcdcdc; flex: 0 0 108px; border-right: 8px solid #2e2e2e; }
+    .res-plan  { background: #d5eaff; }
+    .sp-fw-v   { width: 8px; flex-shrink: 0; background: #2e2e2e; }
+    .sp-entries { display: flex; border-top: 2px dashed #888; }
+    .sp-entry-comm { flex: 0 0 108px; background: #ebebeb; font-size: 9px; font-weight: 700; color: #666; text-align: center; padding: 6px 4px; border-right: 8px solid #2e2e2e; }
+    .sp-entry-blank { width: 8px; flex-shrink: 0; background: #2e2e2e; }
+    .sp-entry-res { flex: 1; background: #fff; font-size: 9px; font-weight: 700; color: var(--accent2); text-align: center; padding: 6px 2px; border-right: 1px solid var(--border); }
+    .sp-street { background: #777; color: #fff; font-size: 10px; font-weight: 700; text-align: center; padding: 7px; margin-top: 3px; border-radius: 0 0 3px 3px; letter-spacing: .3px; }
+
+    /* ── UTILITY OVERRIDES ── */
+    .callout-mt  { margin-top: 20px; }
+    .note-sm     { font-size: 12px; color: var(--mid); }
+    .savings-total { text-align: center; font-weight: 700; color: var(--green); }
+
+    /* ── FOOTER ── */
+    .footer {
+      border-top: 1px solid var(--border);
+      padding: 20px 48px;
+      font-size: 11px;
+      color: #999;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    @media print {
+      .cover { padding: 36px 40px 28px; }
+      .page  { padding: 28px 40px; }
+      section { page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-label">Concept Proposal — Residential Design Strategy</div>
+  <h1>4335 Euclid Avenue<br>Mixed-Use Development</h1>
+  <div class="cover-sub">San Diego, CA 92105 &nbsp;|&nbsp; APN 471-271-16-00 &nbsp;|&nbsp; CUPD-CU-2-4 Zone</div>
+  <dl class="cover-meta">
+    <div><dt>Prepared by</dt><dd>ADEC Group</dd></div>
+    <div><dt>Date</dt><dd>April 26, 2026</dd></div>
+    <div><dt>Lot Area</dt><dd>6,250 SF</dd></div>
+    <div><dt>Proposed Program</dt><dd>8 Residential Units + 640 SF Commercial</dd></div>
+    <div><dt>Design Strategy</dt><dd>R-3 Unit Blocks — Independent Entry Per Unit</dd></div>
+  </dl>
+</div>
+
+<div class="page">
+
+  <!-- OVERVIEW -->
+  <section>
+    <h2>Overview</h2>
+    <p>
+      This proposal presents a redesigned building organization for 4335 Euclid Avenue. The key change
+      is the elimination of a shared interior hallway in favor of <strong>individual private entries</strong>
+      for every residential unit — both ground-floor and upper-floor. Each pair of stacked units is
+      physically separated from all neighboring units by a full-height fire wall, creating self-contained
+      <strong>residential unit blocks</strong>.
+    </p>
+    <p>
+      This organization unlocks a <strong>lighter fire sprinkler system</strong> (residential NFPA 13D
+      instead of the commercial-grade NFPA 13R), reduces ongoing maintenance obligations, and produces
+      a building that feels more like individual townhomes than a conventional apartment complex.
+    </p>
+
+    <div class="callout green">
+      <div class="callout-icon">&#10003;</div>
+      <div class="callout-body">
+        <strong>Key outcome: No shared hallway. No shared stairwell. Every unit has its own front door at street level.</strong>
+        <span>Each unit — including upper-floor units — is entered independently from the exterior. Residents never pass through another unit's space to reach their home.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT CHANGED -->
+  <section>
+    <h2>What Changed from the Original Layout</h2>
+    <table class="compare">
+      <thead>
+        <tr>
+          <th>Element</th>
+          <th>Original Layout</th>
+          <th>Proposed Layout</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Corridor / Hallway</strong></td>
+          <td><span class="tag old">Removed</span> 6 ft shared interior hallway serving all upper units</td>
+          <td><span class="tag new">Eliminated</span> Width reallocated into private stair enclosures per unit block</td>
+        </tr>
+        <tr>
+          <td><strong>Upper Unit Entry</strong></td>
+          <td>Shared hallway → shared stair → unit door</td>
+          <td>Own private door at grade → own enclosed stair → unit (non-shared)</td>
+        </tr>
+        <tr>
+          <td><strong>Unit Count</strong></td>
+          <td>9 units (4 ground + 5 upper)</td>
+          <td>8 units (4 ground + 4 upper) — SF adjusted per block</td>
+        </tr>
+        <tr>
+          <td><strong>Building Classification</strong></td>
+          <td>Group R-2 (multifamily apartment)</td>
+          <td>Group R-3 (≤ 2 units per fire-wall-separated block)</td>
+        </tr>
+        <tr>
+          <td><strong>Fire Sprinkler System</strong></td>
+          <td>NFPA 13R (commercial-grade, full building)</td>
+          <td>NFPA 13D (residential-grade, per unit)</td>
+        </tr>
+        <tr>
+          <td><strong>Party Walls</strong></td>
+          <td>Standard demising walls between units</td>
+          <td>Full-height fire walls (CBC 706), foundation through roof</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- BUILDING DIAGRAM -->
+  <section>
+    <h2>Building Organization — Concept Diagram</h2>
+    <p>The building is divided into four residential unit blocks plus one ground-floor commercial block at the front. Each block is separated from its neighbors by a full-height fire wall (shown in dark). No openings exist between blocks at any level.</p>
+
+    <div class="diagram-wrap">
+      <div class="diagram-title">Building Section — Schematic (Not to Scale)</div>
+
+      <div class="sect-frame">
+
+        <!-- Floor labels + Building grid -->
+        <div class="sect-row">
+          <div class="sect-labels">
+            <div class="sect-lbl">2nd Fl.</div>
+            <div style="height:4px;"></div>
+            <div class="sect-lbl">Ground</div>
+          </div>
+          <div class="sect-col">
+
+            <!-- BUILDING GRID -->
+            <div class="sect-bldg">
+
+              <!-- Commercial: spans all rows -->
+              <div class="s-comm">
+                <div class="s-comm-name">Commercial</div>
+                <div class="s-comm-sf">640 SF</div>
+                <div class="s-comm-tag">Group B</div>
+                <div class="s-comm-note">Mixed-use<br>front block<br>(2 stories)</div>
+              </div>
+
+              <div class="s-fw" style="grid-column:2;"></div>
+
+              <div class="s-u up" style="grid-column:3;grid-row:1;">
+                <div class="un">Unit 5</div><div class="sf">~568 SF · 2 Bed</div><div class="r3">R-3</div>
+              </div>
+              <div class="s-fw" style="grid-column:4;"></div>
+              <div class="s-u up" style="grid-column:5;grid-row:1;">
+                <div class="un">Unit 6</div><div class="sf">~568 SF · 2 Bed</div><div class="r3">R-3</div>
+              </div>
+              <div class="s-fw" style="grid-column:6;"></div>
+              <div class="s-u up" style="grid-column:7;grid-row:1;">
+                <div class="un">Unit 7</div><div class="sf">~568 SF · 2 Bed</div><div class="r3">R-3</div>
+              </div>
+              <div class="s-fw" style="grid-column:8;"></div>
+              <div class="s-u up" style="grid-column:9;grid-row:1;">
+                <div class="un">Unit 8</div><div class="sf">~590 SF · 2 Bed</div><div class="r3">R-3</div>
+              </div>
+
+              <div class="s-floorline"></div>
+
+              <div class="s-u dn" style="grid-column:3;grid-row:3;">
+                <div class="un">Unit 1</div><div class="sf">~568 SF · 2 Bed</div><div class="r3">R-3</div>
+              </div>
+              <div class="s-u dn" style="grid-column:5;grid-row:3;">
+                <div class="un">Unit 2</div><div class="sf">~568 SF · 2 Bed</div><div class="r3">R-3</div>
+              </div>
+              <div class="s-u dn" style="grid-column:7;grid-row:3;">
+                <div class="un">Unit 3</div><div class="sf">~568 SF · 2 Bed</div><div class="r3">R-3</div>
+              </div>
+              <div class="s-u dn" style="grid-column:9;grid-row:3;">
+                <div class="un">Unit 4</div><div class="sf">~590 SF · 2 Bed</div><div class="r3">R-3</div>
+              </div>
+
+            </div><!-- /sect-bldg -->
+
+            <!-- ENTRY ZONE — dashed top = grade threshold -->
+            <div class="sect-entry">
+              <div class="se-comm">
+                <span class="se-arrow">&#8593;</span>
+                <span>Comm.<br>Entry</span>
+              </div>
+              <div class="se-fw" style="grid-column:2;"></div>
+              <div class="se-block" style="grid-column:3;">
+                <div class="se-door d-unit"><span class="da">&#8593;</span>Unit 1<br>Door</div>
+                <div class="se-door d-stair"><span class="da">&#8593;</span>Stair<br>&#8594; Unit 5</div>
+              </div>
+              <div class="se-fw" style="grid-column:4;"></div>
+              <div class="se-block" style="grid-column:5;">
+                <div class="se-door d-unit"><span class="da">&#8593;</span>Unit 2<br>Door</div>
+                <div class="se-door d-stair"><span class="da">&#8593;</span>Stair<br>&#8594; Unit 6</div>
+              </div>
+              <div class="se-fw" style="grid-column:6;"></div>
+              <div class="se-block" style="grid-column:7;">
+                <div class="se-door d-unit"><span class="da">&#8593;</span>Unit 3<br>Door</div>
+                <div class="se-door d-stair"><span class="da">&#8593;</span>Stair<br>&#8594; Unit 7</div>
+              </div>
+              <div class="se-fw" style="grid-column:8;"></div>
+              <div class="se-block" style="grid-column:9;">
+                <div class="se-door d-unit"><span class="da">&#8593;</span>Unit 4<br>Door</div>
+                <div class="se-door d-stair"><span class="da">&#8593;</span>Stair<br>&#8594; Unit 8</div>
+              </div>
+            </div><!-- /sect-entry -->
+
+          </div><!-- /sect-col -->
+        </div><!-- /sect-row -->
+
+        <!-- STREET BAR -->
+        <div class="sect-street-row">
+          <div class="sect-street-spacer"></div>
+          <div class="sect-street">Private Entry — Each Door Above Is An Independent Private Exterior Entry</div>
+        </div>
+        <div class="sect-note">Building Section Schematic &nbsp;·&nbsp; Not to Scale &nbsp;·&nbsp; Fire walls (CBC 706) run full height — foundation through roof sheathing</div>
+
+      </div><!-- /sect-frame -->
+
+      <!-- Legend -->
+      <div class="legend">
+        <div class="legend-item"><div class="legend-swatch" style="background:#c8daf5;"></div> Upper-floor residential (R-3)</div>
+        <div class="legend-item"><div class="legend-swatch" style="background:#d5eaff;"></div> Ground-floor residential (R-3)</div>
+        <div class="legend-item"><div class="legend-swatch" style="background:#b8cfe8;"></div> Private stair entry (upper unit)</div>
+        <div class="legend-item"><div class="legend-swatch" style="background:#dcdcdc;"></div> Commercial block (Group B)</div>
+        <div class="legend-item"><div class="legend-wall"></div> Fire wall — CBC 706 (foundation to roof)</div>
+      </div>
+    </div>
+
+    <div class="callout blue">
+      <div class="callout-icon">&#8505;</div>
+      <div class="callout-body">
+        <strong>What is a "unit block"?</strong>
+        <span>A unit block is one self-contained section of the building enclosed on both sides by full-height fire walls. It contains exactly two homes: one on the ground floor and one directly above it. Each home has its own private front door at street level. The ground-floor unit enters directly; the upper unit enters through its own enclosed private stairwell. No resident of one block can access another block — they are structurally and fire-separated from their neighbors.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW EACH UNIT IS ENTERED -->
+  <section>
+    <h2>How Each Unit Is Entered</h2>
+    <p>Every unit — ground floor and upper floor — has its own private exterior entry. There are no shared corridors or shared stairs anywhere in the building.</p>
+    <div class="egress-wrap">
+      <div class="egress-card">
+        <div class="ec-label">Ground Floor Unit (e.g. Unit 1)</div>
+        <div class="ec-step"><div class="ec-num">1</div><span>Arrive at Euclid Ave sidewalk</span></div>
+        <div class="ec-step"><div class="ec-num">2</div><span>Enter own private front door at grade</span></div>
+        <div class="ec-step"><div class="ec-num">3</div><span>Enter unit — no shared space used</span></div>
+      </div>
+      <div class="egress-card">
+        <div class="ec-label">Upper Floor Unit (e.g. Unit 5)</div>
+        <div class="ec-step"><div class="ec-num">1</div><span>Arrive at Euclid Ave sidewalk</span></div>
+        <div class="ec-step"><div class="ec-num">2</div><span>Enter own private stair door at grade (adjacent to Unit 1's door, within same block)</span></div>
+        <div class="ec-step"><div class="ec-num">3</div><span>Climb private enclosed stair to 2nd floor</span></div>
+        <div class="ec-step"><div class="ec-num">4</div><span>Enter unit — stair is inside the block, used only by Unit 5</span></div>
+      </div>
+      <div class="egress-card">
+        <div class="ec-label">Commercial Space</div>
+        <div class="ec-step"><div class="ec-num">1</div><span>Arrive at Euclid Ave sidewalk</span></div>
+        <div class="ec-step"><div class="ec-num">2</div><span>Enter commercial entry (separated from all residential by fire wall)</span></div>
+        <div class="ec-step"><div class="ec-num">3</div><span>No access to any residential unit from commercial space</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BENEFITS -->
+  <section>
+    <h2>Key Benefits</h2>
+    <div class="benefits">
+      <div class="benefit-card">
+        <div class="bc-icon">&#128024;</div>
+        <div class="bc-title">Lighter Sprinkler System</div>
+        <div class="bc-body">NFPA 13D (residential-grade) instead of NFPA 13R (commercial-grade). Smaller pipe sizes, fewer heads, lower installation cost, lower maintenance burden.</div>
+      </div>
+      <div class="benefit-card">
+        <div class="bc-icon">&#127968;</div>
+        <div class="bc-title">Townhome Feel</div>
+        <div class="bc-body">Every resident has their own front door at street level. No apartment hallways, no buzzers, no neighbors in a shared corridor. A more private, higher-quality living experience.</div>
+      </div>
+      <div class="benefit-card">
+        <div class="bc-icon">&#128274;</div>
+        <div class="bc-title">Full Fire Separation</div>
+        <div class="bc-body">Full-height fire walls (CBC 706) from foundation to roof between every unit block. Each block is structurally and fire-independently designed. Exceeds typical apartment construction.</div>
+      </div>
+      <div class="benefit-card">
+        <div class="bc-icon">&#128200;</div>
+        <div class="bc-title">Simpler Code Path</div>
+        <div class="bc-body">R-3 classification removes the multifamily sprinkler mandate (CBC 903.2.8). Fewer shared-element requirements simplify the permit drawings and reduce plan check exposure.</div>
+      </div>
+      <div class="benefit-card">
+        <div class="bc-icon">&#9881;</div>
+        <div class="bc-title">Efficient Use of Space</div>
+        <div class="bc-body">The former 6 ft shared hallway is absorbed into the private stair enclosures. Net usable area loss per unit is minimal — the space works harder with private use than as a shared corridor.</div>
+      </div>
+      <div class="benefit-card">
+        <div class="bc-icon">&#127963;</div>
+        <div class="bc-title">Commercial Block Retained</div>
+        <div class="bc-body">The 640 SF ground-floor commercial space (Group B) is retained and fire-separated from the residential blocks. Mixed-use program is preserved as originally planned.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CODE BASIS -->
+  <section>
+    <h2>Code Basis (Summary)</h2>
+    <p>The following code sections form the basis for the R-3 classification and sprinkler system selection. Full code analysis will be submitted on the permit drawings.</p>
+    <table class="code-table">
+      <thead>
+        <tr>
+          <th>Code Section</th>
+          <th>Subject</th>
+          <th>Application</th>
+          <th>Result</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="badge">CBC 706</span></td>
+          <td>Fire Walls</td>
+          <td>Full-height fire walls, structurally independent, foundation through roof sheathing, between every unit block</td>
+          <td class="check">&#10003; Each block = separate building</td>
+        </tr>
+        <tr>
+          <td><span class="badge">CBC 310.5</span></td>
+          <td>Group R-3 Classification</td>
+          <td>Buildings with not more than 2 dwelling units — each fire-wall-separated block contains exactly 2 units</td>
+          <td class="check">&#10003; R-3 applies to each block</td>
+        </tr>
+        <tr>
+          <td><span class="badge green">IB-125 Ex. 4</span></td>
+          <td>DSD Classification Table — City of San Diego</td>
+          <td><strong>"New Townhouses Designed per CRC"</strong> → R-3, Combination Permit. City of San Diego's own Information Bulletin 125 (June 2025) explicitly confirms this project type as R-3. This project matches Example 4 exactly.</td>
+          <td class="check">&#10003; DSD confirms R-3 for new CRC townhouses — strongest direct authority</td>
+        </tr>
+        <tr>
+          <td><span class="badge">CBC 903.2.8</span></td>
+          <td>NFPA 13R Sprinkler Mandate</td>
+          <td>Applies to Group R-2 only — not triggered for R-3</td>
+          <td class="check">&#10003; NFPA 13R not required</td>
+        </tr>
+        <tr>
+          <td><span class="badge">CRC R313</span></td>
+          <td>Residential Sprinkler Requirement</td>
+          <td>New residential construction requires automatic sprinkler system — NFPA 13D acceptable for R-3</td>
+          <td class="check">&#10003; NFPA 13D required (lighter system)</td>
+        </tr>
+        <tr>
+          <td><span class="badge">CBC 508.4</span></td>
+          <td>B / R-3 Occupancy Separation</td>
+          <td>Fire-rated separation between commercial block (Group B) and residential blocks (Group R-3)</td>
+          <td class="check">&#10003; Shown at commercial/residential interface</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout amber callout-mt">
+      <div class="callout-icon">&#9888;</div>
+      <div class="callout-body">
+        <strong>Note on Sprinklers</strong>
+        <span>NFPA 13D is required — it is not eliminated entirely. New residential construction in California requires some form of automatic sprinkler system. The benefit of this design is upgrading from the more expensive NFPA 13R (commercial-grade, full-building system) to NFPA 13D (residential-grade, per-unit system), which is smaller in scope, cheaper to install, and simpler to maintain.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- UNIT SCHEDULE -->
+  <section>
+    <h2>Proposed Unit Schedule</h2>
+    <table class="compare">
+      <thead>
+        <tr>
+          <th>Block</th>
+          <th>Ground Floor Unit</th>
+          <th>Upper Floor Unit</th>
+          <th>Occupancy</th>
+          <th>Sprinkler</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Commercial</strong></td>
+          <td>640 SF — Group B</td>
+          <td>—</td>
+          <td>Group B</td>
+          <td>Per CFC (separate)</td>
+        </tr>
+        <tr>
+          <td><strong>Block 1</strong></td>
+          <td>Unit 1 — ~568 SF, 2 bed</td>
+          <td>Unit 5 — ~568 SF, 2 bed</td>
+          <td>R-3</td>
+          <td>NFPA 13D</td>
+        </tr>
+        <tr>
+          <td><strong>Block 2</strong></td>
+          <td>Unit 2 — ~568 SF, 2 bed</td>
+          <td>Unit 6 — ~568 SF, 2 bed</td>
+          <td>R-3</td>
+          <td>NFPA 13D</td>
+        </tr>
+        <tr>
+          <td><strong>Block 3</strong></td>
+          <td>Unit 3 — ~568 SF, 2 bed</td>
+          <td>Unit 7 — ~568 SF, 2 bed</td>
+          <td>R-3</td>
+          <td>NFPA 13D</td>
+        </tr>
+        <tr>
+          <td><strong>Block 4</strong></td>
+          <td>Unit 4 — ~590 SF, 2 bed</td>
+          <td>Unit 8 — ~590 SF, 2 bed</td>
+          <td>R-3</td>
+          <td>NFPA 13D</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="note-sm">Unit square footages are approximate and subject to final floor plan coordination. Total residential GBA ~4,560 SF net (adjust per actual stair enclosure dimensions). Commercial block retained at 640 SF ground floor.</p>
+  </section>
+
+  <!-- SITE PLAN VIEW -->
+  <section>
+    <h2>Site Plan — Schematic Layout (Top View)</h2>
+    <p>The 50 ft wide lot is organized with commercial at the street frontage and four residential unit blocks extending toward the rear. Each block runs front-to-back, with fire walls between every block. All residential entries face the street.</p>
+    <div class="diagram-wrap">
+      <div class="diagram-title">Site Plan — Top-Down View (Not to Scale)</div>
+      <div class="siteplan">
+        <!-- North arrow + label row -->
+        <div class="sp-labels">
+          <div class="sp-lbl-side">← REAR ALLEY / PROPERTY LINE</div>
+          <div class="sp-lbl-side">EUCLID AVENUE (FRONT) →</div>
+        </div>
+        <div class="sp-lot">
+          <!-- Rear setback -->
+          <div class="sp-setback sp-rear">Rear Setback — 10 ft</div>
+          <!-- Unit blocks (plan view) -->
+          <div class="sp-units">
+            <div class="sp-block comm-plan">
+              <div class="sp-block-label">Commercial<br>640 SF<br>Group B</div>
+            </div>
+            <div class="sp-fw-v"></div>
+            <div class="sp-block res-plan">
+              <div class="sp-block-label">Block 1<br>Unit 1 + Unit 5</div>
+            </div>
+            <div class="sp-fw-v"></div>
+            <div class="sp-block res-plan">
+              <div class="sp-block-label">Block 2<br>Unit 2 + Unit 6</div>
+            </div>
+            <div class="sp-fw-v"></div>
+            <div class="sp-block res-plan">
+              <div class="sp-block-label">Block 3<br>Unit 3 + Unit 7</div>
+            </div>
+            <div class="sp-fw-v"></div>
+            <div class="sp-block res-plan wider">
+              <div class="sp-block-label">Block 4<br>Unit 4 + Unit 8</div>
+            </div>
+          </div>
+          <!-- Front setback + entries -->
+          <div class="sp-setback sp-front">Front Setback — 10 ft</div>
+          <div class="sp-entries">
+            <div class="sp-entry-comm">&#8593; Comm.</div>
+            <div class="sp-entry-blank"></div>
+            <div class="sp-entry-res">&#8593; U1 &#8593; U5</div>
+            <div class="sp-entry-blank"></div>
+            <div class="sp-entry-res">&#8593; U2 &#8593; U6</div>
+            <div class="sp-entry-blank"></div>
+            <div class="sp-entry-res">&#8593; U3 &#8593; U7</div>
+            <div class="sp-entry-blank"></div>
+            <div class="sp-entry-res">&#8593; U4 &#8593; U8</div>
+          </div>
+        </div>
+        <div class="sp-street">EUCLID AVENUE — 50 ft Lot Width</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COST SAVINGS -->
+  <section>
+    <h2>Cost Savings — Sprinkler System</h2>
+    <p>The R-3 fire wall design eliminates the NFPA 13R commercial-grade system requirement and replaces it with NFPA 13D, a residential-grade system. The difference is significant in scope, cost, and ongoing maintenance.</p>
+    <table class="compare">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>NFPA 13R — Original (R-2 Path)</th>
+          <th>NFPA 13D — Proposed (R-3 Path)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>System Type</strong></td>
+          <td>Commercial-grade, full building</td>
+          <td>Residential-grade, per-unit living spaces</td>
+        </tr>
+        <tr>
+          <td><strong>Coverage Required</strong></td>
+          <td>All areas including corridors, utility spaces, attic</td>
+          <td>Living spaces only — attic and garage excluded per NFPA 13D</td>
+        </tr>
+        <tr>
+          <td><strong>Pipe Sizing</strong></td>
+          <td>Larger diameter, higher flow demand</td>
+          <td>Smaller diameter, residential flow rates</td>
+        </tr>
+        <tr>
+          <td><strong>Water Meter</strong></td>
+          <td>May require dedicated fire service meter</td>
+          <td>Can share domestic meter in most cases</td>
+        </tr>
+        <tr>
+          <td><strong>Estimated Installation (8 units)</strong></td>
+          <td>~$40,000 – $60,000</td>
+          <td>~$16,000 – $28,000</td>
+        </tr>
+        <tr>
+          <td><strong>Estimated Savings</strong></td>
+          <td colspan="2" class="savings-total">~$20,000 – $32,000 (pending sub quote)</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="callout amber">
+      <div class="callout-icon">&#9888;</div>
+      <div class="callout-body">
+        <strong>These are planning-level estimates only.</strong>
+        <span>Final cost depends on building layout, pipe routing, and the C-16 contractor's scope. A sub quote should be obtained before permit submittal to confirm savings and validate the design strategy financially.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- RISKS AND FALLBACK -->
+  <section>
+    <h2>Risks &amp; Fallback</h2>
+    <p>The R-3 fire wall strategy is well-supported by code and by DSD's own IB-125 Table 1 (Example 4). However, it is confirmed at plan check — not at a pre-application meeting. The following risks should be understood before submittal.</p>
+    <table class="compare">
+      <thead>
+        <tr>
+          <th>Risk</th>
+          <th>Likelihood</th>
+          <th>Impact</th>
+          <th>Mitigation</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Plan check rejects R-3 classification — classifies building as R-2</strong></td>
+          <td><span class="tag old">Low–Med</span></td>
+          <td>NFPA 13R required → ~$20K–32K additional cost; shared egress redesign</td>
+          <td>Lead permit set with IB-125 Ex. 4 citation + CBC 310.5 + CBC 706 code analysis sheet. Non-shared egress clearly shown on all plans.</td>
+        </tr>
+        <tr>
+          <td><strong>Fire wall structural independence detail challenged</strong></td>
+          <td><span class="tag old">Medium</span></td>
+          <td>Correction letter → design revision → resubmittal delay (4–8 weeks)</td>
+          <td>Provide complete CBC 706.4 structural independence detail at permit submittal. Show independent footing, wall framing, and roof connection on structural sheets.</td>
+        </tr>
+        <tr>
+          <td><strong>San Diego Fire-Rescue requires 13R instead of 13D</strong></td>
+          <td><span class="tag new">Low</span></td>
+          <td>Increased sprinkler system cost (~$20K–32K delta)</td>
+          <td>Confirm NFPA 13D acceptance for new R-3 townhouses at this address with Fire-Rescue before permit submittal. Site is not in a Fire Hazard Severity Zone.</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="callout green">
+      <div class="callout-icon">&#10003;</div>
+      <div class="callout-body">
+        <strong>Fallback position is well-defined.</strong>
+        <span>If R-3 classification is denied at plan check, the project reverts to R-2 with NFPA 13R. The floor plan layout (private entries, fire walls) is still a better building — only the sprinkler system scope changes. No redesign of the unit layout is required.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEXT STEPS -->
+  <section>
+    <h2>Next Steps</h2>
+    <div class="callout green">
+      <div class="callout-icon">&#9654;</div>
+      <div class="callout-body">
+        <strong>1. Finalize floor plan with unit block layout</strong>
+        <span>Confirm fire wall centerlines, stair enclosure footprints, and unit SF per block. Coordinate with structural for fire wall footing design.</span>
+      </div>
+    </div>
+    <div class="callout green">
+      <div class="callout-icon">&#9654;</div>
+      <div class="callout-body">
+        <strong>2. Engage NFPA 13D sprinkler sub</strong>
+        <span>Get scope and pricing for NFPA 13D residential system across 8 units. Confirm San Diego Fire-Rescue accepts 13D for new R-3 construction at this address.</span>
+      </div>
+    </div>
+    <div class="callout green">
+      <div class="callout-icon">&#9654;</div>
+      <div class="callout-body">
+        <strong>3. Prepare permit package with code analysis sheet</strong>
+        <span>Direct permit submittal (no pre-application). Code analysis sheet to lead the permit set, citing CBC 706, CBC 310.5, and CRC R313 with full graphical support on drawings.</span>
+      </div>
+    </div>
+    <div class="callout green">
+      <div class="callout-icon">&#9654;</div>
+      <div class="callout-body">
+        <strong>4. Show occupancy separation at commercial interface</strong>
+        <span>CBC 508.4 separation between Group B commercial block and Group R-3 residential blocks — detail on permit drawings at the shared wall.</span>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<div class="footer">
+  <span>4335 Euclid Avenue, San Diego CA 92105 &nbsp;·&nbsp; APN 471-271-16-00 &nbsp;·&nbsp; ADEC Group</span>
+  <span>Concept Proposal &nbsp;·&nbsp; April 26, 2026 &nbsp;·&nbsp; For Client Review</span>
+</div>
+
+</body>
+</html>
