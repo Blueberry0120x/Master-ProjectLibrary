@@ -186,7 +186,7 @@
       grid-template-rows: 92px 4px 92px;
     }
     .s-comm {
-      grid-column: 1; grid-row: 1 / 4;
+      grid-column: 1; grid-row: 3;
       background: #dcdcdc;
       display: flex; flex-direction: column;
       align-items: center; justify-content: center;
@@ -206,7 +206,7 @@
       color: rgba(255,255,255,.55);
       letter-spacing: 1.5px; white-space: nowrap;
     }
-    .s-floorline { grid-column: 2 / 10; grid-row: 2; background: #2e2e2e; }
+    .s-floorline { grid-column: 1 / 10; grid-row: 2; background: #2e2e2e; }
     .s-u {
       display: flex; flex-direction: column;
       align-items: center; justify-content: center;
@@ -270,6 +270,8 @@
       margin-top: 5px; letter-spacing: .3px;
     }
     .s-comm-note { font-size: 8px; color: #999; margin-top: 10px; font-style: italic; line-height: 1.6; }
+    .s-u-comm    { grid-column: 1; grid-row: 1; border-right: 2.5px solid #2e2e2e; }
+    .se-col-comm { grid-column: 1; border-right: 2.5px solid #2e2e2e; }
     .se-arrow    { font-size: 16px; line-height: 1; }
 
     /* legend */
@@ -449,7 +451,7 @@
     <div><dt>Prepared by</dt><dd>ADEC Group</dd></div>
     <div><dt>Date</dt><dd>April 26, 2026</dd></div>
     <div><dt>Lot Area</dt><dd>6,250 SF</dd></div>
-    <div><dt>Proposed Program</dt><dd>8 Residential Units + 640 SF Commercial</dd></div>
+    <div><dt>Proposed Program</dt><dd>9 Residential Units + 640 SF Commercial</dd></div>
     <div><dt>Design Strategy</dt><dd>R-3 Unit Blocks — Independent Entry Per Unit</dd></div>
   </dl>
 </div>
@@ -551,12 +553,16 @@
             <!-- BUILDING GRID -->
             <div class="sect-bldg">
 
-              <!-- Commercial: spans all rows -->
+              <!-- Unit 9 — upper floor above commercial -->
+              <div class="s-u up s-u-comm">
+                <div class="un">Unit 9</div><div class="sf">~670 SF · 2 Bed</div><div class="r3">R-3</div>
+              </div>
+
+              <!-- Commercial — ground floor -->
               <div class="s-comm">
                 <div class="s-comm-name">Commercial</div>
                 <div class="s-comm-sf">640 SF</div>
                 <div class="s-comm-tag">Group B</div>
-                <div class="s-comm-note">Mixed-use<br>front block<br>(2 stories)</div>
               </div>
 
               <div class="s-fw" style="grid-column:2;"></div>
@@ -596,9 +602,9 @@
 
             <!-- ENTRY ZONE — dashed top = grade threshold -->
             <div class="sect-entry">
-              <div class="se-comm">
-                <span class="se-arrow">&#8593;</span>
-                <span>Comm.<br>Entry</span>
+              <div class="se-block se-col-comm">
+                <div class="se-door d-unit"><span class="da">&#8593;</span>Comm.<br>Entry</div>
+                <div class="se-door d-stair"><span class="da">&#8593;</span>Stair<br>&#8594; Unit 9</div>
               </div>
               <div class="se-fw" style="grid-column:2;"></div>
               <div class="se-block" style="grid-column:3;">
@@ -794,11 +800,11 @@
       </thead>
       <tbody>
         <tr>
-          <td><strong>Commercial</strong></td>
-          <td>640 SF — Group B</td>
-          <td>—</td>
-          <td>Group B</td>
-          <td>Per CFC (separate)</td>
+          <td><strong>Comm. Block</strong></td>
+          <td>640 SF — Group B (commercial)</td>
+          <td>Unit 9 — ~670 SF, 2 bed (R-3, private stair entry)</td>
+          <td>B (ground) / R-3 (upper) — CBC 508.4 separation</td>
+          <td>NFPA 13D (Unit 9) + CFC (comm.)</td>
         </tr>
         <tr>
           <td><strong>Block 1</strong></td>
@@ -823,14 +829,14 @@
         </tr>
         <tr>
           <td><strong>Block 4</strong></td>
-          <td>Unit 4 — ~590 SF, 2 bed</td>
-          <td>Unit 8 — ~590 SF, 2 bed</td>
+          <td>Unit 4 — ~568 SF, 2 bed</td>
+          <td>Unit 8 — ~568 SF, 2 bed</td>
           <td>R-3</td>
           <td>NFPA 13D</td>
         </tr>
       </tbody>
     </table>
-    <p class="note-sm">Unit square footages are approximate and subject to final floor plan coordination. Total residential GBA ~4,560 SF net (adjust per actual stair enclosure dimensions). Commercial block retained at 640 SF ground floor.</p>
+    <p class="note-sm">Unit square footages per site_data.json (v1). Total residential GBA: 9 units ~5,223 SF net. Commercial block: 640 SF ground floor. Unit 9 above commercial — CBC 508.4 horizontal separation at floor assembly required.</p>
   </section>
 
   <!-- SITE PLAN VIEW -->
@@ -923,9 +929,9 @@
           <td>Can share domestic meter in most cases</td>
         </tr>
         <tr>
-          <td><strong>Estimated Installation (8 units)</strong></td>
-          <td>~$40,000 – $60,000</td>
-          <td>~$16,000 – $28,000</td>
+          <td><strong>Estimated Installation (9 units)</strong></td>
+          <td>~$45,000 – $65,000</td>
+          <td>~$18,000 – $32,000</td>
         </tr>
         <tr>
           <td><strong>Estimated Savings</strong></td>
@@ -985,6 +991,78 @@
     </div>
   </section>
 
+  <!-- TRASH ENCLOSURE -->
+  <section>
+    <h2>Rear Alley — Trash Enclosure (SDMC 142.0830)</h2>
+    <p>The 10-unit program (9 residential + 1 commercial) requires a service enclosure at the rear alley. The layout below fits within the 30 ft deep × 5–6 ft wide alley setback using a single-file cart row with straight pull-out to the alley on collection day.</p>
+
+    <table class="compare">
+      <thead>
+        <tr>
+          <th>Cart</th>
+          <th>Type</th>
+          <th>Size</th>
+          <th>Dims (D × W × H)</th>
+          <th>Count</th>
+          <th>Purpose</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>1 &amp; 2</strong></td>
+          <td>Gray — Trash</td>
+          <td>65-gal</td>
+          <td>33″ × 29″ × 43″</td>
+          <td>2</td>
+          <td>General refuse — 130 gal total</td>
+        </tr>
+        <tr>
+          <td><strong>3 &amp; 4</strong></td>
+          <td>Blue — Recycling</td>
+          <td>35-gal</td>
+          <td>24″ × 19″ × 38″</td>
+          <td>2</td>
+          <td>Recycling — 70 gal total (meets 35% diversion)</td>
+        </tr>
+        <tr>
+          <td><strong>5</strong></td>
+          <td>Green — Organics</td>
+          <td>35-gal</td>
+          <td>24″ × 19″ × 38″</td>
+          <td>1</td>
+          <td>Organics / food scraps — 35 gal total</td>
+        </tr>
+        <tr>
+          <td colspan="5"><strong>Total cart depth in line</strong></td>
+          <td><strong>~11.5 ft</strong> (3–4 ft maneuvering behind)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Enclosure Construction Requirements</h3>
+    <table class="code-table">
+      <thead>
+        <tr><th>Item</th><th>Requirement</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Pad</td><td>Concrete slab, sloped to drain — no pooling at alley interface</td></tr>
+        <tr><td>Gate</td><td>Alley-facing wide-swing gate, min. 5 ft clear opening for rollout</td></tr>
+        <tr><td>Screen walls</td><td>Solid, opaque — min. 6 ft height per SDMC waste enclosure standards</td></tr>
+        <tr><td>Dimensions</td><td>5 ft clear width (29″ max cart + clearance) × 30 ft depth available; ~15 ft used</td></tr>
+        <tr><td>Signage</td><td>Cart type labels per SD Environmental Services guidelines</td></tr>
+        <tr><td>Pre-approval</td><td>Submit cart layout to SD Environmental Services Waste Portal for hauler confirmation before permit</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout amber callout-mt">
+      <div class="callout-icon">&#9888;</div>
+      <div class="callout-body">
+        <strong>Request 35-gal carts explicitly — default may be larger.</strong>
+        <span>SD Environmental Services assigns cart sizes based on unit count unless smaller carts are requested through the Waste Portal. Smaller carts ($33/mo each) vs. 95-gal ($44/mo each) compounds over the life of the building. Request 35-gal for recycling and organics at permit application time.</span>
+      </div>
+    </div>
+  </section>
+
   <!-- NEXT STEPS -->
   <section>
     <h2>Next Steps</h2>
@@ -999,7 +1077,7 @@
       <div class="callout-icon">&#9654;</div>
       <div class="callout-body">
         <strong>2. Engage NFPA 13D sprinkler sub</strong>
-        <span>Get scope and pricing for NFPA 13D residential system across 8 units. Confirm San Diego Fire-Rescue accepts 13D for new R-3 construction at this address.</span>
+        <span>Get scope and pricing for NFPA 13D residential system across 9 units. Confirm San Diego Fire-Rescue accepts 13D for new R-3 construction at this address.</span>
       </div>
     </div>
     <div class="callout green">
