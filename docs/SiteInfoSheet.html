@@ -1,0 +1,1652 @@
+<!DOCTYPE html>
+<!-- Site Info Sheet — Development Shell -->
+<html lang="en">
+<head>
+<script>window.__GOOGLE_MAPS_KEY__="";</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#0f4c81">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x1f3d7;</text></svg>">
+    <title>Site Info Sheet</title>
+    <style>
+/* ==========================================
+   1. CORE VARIABLES & BASE
+   ========================================== */
+/* html zoom removed — caused Leaflet click/anchor drift. Use font-size on body instead. */
+/* Thin scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #475569; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #64748b; }
+* { scrollbar-width: thin; scrollbar-color: #475569 transparent; }
+:root {
+    --primary: #0f4c81; --secondary: #e2e8f0; --accent: #d9381e;
+    --text: #2d3748; --bg: #f4f7fb; --card: #ffffff;
+    --line: #dbe3ee; --cad-bg: #1a1a1a; --cad-text: #e0e0e0;
+    --cad-border: #444; --cad-accent: #d670d6;
+}
+body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    margin: 0; padding: 20px;
+    font-size: 90%;
+    background-color: var(--bg); color: var(--text);
+    -webkit-tap-highlight-color: transparent;
+    overscroll-behavior: none;
+    -webkit-overflow-scrolling: touch;
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+}
+.page-wrapper { max-width: 90%; margin: 0 auto; }
+
+/* ── Accessibility: keyboard focus ring (WCAG 2.1 AA) ── */
+:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+    border-radius: 3px;
+}
+[role="button"] { cursor: pointer; }
+[role="button"]:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+    border-radius: 3px;
+}
+
+/* ==========================================
+   2. HEADER & BANNER
+   ========================================== */
+.header {
+    border-bottom: 3px solid var(--primary); padding-bottom: 10px; margin-bottom: 15px;
+    display: flex; justify-content: space-between; align-items: center;
+}
+h1 { color: var(--primary); margin: 0 0 3px 0; font-size: 28px; }
+
+/* Suite bar — full-width dark blue nav row */
+.suite-bar {
+    display: flex; align-items: center; background: var(--primary);
+    border-radius: 0; padding: 0 14px; height: 32px; margin-bottom: 8px;
+    font-family: 'Segoe UI', system-ui, sans-serif; font-size: 12px;
+    font-weight: 600; letter-spacing: 0.3px;
+}
+.suite-bar button.suite-bar-extlink {
+    background: transparent; cursor: pointer; font-family: inherit;
+}
+.suite-bar-active { color: #fff; border-bottom: 2px solid #fff; height: 30px; display: flex; align-items: center; padding: 0 12px; }
+.suite-bar-link { color: rgba(255,255,255,.6); text-decoration: none; padding: 0 12px; height: 30px; display: flex; align-items: center; transition: .15s; }
+.suite-bar-link:hover { color: #fff; background: rgba(255,255,255,.1); }
+.suite-bar-sep { color: rgba(255,255,255,.25); padding: 0 3px; }
+.suite-bar-ext { margin-left: auto; display: flex; gap: 6px; align-items: center; }
+.suite-bar-extlink {
+    color: #fff; text-decoration: none; padding: 0 9px; height: 20px;
+    display: flex; align-items: center; border-radius: 4px;
+    font-size: 11px; font-weight: 600; border: 1.5px solid rgba(255,255,255,.4); transition: .15s;
+}
+.suite-bar-extlink:hover { background: rgba(255,255,255,.15); border-color: #fff; }
+.suite-bar-extlink-amber { color: #fbbf24; border-color: rgba(251,191,36,.5); }
+.suite-bar-extlink-amber:hover { background: rgba(251,191,36,.12); border-color: #fbbf24; }
+.suite-bar-extlink-rose { color: #fb7185; border-color: rgba(251,113,133,.5); }
+.suite-bar-extlink-rose:hover { background: rgba(251,113,133,.12); border-color: #fb7185; }
+.suite-bar-extlink-sky { color: #38bdf8; border-color: rgba(56,189,248,.5); }
+.suite-bar-extlink-sky:hover { background: rgba(56,189,248,.12); border-color: #38bdf8; }
+
+/* Suite bar state filter */
+.suite-bar-state {
+    display: flex; align-items: center; gap: 4px;
+    margin-left: 14px; padding-left: 14px;
+    border-left: 1px solid rgba(255,255,255,.2);
+}
+.suite-bar-state label { color: rgba(255,255,255,.55); font-size: 10px; letter-spacing: .5px; text-transform: uppercase; }
+.suite-bar-state select {
+    background: rgba(255,255,255,.12); color: #fff;
+    border: 1px solid rgba(255,255,255,.3); border-radius: 4px;
+    padding: 2px 6px; font-size: 11px; font-weight: 700;
+    font-family: inherit; cursor: pointer; outline: none;
+    -webkit-appearance: none; appearance: none;
+}
+.suite-bar-state select:focus { border-color: rgba(255,255,255,.6); }
+.suite-bar-state select option { background: #0f4c81; color: #fff; }
+
+/* Suite bar dropdown */
+.suite-bar-dropdown { position: relative; display: inline-flex; }
+.suite-bar-dd-menu {
+    display: none; position: absolute; top: 22px; right: 0;
+    flex-direction: column; background: #1a3a5c; border-radius: 4px;
+    border: 1px solid rgba(94,234,212,.3); z-index: 999; min-width: 110px;
+}
+.suite-bar-dropdown:hover .suite-bar-dd-menu { display: flex; }
+.suite-bar-dd-menu a {
+    color: #5eead4; text-decoration: none; padding: 6px 12px;
+    font-size: 11px; font-weight: 600; white-space: nowrap;
+}
+.suite-bar-dd-menu a:hover { background: rgba(94,234,212,.12); }
+.suite-bar-dd-menu a + a { border-top: 1px solid rgba(94,234,212,.2); }
+
+/* Collapsible sidebar sections */
+.box-toggle { user-select: none; }
+.box-toggle::after { content: '\25BE'; float: right; font-size: 21px; color: #94a3b8; transition: transform .2s; display: inline-block; }
+.sidebar-box.collapsed .box-toggle::after { transform: rotate(-90deg); }
+.sidebar-box.collapsed > .box-body { display: none; }
+.sub-toggle { user-select: none; }
+.sub-toggle::after { content: '\25BE'; float: right; font-size: 18px; color: #94a3b8; transition: transform .2s; display: inline-block; }
+.sub-body.collapsed { display: none; }
+.building-config-wrap.collapsed > .sub-body { display: none; }
+.building-config-wrap.collapsed .sub-toggle::after { transform: rotate(-90deg); }
+
+/* Title row — title stack inline with address+apn pair */
+.header-title-row { display: flex; align-items: center; gap: 0; position: relative; }
+.header-address-pair { display: flex; align-items: center; gap: 10px; margin-left: 55px; position: relative; }
+.header-title-stack { display: flex; flex-direction: column; gap: 2px; }
+.header-title-stack h1 { margin: 0; white-space: nowrap; }
+.header-title-stack p  { margin: 0; color: #4a5568; }
+
+/* Site switcher — styled as address value inside the card */
+.site-select {
+    background: transparent !important;
+    color: #fff !important;
+    border: none !important;
+    font-size: 1.05em;
+    font-weight: 700;
+    font-family: inherit;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    min-width: 200px;
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9'%3E%3Cpath d='M0 0l7 9 7-9z' fill='rgba(255,255,255,0.9)'/%3E%3C/svg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 4px center !important;
+    background-size: 14px !important;
+    padding-right: 22px;
+}
+.site-select option {
+    background: #0c2d4a;
+    color: #fff;
+    font-weight: 600;
+    padding: 6px 8px;
+}
+
+/* Address / APN cells in header */
+.header-address {
+    display: flex; flex-direction: column; padding: 9px 16px;
+    background: var(--primary); color: white; border-radius: 8px;
+    flex-shrink: 0;
+    box-shadow: 0 4px 6px rgba(15,76,129,.18);
+}
+.header-address .banner-value { white-space: normal; overflow: visible; text-overflow: clip; }
+
+/* Draggable Property Banner — single row, scrollable, legible */
+.property-banner {
+    background: var(--primary); color: white; border-radius: 8px;
+    padding: 0; display: flex; flex-wrap: nowrap; overflow-x: auto;
+    margin-bottom: 18px; box-shadow: 0 4px 6px rgba(15,76,129,.18);
+    user-select: none;
+    scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.25) transparent;
+}
+.property-banner::-webkit-scrollbar { height: 4px; }
+.property-banner::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.25); border-radius: 2px; }
+.banner-stat {
+    display: flex; flex-direction: column; padding: 8px 12px;
+    cursor: grab; flex: 0 0 auto;
+    transition: background 0.15s; border: 1px solid transparent;
+    border-right: 1px solid rgba(255,255,255,0.13); min-width: 0;
+}
+.banner-stat:last-child { border-right: 1px solid transparent; }
+.banner-stat:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.25); }
+.banner-stat.dragging { opacity: 0.4; cursor: grabbing; }
+.banner-stat.drag-over { background: rgba(255,255,255,0.18); border-color: rgba(255,255,255,0.6); }
+.banner-label {
+    font-size: 0.69em; text-transform: uppercase; letter-spacing: 0.6px;
+    opacity: 0.7; margin-bottom: 4px; font-weight: 600; white-space: nowrap;
+}
+.banner-value {
+    font-size: 1.05em; font-weight: 700; line-height: 1.25; color: #ffffff;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+/* ==========================================
+   3. MAIN LAYOUT — Resizable Flex Split
+   ========================================== */
+.main-container { display: flex; gap: 0; align-items: stretch; height: 600px; }
+
+.sidebar {
+    width: 50%; min-width: 280px; flex-shrink: 0;
+    overflow-y: auto; padding-right: 19px;
+}
+.col-divider {
+    width: 8px; min-width: 8px; flex-shrink: 0;
+    cursor: col-resize; margin: 0 5px; align-self: stretch;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 4px; background: var(--line); transition: background 0.2s;
+}
+.col-divider:hover, .col-divider.resizing { background: var(--primary); }
+.col-divider::after { content: '⋮'; font-size: 14px; color: #888; }
+.col-divider.resizing::after { color: white; }
+.map-panel { flex: 1; min-width: 300px; display: flex; flex-direction: column; }
+
+/* Sidebar Boxes */
+.sidebar-box {
+    background: var(--card); border: 1px solid var(--line); border-radius: 8px;
+    padding: 14px; margin-bottom: 10px; box-shadow: 0 4px 6px rgba(17,24,39,.03);
+}
+.sidebar-box h2 { margin: 0; font-size: 1.1em; color: var(--primary); }
+.sidebar-box h3 { margin: 8px 0 6px 0; font-size: 0.74em; color: #111; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 800; }
+
+/* Box header row — h2 + inline toggle */
+.box-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 10px; border-bottom: 2px solid var(--secondary); padding-bottom: 6px;
+}
+
+/* (removed: .mode-track, .mode-btn — unused) */
+
+/* Align Map sidebar controls */
+/* Align-map grid — 3 cols: label | deg+° | slider or toggle+save */
+.align-grid {
+    display: grid;
+    grid-template-columns: auto 68px 1fr;
+    align-items: center;
+    gap: 6px 8px;
+    margin-bottom: 10px;
+    font-size: 0.88em;
+}
+.align-grid strong { color: #4a5568; white-space: nowrap; }
+.align-grid input[type="range"] { width: 100%; margin: 0; }
+.align-grid > label.switch { justify-self: center; transform: scale(0.8); transform-origin: center center; }
+.deg-input-wrap { display: flex; align-items: center; gap: 3px; }
+.deg-input-wrap span { font-weight: bold; font-size: 1em; }
+/* (removed: .snap-save-row — unused) */
+.btn-save-boundary {
+    flex: 1; padding: 4px 8px; border: none; border-radius: 4px;
+    font-weight: bold; font-size: 0.76em; cursor: pointer; color: white;
+    background: #805ad5; transition: 0.2s; white-space: nowrap;
+}
+.btn-save-boundary:hover { background: #6b46c1; }
+.btn-lock-position {
+    flex: 1; padding: 4px 8px; border: none; border-radius: 4px;
+    font-weight: bold; font-size: 0.76em; cursor: pointer; color: white;
+    background: #2b6cb0; transition: 0.2s; white-space: nowrap;
+}
+.btn-lock-position:hover  { background: #2c5282; }
+.btn-lock-position.locked { background: #c53030; }
+.btn-lock-position.locked:hover { background: #9b2c2c; }
+.btn-save-config {
+    flex: 1 1 0; min-width: 100px; padding: 6px 16px; border: none; border-radius: 4px;
+    font-weight: bold; font-size: 0.76em; cursor: pointer; color: white;
+    background: #475569; transition: background 0.18s; white-space: nowrap; text-align: center;
+}
+.btn-save-config:hover { background: #334155; }
+#saveConfigBtn       { background: #0f4c81; }
+#saveConfigBtn:hover { background: #0d3f6b; }
+#freeDragBtn         { background: #1e293b; border: 2px solid #94a3b8; color: #94a3b8; }
+#freeDragBtn:hover   { background: #334155; border-color: #e2e8f0; color: #fff; }
+#snapEdgeBtn         { background: #dc2626; border: 2px solid #f87171; color: #fff; }
+#snapEdgeBtn:hover   { background: #b91c1c; }
+.align-angle-input {
+    width: 100%; text-align: right;
+    border: 1px solid #cbd5e0; border-radius: 3px;
+    background: white; color: var(--text); outline: none;
+    font-size: 0.85em; font-weight: 600;
+    padding: 2px 4px; box-sizing: border-box;
+}
+.align-angle-input:focus { border-color: var(--primary); box-shadow: 0 0 0 2px rgba(15,76,129,0.15); }
+.align-angle-input:disabled { background: #f0f2f5; color: #a0aec0; border-color: #e2e8f0; cursor: default; }
+.align-angle-input[readonly] { background: #f0f2f5; color: #0f4c81; border-color: #e2e8f0; cursor: default; font-weight: 700; }
+#bldgFootprintArea { border: 2px solid #0f4c81; }
+.s-hint {
+    cursor: help; color: #0f4c81; font-weight: 800; font-size: 0.78em;
+    border: 1px solid #0f4c81; border-radius: 50%; padding: 0 2px;
+    line-height: 1; display: inline-block; vertical-align: middle;
+}
+.align-btn-row { display: flex; gap: 6px; margin-bottom: 8px; }
+.btn-align {
+    flex: 1; padding: 7px 4px; border: none; border-radius: 4px;
+    font-weight: bold; font-size: 0.78em; cursor: pointer; color: white; transition: 0.2s;
+}
+.btn-align-lisp  { background: var(--accent); }
+.btn-align-lisp:hover  { background: #b92b15; }
+.btn-align-img   { background: #38a169; }
+.btn-align-img:hover   { background: #2f855a; }
+.btn-align-reset { background: #718096; }
+.btn-align-reset:hover { background: #4a5568; }
+.btn-align-file  { background: #805ad5; }
+.btn-align-file:hover  { background: #6b46c1; }
+
+/* FAB floating action buttons (Save Config / Print PDF) */
+.fab-btn {
+    pointer-events: all;
+    border: none; border-radius: 20px;
+    padding: 8px 0; width: 148px;
+    font-size: 12px; font-weight: 700; cursor: pointer;
+    box-shadow: 0 4px 16px rgba(0,0,0,.3);
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+    white-space: nowrap; font-family: 'Segoe UI', sans-serif;
+    color: #fff;
+}
+.fab-btn-edit  { background: #7e22ce; }
+.fab-btn-edit:hover  { background: #6b21a8; }
+.fab-btn-save  { background: #475569; }
+.fab-btn-save:hover  { background: #334155; }
+.fab-btn-print { background: #0f4c81; }
+.fab-btn-print:hover { background: #0d3f6b; }
+
+/* Building dim toggle button */
+.btn-dim-bldg        { background: #38a169 !important; color: white !important; }
+.btn-dim-bldg:hover  { background: #2f855a !important; }
+.btn-dim-bldg.active { background: #276749 !important; color: white !important; box-shadow: inset 0 2px 4px rgba(0,0,0,.3) !important; }
+.btn-dim-bldg.active:hover { background: #22543d !important; }
+
+/* Lot dimension labels on map — plain text, clickable to hide */
+.dim-label {
+    font-size: 0.72em; font-weight: 800; font-family: 'Segoe UI', sans-serif;
+    color: #1a202c; white-space: nowrap; letter-spacing: 0.3px;
+    text-shadow: 0 0 3px #fff, 0 0 3px #fff, 1px 1px 2px #fff, -1px -1px 2px #fff;
+    cursor: pointer; user-select: none;
+}
+.dim-label:hover { opacity: 0.5; }
+.prop-dim-label {
+    font-size: 1.1em; font-weight: 900; font-family: 'Segoe UI', sans-serif;
+    color: #b91c1c; white-space: nowrap; letter-spacing: 0.4px;
+    text-shadow: 0 0 4px #fff, 0 0 4px #fff, 1px 1px 3px #fff, -1px -1px 3px #fff;
+    cursor: grab; user-select: none;
+}
+.prop-dim-label:hover { opacity: 0.7; }
+.setback-dim-label {
+    font-size: 0.95em; font-weight: 900; font-family: 'Segoe UI', sans-serif;
+    color: #f6c90e; white-space: nowrap; letter-spacing: 0.3px;
+    text-shadow: 0 0 4px #000, 0 0 4px #000, 1px 1px 3px #000, -1px -1px 3px #000;
+    pointer-events: none; user-select: none;
+}
+/* Chain dim lines — normal state */
+.chain-dim-line { cursor: default; }
+/* When dim drag mode is on: lines turn red, thicker hit area, pointer cursor */
+.dim-drag-mode-on .chain-dim-line { stroke: #e53e3e !important; cursor: pointer; }
+.dim-drag-mode-on .chain-dim-line:hover { stroke: #c53030 !important; }
+/* Architectural dimension text labels on map — plain text, centered */
+.arch-dim-label {
+    font-size: 0.68em; font-weight: 800; font-family: 'Segoe UI', sans-serif;
+    color: #1a202c; white-space: nowrap;
+    text-shadow: 0 0 3px #fff, 0 0 3px #fff, 1px 1px 2px #fff, -1px -1px 2px #fff;
+    pointer-events: none; user-select: none;
+}
+.lisp-output { width: 100%; height: 110px; padding: 8px; font-family: monospace; font-size: 0.8em; background: #1a202c; color: #a0aec0; box-sizing: border-box; resize: vertical; border: none; border-radius: 3px; }
+
+/* Setback Config */
+.setback-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+.setback-field { display: flex; flex-direction: column; gap: 3px; }
+.setback-field label { font-size: 0.74em; color: #111; font-weight: 800; text-transform: uppercase; letter-spacing: 0.4px; }
+.setback-field input {
+    width: 100%; padding: 5px 8px; border: 1px solid #cbd5e0; border-radius: 4px;
+    font-size: 0.92em; background: white; box-sizing: border-box; color: var(--text);
+}
+.setback-field input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 2px rgba(15,76,129,0.15); }
+.btn-accept {
+    width: 100%; padding: 8px; background: var(--primary); color: white;
+    border: none; border-radius: 5px; font-weight: bold; font-size: 0.9em;
+    cursor: pointer; transition: 0.2s;
+}
+.btn-accept:hover { background: #0a3a6e; }
+
+/* Set Front Edge button — sits in header row alongside btn-save-config */
+.btn-set-front { background: #0f4c81; color: #fff; margin-right: 50px; }
+.btn-set-front:hover { background: #0a3a6e; }
+.btn-set-front.active { background: #b91c1c; }
+
+/* Setback Config section wrapper — mirrors building-config-wrap */
+.setback-config-wrap { border-top: 1px solid var(--line); padding-top: 12px; margin-top: 12px; }
+.setback-config-wrap.collapsed > .sub-body { display: none; }
+.setback-config-wrap.collapsed .sub-toggle::after { transform: rotate(-90deg); }
+
+/* Front edge pick marker (shown on map while selecting) */
+.front-pick-dot {
+    width: 52px; height: 22px; background: #0f4c81; color: #fff;
+    border-radius: 4px; font-size: 11px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,.4);
+    transition: background 0.12s; white-space: nowrap;
+}
+.front-pick-dot:hover { background: #16a34a; }
+
+/* Save Setbacks button */
+.btn-save-setback {
+    width: 100%; margin-top: 6px; padding: 6px 8px; border: none; border-radius: 5px;
+    font-weight: bold; font-size: 0.82em; cursor: pointer; color: white;
+    background: #2b6cb0; transition: 0.2s;
+}
+.btn-save-setback:hover { background: #2c5282; }
+
+/* Building Config section */
+.building-config-wrap { border-top: 1px solid var(--line); padding-top: 12px; margin-top: 12px; }
+.building-grid {
+    display: grid; grid-template-columns: auto 68px 1fr;
+    gap: 8px 10px; align-items: center; font-size: 0.88em;
+}
+.building-grid > strong { color: #4a5568; white-space: nowrap; grid-column: 1; }
+.building-grid input[type="range"] { width: calc(100% - 10px); margin: 0 0 0 10px; }
+.footprint-inputs,
+.offset-inputs {
+    display: grid;
+    grid-template-columns: 10px 1fr 18px 10px 1fr 18px 10px 1fr 18px;
+    align-items: center; column-gap: 4px; grid-column: 2 / -1;
+}
+.footprint-inputs label, .offset-inputs label { font-size: inherit; font-weight: 700; color: #4a5568; text-transform: uppercase; text-align: right; }
+.footprint-inputs .ft-label, .offset-inputs .ft-label { font-size: 0.82em; color: #718096; }
+.offset-inputs input:disabled { color: #a0aec0; }
+/* Inline control row: [label][val][slider] repeating, all in one line */
+.inline-ctrl-row {
+    grid-column: 2 / -1;
+    display: flex; align-items: center; gap: 5px;
+    flex-wrap: nowrap; padding: 2px 0;
+}
+.inline-ctrl-row label { font-size: 0.7em; font-weight: 700; color: #4a5568; text-transform: uppercase; flex-shrink: 0; }
+.inline-val {
+    width: 52px; min-width: 44px; text-align: right;
+    border: 1px solid #cbd5e0; border-radius: 3px;
+    background: white; color: var(--text); outline: none;
+    font-size: 0.78em; font-weight: 600;
+    padding: 2px 4px; box-sizing: border-box; flex-shrink: 0;
+}
+.inline-val:focus { border-color: var(--primary); }
+.inline-val:disabled { background: #f0f2f5; color: #a0aec0; }
+.inline-val[readonly] { background: #f0f2f5; color: #0f4c81; font-weight: 700; }
+.inline-slider { flex: 1 1 60px; min-width: 44px; max-width: 100px; }
+.inline-ctrl-row .grp { margin-left: 12px; }
+
+/* Aligned control rows: columns lock W/X/N and D/Y/G vertically */
+.aligned-ctrl-row {
+    grid-column: 2 / -1;
+    display: grid;
+    grid-template-columns: 14px 52px minmax(0,1fr) 14px 52px minmax(0,1fr) 14px 52px minmax(0,1fr);
+    align-items: center; column-gap: 4px; padding: 2px 0;
+}
+.aligned-ctrl-row label {
+    font-size: 0.7em; font-weight: 700; color: #4a5568;
+    text-transform: uppercase; text-align: right; flex-shrink: 0;
+}
+/* Universal building-config slider */
+.bldg-slider {
+    width: 100%; min-width: 0; max-width: none;
+    height: 4px; appearance: none; -webkit-appearance: none;
+    background: #475569; border-radius: 2px; outline: none;
+    margin: 0; padding: 0; cursor: pointer;
+}
+.bldg-slider::-webkit-slider-thumb {
+    appearance: none; -webkit-appearance: none;
+    width: 12px; height: 12px; border-radius: 50%;
+    background: #3b82f6; border: 2px solid #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,.3); cursor: pointer;
+}
+.bldg-slider::-moz-range-thumb {
+    width: 12px; height: 12px; border-radius: 50%;
+    background: #3b82f6; border: 2px solid #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,.3); cursor: pointer;
+}
+.aligned-ctrl-row .inline-slider,
+.aligned-ctrl-row .bldg-slider { width: 100%; min-width: 0; max-width: none; }
+html[data-theme="dark"] .aligned-ctrl-row label { color: #94a3b8; }
+html[data-theme="dark"] .inline-ctrl-row label { color: #94a3b8; }
+html[data-theme="dark"] .inline-val { background: #1e293b; color: #e2e8f0; border-color: #334155; }
+html[data-theme="dark"] .inline-val:disabled { background: #0f172a; color: #475569; }
+html[data-theme="dark"] .inline-val[readonly] { background: #0f172a; color: #93c5fd; }
+.anchor-track {
+    display: flex; background: #eef2f7; border-radius: 20px;
+    padding: 2px; gap: 0; grid-column: 2 / -1;
+    border: 1px solid #d4dce8;
+}
+.anchor-btn {
+    flex: 1 1 0; padding: 2px 0; border-radius: 18px; border: none;
+    background: transparent; color: #6b7280; font-weight: 800;
+    font-size: 0.60em; text-transform: uppercase; letter-spacing: 0.2px;
+    cursor: pointer; transition: all 0.18s; line-height: 1.5; text-align: center;
+}
+.anchor-btn.active { background: white; color: #0f4c81; box-shadow: 0 1px 4px rgba(0,0,0,0.12); }
+/* (removed: .fp-area-badge — unused) */
+
+.footprint-inputs .align-angle-input { width: 100%; }
+/* Building selector tabs */
+.bldg-selector { display: flex; flex-wrap: wrap; gap: 4px; align-items: center; }
+.bldg-tab {
+    padding: 2px 8px; border-radius: 4px; border: 1px solid #cbd5e0;
+    background: #eef2f7; color: #4a5568; font-weight: 700; font-size: 0.72em;
+    cursor: pointer; transition: all 0.15s;
+}
+.bldg-tab.active { background: var(--primary); color: white; border-color: var(--primary); }
+.bldg-tab-add {
+    padding: 2px 7px; border-radius: 4px; border: 1px dashed #38a169;
+    background: transparent; color: #38a169; font-weight: 700; font-size: 0.72em; cursor: pointer;
+}
+.bldg-tab-del {
+    padding: 2px 7px; border-radius: 4px; border: 1px dashed #e53e3e;
+    background: transparent; color: #e53e3e; font-weight: 700; font-size: 0.72em; cursor: pointer;
+}
+.bldg-tab-ex-add {
+    padding: 2px 7px; border-radius: 4px; border: 1px dashed #6b7280;
+    background: transparent; color: #6b7280; font-weight: 700; font-size: 0.72em; cursor: pointer;
+}
+.bldg-tab-ex-del {
+    padding: 2px 7px; border-radius: 4px; border: 1px dashed #e53e3e;
+    background: transparent; color: #e53e3e; font-weight: 700; font-size: 0.72em; cursor: pointer;
+}
+.bldg-tab-ex {
+    padding: 2px 8px; border-radius: 4px; border: 1px dashed #9ca3af;
+    background: transparent; color: #6b7280; font-weight: 700; font-size: 0.72em; cursor: pointer;
+    transition: all 0.15s;
+}
+.bldg-tab-ex.active { background: #6b7280; color: #fff; border-style: solid; }
+.bldg-drag-pin {
+    width: 18px; height: 18px; border-radius: 50%;
+    background: #e67e22; border: 2px solid #fff;
+    box-shadow: 0 1px 5px rgba(0,0,0,.45); cursor: grab;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 9px; font-weight: 800; color: white; line-height: 1;
+}
+.bldg-drag-pin.active { background: #0f4c81; }
+
+/* Existing building drag pin — dark gray with white outline, letter label */
+.ex-bldg-drag-pin {
+    min-width: 22px; height: 18px; border-radius: 9px;
+    padding: 0 3px;
+    background: #374151; border: 2px solid #fff;
+    box-shadow: 0 1px 5px rgba(0,0,0,.45); cursor: grab;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 9px; font-weight: 800; color: white; line-height: 1;
+}
+
+/* Vehicle drag pin & label */
+.veh-drag-pin {
+    width: 18px; height: 18px; border-radius: 50%;
+    background: #3b82f6; border: 2px solid #fff;
+    box-shadow: 0 1px 5px rgba(0,0,0,.45); cursor: grab;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 7px; font-weight: 800; color: white; line-height: 1;
+}
+.veh-label {
+    font-size: 0.62em; font-weight: 700; color: #1e40af; white-space: nowrap;
+    text-shadow: 0 0 3px #fff, 0 0 3px #fff, 1px 1px 2px #fff;
+    pointer-events: none; user-select: none;
+}
+
+/* CAD Accordions (sidebar) */
+details {
+    background: var(--cad-bg); color: var(--cad-text); border: 1px solid var(--cad-border);
+    border-radius: 6px; margin-bottom: 8px; overflow: hidden;
+}
+summary {
+    padding: 9px 14px; font-weight: bold; font-size: 0.92em; color: var(--cad-accent);
+    background: #222; cursor: pointer; list-style: none;
+    display: flex; align-items: center; justify-content: space-between;
+}
+summary::-webkit-details-marker { display: none; }
+summary::after { content: "+"; font-size: 1.1em; color: white; }
+details[open] summary::after { content: "−"; }
+details[open] summary { border-bottom: 1px solid var(--cad-border); }
+
+.cad-table { width: 100%; border-collapse: collapse; font-size: 0.82em; margin-bottom: 5px; }
+.cad-table th, .cad-table td {
+    padding: 4px 6px 4px 4px; border-bottom: 1px solid var(--cad-border);
+    border-right: 1px solid var(--cad-border); text-align: left; vertical-align: middle;
+}
+.cad-table th { white-space: nowrap; font-weight: bold; background: #2a2a2a; padding-left: 12px; }
+.cad-table tr:last-child th, .cad-table tr:last-child td { border-bottom: none; }
+.cad-table td:last-child { border-right: none; }
+
+.unit-toggle {
+    background: transparent; border: 1px solid var(--cad-accent); color: var(--cad-accent);
+    border-radius: 4px; padding: 2px 6px; font-size: 0.78em; cursor: pointer; float: right;
+}
+.unit-toggle:hover { background: var(--cad-accent); color: var(--cad-bg); }
+
+/* ==========================================
+   4. MAP & CONTROLS
+   ========================================== */
+#map { flex: 1; width: 100%; border: 2px solid #cbd5e0; border-radius: 8px; z-index: 1; background-color: #e5e5e5; }
+
+/* Horizontal control row at top-left */
+.leaflet-top.leaflet-left { display: flex; flex-direction: row; align-items: flex-start; gap: 6px; padding-top: 10px; padding-left: 10px; }
+.leaflet-top.leaflet-left .leaflet-control { margin-top: 0; margin-left: 0; margin-right: 10px; }
+
+/* Toggle switch (snap-to-grid) */
+.switch { position: relative; display: inline-block; width: 40px; height: 20px; flex-shrink: 0; }
+.switch input { opacity: 0; width: 0; height: 0; }
+.slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; border-radius: 20px; }
+.slider:before { position: absolute; content: ""; height: 14px; width: 14px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; }
+input:checked + .slider { background-color: var(--primary); }
+input:checked + .slider:before { transform: translateX(20px); }
+
+/* Help button (top-right of map) */
+.leaflet-control-helper {
+    background: white; border: 2px solid rgba(0,0,0,0.2); border-radius: 4px;
+    width: 34px; height: 34px; display: flex; justify-content: center; align-items: center;
+    font-weight: bold; font-size: 18px; color: var(--primary); cursor: pointer; position: relative;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.4);
+}
+.helper-popup {
+    display: none; position: absolute; top: 0; right: 40px;
+    width: 280px; background: white; border: 1px solid #cbd5e0;
+    border-radius: 6px; padding: 14px; box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+    font-size: 13px; color: #333; line-height: 1.5; cursor: default; text-align: left;
+}
+.leaflet-control-helper:hover .helper-popup { display: block; }
+.helper-popup ul { padding-left: 15px; margin: 5px 0 0 0; }
+
+/* Chain dim lines — stroke-width is controlled by Leaflet weight (no CSS override) */
+
+/* Active chain dim line — highlights when handle is active */
+.chain-dim-active {
+    stroke: #d9381e !important;
+    stroke-width: 2px !important;
+    stroke-dasharray: none !important;
+}
+
+/* Chain dim drag handle — visible knob offset from dim line */
+.chain-drag-handle {
+    width: 20px; height: 20px;
+    background: #d9381e;
+    border: 2.5px solid #ffffff;
+    border-radius: 50%;
+    cursor: grab;
+    opacity: 0.8;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.55);
+    transition: transform .1s, opacity .1s;
+}
+.chain-drag-handle:hover { transform: scale(1.15); opacity: 1; }
+.chain-drag-handle:active { cursor: grabbing; transform: scale(1.05); }
+
+/* North compass — compass rose */
+.north-compass-wrap {
+    background: transparent; cursor: default; pointer-events: none;
+    filter: drop-shadow(0 2px 6px rgba(0,0,0,0.55));
+}
+
+/* Opacity panel */
+.em-oc-ctrl {
+    background: rgba(10,10,10,.82); color: #e0e0e0;
+    padding: 5px 7px; border-radius: 5px; font-size: 9px;
+    min-width: 130px; box-shadow: 0 2px 6px rgba(0,0,0,.55);
+    cursor: default;
+}
+.em-oc-ctrl h4 {
+    margin: 0 0 4px; font-size: 7px; color: #aaa;
+    text-transform: uppercase; letter-spacing: .05em;
+    user-select: none;
+}
+.em-oc-row { display: flex; align-items: center; gap: 4px; margin-bottom: 3px; }
+.em-oc-row label { flex: 1; font-size: 9px; white-space: nowrap; min-width: 52px; }
+.em-oc-row input[type=range] {
+    -webkit-appearance: none; appearance: none;
+    flex: 2; height: 3px; background: #555; border-radius: 2px;
+    cursor: pointer; outline: none; align-self: center;
+}
+.em-oc-row input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none; width: 11px; height: 11px;
+    border-radius: 50%; background: #55aaff; cursor: pointer;
+}
+.em-oc-row input[type=range]::-moz-range-thumb {
+    width: 11px; height: 11px; border-radius: 50%;
+    background: #55aaff; border: none; cursor: pointer;
+}
+.em-oc-row span { min-width: 26px; text-align: right; font-size: 9px; color: #999; }
+/* Dim drag toggle control */
+.leaflet-control-dim-drag a {
+    display: flex; align-items: center; justify-content: center;
+    width: 30px; height: 30px; color: #555; background: #fff;
+    transition: color .15s, background .15s;
+}
+.leaflet-control-dim-drag a:hover { color: #1a202c; background: #f0f0f0; }
+.leaflet-control-dim-drag.dim-drag-active a {
+    color: #fff; background: #e53e3e;
+}
+.leaflet-control-dim-drag.dim-drag-active a:hover { background: #c53030; }
+
+/* Dim merge control */
+.leaflet-control-dim-merge a { color: #4a5568; cursor: pointer; }
+.leaflet-control-dim-merge a:hover { color: #1a202c; background: #f0f0f0; }
+.leaflet-control-dim-merge.dim-merge-active a {
+    color: #fff; background: #2b6cb0;
+}
+.leaflet-control-dim-merge.dim-merge-active a:hover { background: #2c5282; }
+.dim-merge-mode-on .chain-dim-line { stroke: #2b6cb0 !important; cursor: pointer; }
+.dim-merge-mode-on .chain-dim-line:hover { stroke: #2c5282 !important; }
+.dim-merged { color: #2b6cb0 !important; font-weight: 700; }
+
+/* Banner merge / split */
+.banner-stat.merge-ready {
+    background: rgba(255,255,255,0.18) !important;
+    border: 2px dashed rgba(255,255,255,0.85) !important;
+    transform: scale(1.03);
+}
+.banner-stat.merged {
+    flex: 2 1 280px; flex-direction: row; align-items: stretch; gap: 0;
+}
+.banner-stat.merged .merge-half {
+    flex: 1; display: flex; flex-direction: column;
+}
+.banner-stat.merged .merge-sep {
+    width: 1px; background: rgba(255,255,255,0.22);
+    margin: 6px 8px; flex-shrink: 0; align-self: stretch;
+}
+
+/* ==========================================
+   5. INFO BOTTOM — aligns with sidebar/map split
+   ========================================== */
+.info-bottom { display: flex; gap: 0; align-items: flex-start; margin-top: 12px; }
+.info-col-left  { flex: 1; display: flex; flex-direction: column; gap: 8px; }
+.info-col-gap   { width: 18px;  flex-shrink: 0; }
+.info-col-right { flex: 1; display: flex; flex-direction: column; gap: 8px; }
+/* Pin left-column table th widths to match (longest label = STANDARD SETBACKS) */
+.info-col-left .cad-table th { width: 205px; min-width: 205px; }
+/* Overlay zones: let td expand for long values (TBD notes, zone references) */
+#info-overlay-table th { width: 200px; min-width: 180px; }
+#info-overlay-table td { min-width: 120px; }
+/* Scope of work section */
+.info-scope-section { margin-top: 8px; width: 100%; }
+.info-scope-text { margin: 0; padding: 8px 12px; font-size: 0.82em; line-height: 1.55;
+    color: #e2e8f0; background: #1a1a1a; border: 1px solid var(--cad-border);
+    white-space: pre-wrap; word-break: break-word; min-height: 80px; }
+
+/* Info-bottom action footer */
+.info-bottom-footer { width: 100%; display: flex; align-items: center; justify-content: flex-end; padding: 6px 0 4px; }
+.btn-extract-info-lisp { background: #c05621; color: white; border: none; border-radius: 4px;
+    padding: 6px 16px; font-size: 0.78em; font-weight: bold; cursor: pointer; transition: background 0.2s; }
+.btn-extract-info-lisp:hover { background: #9c4221; }
+.btn-extract-info-excel { background: #1d6f42; color: white; border: none; border-radius: 4px;
+    padding: 6px 16px; font-size: 0.78em; font-weight: bold; cursor: pointer; transition: background 0.2s; margin-left: 6px; }
+.btn-extract-info-excel:hover { background: #155232; }
+
+/* ==========================================
+   ELEVATION TOOL
+   ========================================== */
+.elev-wrap { margin-top: 10px; }
+.btn-elev-toggle { width: 100%; background: var(--primary); color: white; }
+.btn-elev-toggle.open { background: #0a3560; }
+.elev-tools { display: none; gap: 6px; margin-top: 6px; }
+.elev-tools.open { display: flex; }
+.btn-elev-sample { flex: 1; background: #2e7d32; color: white; }
+.btn-elev-sample.active { background: #1b5e20; box-shadow: inset 0 2px 4px rgba(0,0,0,.3); }
+.btn-elev-clear  { flex: 1; background: #6b7280; color: white; }
+/* Help tip inline badge */
+.help-tip {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 15px; height: 15px; border-radius: 50%;
+    background: #6b7280; color: #fff; font-size: 0.68em; font-weight: 700;
+    cursor: help; vertical-align: middle; margin-left: 4px;
+    position: relative;
+}
+.help-tip:hover::after {
+    content: attr(data-tip);
+    position: absolute; left: 50%; bottom: calc(100% + 6px);
+    transform: translateX(-50%);
+    background: #1f2937; color: #f9fafb;
+    padding: 6px 10px; border-radius: 6px; font-size: 1.3em; font-weight: 400;
+    white-space: normal; width: 220px; z-index: 9999;
+    box-shadow: 0 4px 12px rgba(0,0,0,.35); pointer-events: none;
+    line-height: 1.4;
+}
+/* Floating hover tooltip */
+.elev-hover {
+    position: fixed; pointer-events: none; z-index: 9999; display: none;
+    background: rgba(15,76,129,.92); color: #fff;
+    padding: 4px 10px; border-radius: 6px; font-size: 0.82em;
+    font-weight: 600; white-space: nowrap; box-shadow: 0 2px 8px rgba(0,0,0,.35);
+}
+/* Permanent pin label */
+.elev-label { background: #fff !important; border: 2px solid #0f4c81 !important;
+    color: #0f4c81 !important; font-weight: 700 !important; font-size: 0.78em !important;
+    padding: 2px 6px !important; border-radius: 4px !important; white-space: nowrap !important; }
+
+/* ==========================================
+   MOBILE — max-width: 767px
+   ========================================== */
+@media (max-width: 767px) {
+    body { padding: 8px; }
+    .page-wrapper { max-width: 100%; }
+
+    /* Header: stack title + buttons */
+    .header { flex-direction: column; align-items: flex-start; gap: 8px; }
+    .header-left { width: 100%; }
+    .header-title-row { flex-wrap: wrap; gap: 8px; }
+    .header-title-stack h1 { font-size: 20px; }
+    .header-address-pair { margin-left: 0; flex-wrap: wrap; }
+    .header-address { padding: 6px 10px; }
+    /* (removed: .header-btn-group, .header-btn — unused) */
+
+    /* Main layout: stack vertically (map on top, sidebar below) */
+    .main-container { flex-direction: column-reverse; height: auto; min-height: 0; }
+    .map-panel { min-height: 52vw; height: 52vw; max-height: 420px; width: 100%; }
+    .col-divider { display: none; }
+    .sidebar { width: 100%; min-width: 0; padding-right: 0; overflow-y: visible; }
+
+    /* Sidebar boxes: slightly less padding */
+    .sidebar-box { padding: 10px; }
+
+    /* Align grid: collapse to 2 cols (label | value+control) */
+    .align-grid { grid-template-columns: auto 1fr; }
+    .align-grid > *:nth-child(3n+2) { grid-column: span 1; }
+
+    /* Setback grid: 2-col stays but shrinks */
+    .setback-grid { gap: 6px; }
+
+    /* Touch targets — buttons */
+    .btn-align, .btn-accept, .btn-save-boundary, .btn-lock-position,
+    .btn-save-config, .btn-elev-toggle, .btn-elev-sample, .btn-elev-clear {
+        min-height: 36px; font-size: 0.8em;
+    }
+
+    /* Info bottom: single column on mobile */
+    .info-bottom { flex-direction: column; }
+    .info-col-gap { display: none; }
+
+    /* Property banner: allow 2-line wrapping on very small screens */
+    .property-banner { flex-wrap: wrap; }
+    .banner-stat { flex: 1 0 auto; min-width: 110px; }
+
+    /* (removed: .mode-track mobile — unused) */
+
+    /* Anchor/bldg tabs: larger tap area */
+    .anchor-btn, .bldg-tab { min-height: 30px; padding: 4px 10px; }
+
+    /* iPhone safe-area + touch */
+    body { padding: 8px; padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right); }
+    input, select, textarea { font-size: 16px !important; }
+    input[type=checkbox] { width: 22px; height: 22px; accent-color: #0f4c81; }
+    button { -webkit-appearance: none; touch-action: manipulation; }
+
+    /* Extra layout overrides for narrow screens */
+    .sidebar { max-height: none !important; overflow: visible !important; }
+    .map-panel { height: 55vh !important; min-height: 350px; }
+    #map { min-height: 350px; }
+    .info-col-left, .info-col-right { width: 100% !important; }
+    .header-title-row { flex-direction: column !important; gap: 6px !important; }
+    .suite-bar-ext { display: none !important; }
+    #map-fab { bottom: calc(16px + env(safe-area-inset-bottom)) !important; }
+}
+
+/* ==========================================
+   DARK MODE
+   ========================================== */
+
+/* Toggle button */
+.theme-toggle {
+    position: fixed; top: 38px; right: 12px; z-index: 9999;
+    width: 36px; height: 36px; border-radius: 50%;
+    border: 1.5px solid var(--line); background: var(--card);
+    cursor: pointer; font-size: 18px; line-height: 1;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    transition: background 0.2s, border-color 0.2s;
+}
+.theme-toggle:hover { border-color: var(--primary); }
+
+/* CSS variable overrides */
+html[data-theme="dark"] {
+    --primary: #93c5fd; --secondary: #2d3748; --accent: #ff6b6b;
+    --text: #e2e8f0; --bg: #0f172a; --card: #1e293b;
+    --line: #334155; --cad-bg: #0a0a0a; --cad-text: #e0e0e0;
+    --cad-border: #555; --cad-accent: #e090e0;
+    color-scheme: dark;
+}
+
+/* Base overrides */
+html[data-theme="dark"] body { background: #0f172a !important; color: #e2e8f0 !important; }
+html[data-theme="dark"] .suite-bar { background: #1e293b !important; }
+html[data-theme="dark"] .header { border-color: #334155 !important; }
+html[data-theme="dark"] h1, html[data-theme="dark"] h2, html[data-theme="dark"] h3 { color: #93c5fd !important; }
+html[data-theme="dark"] .header-title-stack p { color: #94a3b8 !important; }
+html[data-theme="dark"] input, html[data-theme="dark"] select, html[data-theme="dark"] textarea {
+    background: #1e293b !important; color: #e2e8f0 !important; border-color: #334155 !important;
+}
+html[data-theme="dark"] .card, html[data-theme="dark"] .section-card,
+html[data-theme="dark"] .adv-card { background: #1e293b !important; border-color: #334155 !important; }
+html[data-theme="dark"] .adv-card-body { color: #cbd5e1 !important; }
+html[data-theme="dark"] a:not(.btn):not(.suite-bar-link):not(.suite-bar-extlink) { color: #93c5fd; }
+html[data-theme="dark"] .theme-toggle { background: #1e293b; border-color: #475569; }
+
+/* Map: banner/address labels */
+html[data-theme="dark"] .banner-label { color: #94a3b8 !important; opacity: 1 !important; }
+html[data-theme="dark"] .banner-value { color: #fff !important; }
+html[data-theme="dark"] .property-banner { background: #0c2d4a !important; }
+html[data-theme="dark"] .header-address { background: #0c2d4a !important; }
+html[data-theme="dark"] .stat-label { color: #94a3b8 !important; }
+html[data-theme="dark"] .sidebar { background: #0f172a !important; color: #e2e8f0 !important; }
+html[data-theme="dark"] .sidebar label, html[data-theme="dark"] .sidebar p,
+html[data-theme="dark"] .sidebar span { color: #cbd5e1 !important; }
+html[data-theme="dark"] .sidebar h2, html[data-theme="dark"] .sidebar h3 { color: #93c5fd !important; }
+html[data-theme="dark"] .sidebar-box { background: #1e293b !important; border-color: #334155 !important; }
+html[data-theme="dark"] .info-bottom { background: #0f172a !important; }
+html[data-theme="dark"] .info-col-left, html[data-theme="dark"] .info-col-right { background: #1e293b !important; }
+
+/* Buttons in dark mode — preserve individual button colors; only dim un-IDed ones */
+html[data-theme="dark"] .btn-save-config           { background: #4a5568; color: #e2e8f0; }
+html[data-theme="dark"] .btn-save-config:hover      { background: #2d3748; color: #e2e8f0; }
+html[data-theme="dark"] #saveConfigBtn              { background: #1a6bb3 !important; }
+html[data-theme="dark"] #saveConfigBtn:hover        { background: #1558a0 !important; }
+html[data-theme="dark"] .btn-dim-bldg               { background: #2f9e68 !important; }
+html[data-theme="dark"] .btn-dim-bldg:hover         { background: #27855a !important; }
+html[data-theme="dark"] #freeDragBtn                { background: #4a5568 !important; }
+html[data-theme="dark"] #snapEdgeBtn                { background: #4a5568 !important; }
+html[data-theme="dark"] .btn-accept { background: #1e40af !important; }
+html[data-theme="dark"] .btn-save-boundary { background: #15803d !important; }
+html[data-theme="dark"] .btn-lock-position { background: #b91c1c !important; }
+html[data-theme="dark"] #map-fab { background: transparent !important; border: none !important; }
+html[data-theme="dark"] .fab-btn-save { background: #475569 !important; }
+html[data-theme="dark"] .fab-btn-print { background: #1e40af !important; }
+
+/* LISP code area */
+html[data-theme="dark"] .lisp-output { background: #0a0a0a !important; color: #e0e0e0 !important; border-color: #333 !important; }
+
+/* ==========================================
+   SITE INFO EDITOR MODAL
+   ========================================== */
+#site-edit-modal { display:none; position:fixed; inset:0; z-index:10000; background:rgba(0,0,0,.6); align-items:flex-start; justify-content:center; overflow-y:auto; padding:32px 16px; }
+#site-edit-modal.open { display:flex; }
+.sei-dialog { background:#1e293b; border:1px solid #334155; border-radius:10px; width:100%; max-width:680px; box-shadow:0 20px 60px rgba(0,0,0,.5); font-family:'Segoe UI',sans-serif; }
+.sei-header { display:flex; align-items:center; justify-content:space-between; padding:14px 20px; border-bottom:1px solid #334155; }
+.sei-header h3 { margin:0; font-size:1em; font-weight:700; color:#e2e8f0; letter-spacing:.04em; }
+.sei-close { background:none; border:none; color:#94a3b8; font-size:1.4em; cursor:pointer; line-height:1; padding:0 4px; }
+.sei-close:hover { color:#f87171; }
+.sei-body { padding:16px 20px; display:flex; flex-direction:column; gap:14px; }
+.sei-section { font-size:0.72em; font-weight:700; color:#f472b6; letter-spacing:.08em; text-transform:uppercase; border-bottom:1px solid #334155; padding-bottom:4px; margin-bottom:2px; }
+.sei-row { display:grid; grid-template-columns:180px 1fr; align-items:start; gap:8px; }
+.sei-row label { font-size:0.8em; font-weight:600; color:#94a3b8; padding-top:6px; }
+.sei-row input, .sei-row textarea {
+    background:#0f172a; border:1px solid #475569; border-radius:4px;
+    color:#e2e8f0; font-size:0.82em; padding:5px 8px; width:100%; box-sizing:border-box; font-family:inherit;
+}
+.sei-row textarea { resize:vertical; min-height:60px; }
+#sei-scope { min-height:160px; }
+#sei-notes { min-height:90px; }
+.sei-row input:focus, .sei-row textarea:focus { outline:none; border-color:#f472b6; }
+/* Dynamic array editor (inspectors / planning / overlay) */
+.sei-array-wrap { display:flex; flex-direction:column; gap:4px; }
+.sei-array-row { display:grid; grid-template-columns:1fr 1fr 28px; gap:4px; align-items:center; }
+.sei-array-row input { background:#0f172a; border:1px solid #475569; border-radius:4px; color:#e2e8f0; font-size:0.8em; padding:4px 6px; }
+.sei-array-row input:focus { outline:none; border-color:#f472b6; }
+.sei-del-row { background:#7f1d1d; border:none; border-radius:3px; color:#fca5a5; font-size:0.9em; cursor:pointer; padding:0; height:24px; width:24px; }
+.sei-del-row:hover { background:#991b1b; }
+.sei-add-row { background:none; border:1px dashed #475569; border-radius:4px; color:#64748b; font-size:0.78em; cursor:pointer; padding:4px 10px; text-align:left; width:100%; margin-top:2px; }
+.sei-add-row:hover { border-color:#f472b6; color:#f472b6; }
+.sei-footer { display:flex; justify-content:flex-end; gap:8px; padding:12px 20px; border-top:1px solid #334155; }
+.sei-btn-cancel { background:#334155; border:none; border-radius:6px; color:#94a3b8; font-size:0.85em; font-weight:600; padding:8px 18px; cursor:pointer; }
+.sei-btn-cancel:hover { background:#475569; }
+.sei-btn-save { background:#be185d; border:none; border-radius:6px; color:#fff; font-size:0.85em; font-weight:700; padding:8px 18px; cursor:pointer; }
+.sei-btn-save:hover { background:#9d174d; }
+.sei-btn-save:disabled { background:#475569; color:#94a3b8; cursor:not-allowed; }
+.sei-status { font-size:0.78em; color:#94a3b8; padding-top:4px; text-align:center; min-height:16px; }
+
+/* Building config inputs & controls */
+html[data-theme="dark"] .align-angle-input { background: #1e293b !important; color: #e2e8f0 !important; border-color: #334155 !important; }
+html[data-theme="dark"] .align-angle-input:disabled,
+html[data-theme="dark"] .align-angle-input[readonly] { background: #0f172a !important; color: #93c5fd !important; border-color: #334155 !important; }
+html[data-theme="dark"] .building-grid > strong { color: #94a3b8 !important; }
+html[data-theme="dark"] .anchor-track { background: #0f172a !important; border-color: #334155 !important; }
+html[data-theme="dark"] .anchor-btn.active { background: #1e40af !important; color: #fff !important; }
+html[data-theme="dark"] .bldg-tab { background: #0f172a !important; color: #94a3b8 !important; border-color: #334155 !important; }
+html[data-theme="dark"] .bldg-tab.active { background: #1e293b !important; color: #93c5fd !important; }
+html[data-theme="dark"] .footprint-inputs label,
+html[data-theme="dark"] .offset-inputs label { color: #94a3b8 !important; }
+html[data-theme="dark"] .footprint-inputs .ft-label,
+html[data-theme="dark"] .offset-inputs .ft-label { color: #64748b !important; }
+html[data-theme="dark"] #cadZoneSelect { background: #1e293b !important; color: #e2e8f0 !important; border-color: #334155 !important; }
+html[data-theme="dark"] .s-hint { color: #93c5fd !important; border-color: #93c5fd !important; }
+
+
+</style>
+    <script>(function(){var s=localStorage.getItem('theme');if(s==='dark'||(s!=='light'&&window.matchMedia('(prefers-color-scheme:dark)').matches))document.documentElement.setAttribute('data-theme','dark');})()</script>
+    <style>
+        /* Page-specific layout */
+        .siteinfo-wrap { max-width: 1200px; margin: 0 auto; padding: 0 12px 40px; }
+        .siteinfo-header { padding: 10px 0 6px; }
+        .siteinfo-header h2 { font-size: 0.95em; font-weight: 700; color: var(--cad-gold, #d4a843); letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 2px; }
+        .siteinfo-header .si-apn  { font-size: 0.75em; color: #94a3b8; }
+
+        /* Export section */
+        .siteinfo-export { margin-top: 14px; }
+        .siteinfo-export .align-btn-row { margin-bottom: 6px; }
+
+        /* Print: hide export controls, show everything else */
+        @media print {
+            .no-print, .suite-bar { display: none !important; }
+            body { padding: 8px !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        }
+    </style>
+<script>window.__SITE_DEFAULTS__ = {"project":{"prj":"","title":"Mixed-Use Development \u2014 4335 Euclid Ave","permit_type":"Building","forms":["ds375","ds3032","ds420"],"scope":"Demolish existing 1,225 SF single-story commercial building (auto repair, built ~1952, Group B) and construct a new 2-story mixed-use development on a 6,250 SF lot (CUPD-CU-2-4 zone). Proposed program: 9 residential units, all 2-bedroom (Group R-2) \u2014 Units 1\u20134 ground floor (568.59 SF each), Units 5\u20138 second floor (568.59 SF each), Unit 9 second floor (669.80 SF); total net residential 5,218.52 SF. Ground-floor commercial space (Group B): 640.38 SF. Building footprint: 3,422.47 SF (54.76% lot coverage). FAR: 1.10 (max 2.0 permitted). Stories: 2. TPA zone \u2014 0 auto parking required (AB 2097). Common open space: ~361 SF covered area (former carport converted). Trash enclosure: 5' \u00d7 25', east side. NFPA 13R sprinklers per Q2 resolution. Rear 17-ft one-way aisle, alley access. SB 330 Preliminary Application filed concurrently.","existing":{"sf":"1,225","stories":"1","construction_type":"V-B (assumed \u2014 auto repair, ~1952)","occupancy":"B (auto repair)","use":"commercial"},"proposed":{"sf":"~6,845 SF GBA (3,422.47 SF footprint \u00d7 2 stories)","stories":"2","construction_type":"V-A or V-B (TBD per Q2 party-wall/fire-wall path)","occupancy":"R-2 (9 units) + B (640.38 SF)","use":"mixed"},"is_45_years":true,"fire_sprinklers":false,"parking_ratio":"0 required \u2014 TPA/AB 2097 (SDMC 142.0523)","deviations":"Side setbacks 0 ft both sides per CUPD optional standard \u2014 complies per plans.","earthwork_quantities":"Min. grading for new foundation; est. <200 CY; TBD per soils report.","public_improvements":"Driveway approach removal and utility lateral trench in Euclid Ave ROW per Q5; no curb/gutter/sidewalk replacement proposed."},"apn":"471-271-16-00","legal_description":"Lots 6 & 7, Block 48, Tract 1368 of Resubdivision of Block 41 to 48 Inclusive of Fairmount Addition to City Heights, According to Map Thereof No. 1368, Filed in the Office of the County Recorder of San Diego County, October 7, 1911","community_plan":"Mid-City: City Heights","base_zone":"CUPD-CU-2-4","zoning":"CUPD-CU-2-4","lot_sf":6250,"lotSF":6250,"lot_width":50,"lotWidth":50,"lot_depth":125,"lotDepth":125,"cadZone":"CA_VI","parcelPolygon":[[32.7556508703,-117.0917108592],[32.7555139278,-117.0917108591],[32.7555134313,-117.0921181218],[32.7556503339,-117.0921181218]],"year_built_existing":"~1952","cchs_tier":3,"tpa":true,"airport_influence":false,"lat":32.75561335,"lng":-117.09189649,"rotation":0,"locked":true,"setbacks":{"front":10,"rear":10,"sideL":0,"sideR":0},"buildings":[{"orientation":0,"W":30,"D":60,"offsetX":7.9,"offsetY":-1.1,"count":1,"stackSpacing":0,"anchor":"center","stories":1,"floorHeight":9,"locked":false,"stackAngle":0}],"activeBuilding":0,"commFront":false,"showBldgDims":false,"hiddenDimKeys":[],"mergedDimKeys":[],"chainWOffset":0,"chainDOffset":0,"propDimOffsets":{},"mapOpacity":60,"setbacksApplied":false,"freeDrag":true,"snapEdge":true,"siteNorthDeg":0,"frontBearing":270,"vehicles":[],"activeVehicle":-1,"existingBuildings":[],"activeExBuilding":-1,"_geoOffsets":true,"siteFileName":"site_data.json"};</script>
+<script>try{var _sd=window.__SITE_DEFAULTS__||{},_ls=null;try{_ls=JSON.parse(localStorage.getItem('site_state'))}catch(e){}var _sb=(_sd.buildings||[]).length,_lb=(_ls&&_ls.saved&&_ls.saved.buildings)?_ls.saved.buildings.length:0;if(_sb>0&&_sb!==_lb){console.log('[SEED] Server buildings('+_sb+') != local('+_lb+') — clearing cache');localStorage.removeItem('site_state')}}catch(e){}</script>
+<script>window.__SITE_LIST__ = [{"siteId":"CA-11001_WESTMINSTER","address":"11001-11025 Westminster Ave, Garden Grove, CA 92843","apn":"100-151-33, 100-151-34","file":"site_data.json"},{"siteId":"CA-12652_LAUX","address":"12652 Laux Ave, Garden Grove, CA 92840","apn":"231-544-02","file":"site_data.json"},{"siteId":"CA-1905_ROHN","address":"1905 Rohn Rd, Escondido, CA 92025","apn":"236-411-06-00","file":"site_data.json"},{"siteId":"CA-2921_ELCAJON","address":"2921-2923 El Cajon Boulevard, San Diego, CA 92104","apn":"446-232-04-00","file":"site_data.json"},{"siteId":"CA-3063_CABRILLOMESA","address":"3063 Cabrillo Mesa Dr, San Diego, CA 92123","apn":"428-232-04-00","file":"site_data.json"},{"siteId":"CA-4335_EUCLID","address":"4335 Euclid Avenue, San Diego, CA 92105","apn":"471-271-16-00","file":"site_data.json"},{"siteId":"CA-4876_CANNINGTON","address":"4876 Cannington Dr, San Diego, CA 92117","apn":"362-682-03-00","file":"site_data.json"},{"siteId":"CA-5251_PALMYRA","address":"5251 Palmyra Ave, San Diego, CA 92117","apn":"355-441-13-00","file":"site_data.json"},{"siteId":"CA-9362_ANGWIN","address":"9362 Angwin Pl, San Diego, CA 92123","apn":"429-562-08-00","file":"site_data.json"},{"siteId":"WA-10404_KIRKLAND","address":"10404 NE 124th St, Kirkland, WA 98034","apn":"2926059206","file":"site_data.json"},{"siteId":"WA-12843_175TH","address":"12843 175th Ave SE, Renton, WA 98059","apn":"7229900345","file":"site_data.json"},{"siteId":"WA-405_126TH","address":"405 SW 126th St, Burien, WA 98146","apn":"0723049368","file":"site_data.json"}];</script>
+<script>window.__ALL_SITE_DATA__ = {"CA-11001_WESTMINSTER":{"project":"ProjectBook-Planner","siteId":"CA-11001_WESTMINSTER","address":"11001-11025 Westminster Ave, Garden Grove, CA 92843","apn":"100-151-33, 100-151-34","legalDescription":"APN 100-151-33: Sec 4, T 5S, R 10W, Por SW 1/4; APN 100-151-34: Sec 4, T 5S, R 10W, Por W 1/2 SW 1/4 SW 1/4 \u2014 County of Orange, State of California (combined parcels, unplatted Section 4 land)","yearBuilt":"-- TBD: OC Assessor record or existing building permit history","occupancyGroup":"R-3","zoning":"R-3","cadZone":"CA_V","lotWidth":155.3,"lotDepth":109.9,"lotSF":20038,"lotWidthSouth":147.5,"lotWidthNorth":155.3,"lotDepthWest":109.9,"lotDepthEast":122.85,"lotAcres":0.46,"commercialDepth":0,"baseFAR":0,"commFAR":0,"maxHeight":35,"baseHeightLimit":35,"cchsMaxHeight":0,"frontSetback":20,"rearSetback":15,"sideSetback":5,"densityPerSF":0,"nefRatePerSF":0,"affordabilityPct":0,"difPerUnit":0,"difWaiverSF":0,"unitCount":18,"unitDensity":39.13,"projectType":"3-Story Townhome","architect":"ADEC Architecture & Construction Group","scopeOfWork":"-- TBD: Full scope narrative -- demolish existing structure, build 18-unit 3-story townhome development on combined R-3 lots with density bonus. See construction plan for detail.","cornerVisibilityTriangle":true,"cornerVisTriSize":25,"cornerVisCorner":"SW","densityBonus":true,"notes":"Combined lots 33+34 (APN 100-151-33 + 100-151-34). Zoned R-3 (Multiple-Family Residential) -- Garden Grove municipal code, NOT San Diego. Corner visibility triangle at SW corner. Density bonus applied. | TBD - C: baseFAR and densityPerSF -- Garden Grove municipal code Ch 9.12 (R-3 zone standards). | TBD - G: Inspector contacts -- Garden Grove Building & Safety division (714-741-5111).","inspectors":[{"name":"Building (Combination)","val":"-- TBD: Garden Grove Building & Safety -- (714) 741-5111"},{"name":"Structural","val":"-- TBD: Garden Grove Building & Safety"},{"name":"Electrical","val":"-- TBD: Garden Grove Building & Safety"},{"name":"Mechanical","val":"-- TBD: Garden Grove Building & Safety"},{"name":"Grading / Civil","val":"-- TBD: Garden Grove Public Works or OC Grading"}],"planningAreas":[{"name":"COMMUNITY PLAN AREA","val":"-- TBD: Garden Grove General Plan land use map"},{"name":"LAND USE DESIGNATION","val":"-- TBD: Garden Grove General Plan"},{"name":"TRANSIT PRIORITY AREA (TPA)","val":"-- TBD: OCTA TPA map or HCD TPA lookup"},{"name":"PARKING STANDARDS (PSTPA)","val":"-- TBD: Confirm if TPA applies"},{"name":"MOBILITY CHOICES","val":"N/A -- Garden Grove (not SD Municipal Code)"}],"overlayZones":[{"name":"AIRPORT INFLUENCE AREA","val":"-- TBD: John Wayne Airport (SNA) ALUCP -- check OC ALUC map"},{"name":"COASTAL OVERLAY","val":"No -- inland location"},{"name":"VERY HIGH FIRE HAZARD","val":"-- TBD: Cal Fire FHSZ viewer (osfm.fire.ca.gov)"},{"name":"FAULT ZONE","val":"-- TBD: CGS AP Zone map (maps.conservation.ca.gov/cgs/ap)"},{"name":"FEMA FLOOD ZONE","val":"-- TBD: FEMA FIRM map for Garden Grove"}],"existingDwellingSF":3447,"parcelPolygon":[[33.75978691,-117.93742095],[33.75979089,-117.93697997],[33.76015181,-117.93698601],[33.76015034,-117.93715014],[33.76014719,-117.93749677],[33.75984455,-117.9374917]],"lat":33.75997862,"lng":-117.93725426,"rotation":90,"locked":true,"setbacks":{"front":25,"rear":0,"sideL":0,"sideR":0},"buildings":[{"orientation":0,"W":14,"D":25,"offsetX":0,"offsetY":-12.5,"spacing":0,"count":1,"stackSpacing":0,"anchor":"center","stories":3,"floorHeight":9,"stackAngle":0,"locked":false},{"orientation":0,"W":14,"D":25,"offsetX":-31.7,"offsetY":5.8,"spacing":0,"count":1,"stackSpacing":0,"anchor":"center","stories":3,"floorHeight":9,"stackAngle":0,"locked":false},{"orientation":270,"W":14,"D":25,"offsetX":-37.2,"offsetY":-13.7,"spacing":0,"count":3,"stackSpacing":0,"anchor":"front","stories":3,"floorHeight":9,"stackAngle":0,"locked":false}],"activeBuilding":2,"commFront":false,"showBldgDims":true,"hiddenDimKeys":[],"mergedDimKeys":[],"chainWOffset":0,"chainDOffset":0,"propDimOffsets":{},"mapOpacity":60,"setbacksApplied":false,"freeDrag":true,"snapEdge":true,"siteNorthDeg":90,"frontBearing":359.38,"vehicles":[],"activeVehicle":-1,"existingBuildings":[],"activeExBuilding":-1,"_geoOffsets":true,"siteFileName":"site_data.json"},"CA-12652_LAUX":{"project":"ProjectBook-Planner","siteId":"CA-12652_LAUX","address":"12652 Laux Ave, Garden Grove, CA 92840","apn":"231-544-02","legalDescription":"N TR 1698 BLK LOT 27","yearBuilt":"1954","occupancyGroup":"R-3","zoning":"R-1","cadZone":"CA_V","lotWidth":70,"lotDepth":103.0,"lotSF":7210,"lotWidthSouth":60,"lotWidthNorth":60,"lotDepthWest":120,"lotDepthEast":120,"lotAcres":0.17,"commercialDepth":0,"baseFAR":0,"commFAR":0,"maxHeight":35,"baseHeightLimit":35,"cchsMaxHeight":0,"frontSetback":20,"rearSetback":10,"sideSetback":5,"densityPerSF":7200,"nefRatePerSF":0,"affordabilityPct":0,"difPerUnit":0,"difWaiverSF":0,"unitCount":1,"unitDensity":0,"projectType":"SFR + ADU","architect":"-- TBD","scopeOfWork":"Existing 1,041 SF SFR (1954) on 7,210 SF R-1 lot. ADU plans paid and pending city approval. R-1 allows 1 ADU (1,200 SF max) + 1 JADU (500 SF max). 50% lot coverage limit (3,605 SF max). ADU setbacks: 4ft side/rear.","cornerVisibilityTriangle":false,"cornerVisTriSize":0,"cornerVisCorner":"","densityBonus":false,"notes":"Assessor map Book 231 Page 54. Map shows 70ft frontage, ~89.24ft partial depth. Full depth 103ft reconciles with 7210 SF (70x103=7210). Prior data had 60x120 which was wrong.","inspectors":[{"name":"Building (Combination)","val":"Garden Grove Building and Safety Division \u2014 (714) 741-5307 | building@ggcity.org | 11222 Acacia Pkwy, Garden Grove CA 92840 | M\u2013Th 7:30am\u20135:30pm, Fri 7:30am\u20135pm | Schedule: ch.ci.garden-grove.ca.us/permitsoft/inspections/new"},{"name":"Structural","val":"Garden Grove Building and Safety Division \u2014 (714) 741-5307 (same counter as combination)"},{"name":"Electrical","val":"Garden Grove Building and Safety Division \u2014 (714) 741-5307"},{"name":"Mechanical","val":"Garden Grove Building and Safety Division \u2014 (714) 741-5307"},{"name":"Grading / Civil","val":"Garden Grove Public Works \u2014 (714) 741-5119 | 11222 Acacia Pkwy | For grading/drainage; contact Building & Safety first to confirm routing"}],"planningAreas":[{"name":"COMMUNITY PLAN AREA","val":"City of Garden Grove \u2014 General Plan Land Use Element (2021)"},{"name":"LAND USE DESIGNATION","val":"Low Density Residential (LDR) \u2014 1\u201311 du/acre, single-family detached. Source: Garden Grove General Plan Land Use Element (2021 public review); R-1 parcels carry LDR designation."},{"name":"TRANSIT PRIORITY AREA (TPA)","val":"TBD \u2014 check SCAG TPA map (hub.scag.ca.gov) for 12652 Laux Ave. Garden Grove has OCTA bus routes but no rail; no qualifying 15-min high-frequency service confirmed near this address."},{"name":"PARKING STANDARDS (PSTPA)","val":"TBD \u2014 follows from TPA determination above. If Not TPA: standard R-1 parking requirements apply."},{"name":"MOBILITY CHOICES","val":"N/A -- Garden Grove (not SD Municipal Code)"}],"overlayZones":[{"name":"AIRPORT INFLUENCE AREA","val":"TBD \u2014 possibly in outer zone of Fullerton Municipal Airport (FMA) ALUCP (~6.5 mi NW); John Wayne (SNA) ~8 mi S, outside. Check FMA AELUP PDF outer boundary map (files.ocair.com/media/2021-02/AELUP%20for%20FMA%2005092019.pdf) or OC ALUC (ocair.com). Source: OC ALUC research 2026-04-15."},{"name":"COASTAL OVERLAY","val":"No -- inland location"},{"name":"VERY HIGH FIRE HAZARD","val":"Not Designated \u2014 Garden Grove is fully urbanized suburban Orange County; no LRA or SRA FHSZ designation. Source: CAL FIRE FHSZ viewer; OCFA FHSZ maps (confirmed 2026-04-15)."},{"name":"FAULT ZONE","val":"No Alquist-Priolo fault zone at this address; likely in CGS Liquefaction Hazard Zone (alluvial soils, high groundwater). Confirm at maps.conservation.ca.gov/cgs/informationwarehouse/eqzapp/. Source: Garden Grove Safety Element (2021)."},{"name":"FEMA FLOOD ZONE","val":"Likely Zone X \u2014 minimal hazard (Orange County flatlands; panel series 06059C). Confirm at msc.fema.gov. Source: OC Flood Insurance Study 06059CV001C (2026-04-15)."}],"maxLotCoverage":50,"existingDwellingSF":1041,"existingBedBath":"3bd / 2ba","parcelPolygon":[[33.78083431,-117.912232],[33.78083334,-117.91246567],[33.78055023,-117.91246408],[33.78055066,-117.91234889],[33.78055114,-117.91223042]],"lat":33.78066394,"lng":-117.91234821,"rotation":0,"locked":false,"setbacks":{"front":20,"rear":4,"sideL":4,"sideR":4},"buildings":[{"orientation":0,"W":39,"D":26,"offsetX":-2.5,"offsetY":42.3,"spacing":0,"count":1,"stackSpacing":0,"anchor":"front","stories":1,"floorHeight":9,"stackAngle":0,"locked":false},{"orientation":0,"W":20,"D":20,"offsetX":-32.8,"offsetY":42.5,"spacing":0,"count":1,"stackSpacing":0,"stackAngle":0,"anchor":"center","stories":1,"floorHeight":9,"locked":false},{"orientation":0,"W":60,"D":20,"offsetX":14.6,"offsetY":-9.5,"spacing":28.6,"count":1,"stackSpacing":0,"stackAngle":0,"anchor":"center","stories":1,"floorHeight":9,"locked":false}],"activeBuilding":0,"commFront":false,"showBldgDims":true,"hiddenDimKeys":[],"mergedDimKeys":[],"chainWOffset":30.807109008422238,"chainDOffset":-10,"propDimOffsets":{},"mapOpacity":58,"setbacksApplied":false,"freeDrag":true,"snapEdge":false,"siteNorthDeg":0,"frontBearing":270,"vehicles":[],"activeVehicle":-1,"existingBuildings":[{"polygon":[[33.78069136987552,-117.91239762242932],[33.78069136987552,-117.91229879757068],[33.780636510124474,-117.91229879757068],[33.780636510124474,-117.91239762242932]],"locked":false}],"activeExBuilding":0,"_geoOffsets":true,"siteFileName":"site_data.json"},"CA-1905_ROHN":{"project":"ProjectBook-Planner","siteId":"CA-1905_ROHN","address":"1905 Rohn Rd, Escondido, CA 92025","apn":"236-411-06-00","legalDescription":"Lot 6, Montview Terrace, Map No. 004221, City of Escondido, County of San Diego, State of California","yearBuilt":"~1960","occupancyGroup":"R-3","zoning":"RE-20","cadZone":"CA_VI","lotWidth":164,"lotDepth":211,"lotSF":23962,"commercialDepth":0,"baseFAR":0.5,"commFAR":0,"maxHeight":35,"baseHeightLimit":35,"cchsMaxHeight":0,"frontSetback":25,"rearSetback":20,"sideSetback":10,"densityPerSF":20000,"nefRatePerSF":0,"affordabilityPct":0,"difPerUnit":0,"difWaiverSF":0,"projectType":"","architect":"","scopeOfWork":"","notes":"ESCONDIDO INDEPENDENT CITY -- NOT governed by City of San Diego SDMC. All zoning refs are Escondido Municipal Code (EMC) Article 6. General Plan designation E2 (Estate Residential). Council District 4. Lot is trapezoidal/irregular -- lotWidth 164 ft and lotDepth 211 ft are bounding box estimates from GIS polygon, NOT surveyed dimensions; obtain parcel map from SDARCC for actual lot lines. Lot SF 23,962 is GIS-confirmed. Lot is conforming under RE-20 (min 20,000 SF). | TBD - A: legalDescription -- SDARCC recorder lookup by APN 236-411-06-00. yearBuilt ~1960 estimated from comparables -- confirm via SD County Assessor secured roll or ParcelQuest. | TBD - C: All zoning standards (FAR, height, setbacks) -- Escondido Municipal Code Article 6, RE-20 zone. City of Escondido Planning Dept (760) 839-4671. | TBD - D: TPA status unconfirmed -- likely NOT in TPA (no light rail proximity); verify via SANDAG GIS. CCHS does not apply (SD-specific overlay). No CCHS tier. | TBD - E: Fees -- City of Escondido Building Division fee schedule (NOT SD DSD). Impact fees per Escondido schedule. | TBD - F: Project type, architect, scope of work. | TBD - G: Inspector contacts -- City of Escondido Building Division (760) 839-4647. | TBD - H: Map rotation -- estimate from aerial. Parcel polygon irregular -- trace vertices from SD County GIS or Escondido parcel lookup (escondido.gov/209/Parcel-Lookup).","inspectors":[{"name":"Building (Combination)","val":"City of Escondido Building Division \u2014 (760) 839-4647 | 24-hr inspection line: (760) 839-4646 | 201 N. Broadway, Escondido CA 92025 | Online: escondido.gov/1280 | Inspector hours: 8:00\u20138:30am or 4:00\u20135:00pm"},{"name":"Structural","val":"City of Escondido Building Division \u2014 (760) 839-4647 (same counter as combination)"},{"name":"Electrical","val":"City of Escondido Building Division \u2014 (760) 839-4647"},{"name":"Mechanical","val":"City of Escondido Building Division \u2014 (760) 839-4647"},{"name":"Grading / Civil","val":"City of Escondido Engineering Division \u2014 (760) 839-4671 | 201 N. Broadway, Escondido CA 92025"}],"planningAreas":[{"name":"GENERAL PLAN AREA","val":"City of Escondido -- E2 (Estate Residential)"},{"name":"COUNCIL DISTRICT","val":"District 4"},{"name":"LAND USE DESIGNATION","val":"Estate Residential (E-2) \u2014 confirmed current GP designation for RE-20 zone parcels. Source: EMC Article 6; GP Amendment Ord. 2025-01 (no rezoning of estate residential parcels)."},{"name":"TRANSIT PRIORITY AREA (TPA)","val":"Not in TPA \u2014 ~2+ mi north of Escondido Transit Center (Sprinter terminus, 700 W Valley Pkwy); Sprinter runs 30-min frequency (below 15-min TPA threshold). Source: gonctd.com; SANDAG TPA dataset (2026-04-15)."},{"name":"PARKING STANDARDS (PSTPA)","val":"Not in TPA \u2014 standard parking requirements apply per EMC Article 4."},{"name":"ANIMAL OVERLAY (AO)","val":"-- TBD: RE-20 permits animals by right; AO zone adds enhanced regs \u2014 verify via Escondido GIS or Planning Dept (760) 839-4671"}],"overlayZones":[{"name":"AIRPORT INFLUENCE AREA","val":"No (confirmed -- SD County GIS)"},{"name":"COASTAL OVERLAY","val":"No (~18 mi inland)"},{"name":"VERY HIGH FIRE HAZARD","val":"No \u2014 NoWildland per Escondido Fire GIS (prior confirmation). NOTE: CAL FIRE updated FHSZ map March 2025 expanded Very High coverage in Escondido hillside areas \u2014 re-verify at escondido.gov/209 (APN 236-411-06-00) with 2025 map. Source: Escondido Fire GIS; CAL FIRE Mar 2025 update."},{"name":"FAULT ZONE (ALQUIST-PRIOLO)","val":"No (confirmed -- CGS statewide GIS)"},{"name":"FEMA FLOOD ZONE","val":"Zone X -- minimal hazard (confirmed -- FEMA NFHL)"},{"name":"CCHS (HOUSING SOLUTIONS)","val":"N/A -- City of San Diego overlay, does not apply to Escondido"}],"parcelPolygon":[[33.10000181,-117.08553282],[33.10011525,-117.08615299],[33.1004517,-117.08606605],[33.1003454,-117.08552624],[33.10034086,-117.08551086],[33.10033392,-117.08549679],[33.10032486,-117.08548455],[33.10031401,-117.08547458],[33.10030175,-117.08546725],[33.10028854,-117.08546282],[33.10027487,-117.08546147],[33.10026123,-117.08546324]],"existingDwellingSF":1518,"lat":33.10027952,"lng":-117.08559164,"rotation":14.1,"locked":true,"setbacks":{"front":25,"rear":20,"sideL":10,"sideR":10},"buildings":[{"orientation":166.7,"W":30,"D":60,"offsetX":-56.1,"offsetY":-20.9,"spacing":0,"count":1,"stackSpacing":0,"anchor":"center","stories":1,"floorHeight":9,"stackAngle":0,"locked":false},{"orientation":166.9,"W":30,"D":60,"offsetX":-122.1,"offsetY":22.3,"spacing":0,"count":1,"stackSpacing":0,"stackAngle":0,"anchor":"center","stories":1,"floorHeight":9,"locked":false}],"activeBuilding":1,"commFront":false,"showBldgDims":true,"hiddenDimKeys":[],"mergedDimKeys":[],"chainWOffset":2.2774829182771157,"chainDOffset":5.8079521553859195,"propDimOffsets":{},"mapOpacity":60,"setbacksApplied":false,"freeDrag":true,"snapEdge":true,"siteNorthDeg":14.1,"frontBearing":282.69,"vehicles":[],"activeVehicle":-1,"existingBuildings":[],"activeExBuilding":-1,"_geoOffsets":true,"siteFileName":"site_data.json"},"CA-2921_ELCAJON":{"project":{"prj":"","title":"Change of Occupancy \u2014 Rear Warehouse to R-3 Townhouses, 2921-2923 El Cajon Blvd","permit_type":"Building","forms":["ds375","ds3032","ds420"],"scope":"Interior change of occupancy and remodel of the existing rear warehouse shell at APN 446-232-04-00 (Lots 7 & 8, Block 119, 7,039 SF total). Rear shell (~46' wide \u00d7 ~40' deep, ~22 ft tall, existing flat roof) fully retained \u2014 no exterior demolition, no new footprint. Interior work only: new structural floor deck at ~11 ft AFF creates 2 residential floors within the existing shell (10-ft ground floor + 1-ft floor assembly + 10-ft 2nd floor = 22 ft total, matching existing shell height exactly). Proposed program: 2 Group R-3 townhouse units (CBC 310.5), each 2-story (~20' wide \u00d7 40' deep per floor), separated by a single CBC 706 structurally-independent fire wall running continuously from foundation through new floor deck to existing flat roof plane. No shared corridor \u2014 each unit has a private internal staircase and private ground-floor exit directly to the rear alley. Upper-floor sleeping rooms: CBC 1030 emergency escape windows facing rear alley (subject to DS-375 Q5 confirmation). GBA of converted area: ~3,680 SF (1,840 SF/floor \u00d7 2 stories). R-3 classification via fire wall path avoids NFPA 13R sprinkler requirement \u2014 CBC 903.2.8 does not apply to R-3. Existing 4,550 SF + 1,910 SF mezzanine Group B commercial (Digital Gym Media Arts Center) at front of building RETAINED \u2014 no change to exterior, occupancy, or tenant. Zero parking (TPA). Rear alley access. SB 330 Preliminary Application filed concurrently.","existing":{"sf":"~6,460 SF total (4,550 SF + 1,910 SF mezzanine, Group B \u2014 RETAINED); rear warehouse shell ~1,840 SF/floor","stories":"1 + mezzanine (front Group B); 1-story warehouse shell at rear (~22 ft to flat roof)","construction_type":"V-B (assumed \u2014 commercial/warehouse, ~1950, exterior shell retained)","occupancy":"B (Digital Gym front + warehouse rear \u2014 both Group B currently)","use":"commercial"},"proposed":{"sf":"~3,680 SF GBA (1,840 SF/floor \u00d7 2 stories, interior conversion of existing rear shell)","stories":"2 (new interior floor deck within existing 22-ft shell \u2014 no change to exterior height)","construction_type":"V-B (existing exterior shell retained; new interior floor framing and CBC 706 fire wall V-B)","occupancy":"B (front \u2014 Digital Gym retained) + R-3 (rear \u2014 2 townhouse units via COO, ~3,680 SF GBA)","use":"mixed (existing B front unchanged + new R-3 rear conversion)"},"is_45_years":true,"fire_sprinklers":false,"egress_analysis":false,"previously_graded":false,"parking_ratio":"0 required \u2014 TPA/SDA; AB 2097 (SDMC 142.0523)","deviations":"None anticipated. No exterior modifications proposed. Existing shell height (~22 ft) unchanged. R-3 fire wall path (CBC 310.5 + CBC 706) is the design basis \u2014 CBC 903.2.8 sprinkler requirement does not apply to R-3.","earthwork_quantities":"No grading \u2014 interior work only within existing building shell. No new footprint.","public_improvements":"None anticipated from interior-only COO. El Cajon Blvd frontage improvements TBD per DS-375 Q10 response."},"apn":"446-232-04-00","zoning":"CC-3-9","legal_description":"Block 119, Lots 7 & 8, University Heights D'Hemecourt Map (Amended), City of San Diego, County of San Diego, State of California","community_plan":"North Park","base_zone":"CC-3-9","lot_sf":7039,"lotSF":7039,"lot_width":49,"lotWidth":49,"lot_depth":144,"lotDepth":144,"cadZone":"CA_VI","parcelPolygon":[[32.75472599035348,-117.13089185144067],[32.754725501443225,-117.13096033160872],[32.75481619557008,-117.1309604872065],[32.75492888916509,-117.13096068350124],[32.75511853365214,-117.13096100895713],[32.75511909094138,-117.13088295043677],[32.75511964818886,-117.13080489084834],[32.75472663919634,-117.13080096177241]],"year_built_existing":"~1950","cchs_tier":3,"tpa":true,"airport_influence":true,"airport_influence_area":"SDIA Review Area 2","lat":32.75491006,"lng":-117.1309029,"rotation":0,"frontBearing":180,"locked":true,"setbacks":{"front":10,"rear":10,"sideL":0,"sideR":0},"buildings":[{"orientation":0,"W":30,"D":60,"offsetX":0,"offsetY":0,"count":1,"stackSpacing":0,"anchor":"center","stories":1,"floorHeight":9}],"activeBuilding":0,"commFront":false,"showBldgDims":false,"hiddenDimKeys":[],"chainWOffset":0,"chainDOffset":0,"mapOpacity":60,"setbacksApplied":false,"freeDrag":true,"snapEdge":true,"siteNorthDeg":0,"vehicles":[],"activeVehicle":-1,"siteFileName":"site_data.json"},"CA-3063_CABRILLOMESA":{"project":"ProjectBook-Planner","siteId":"CA-3063_CABRILLOMESA","address":"3063 Cabrillo Mesa Dr, San Diego, CA 92123","apn":"428-232-04-00","legalDescription":"Lot 83, Cabrillo Mesa, Map No. 003385, City of San Diego, County of San Diego, State of California","yearBuilt":"1958","occupancyGroup":"R-3","zoning":"RS-1-7","cadZone":"CA_VI","lotWidth":61,"lotDepth":100,"lotSF":6100,"commercialDepth":0,"baseFAR":0.6,"commFAR":0,"maxHeight":30,"baseHeightLimit":30,"cchsMaxHeight":0,"frontSetback":15,"rearSetback":13,"sideSetback":5,"densityPerSF":5000,"nefRatePerSF":0,"affordabilityPct":0,"difPerUnit":0,"difWaiverSF":0,"projectType":"","architect":"","scopeOfWork":"","cornerVisibilityTriangle":false,"cornerVisTriSize":25,"cornerVisCorner":"SW","densityBonus":false,"notes":"TBD - A: lotWidth/lotDepth estimated 61x100 from 6,100 SF lot -- verify via assessor tract map. | TBD - B: Existing house 1,138 SF, 3bd/2ba, built 1958. | TBD - C: baseFAR 0.6 and setbacks 15/13/5 from RS-1-7 SD Municipal Code defaults -- confirm against current code. | TBD - D: Airport influence area likely YES (Montgomery Field). Transit, fire, fault zones -- verify via ZAPP portal. | TBD - E: NEF rate, DIF, affordability -- City DSD Fee Schedule. | TBD - F: Project type, architect, scope of work. | TBD - G: Inspector contacts -- City DSD staff directory.","inspectors":[{"name":"Combination","val":"City of San Diego DSD Inspection Services \u2014 (858) 581-7111 | M\u2013F 7am\u20133:30pm questions; 7:15\u20137:45am inspector direct; 24/7 automated scheduling | Grading/Civil: (619) 446-5242 / fit_dsd@sandiego.gov | PM support: DSD-inspection-proj-mgr@sandiego.gov | sandiego.gov/development-services/inspections"},{"name":"Structural","val":"City of San Diego DSD Inspection Services \u2014 (858) 581-7111 | M\u2013F 7am\u20133:30pm questions; 7:15\u20137:45am inspector direct; 24/7 automated scheduling | Grading/Civil: (619) 446-5242 / fit_dsd@sandiego.gov | PM support: DSD-inspection-proj-mgr@sandiego.gov | sandiego.gov/development-services/inspections"},{"name":"Electrical","val":"City of San Diego DSD Inspection Services \u2014 (858) 581-7111 | M\u2013F 7am\u20133:30pm questions; 7:15\u20137:45am inspector direct; 24/7 automated scheduling | Grading/Civil: (619) 446-5242 / fit_dsd@sandiego.gov | PM support: DSD-inspection-proj-mgr@sandiego.gov | sandiego.gov/development-services/inspections"},{"name":"Mechanical","val":"City of San Diego DSD Inspection Services \u2014 (858) 581-7111 | M\u2013F 7am\u20133:30pm questions; 7:15\u20137:45am inspector direct; 24/7 automated scheduling | Grading/Civil: (619) 446-5242 / fit_dsd@sandiego.gov | PM support: DSD-inspection-proj-mgr@sandiego.gov | sandiego.gov/development-services/inspections"},{"name":"Grading / Civil","val":"City of San Diego DSD Inspection Services \u2014 (858) 581-7111 | M\u2013F 7am\u20133:30pm questions; 7:15\u20137:45am inspector direct; 24/7 automated scheduling | Grading/Civil: (619) 446-5242 / fit_dsd@sandiego.gov | PM support: DSD-inspection-proj-mgr@sandiego.gov | sandiego.gov/development-services/inspections"}],"planningAreas":[{"name":"COMMUNITY PLAN AREA","val":"SERRA MESA"},{"name":"LAND USE DESIGNATION","val":"Residential Low (5-9 du/ac)"},{"name":"CCHS (HOUSING SOLUTIONS)","val":"Not in CCHS \u2014 RS-1-7 residential zone is not CCHS-eligible. Source: SDMC \u00a7143.0710 (2026-04-15)."},{"name":"TRANSIT PRIORITY AREA (TPA)","val":"Not in TPA \u2014 Serra Mesa interior residential; no high-frequency transit within 0.5 mi. Source: MTS route map; SDMTS.com (2026-04-15)."},{"name":"PARKING STANDARDS (PSTPA)","val":"Not in PSTPA \u2014 no TPA designation; standard RS-1-7 parking (2 spaces per unit). Source: SDMC \u00a7142.0528 (2026-04-15)."},{"name":"MOBILITY CHOICES","val":"-- TBD: SD Municipal Code Appendix A Fig A-1"}],"overlayZones":[{"name":"HEIGHT LIMIT OVERLAY","val":"30 ft (RS-1-7 base zone)"},{"name":"TRANSIT AREA OVERLAY","val":"No \u2014 Serra Mesa interior residential; no TAOZ designation per SD Zoning Map. Source: SD Zoning Data Portal (2026-04-15)."},{"name":"AIRPORT INFLUENCE AREA","val":"YES \u2014 Montgomery Field (MYF) ALUCP Review Area 1 (~55-60 CNEL). Site at 32.800\u00b0N is ~1.3 mi south of MYF runway 28L/10R. Noise attenuation required for new residential per SDMC \u00a7132.0403 Airport Overlay Zone. Verify exact contour via SDMC Appendix F Fig 132-03G or SDCRAA APN lookup. Source: MYF ALUCP; SDMC \u00a7132.0403 (2026-04-15)."},{"name":"COASTAL OVERLAY","val":"No"},{"name":"VERY HIGH FIRE HAZARD","val":"Likely No \u2014 Serra Mesa is a fully developed mid-city neighborhood; no SRA or LRA designation expected. Verify via SD ZAPP portal or CAL FIRE FHSZ map (2025 update). Source: CAL FIRE FHSZ viewer 2025 (2026-04-15)."},{"name":"FAULT ZONE","val":"Likely No \u2014 Serra Mesa is ~1.5 mi north of Mission Valley (Rose Canyon Fault trace). AP fault zone boundary is narrow (~50 ft of fault trace) and does not extend to this location. SEISMIC HAZARD still applies (Rose Canyon Fault M6.9 max, ~1.5 mi; Geotech required per SDMC \u00a7113.0271). Source: CGS AP Zone GIS; SDMC \u00a7132.0105 (2026-04-15)."}],"parcelPolygon":[[32.80013922,-117.13942465],[32.80009523,-117.139444],[32.79998184,-117.13949388],[32.80007064,-117.13979501],[32.80022476,-117.13972734]],"existingDwellingSF":1138,"lat":32.80010234,"lng":-117.13957698,"rotation":0,"locked":true,"setbacks":{"front":15,"rear":13,"sideL":5,"sideR":5},"buildings":[{"orientation":0,"W":30,"D":40,"offsetX":0,"offsetY":0,"spacing":0,"count":1,"stackSpacing":0,"anchor":"center","stories":1,"floorHeight":9,"stackAngle":0,"locked":false}],"activeBuilding":0,"commFront":false,"showBldgDims":false,"hiddenDimKeys":[],"mergedDimKeys":[],"chainWOffset":0,"chainDOffset":0,"propDimOffsets":{},"mapOpacity":70,"setbacksApplied":false,"freeDrag":false,"snapEdge":false,"siteNorthDeg":0,"vehicles":[],"activeVehicle":-1,"existingBuildings":[],"activeExBuilding":-1,"frontBearing":290.29,"_geoOffsets":true,"siteFileName":"site_data.json"},"CA-4335_EUCLID":{"project":{"prj":"","title":"Mixed-Use Development \u2014 4335 Euclid Ave","permit_type":"Building","forms":["ds375","ds3032","ds420"],"scope":"Demolish existing 1,225 SF single-story commercial building (auto repair, built ~1952, Group B) and construct a new 2-story mixed-use development on a 6,250 SF lot (CUPD-CU-2-4 zone). Proposed program: 9 residential units, all 2-bedroom (Group R-2) \u2014 Units 1\u20134 ground floor (568.59 SF each), Units 5\u20138 second floor (568.59 SF each), Unit 9 second floor (669.80 SF); total net residential 5,218.52 SF. Ground-floor commercial space (Group B): 640.38 SF. Building footprint: 3,422.47 SF (54.76% lot coverage). FAR: 1.10 (max 2.0 permitted). Stories: 2. TPA zone \u2014 0 auto parking required (AB 2097). Common open space: ~361 SF covered area (former carport converted). Trash enclosure: 5' \u00d7 25', east side. NFPA 13R sprinklers per Q2 resolution. Rear 17-ft one-way aisle, alley access. SB 330 Preliminary Application filed concurrently.","existing":{"sf":"1,225","stories":"1","construction_type":"V-B (assumed \u2014 auto repair, ~1952)","occupancy":"B (auto repair)","use":"commercial"},"proposed":{"sf":"~6,845 SF GBA (3,422.47 SF footprint \u00d7 2 stories)","stories":"2","construction_type":"V-A or V-B (TBD per Q2 party-wall/fire-wall path)","occupancy":"R-2 (9 units) + B (640.38 SF)","use":"mixed"},"is_45_years":true,"fire_sprinklers":false,"parking_ratio":"0 required \u2014 TPA/AB 2097 (SDMC 142.0523)","deviations":"Side setbacks 0 ft both sides per CUPD optional standard \u2014 complies per plans.","earthwork_quantities":"Min. grading for new foundation; est. <200 CY; TBD per soils report.","public_improvements":"Driveway approach removal and utility lateral trench in Euclid Ave ROW per Q5; no curb/gutter/sidewalk replacement proposed."},"apn":"471-271-16-00","legal_description":"Lots 6 & 7, Block 48, Tract 1368 of Resubdivision of Block 41 to 48 Inclusive of Fairmount Addition to City Heights, According to Map Thereof No. 1368, Filed in the Office of the County Recorder of San Diego County, October 7, 1911","community_plan":"Mid-City: City Heights","base_zone":"CUPD-CU-2-4","zoning":"CUPD-CU-2-4","lot_sf":6250,"lotSF":6250,"lot_width":50,"lotWidth":50,"lot_depth":125,"lotDepth":125,"cadZone":"CA_VI","parcelPolygon":[[32.7556508703,-117.0917108592],[32.7555139278,-117.0917108591],[32.7555134313,-117.0921181218],[32.7556503339,-117.0921181218]],"year_built_existing":"~1952","cchs_tier":3,"tpa":true,"airport_influence":false,"lat":32.75561335,"lng":-117.09189649,"rotation":0,"locked":true,"setbacks":{"front":10,"rear":10,"sideL":0,"sideR":0},"buildings":[{"orientation":0,"W":30,"D":60,"offsetX":7.9,"offsetY":-1.1,"count":1,"stackSpacing":0,"anchor":"center","stories":1,"floorHeight":9,"locked":false,"stackAngle":0}],"activeBuilding":0,"commFront":false,"showBldgDims":false,"hiddenDimKeys":[],"mergedDimKeys":[],"chainWOffset":0,"chainDOffset":0,"propDimOffsets":{},"mapOpacity":60,"setbacksApplied":false,"freeDrag":true,"snapEdge":true,"siteNorthDeg":0,"frontBearing":270,"vehicles":[],"activeVehicle":-1,"existingBuildings":[],"activeExBuilding":-1,"_geoOffsets":true,"siteFileName":"site_data.json"},"CA-4876_CANNINGTON":{"project":"ProjectBook-Planner","siteId":"CA-4876_CANNINGTON","address":"4876 Cannington Dr, San Diego, CA 92117","apn":"362-682-03-00","legalDescription":"Lot 78, Balboa Greens Annex, Map Book 8118, City of San Diego, County of San Diego, State of California","yearBuilt":"1976","occupancyGroup":"R-3","zoning":"RS-1-7","cadZone":"CA_VI","lotWidth":50,"lotDepth":100,"lotSF":5000,"commercialDepth":0,"baseFAR":0.6,"commFAR":0,"maxHeight":30,"baseHeightLimit":30,"cchsMaxHeight":0,"frontSetback":15,"rearSetback":15,"sideSetback":5,"densityPerSF":7000,"nefRatePerSF":0,"affordabilityPct":0,"difPerUnit":0,"difWaiverSF":0,"projectType":"","architect":"","scopeOfWork":"","cornerVisibilityTriangle":false,"cornerVisTriSize":25,"cornerVisCorner":"SW","densityBonus":false,"notes":"TBD - B: lotWidth/lotDepth estimated 50x100 from subdivision typical -- verify via Balboa Greens Annex tract map (Map Book 8118, County Recorder). | TBD - C: baseFAR 0.6 and setbacks 15/15/5 from RS-1-7 SD Municipal Code defaults -- confirm against current code. Lot is nonconforming at 5,000 SF under RS-1-7 (min 7,000 SF). | TBD - D: CCHS applicability unconfirmed for RS zone -- check SD Planning CCHS map. Mobility Choices zone -- check SD Municipal Code Appendix A Fig A-1. Airport Influence Area -- verify MCAS Miramar ALUCP and SAN ALUCP. Fire hazard zone -- verify Cal Fire FHSZ viewer. Fault zone -- verify CGS AP Zone map. | TBD - E: NEF rate per SF -- City DSD Fee Schedule PDF. DIF per unit -- DSD DIF schedule residential category. Affordability % -- confirm if density bonus applies for this scope. | TBD - F: Project type, architect, scope of work. | TBD - G: Inspector contacts -- City DSD staff directory (Inspection Services). | TBD - H: Map rotation degrees -- estimate from aerial (how many degrees lot north is off screen-north). Parcel polygon vertices if lot is irregular.","inspectors":[{"name":"Combination","val":"TESTING"},{"name":"Structural","val":"-- TBD: DSD Inspection Services directory"},{"name":"Electrical","val":"-- TBD: DSD Inspection Services directory"},{"name":"Mechanical","val":"-- TBD: DSD Inspection Services directory"},{"name":"Grading / Civil","val":"-- TBD: DSD Inspection Services directory"}],"planningAreas":[{"name":"COMMUNITY PLAN AREA","val":"CLAIREMONT MESA"},{"name":"LAND USE DESIGNATION","val":"Residential Low-2 (5-9 du/ac)"},{"name":"CCHS (HOUSING SOLUTIONS)","val":"-- TBD: verify SD Planning CCHS map"},{"name":"TRANSIT PRIORITY AREA (TPA)","val":"Yes"},{"name":"PARKING STANDARDS (PSTPA)","val":"Yes (0 Parking Required)"},{"name":"MOBILITY CHOICES","val":"-- TBD: SD Municipal Code Appendix A Fig A-1"}],"overlayZones":[{"name":"HEIGHT LIMIT OVERLAY","val":"Yes -- 30 ft (Clairemont Mesa, O-22049)"},{"name":"TRANSIT AREA OVERLAY","val":"No"},{"name":"AIRPORT INFLUENCE AREA","val":"-- TBD: verify MCAS Miramar / SAN ALUCP"},{"name":"COASTAL OVERLAY","val":"No"},{"name":"VERY HIGH FIRE HAZARD","val":"-- TBD: Cal Fire FHSZ viewer"},{"name":"FAULT ZONE","val":"-- TBD: CGS AP Zone map"}],"parcelPolygon":[[32.83086222,-117.16865247],[32.83073366,-117.16892157],[32.83085993,-117.16901407],[32.83099078,-117.1687352]],"existingDwellingSF":1993,"lat":32.831143191035906,"lng":-117.16906324241327,"rotation":60.3,"locked":true,"setbacks":{"front":10,"rear":10,"sideL":0,"sideR":0},"buildings":[{"orientation":26.5,"W":29.5,"D":16,"offsetX":63.7,"offsetY":-108,"spacing":0,"count":1,"stackSpacing":0,"anchor":"center","stories":1,"floorHeight":9,"stackAngle":0,"locked":false}],"activeBuilding":0,"commFront":false,"showBldgDims":true,"hiddenDimKeys":[],"mergedDimKeys":[],"chainWOffset":-14.062898385239805,"chainDOffset":0,"propDimOffsets":{},"mapOpacity":70,"setbacksApplied":false,"freeDrag":true,"snapEdge":false,"siteNorthDeg":60.3,"frontBearing":330.86,"vehicles":[],"activeVehicle":-1,"existingBuildings":[],"activeExBuilding":-1,"_geoOffsets":true,"siteFileName":"site_data.json"},"CA-5251_PALMYRA":{"project":"ProjectBook-Planner","siteId":"CA-5251_PALMYRA","address":"5251 Palmyra Ave, San Diego, CA 92117","apn":"355-441-13-00","legalDescription":"Lot 49, University View Estates Unit No. 2, Map No. 004985, City of San Diego, County of San Diego, State of California","yearBuilt":"1963","occupancyGroup":"R-3","zoning":"RS-1-7","cadZone":"CA_VI","lotWidth":55,"lotDepth":100,"lotSF":5509,"commercialDepth":0,"baseFAR":0.6,"commFAR":0,"maxHeight":30,"baseHeightLimit":30,"cchsMaxHeight":0,"frontSetback":15,"rearSetback":13,"sideSetback":5,"densityPerSF":5000,"nefRatePerSF":0,"affordabilityPct":0,"difPerUnit":0,"difWaiverSF":0,"projectType":"","architect":"","scopeOfWork":"","cornerVisibilityTriangle":false,"cornerVisTriSize":25,"cornerVisCorner":"SW","densityBonus":false,"notes":"TBD - A: Lot is irregular 5-sided polygon (~55x100), 5,509 SF -- legal nonconforming under RS-1-7 (min 7,000 SF). Verify dims via assessor tract map (Map 4985). | TBD - B: Existing house 1,066 SF, 3bd/1.5ba, built 1963. | TBD - C: baseFAR 0.6, setbacks 15/13/5 from RS-1-7 defaults. Clairemont plan update Dec 2025 may affect -- verify current code. | TBD - D: Airport YES (MCAS Miramar Review Area 1, 60-65 CNEL + Montgomery Field Review Area 2). Very High Fire Hazard YES (300 ft brush buffer). Height limit 30 ft (Clairemont Mesa overlay O-22048). | TBD - E: NEF, DIF, affordability -- City DSD Fee Schedule. | TBD - F: Project type, architect, scope. | TBD - G: Inspector contacts.","inspectors":[{"name":"Combination","val":"City of San Diego DSD Inspection Services \u2014 (858) 581-7111 | M\u2013F 7am\u20133:30pm questions; 7:15\u20137:45am inspector direct; 24/7 automated scheduling | Grading/Civil: (619) 446-5242 / fit_dsd@sandiego.gov | PM support: DSD-inspection-proj-mgr@sandiego.gov | sandiego.gov/development-services/inspections"},{"name":"Structural","val":"City of San Diego DSD Inspection Services \u2014 (858) 581-7111 | M\u2013F 7am\u20133:30pm questions; 7:15\u20137:45am inspector direct; 24/7 automated scheduling | Grading/Civil: (619) 446-5242 / fit_dsd@sandiego.gov | PM support: DSD-inspection-proj-mgr@sandiego.gov | sandiego.gov/development-services/inspections"},{"name":"Electrical","val":"City of San Diego DSD Inspection Services \u2014 (858) 581-7111 | M\u2013F 7am\u20133:30pm questions; 7:15\u20137:45am inspector direct; 24/7 automated scheduling | Grading/Civil: (619) 446-5242 / fit_dsd@sandiego.gov | PM support: DSD-inspection-proj-mgr@sandiego.gov | sandiego.gov/development-services/inspections"},{"name":"Mechanical","val":"City of San Diego DSD Inspection Services \u2014 (858) 581-7111 | M\u2013F 7am\u20133:30pm questions; 7:15\u20137:45am inspector direct; 24/7 automated scheduling | Grading/Civil: (619) 446-5242 / fit_dsd@sandiego.gov | PM support: DSD-inspection-proj-mgr@sandiego.gov | sandiego.gov/development-services/inspections"},{"name":"Grading / Civil","val":"City of San Diego DSD Inspection Services \u2014 (858) 581-7111 | M\u2013F 7am\u20133:30pm questions; 7:15\u20137:45am inspector direct; 24/7 automated scheduling | Grading/Civil: (619) 446-5242 / fit_dsd@sandiego.gov | PM support: DSD-inspection-proj-mgr@sandiego.gov | sandiego.gov/development-services/inspections"}],"planningAreas":[{"name":"COMMUNITY PLAN AREA","val":"CLAIREMONT MESA"},{"name":"LAND USE DESIGNATION","val":"Residential Low-2 (5-9 du/ac)"},{"name":"CCHS (HOUSING SOLUTIONS)","val":"Not in CCHS \u2014 RS-1-7 residential zone is not a CCHS-eligible commercial corridor zone. CCHS applies to CC, CN, CV, and certain mixed-use zones per SD Ord. 21866. Source: SDMC \u00a7143.0710; SD Planning (2026-04-15)."},{"name":"TRANSIT PRIORITY AREA (TPA)","val":"Not in TPA \u2014 Palmyra Ave is an interior residential street in Clairemont Mesa. No MTS/NCTD rapid bus or rail within 0.5 mi. Standard residential parking applies. Source: MTS route map; SDMTS.com (2026-04-15)."},{"name":"PARKING STANDARDS (PSTPA)","val":"Not in PSTPA \u2014 no TPA designation; standard RS-1-7 parking applies (2 spaces per unit). Source: SDMC \u00a7142.0528 (2026-04-15)."},{"name":"MOBILITY CHOICES","val":"-- TBD: SD Municipal Code Appendix A Fig A-1"}],"overlayZones":[{"name":"HEIGHT LIMIT OVERLAY","val":"Yes -- 30 ft (Clairemont Mesa, O-22048)"},{"name":"TRANSIT AREA OVERLAY","val":"No \u2014 interior Clairemont Mesa residential; no TAOZ designation. Source: SD Zoning Data Portal (2026-04-15)."},{"name":"AIRPORT INFLUENCE AREA","val":"YES -- MCAS Miramar Review Area 1 (60-65 CNEL) + Montgomery Field Review Area 2"},{"name":"COASTAL OVERLAY","val":"No"},{"name":"VERY HIGH FIRE HAZARD","val":"YES -- within 300 ft brush zone buffer"},{"name":"FAULT ZONE","val":"No (not in Alquist-Priolo zone)"}],"parcelPolygon":[[32.8415535,-117.17756154],[32.84151114,-117.17769124],[32.84149677,-117.17773001],[32.84174129,-117.17786654],[32.84180297,-117.17770112]],"existingDwellingSF":1066,"lat":32.84167121505937,"lng":-117.17774311970788,"rotation":335,"locked":true,"setbacks":{"front":4,"rear":4,"sideL":4,"sideR":15},"buildings":[{"orientation":0,"W":5,"D":5,"offsetX":10.3,"offsetY":37.1,"spacing":0,"count":1,"stackSpacing":0,"anchor":"center","stories":1,"floorHeight":9,"stackAngle":360,"locked":false}],"activeBuilding":0,"commFront":false,"showBldgDims":true,"hiddenDimKeys":[],"mergedDimKeys":[],"chainWOffset":6.401567474405599,"chainDOffset":11.21143477916904,"propDimOffsets":{},"mapOpacity":75,"setbacksApplied":true,"freeDrag":false,"snapEdge":false,"siteNorthDeg":335,"frontBearing":240,"vehicles":[],"activeVehicle":-1,"existingBuildings":[{"polygon":[[32.841677429875524,-117.17779888309342],[32.841677429875524,-117.17770111690659],[32.84162257012448,-117.17770111690659],[32.84162257012448,-117.17779888309342]],"locked":false}],"activeExBuilding":0,"_geoOffsets":true,"siteFileName":"site_data.json"},"CA-9362_ANGWIN":{"project":"ProjectBook-Planner","siteId":"CA-9362_ANGWIN","address":"9362 Angwin Pl, San Diego, CA 92123","apn":"429-562-08-00","legalDescription":"Lot 1719, Mission Village Unit #18, Map 4252, City of San Diego, County of San Diego, State of California","yearBuilt":"1960","occupancyGroup":"R-3","zoning":"RS-1-7","cadZone":"CA_VI","lotWidth":60,"lotDepth":110,"lotSF":6600,"commercialDepth":0,"baseFAR":0.6,"commFAR":0,"maxHeight":30,"baseHeightLimit":30,"cchsMaxHeight":0,"frontSetback":15,"rearSetback":13,"sideSetback":5,"densityPerSF":5000,"nefRatePerSF":0,"affordabilityPct":0,"difPerUnit":0,"difWaiverSF":0,"projectType":"New Construction","architect":"ADEC INC.","scopeOfWork":"","cornerVisibilityTriangle":false,"cornerVisTriSize":25,"cornerVisCorner":"SW","densityBonus":false,"notes":"Lot dims estimated 60x110 (~6,600 SF) -- verify via tract map (Map 4252). Comps 0.14 ac (~6,098 SF). House SF 1,781 (4bd/2ba, per Zillow). Geologic Hazard Cat 52, slopes 25%+. Elevation ~365 ft. Cultural/Paleo sensitivity: Moderate.","inspectors":[{"name":"Combination","val":"Carl Paiz-Snodgrass | 619-533-3636 | CPaizSnodgra@sandiego.gov"},{"name":"Structural","val":"Juan Perez | 858-627-2092 | JuanPerez@sandiego.gov"},{"name":"Electrical","val":"Reina Montoya | 858-627-2077 | MontoyaR@sandiego.gov"},{"name":"Mechanical","val":"Chad Menges | 858-627-2069 | CMenges@sandiego.gov"},{"name":"Grading / Civil","val":"Alejandro Ruiz | 858-627-2034 | ARuiz@sandiego.gov"},{"name":"Elect-Fire Alarm","val":"Reina Montoya | 858-627-2077 | MontoyaR@sandiego.gov"},{"name":"Mech-Fire Suppression","val":"Jesus Vallejo | 619-533-6797 | JVallejo@sandiego.gov"},{"name":"FIT Electrical","val":"Ahmed Ali | 619-865-2955 | AhmedA@sandiego.gov"},{"name":"FIT Traffic","val":"Solomon Abraham | 619-533-4456 | SAbraham@sandiego.gov"},{"name":"FIT Civil","val":"Fadi Bety | 619-236-6099 | FBety@sandiego.gov"}],"planningAreas":[{"name":"COMMUNITY PLAN AREA","val":"SERRA MESA"},{"name":"LAND USE DESIGNATION","val":"Low Density Residential (5-9 du/ac)"},{"name":"CCHS (HOUSING SOLUTIONS)","val":"No"},{"name":"TRANSIT PRIORITY AREA (TPA)","val":"No"},{"name":"PARKING STANDARDS (PSTPA)","val":"No"},{"name":"MOBILITY CHOICES","val":"Yes -- Mobility Zone 4"},{"name":"AFFORDABLE HOUSING PARKING DEMAND","val":"High"}],"overlayZones":[{"name":"HEIGHT LIMIT OVERLAY","val":"No (RS-1-7 base 30 ft applies)"},{"name":"TRANSIT AREA OVERLAY","val":"No"},{"name":"AIRPORT INFLUENCE AREA","val":"YES -- Montgomery Field Review Area 1, Safety Zone 6, FAA Part 77 (457-462 ft MSL, 3000-3500 ft from runway)"},{"name":"COASTAL OVERLAY","val":"No"},{"name":"VERY HIGH FIRE HAZARD","val":"YES (VHFHSZ 2025 + 2009)"},{"name":"FAULT ZONE","val":"No"},{"name":"GEOLOGIC HAZARD","val":"Cat 52 -- slopes 25%+ present"},{"name":"FLOOD ZONE","val":"Zone X -- minimal flood hazard"}],"parcelPolygon":[[32.80372968,-117.12713514],[32.80349733,-117.12712961],[32.80349737,-117.12733467],[32.80373246,-117.12734349]],"existingDwellingSF":1781,"lat":32.80368563223815,"lng":-117.12719764357803,"rotation":180,"locked":true,"setbacks":{"front":15,"rear":4,"sideL":4,"sideR":4},"buildings":[{"orientation":0,"W":16.5,"D":32,"offsetX":-1.6,"offsetY":-25.6,"spacing":0,"count":1,"stackSpacing":0,"stackAngle":0,"anchor":"center","stories":1,"floorHeight":9,"locked":false}],"activeBuilding":0,"commFront":false,"showBldgDims":true,"hiddenDimKeys":[],"mergedDimKeys":[],"chainWOffset":6.44425652769786,"chainDOffset":7.755552240412605,"propDimOffsets":{},"mapOpacity":70,"setbacksApplied":true,"freeDrag":true,"snapEdge":false,"siteNorthDeg":180,"frontBearing":180.01,"vehicles":[],"activeVehicle":-1,"existingBuildings":[{"polygon":[[32.80371306211367,-117.12724650578377],[32.80371306211367,-117.12714878137228],[32.80365820236263,-117.12714878137228],[32.80365820236263,-117.12724650578377]],"locked":false}],"activeExBuilding":0,"_geoOffsets":true,"siteFileName":"site_data.json"},"WA-10404_KIRKLAND":{"project":"ProjectBook-Planner","siteId":"WA-10404_KIRKLAND","address":"10404 NE 124th St, Kirkland, WA 98034","apn":"2926059206","legalDescription":"W 1/2 OF SW 1/4 OF SE 1/4 OF NW 1/4 LESS E 211.59 FT LESS N 400 FT LESS CO RD TGW E 7.5 FT OF SE 1/4 OF SW 1/4 OF NW 1/4 LESS N 400 FT LESS CO RD","yearBuilt":"1939","occupancyGroup":"R-3","zoning":"RSX 7.2","cadZone":"WA_N","lotWidth":122,"lotDepth":233,"lotSF":28314,"commercialDepth":0,"baseFAR":0.5,"commFAR":0,"maxHeight":30,"baseHeightLimit":30,"cchsMaxHeight":0,"frontSetback":20,"rearSetback":10,"sideSetback":5,"densityPerSF":0,"nefRatePerSF":0,"affordabilityPct":0,"difPerUnit":0,"difWaiverSF":0,"projectType":"","architect":"","scopeOfWork":"","notes":"CONFIRMED (King County Assessor + GIS, 2026-04-10): APN 2926059206, legalDescription from eReal Property, yearBuilt 1939, lotSF 28,314 SF (GIS: 27,823 SF). RSX 7.2 zoning from listing data (pending ePlanning confirm). Standards from KZC Ch 15.30 Ord. 4196: height 30 ft, front 20 ft, rear 10 ft, side 5 ft, max lot coverage 50%. lat/lng from KC GIS polygon centroid -- verify via geocode. lotWidth/lotDepth are bounding-box estimates (irregular parcel, 7-vertex polygon); confirm via King County tract map. baseFAR 0.5 = 50% lot coverage approx equivalent (KZC uses coverage not FAR; placeholder only). | TBD - D: community plan + transit overlays -- Kirkland Comprehensive Plan; TPA check -- PSRC GIS. Airport -- BFI (Boeing Field) ALUCP, not SeaTac (site is Kingsgate area). Seismic -- Seattle fault zone proximity. | TBD - E: Fees -- City of Kirkland permit fee schedule; impact fees and utility connection fees. | TBD - F: Project type, architect, scope of work. | TBD - G: Inspector contacts -- City of Kirkland Permit Center (425) 587-3600. | TBD - H: Parcel polygon -- pending KC GIS vertex extract. Map rotation from aerial.","inspectors":[{"name":"Building Inspector","val":"City of Kirkland Development Services Center \u2014 (425) 587-3600 (main/planning & building counter) | (425) 587-3225 (inspection scheduling) | 123 Fifth Ave, Kirkland WA 98033 | MyBuildingPermit.com"},{"name":"Structural","val":"City of Kirkland Development Services Center \u2014 (425) 587-3600 (same counter)"},{"name":"Electrical","val":"City of Kirkland Development Services Center \u2014 (425) 587-3600"},{"name":"Mechanical","val":"City of Kirkland Development Services Center \u2014 (425) 587-3600"},{"name":"Grading / Civil","val":"City of Kirkland Public Works \u2014 (425) 587-3800 | route through Development Services Center for permit coordination"}],"planningAreas":[{"name":"COMPREHENSIVE PLAN AREA","val":"Kingsgate Neighborhood \u2014 Single Family / Low Density Residential. Kirkland 2044 Comprehensive Plan (adopted Dec 2024). Outside Totem Lake Urban Center boundary. Source: Kirkland Kingsgate Neighborhood Plan; 2044 Comp Plan."},{"name":"LAND USE DESIGNATION","val":"Single Family Residential / Low Density Residential \u2014 RSX 7.2 zone (7,200 SF min lot), Kingsgate area. Verify exact parcel designation on Kirkland GIS (kirklandwa.gov/gis). Source: KZC Chapter 15; Kirkland 2044 Comp Plan (2026-04-15)."},{"name":"TRANSIT PRIORITY AREA","val":"TBD \u2014 KC Metro stop #74714 at Totem Lake Blvd & NE 124th St is ~0.5\u20130.8 mi west. Measure walking distance; if <0.5 mi qualifies under WA HB 1110 frequent transit area. Lot size (28,314 SF) likely already permits middle housing without TPA bonus. Source: pugetsndtransit.org stop #74714 (2026-04-15)."},{"name":"URBAN GROWTH AREA (UGA)","val":"Yes -- Kirkland is within King County UGA"},{"name":"MOBILITY / TRANSIT ACCESS","val":"KC Metro routes 225 and 239 stop at Totem Lake Blvd & NE 124th St (~0.5\u20130.8 mi W). Totem Lake Urban Center with planned I-405 BRT proximity. Source: King County Metro (2026-04-15)."}],"overlayZones":[{"name":"AIRPORT INFLUENCE AREA","val":"No \u2014 outside all airport noise contours. BFI (Boeing Field) ~8 mi SW; 65 DNL contour does not reach Kirkland at this distance (~11 mi from runway). Paine Field (PAE) ~14 mi N, contours do not extend south. No Kirkland airport overlay or noise district in KZC. FAR Part 77 notification applies only for structures \u2265200 ft AGL (not applicable to SFR). Source: BFI Part 150 Study; FAA BFI noise compatibility program (federalregister.gov 2025-10587) (2026-04-15)."},{"name":"COASTAL / SHORELINE","val":"No Lake Washington shoreline designation \u2014 ~2.5\u20133 mi east of Lake Washington; outside 200 ft SMA buffer. Standard site-specific CAR required. Source: Kirkland Shoreline Master Program (2026-04-15)."},{"name":"VERY HIGH FIRE HAZARD","val":"No \u2014 Kingsgate is fully developed suburban Kirkland. WA DNR Wildfire Hazard draft map (not finalized 2026-04) does not designate urbanized east-side King County neighborhoods. Source: WA DNR Wildfire Hazard and Risk Mapping draft (2026-04-15)."},{"name":"SEISMIC / FAULT ZONE","val":"Seismic Hazard Area \u2014 site at 47.712\u00b0N is NORTH of Seattle Fault main trace (~47.61\u00b0N); lower fault rupture risk than south-of-fault sites. Cascadia Subduction Zone applicable. Upland Kingsgate soils = lower liquefaction risk. Standard seismic design (ASCE 7/IBC). Geotech review required for new multi-unit construction. Source: Seattle Fault Wikipedia; USGS Pacific NW seismic hazards (2026-04-15)."},{"name":"FEMA FLOOD ZONE","val":"Likely Zone X \u2014 upland Kingsgate area, no flood-prone streams at NE 124th. Confirm via msc.fema.gov or KC iMap (gismaps.kingcounty.gov/parcelviewer2/). Source: FEMA MSC; KC iMap (2026-04-15)."},{"name":"CRITICAL AREAS (WA)","val":"No critical areas flag identified at this address; no stream corridors or wetlands noted. Standard site-specific CAR required per KZC critical areas regulations at permit submittal. Source: King County wetlands GIS; Kirkland critical areas (2026-04-15)."}],"existingDwellingSF":2230,"parcelPolygon":[[47.711953957,-122.202527073],[47.71195392,-122.202502696],[47.711953736,-122.202413029],[47.711952865,-122.202040219],[47.711316461,-122.202049854],[47.711317689,-122.202536745],[47.711723649,-122.202530588]],"lat":47.711651,"lng":-122.202328,"rotation":0,"locked":true,"setbacks":{"front":20,"rear":10,"sideL":5,"sideR":5},"buildings":[],"activeBuilding":0,"commFront":false,"showBldgDims":false,"hiddenDimKeys":[],"mergedDimKeys":[],"chainWOffset":0,"chainDOffset":0,"propDimOffsets":{},"mapOpacity":60,"setbacksApplied":false,"freeDrag":true,"snapEdge":true,"siteNorthDeg":0,"vehicles":[],"activeVehicle":-1,"frontBearing":270,"existingBuildings":[],"activeExBuilding":-1,"_geoOffsets":true,"siteFileName":"site_data.json"},"WA-12843_175TH":{"project":"ProjectBook-Planner","siteId":"WA-12843_175TH","address":"12843 175th Ave SE, Renton, WA 98059","apn":"7229900345","legalDescription":"-- TBD: King County Recorder via iMap (gis.kingcounty.gov) by APN -- Subdivision / Block / Lot from recorded plat map","yearBuilt":"N/A","occupancyGroup":"N/A -- vacant lot","zoning":"R-4","cadZone":"WA_N","lotWidth":114,"lotDepth":132,"lotSF":15029,"commercialDepth":0,"baseFAR":0,"commFAR":0,"maxHeight":30,"baseHeightLimit":30,"cchsMaxHeight":0,"frontSetback":15,"rearSetback":20,"sideSetback":5,"densityPerSF":0,"nefRatePerSF":0,"affordabilityPct":0,"difPerUnit":0,"difWaiverSF":0,"projectType":"","architect":"","scopeOfWork":"","notes":"VACANT LOT \u2014 no structure. Assessed land value $116,000; total assessed value = land only (no improvement value) per city-data.com 2016 tax record. Owner: Ernest E Rensink & Elizabeth M Rensink. Owner ALSO owns adjacent 12853 175th Ave SE (same owners per city-data) \u2014 potential combined-parcel development opportunity (~30,000 SF total). Water: Water District connection. Sewer: Private (likely septic \u2014 verify with KC Public Health). Street: Public, paved. | PIN/APN 7229900345 \u2014 confirmed 2026-04-15 via KC GIS bbox spatial query; polygon area ~15,024 SF matches recorded 15,029 SF; centroid at 47.486470, -122.107315. Verify in KC eReal Property (blue.kingcounty.gov/assessor) for full legal description and ownership chain. | lotWidth 114 ft \u00d7 lotDepth 132 ft \u2014 GIS-measured from polygon vertices (2026-04-15); not estimated. lotSF 15,029 from city-data.com tax record. | TBD - C: All zoning standards are from Renton Municipal Code (RMC) 4-2-110A Table \u2014 verify current values at codepublishing.com/WA/Renton. Ordinance 6161 (June 2025) added middle housing (HB 1110 compliance): up to 4 units per lot allowed outright; up to 6 with affordable housing bonus. Types: duplexes, triplexes, fourplexes, townhouses, stacked flats, courtyard apts. Height and setbacks unchanged for middle housing. Corner lot: not confirmed \u2014 verify if 175th Ave SE is the only frontage or if there is a cross-street. | TBD - C2: Zoning designation confirmed as R-4 from neighborhood property search; verify exact zone code via Renton iMap (gismaps.rentonwa.gov) or Renton CED permit portal. Confirm lot is within City of Renton limits (not unincorporated KC). | TBD - D: All overlay zones unconfirmed \u2014 verify via Renton iMap and external sources listed below. | TBD - E: Fees \u2014 City of Renton permit fee schedule (rentonwa.gov/permits). WA has no NEF. Impact fees and utility connection fees via Renton CED. Permit center: (425) 430-7200. | TBD - G: Inspector contacts \u2014 City of Renton Development Services (425) 430-7200. | TBD - H: Coordinates from USCB geocoder (47.487244, -122.107018) \u2014 verify lat/lng by right-clicking lot center in Google Maps. Rotation: estimate from aerial. Parcel polygon: extract from KC iMap if irregular.","inspectors":[{"name":"Building Inspector","val":"City of Renton Permit Services \u2014 (425) 430-7200 (main CED/Development Services) | (425) 430-7215 (permit services direct) | (425) 430-7202 (inspection scheduling) | 1055 S Grady Way, Renton WA 98057 | permitting.rentonwa.gov"},{"name":"Structural","val":"City of Renton Permit Services \u2014 (425) 430-7200 (same counter)"},{"name":"Electrical","val":"City of Renton Permit Services \u2014 (425) 430-7200"},{"name":"Mechanical","val":"City of Renton Permit Services \u2014 (425) 430-7200"},{"name":"Grading / Civil","val":"City of Renton Public Works \u2014 (425) 430-7200 | route through Permit Services; geotechnical review required per RMC 4-3-050 for vacant lot development"}],"planningAreas":[{"name":"COMPREHENSIVE PLAN AREA","val":"Residential Low Density (RLD) \u2014 City of Renton 2024 Comprehensive Plan (eff. Jan 1, 2025, covers 2025\u20132044). R-4 zone implements RLD designation per RMC 4-2-010. Source: RMC 4-2-010; rentonwa.gov 2024 Comp Plan (2026-04-15)."},{"name":"LAND USE DESIGNATION","val":"Residential Low Density (RLD) \u2014 4 du/net acre base; middle housing (up to 4 units) per Ord. 6161 (June 2025). Source: RMC 4-2-010; Renton 2024 Comp Plan (2026-04-15)."},{"name":"CITY LIMITS","val":"Within City of Renton \u2014 APN 7229900345 confirmed via KC GIS spatial query (2026-04-15); PIN in 7229 series is City of Renton parcels. Verify via Renton iMap (gismaps.rentonwa.gov) if needed."},{"name":"TRANSIT PRIORITY AREA","val":"Not in TPA \u2014 East Renton Highlands at 175th Ave SE has no high-frequency transit within 0.5 mi. No Sound Transit, BRT, or RapidRide line serves this area. Nearest transit center ~6 mi west (downtown Renton). Source: King County Metro route maps (2026-04-15)."},{"name":"URBAN GROWTH AREA (UGA)","val":"Yes -- Renton is within King County UGA"},{"name":"MIDDLE HOUSING (HB 1110)","val":"Yes -- Renton adopted Ord. 6161 (June 2025); up to 4 units per lot outright in R-4"}],"overlayZones":[{"name":"AIRPORT INFLUENCE AREA","val":"Likely no formal overlay \u2014 Renton Municipal Airport (RNT) ~6.5 mi west; FAR Part 77 transitional surfaces do not impose height restrictions on SFR at this distance. BFI (Boeing Field) ~8 mi NW; 65 DNL contour does not extend to 98059. Confirm RMC 4-3-020 airport height boundary map for east Renton does not reach 175th Ave SE. FAA OE/AAA filing only required for structures \u2265~70\u2013100 ft AGL. Source: Wikipedia RNT; RMC 4-3-020; FAA airport data (2026-04-15)."},{"name":"COASTAL / SHORELINE","val":"No \u2014 inland location; ~0.9 mi north of Soos Creek; no SMA shoreline designation. Soos Creek main channel ~1.5\u20132 mi south/southwest. Source: WA Ecology Coastal Atlas (2026-04-15)."},{"name":"VERY HIGH FIRE HAZARD","val":"No \u2014 East Renton Highlands is suburban with no WUI designation. WA DNR Wildfire Hazard draft map (not finalized 2026-04) does not designate standard suburban King County parcels. Source: WA DNR Wildfire Hazard and Risk Mapping draft (2026-04-15)."},{"name":"SEISMIC / FAULT ZONE","val":"Seismic Hazard Area \u2014 site at 47.486\u00b0N is south of Seattle Fault main trace (~47.61\u00b0N); footwall zone, significant seismic hazard from both Seattle Fault (M7+) and Cascadia Subduction Zone. Elevated East Renton Highlands terrain = lower liquefaction risk vs Cedar River valley. RMC 4-3-050 requires geotechnical report if designated seismic hazard soils present. Source: WA DNR GM-41 liquefaction susceptibility; Renton Hazard Mitigation Plan; RMC 4-3-050 (2026-04-15)."},{"name":"FEMA FLOOD ZONE","val":"Likely Zone X \u2014 elevated East Renton Highlands; outside Cedar River, Green River, and Soos Creek floodplains at this location. Confirm at msc.fema.gov or KC iMap (gismaps.kingcounty.gov/parcelviewer2/). Source: KC Flood Control District; FEMA MSC (2026-04-15)."},{"name":"CRITICAL AREAS (RMC 4-3)","val":"CAR REQUIRED \u2014 vacant lot in Soos Creek watershed area (Soos Creek ~1.5\u20132 mi S). Wetland delineation may be required if hydric soils, drainage swales, or ponding present on the vacant parcel. Submit environmental checklist at pre-application meeting per RMC 4-3-050. Source: Soos Creek Water and Sewer District; King County wetlands GIS; RMC 4-3-050 (2026-04-15)."},{"name":"WELLHEAD PROTECTION","val":"TBD \u2014 East Renton area has some Zone 1/2 wellhead protection areas; verify via Renton iMap (gismaps.rentonwa.gov) wellhead protection layer. Soos Creek Water and Sewer District serves this address. Source: Soos Creek W&S District (sooscreek.com); Renton iMap (2026-04-15)."}],"devRef":{"source":"Census geocoder lat/lng; city-data.com 2016 tax record (lot SF, owner, land value); Renton Ord. 6161 middle housing (June 2025); RMC 4-2-110A (R-4 standards from knowledge base \u2014 verify at codepublishing.com/WA/Renton).","lotSF":15029,"lotWidthEstimate_ft":80,"lotDepthEstimate_ft":188,"note_dimensions":"Width and depth are rough estimates only (80 \u00d7 188 \u2248 15,040 SF). Confirm from KC Assessor parcel map or surveyor before any design work.","setbacksApplied":{"front_ft":15,"rear_ft":20,"side_ft":5},"buildableEnvelope":{"footprintSF_estimate":6012,"pctOfLot":40.0,"note":"40% max lot coverage = 15,029 \u00d7 0.40 = 6,012 SF max footprint. Actual buildable zone within setbacks ~70 ft \u00d7 153 ft = 10,710 SF (usable area, not max coverage)."},"imperviousLimit":{"pct":55,"maxSF":8266,"note":"15,029 \u00d7 0.55 = 8,266 SF max impervious total (structures + driveway + hardscape)."},"units":{"baselineSingleFamily":1,"middleHousing_4unit":4,"bonusAffordable_6unit":6,"note":"R-4 base = 1 SFR. After Ord. 6161 (HB 1110, June 2025): 4 units per lot outright; 6 with affordable bonus. Types: duplex, triplex, fourplex, townhouse, stacked flat, courtyard apt."},"adjacentParcel":{"address":"12853 175th Ave SE, Renton, WA 98059","owner":"Ernest E Rensink & Elizabeth M Rensink (same owner)","note":"Combined development of both parcels (~30,058 SF total) could unlock larger unit count and simplified site layout. Requires lot line adjustment or joint permit. Verify APN of 12853 via KC Assessor."}},"existingDwellingSF":0,"parcelPolygon":[[47.486636,-122.107585],[47.486618,-122.107048],[47.486303,-122.107045],[47.486323,-122.107583]],"lat":47.48647,"lng":-122.107254,"rotation":0,"locked":false,"setbacks":{"front":15,"rear":20,"sideL":5,"sideR":5},"buildings":[{"orientation":0,"W":30,"D":60,"offsetX":0,"offsetY":0,"spacing":0,"count":1,"stackSpacing":0,"anchor":"center","stories":1,"floorHeight":9,"locked":false,"stackAngle":0}],"activeBuilding":0,"commFront":false,"showBldgDims":true,"hiddenDimKeys":[],"mergedDimKeys":[],"chainWOffset":0,"chainDOffset":0,"propDimOffsets":{},"mapOpacity":100,"setbacksApplied":false,"freeDrag":true,"snapEdge":false,"siteNorthDeg":0,"frontBearing":270,"vehicles":[],"activeVehicle":-1,"existingBuildings":[],"activeExBuilding":-1,"_geoOffsets":true,"siteFileName":"site_data.json"},"WA-405_126TH":{"project":"ProjectBook-Planner","siteId":"WA-405_126TH","address":"405 SW 126th St, Burien, WA 98146","apn":"0723049368","legalDescription":"N 120 FT OF E 1/2 OF SE 1/4 OF SW 1/4 OF SE 1/4 LESS W 180 FT LESS CO RDS","yearBuilt":"1949","occupancyGroup":"R-3","zoning":"R2","cadZone":"WA_N","lotWidth":94,"lotDepth":95,"lotSF":10879,"commercialDepth":0,"baseFAR":0,"commFAR":0,"maxHeight":35,"baseHeightLimit":35,"cchsMaxHeight":0,"frontSetback":15,"rearSetback":5,"sideSetback":5,"densityPerSF":0,"nefRatePerSF":0,"affordabilityPct":0,"difPerUnit":0,"difWaiverSF":0,"projectType":"","architect":"","scopeOfWork":"","notes":"ZONING SOURCE: Burien Ordinance 868 (effective July 9, 2025) amended BMC Title 19 -- all R-zone standards below are from Ord. 868, Table 19.15.015.2.B and .2.C. R-2 zone (Residential 2 -- Low Density): front setback=15ft, interior setback (all non-front sides including rear)=5ft, max height=35ft, min lot size=5,000sf, max impervious=70%, baseline units per lot=4 outright (+1 bonus if affordable or within 1/4mi of qualifying transit stop, +1 preservation bonus if existing primary dwelling preserved). Corner lot note: WA-405 is a corner lot (curved polygon corner at SE); both street frontages require 15ft setback. Short plat (BMC Ch.17.35): divides land into 4 or fewer lots, Type 1 review, Director decision, ~180 days to preliminary decision, 36-month window to record final plat after preliminary approval. Pre-application meeting required (submit via MyBuildingPermit). Lot must meet minimum R-2 lot size (5,000sf) per resulting lot. Surveyor required. At 10,879sf, lot could theoretically be split into 2 lots of ~5,440sf each -- but corner lot geometry and street frontage must be verified. Note: 4 units allowed outright on existing lot WITHOUT a short plat; short plat only needed if selling lots separately. Unit Lot Subdivision (SB 5258, 2023) available for condo-style ownership without traditional lot division -- Burien must adopt by 2027. | TBD - A: legalDescription -- King County Recorder / iMap (gis.kingcounty.gov). yearBuilt and existing occupancy -- King County Assessor (blue.kingcounty.gov/assessor). | TBD - D: community plan, transit overlays -- City of Burien Comprehensive Plan; TPA check -- PSRC / Sound Transit GIS. Airport influence -- SEA (SeaTac) ALUCP. Fault zone -- USGS seismic. | TBD - E: Fees -- 2026 City of Burien fee schedule (burienwa.gov permits page); WA has no NEF; check impact fees and connection fees. Short plat filing fee on MyBuildingPermit. | TBD - G: Inspector contacts -- City of Burien Permit Center (206) 248-5510. | TBD - H: Map rotation from aerial. Parcel polygon captured.","inspectors":[{"name":"Building Inspector","val":"City of Burien Permit Center \u2014 (206) 241-4647 (main) | (206) 248-5525 (inspection scheduling) | permittech@burienwa.gov | 400 SW 152nd St Suite 300, Burien WA 98166 | M\u2013Th 9am\u2013noon in-person, 9am\u20134pm phone | MyBuildingPermit.com"},{"name":"Structural","val":"City of Burien Permit Center \u2014 (206) 241-4647 (same counter as building)"},{"name":"Electrical","val":"City of Burien Permit Center \u2014 (206) 241-4647"},{"name":"Mechanical","val":"City of Burien Permit Center \u2014 (206) 241-4647"},{"name":"Grading / Civil","val":"City of Burien Public Works \u2014 (206) 241-4647 (route via Permit Center); King County Permitting for unincorporated areas (206) 296-6600"}],"planningAreas":[{"name":"COMPREHENSIVE PLAN AREA","val":"Residential Low 1 (RL-1) \u2014 Burien 2044 Comprehensive Plan (adopted Oct 28, 2024). R2 zone implements RL-1. Source: connect.burienwa.gov; Ord. 868 (eff. July 9, 2025)."},{"name":"LAND USE DESIGNATION","val":"Residential Low 1 (RL-1) \u2014 medium-density infill residential; up to 6 units/lot on 5,000 SF parcels under Ord. 868. Source: Burien 2044 Comp Plan; Ord. 868."},{"name":"TRANSIT PRIORITY AREA","val":"Likely YES \u2014 RapidRide H Line stop at SW 128th St on Ambaum Blvd SW is ~0.15 mi from site; H Line operates 10\u201315 min headways. Qualifies as frequent transit service area under WA HB 1110 if walking distance <0.5 mi. Confirm walking route distance. Source: King County Metro RapidRide H Line (2026-04-15)."},{"name":"URBAN GROWTH AREA (UGA)","val":"Yes -- Burien is within King County UGA"},{"name":"MOBILITY / TRANSIT ACCESS","val":"RapidRide H Line on Ambaum Blvd SW (~0.15 mi W); Burien Transit Center ~1 mi E (A Line, H Line, multiple KC Metro routes). Source: King County Metro (2026-04-15)."}],"overlayZones":[{"name":"AIRPORT INFLUENCE AREA","val":"YES \u2014 Burien is directly under SeaTac (SEA) flight paths. Aircraft Noise Reduction per BMC Chapter 15.12 applies to all new construction. Site at ~1.8 mi SW of SEA \u2014 near or within DNL 65 noise contour. Check Port Package eligibility at seatacnoise.info and 2032 NEM at seapart150.com. Permit submittal requires Aircraft Noise Reduction Submittal Checklist (Burien Permit Center). FAR Part 77 height thresholds not triggered by SFR. Source: BMC 15.12; seapart150.com; Port of Seattle 2023 NEM (2026-04-15)."},{"name":"COASTAL / SHORELINE","val":"No SMA shoreline designation \u2014 ~0.9 mi east of Puget Sound OHWM; outside 200 ft SMA buffer. Site-specific CAR required at permit stage for drainage/wetlands. Source: WA Ecology Coastal Atlas (2026-04-15)."},{"name":"VERY HIGH FIRE HAZARD","val":"No \u2014 urban Burien is not a WUI area; WA DNR Wildfire Hazard draft map (not finalized as of 2026-04) does not designate fully suburban King County neighborhoods. No high/very-high wildfire hazard expected. Source: WA DNR Wildfire Hazard and Risk Mapping draft (2026-04-15)."},{"name":"SEISMIC / FAULT ZONE","val":"Seismic Hazard Area \u2014 site is south of Seattle Fault main trace (~47.61\u00b0N; site at 47.490\u00b0N). Both Seattle Fault and Cascadia Subduction Zone applicable. No Special Fault Rupture Hazard Zone designation. Standard seismic design (ASCE 7/IBC). Liquefaction potential exists in low-lying areas; upland site lower risk. Source: Seattle Fault Wikipedia; King County Earthquake Soils Hazard Map (2026-04-15)."},{"name":"FEMA FLOOD ZONE","val":"Likely Zone X \u2014 minimal hazard; FIRM panels 0935F, 0953F, 0955F (King County, eff. Aug 19, 2020). Confirm at msc.fema.gov or KC iMap. Source: burienwa.gov FIRM page; KC 2020 FIRM update (2026-04-15)."},{"name":"CRITICAL AREAS (WA)","val":"No critical areas flag identified; ~0.9 mi from Puget Sound, no creek/wetland at this address per search. Site-specific Critical Areas Review (CAR) required at permit submittal. Source: City of Burien planning (2026-04-15)."}],"parcelPolygon":[[47.49023293,-122.33933165],[47.49022964,-122.33932467],[47.49022597,-122.33931812],[47.49022195,-122.33931205],[47.49021759,-122.3393065],[47.49021293,-122.33930151],[47.490208,-122.33929712],[47.49020284,-122.33929335],[47.49019748,-122.33929023],[47.49019196,-122.33928779],[47.49018633,-122.33928604],[47.49018061,-122.33928464],[47.49017486,-122.33928466],[47.48998254,-122.33928539],[47.48998177,-122.33976728],[47.49022738,-122.33976487],[47.49022742,-122.3396207],[47.49022753,-122.33961666],[47.49022764,-122.33961262],[47.49022776,-122.33960858],[47.49022789,-122.33960453],[47.49022802,-122.3396005],[47.49022816,-122.33959646],[47.4902283,-122.33959242],[47.49022845,-122.33958838],[47.4902286,-122.33958434],[47.49022876,-122.3395803],[47.49022893,-122.33957627],[47.4902291,-122.33957223],[47.49022928,-122.33956819],[47.49022947,-122.33956416],[47.49022966,-122.33956013],[47.49022986,-122.33955609],[47.49023006,-122.33955206],[47.49023027,-122.33954802],[47.49023049,-122.33954399],[47.49023071,-122.33953996],[47.49023094,-122.33953593],[47.49023117,-122.3395319],[47.49023141,-122.33952787],[47.49023166,-122.33952384],[47.49023191,-122.33951981],[47.49023217,-122.33951579],[47.49023243,-122.33951176],[47.4902327,-122.33950774],[47.49023298,-122.33950371],[47.49023326,-122.33949969],[47.49023355,-122.33949566],[47.49023384,-122.33949165],[47.49023415,-122.33948763],[47.49023445,-122.33948361],[47.49023476,-122.33947959],[47.49023508,-122.33947557],[47.4902354,-122.33947155],[47.49023574,-122.33946754],[47.49023607,-122.33946353],[47.49023642,-122.33945951],[47.49023677,-122.3394555],[47.49023712,-122.33945149],[47.49023748,-122.33944747],[47.49023785,-122.33944347],[47.49023822,-122.33943947],[47.4902386,-122.33943546],[47.49023898,-122.33943145],[47.49023938,-122.33942745],[47.49023977,-122.33942345],[47.49024018,-122.33941945],[47.49024059,-122.33941545],[47.490241,-122.33941145],[47.49024142,-122.33940745],[47.49024185,-122.33940346],[47.49024228,-122.33939946],[47.49024272,-122.33939547],[47.49024317,-122.33939148],[47.49024356,-122.33938815],[47.49024345,-122.33937965],[47.49024286,-122.3393712],[47.49024179,-122.33936285],[47.49024025,-122.33935467],[47.49023825,-122.3393467],[47.49023581,-122.33933901]],"existingDwellingSF":599,"devRef":{"source":"Burien Ord. 868 (eff. Jul 9, 2025) \u2014 BMC Table 19.15.015.2.B/.2.C. Geometry computed from parcelPolygon.","lotSF":10879,"frontages":{"primary_SW126thSt_ft":118.7,"secondary_eastSt_ft":70.1,"west_interior_ft":89.5},"setbacksApplied":{"south_front_ft":15,"east_cornerFront_ft":15,"north_interior_ft":5,"west_interior_ft":5},"buildableEnvelope":{"footprintSF":6824,"pctOfLot":62.7,"note":"Polygon-inset grid calc (2 ft res). Corner lot: both street frontages at 15 ft. Surveyor confirmation required."},"imperviousLimit":{"pct":70,"maxSF":7615,"remainingAfterFootprint":791,"note":"791 sq ft remaining for driveway + walkways after max footprint build-out."},"units":{"baseline":4,"bonusTransitOrAffordable":1,"bonusPreservation":1,"maxTotal":6,"noFARLimit":true,"heightLimitFt":35},"developmentScenarios":{"twoStory":{"totalGFA_SF":13648,"perUnit4_SF":3412,"impliedFAR":1.25},"threeStory":{"totalGFA_SF":20472,"perUnit4_SF":5118,"impliedFAR":1.88}},"existingBuilding":{"sfFromPolygon":599,"dimensions":"~20 ft N-S x 29.9 ft E-W","yearBuilt":1949,"verifyWith":"King County Assessor (blue.kingcounty.gov/assessor) -- polygon is rough estimate","preservationBonus":"R-2 allows +1 unit above baseline if primary dwelling preserved per BMC 19.17.155. Verify criteria."},"shortPlat":{"eligible":true,"maxLots":2,"minLotSF":5000,"note":"10,879 sf / 5,000 min = 2 lots max. Each lot must meet 5,000 sf min, maintain street frontage, pass SEPA. BMC Ch.17.35 Type 1 review, ~180 days preliminary. Short plat NOT needed for 4-unit build on existing lot \u2014 only required if selling lots separately."}},"lat":47.49020440935354,"lng":-122.3395711091351,"rotation":0,"locked":true,"setbacks":{"front":15,"rear":5,"sideL":15,"sideR":5},"buildings":[{"orientation":0,"offsetX":-32.9,"offsetY":-21.4,"count":1,"stackSpacing":0,"anchor":"front","stories":2,"floorHeight":9,"W":30,"D":40,"stackAngle":0,"locked":false}],"activeBuilding":0,"commFront":false,"showBldgDims":true,"hiddenDimKeys":[],"mergedDimKeys":[],"chainWOffset":-9.79097921411255,"chainDOffset":30,"propDimOffsets":{},"mapOpacity":85,"setbacksApplied":true,"freeDrag":true,"snapEdge":false,"siteNorthDeg":0,"frontBearing":90.15,"vehicles":[],"activeVehicle":-1,"existingBuildings":[{"polygon":[[47.49015742958625,-122.33958421903574],[47.49015742958625,-122.33946265843753],[47.4901025698352,-122.33946265843753],[47.4901025698352,-122.33958421903574]],"locked":false}],"activeExBuilding":0,"_geoOffsets":true,"siteFileName":"site_data.json"}};</script>
+</head>
+<body>
+<div class="page-wrapper">
+
+    <!-- SUITE BAR -->
+    <div class="suite-bar no-print">
+        <a href="/map" class="suite-bar-link" onclick="if(location.protocol==='file:')this.href='InteractiveMap.html'">Map</a>
+        <span class="suite-bar-sep">|</span>
+        <span class="suite-bar-active">Site Info</span>
+        <span class="suite-bar-sep">|</span>
+        <a href="/checklist" class="suite-bar-link" onclick="if(location.protocol==='file:')this.href='PreApp_Checklist.html'">Checklist</a>
+        <div class="suite-bar-ext">
+            <a href="https://assr.parcelquest.com/" target="_blank" class="suite-bar-extlink suite-bar-extlink-amber">ParcelQuest &#x2197;</a>
+            <a href="https://sandiego.maps.arcgis.com/" target="_blank" class="suite-bar-extlink suite-bar-extlink-sky">SanDag GIS &#x2197;</a>
+        </div>
+    </div>
+
+    <div class="siteinfo-wrap">
+
+        <!-- SITE HEADER -->
+        <div class="siteinfo-header">
+            <h2 id="si-address">Site Info Sheet</h2>
+            <span class="si-apn">APN: <span id="si-apn">--</span> &nbsp;|&nbsp; Zone: <span id="si-zone">--</span></span>
+        </div>
+
+        <!-- PROPERTY BANNER -->
+        <div class="property-banner" id="propertyBanner">
+            <div class="banner-stat"><span class="banner-label">Lot Dims</span><span class="banner-value"><span id="ui-w">--</span>' &times; <span id="ui-d">--</span>'</span></div>
+            <div class="banner-stat"><span class="banner-label">Lot Size</span><span class="banner-value" id="ui-sqft">--</span></div>
+            <div class="banner-stat"><span class="banner-label">Ex. Bldg SF</span><span class="banner-value" id="ui-exbldg">--</span></div>
+            <div class="banner-stat"><span class="banner-label">Zoning</span><span class="banner-value" id="ui-zoning">--</span></div>
+            <div class="banner-stat"><span class="banner-label">Base Density</span><span class="banner-value" id="ui-density">--</span></div>
+            <div class="banner-stat"><span class="banner-label">FAR [Base / Comm]</span><span class="banner-value" id="ui-far">--</span></div>
+            <div class="banner-stat"><span class="banner-label">Max Height</span><span class="banner-value" id="ui-maxht">--</span></div>
+            <div class="banner-stat"><span class="banner-label">Setbacks (F/S/R)</span><span class="banner-value" id="ui-setbacks">--</span></div>
+        </div>
+
+        <!-- SCOPE OF WORK -->
+        <details class="info-scope-section" open>
+            <summary>SCOPE OF WORK</summary>
+            <p id="info-scope-work" class="info-scope-text">--</p>
+        </details>
+
+        <!-- INFO BOTTOM — same two-column layout as map page -->
+        <div class="info-bottom" id="infoBottom">
+            <div class="info-col-left" id="infoColLeft">
+                <details open>
+                    <summary>PROJECT INFORMATION</summary>
+                    <table class="cad-table">
+                        <tr><th>PROJECT ADDRESS:</th><td id="info-address"></td></tr>
+                        <tr><th>LEGAL DESCRIPTION:</th><td id="info-legal">--</td></tr>
+                        <tr><th>PARCEL #:</th><td id="info-apn"></td></tr>
+                        <tr><th>EX. BLDG SF:</th><td id="info-exbldg-proj">--</td></tr>
+                        <tr><th>YEAR BUILT:</th><td id="info-year-built">--</td></tr>
+                        <tr><th>BASE ZONE:</th><td id="info-zone"></td></tr>
+                        <tr><th>OCCUPANCY GROUP:</th><td id="info-occupancy">--</td></tr>
+                        <tr><th>AVG ELEVATION:</th><td id="info-avg-elev">--</td></tr>
+                        <tr><th>PROJECT TYPE:</th><td id="info-sl-projtype">--</td></tr>
+                        <tr><th>ARCHITECT:</th><td id="info-sl-architect">--</td></tr>
+                        <tr><th>LOT WIDTH:</th><td id="info-w"></td></tr>
+                        <tr><th>HEIGHT RESTRICTION:</th><td id="info-height">--</td></tr>
+                        <tr><th>STANDARD SETBACKS:</th><td id="info-setbacks">--</td></tr>
+                    </table>
+                </details>
+                <details open>
+                    <summary>LAND COVERAGE</summary>
+                    <table class="cad-table">
+                        <tr><th>LOT SIZE:</th><td id="info-lotsize">--</td></tr>
+                        <tr><th>EX. BLD:</th><td id="info-exbldg-land">--</td></tr>
+                        <tr><th>MIN LOT / DENSITY:</th><td id="info-density-lot">--</td></tr>
+                        <tr><th>MAX FAR:</th><td id="info-max-far">--</td></tr>
+                        <tr><th>BUILDABLE FAR:</th><td id="info-buildable-far">--</td></tr>
+                        <tr><th>PROPOSED FAR:</th><td id="info-proposed-far">--</td></tr>
+                        <tr><th>TOTAL FAR:</th><td id="info-total-far">--</td></tr>
+                        <tr><th>FAR CHECK:</th><td id="info-far-check">--</td></tr>
+                    </table>
+                </details>
+            </div>
+            <div class="info-col-gap"></div>
+            <div class="info-col-right" id="infoColRight">
+                <details open>
+                    <summary id="info-zoning-header">ZONING PARAMETERS</summary>
+                    <table class="cad-table">
+                        <tr><th>BASE DENSITY:</th><td id="info-zp-density">--</td></tr>
+                        <tr><th>BASE FAR:</th><td id="info-zp-basefar">--</td></tr>
+                        <tr><th>COMM FAR:</th><td id="info-zp-commfar">--</td></tr>
+                        <tr><th>MAX HEIGHT:</th><td id="info-zp-maxht">--</td></tr>
+                        <tr><th>FRONT SETBACK:</th><td id="info-zp-front">--</td></tr>
+                        <tr><th>REAR SETBACK:</th><td id="info-zp-rear">--</td></tr>
+                        <tr><th>SIDE SETBACK:</th><td id="info-zp-side">--</td></tr>
+                        <tr><th>NOTES:</th><td id="info-zp-notes">--</td></tr>
+                    </table>
+                </details>
+                <details id="info-planning-section" open>
+                    <summary>PLANNING &amp; TRANSIT AREAS</summary>
+                    <table class="cad-table" id="info-planning-table"></table>
+                </details>
+                <details id="info-overlay-section" open>
+                    <summary>OVERLAY ZONES</summary>
+                    <table class="cad-table" id="info-overlay-table"></table>
+                </details>
+                <details id="info-inspectors-section" open>
+                    <summary>CITY INSPECTOR CONTACTS</summary>
+                    <table class="cad-table" id="info-inspectors-table"></table>
+                </details>
+            </div>
+        </div>
+
+        <!-- EXPORT LISP SECTION -->
+        <div class="siteinfo-export no-print">
+            <div class="align-btn-row">
+                <button id="siteInfoExportBtn"  class="btn-align btn-align-lisp">&#9654; Export LISP</button>
+                <button id="siteInfoExcelBtn"   class="btn-align btn-align-excel">&#9654; Export Excel</button>
+                <button id="siteInfoPrintBtn"   class="btn-align btn-align-img" onclick="window.print()">&#128438; Print / PDF</button>
+            </div>
+            <textarea id="siteInfoLispOutput" class="lisp-output" readonly placeholder="LISP code will appear here after clicking Export LISP&#x2026;"></textarea>
+        </div>
+
+    </div><!-- end siteinfo-wrap -->
+</div><!-- end page-wrapper -->
+
+<script>
+/* ==========================================
+   SITE INFO SHEET — self-contained init
+   Reads from window.__SITE_DEFAULTS__ (injected at build time).
+   No engine dependencies.
+   ========================================== */
+(function() {
+    var sd = window.__SITE_DEFAULTS__ || {};
+
+    var lotW  = sd.lotWidth  || 0;
+    var lotD  = sd.lotDepth  || 0;
+    var lotSF = (sd.lotSF && sd.lotSF > 0) ? sd.lotSF : (lotW * lotD);
+
+    var baseFAR  = sd.baseFAR  != null ? sd.baseFAR  : 2.0;
+    var commFAR  = sd.commFAR  != null ? sd.commFAR  : 0;
+    var maxHt    = sd.maxHeight != null ? sd.maxHeight : 50;
+    var densPS   = sd.densityPerSF != null ? sd.densityPerSF : 600;
+    var fSb      = sd.frontSetback != null ? sd.frontSetback : 10;
+    var rSb      = sd.rearSetback  != null ? sd.rearSetback  : 10;
+    var sSb      = sd.sideSetback  != null ? sd.sideSetback  : 0;
+    var exSF     = sd.existingDwellingSF || 0;
+
+    function _set(id, val) {
+        var el = document.getElementById(id);
+        if (el) el.innerText = val;
+    }
+    function _n(v, dec) { return (dec != null) ? Number(v).toFixed(dec) : Number(v); }
+
+    /* ── Header ── */
+    _set('si-address', sd.address || '--');
+    _set('si-apn',     sd.apn     || '--');
+    _set('si-zone',    sd.zoning  || '--');
+
+    /* ── Property banner ── */
+    _set('ui-w',        _n(lotW, 1));
+    _set('ui-d',        _n(lotD, 1));
+    _set('ui-sqft',     Math.round(lotSF).toLocaleString() + ' SF');
+    _set('ui-exbldg',   exSF > 0 ? exSF.toLocaleString() + ' SF' : '--');
+    _set('ui-zoning',   sd.zoning  || '--');
+    _set('ui-density',  densPS > 0 ? '1 DU / ' + densPS + ' SF' : '--');
+    _set('ui-far',      baseFAR + ' / ' + commFAR);
+    _set('ui-maxht',    maxHt + ' FT');
+    _set('ui-setbacks', fSb + "\' / " + sSb + "\' / " + rSb + "\'");
+
+    /* ── Scope of work ── */
+    _set('info-scope-work', sd.scopeOfWork || '--');
+
+    /* ── Project info table ── */
+    var exSFText = exSF > 0 ? exSF.toLocaleString() + ' SF' : '--';
+    _set('info-address',   sd.address || '--');
+    _set('info-legal',     sd.legalDescription || '--');
+    _set('info-apn',       sd.apn     || '--');
+    _set('info-exbldg-proj', exSFText);
+    _set('info-year-built',  sd.yearBuilt      || '--');
+    _set('info-zone',        sd.zoning         || '--');
+    _set('info-occupancy',   sd.occupancyGroup || '--');
+    _set('info-sl-projtype', sd.projectType    || '--');
+    _set('info-sl-architect', sd.architect     || '--');
+    _set('info-w',           _n(lotW, 1) + ' FT');
+    _set('info-height',      maxHt > 0 ? maxHt + '.0 FT' : '--');
+    _set('info-setbacks',    '(F) ' + fSb + '-FT | (R) ' + rSb + '-FT | (S) ' + sSb + '-FT');
+
+    /* ── Land coverage table ── */
+    _set('info-lotsize',       Math.round(lotSF).toLocaleString() + ' S.F.');
+    _set('info-exbldg-land',   exSFText);
+    _set('info-density-lot',   _n(lotSF, 1) + ' S.F.');
+    _set('info-max-far',       baseFAR > 0 ? baseFAR.toString() : 'N/A');
+    _set('info-buildable-far', (lotSF * baseFAR).toFixed(1) + ' S.F.');
+
+    /* ── Zoning params table ── */
+    if (document.getElementById('info-zoning-header'))
+        document.getElementById('info-zoning-header').textContent = 'ZONING PARAMETERS (' + (sd.zoning || '--') + ')';
+    _set('info-zp-density', densPS > 0 ? '1 DU per ' + densPS + ' sq. ft.' : 'Per zoning overlay');
+    _set('info-zp-basefar', baseFAR > 0 ? baseFAR.toString() : 'N/A');
+    _set('info-zp-commfar', commFAR > 0 ? commFAR + ' FAR' : 'N/A');
+    _set('info-zp-maxht',   maxHt > 0 ? maxHt + ' Feet' : '--');
+    _set('info-zp-front',   fSb + ' FT');
+    _set('info-zp-rear',    rSb + ' FT');
+    _set('info-zp-side',    sSb + ' FT');
+    _set('info-zp-notes',   sd.notes || '--');
+
+    /* ── Planning areas (dynamic) ── */
+    var planTable = document.getElementById('info-planning-table');
+    if (planTable) {
+        var areas = sd.planningAreas || [];
+        if (areas.length > 0) {
+            planTable.innerHTML = '';
+            areas.forEach(function(r) {
+                var tr = document.createElement('tr');
+                var th = document.createElement('th'); th.textContent = (r.name || '').toUpperCase() + ':';
+                var td = document.createElement('td'); td.textContent = r.val || '--';
+                tr.appendChild(th); tr.appendChild(td); planTable.appendChild(tr);
+            });
+        } else {
+            planTable.innerHTML = '<tr><td>No planning data assigned</td></tr>';
+        }
+    }
+
+    /* ── Overlay zones (dynamic) ── */
+    var overlayTable = document.getElementById('info-overlay-table');
+    if (overlayTable) {
+        var zones = sd.overlayZones || [];
+        if (zones.length > 0) {
+            overlayTable.innerHTML = '';
+            zones.forEach(function(r) {
+                var tr = document.createElement('tr');
+                var th = document.createElement('th'); th.textContent = (r.name || '').toUpperCase() + ':';
+                var td = document.createElement('td'); td.textContent = r.val || '--';
+                tr.appendChild(th); tr.appendChild(td); overlayTable.appendChild(tr);
+            });
+        } else {
+            overlayTable.innerHTML = '<tr><td>No overlay zones assigned</td></tr>';
+        }
+    }
+
+    /* ── Inspectors (dynamic) ── */
+    var inspTable = document.getElementById('info-inspectors-table');
+    if (inspTable) {
+        var insp = sd.inspectors || [];
+        if (insp.length > 0) {
+            inspTable.innerHTML = '';
+            insp.forEach(function(ins) {
+                var tr = document.createElement('tr');
+                var th = document.createElement('th'); th.textContent = (ins.name || '').toUpperCase() + ':';
+                var td = document.createElement('td'); td.textContent = ins.val || '--';
+                tr.appendChild(th); tr.appendChild(td); inspTable.appendChild(tr);
+            });
+        } else {
+            inspTable.innerHTML = '<tr><td>No inspectors assigned</td></tr>';
+        }
+    }
+
+    /* ── Export Excel ── */
+    document.getElementById('siteInfoExcelBtn').addEventListener('click', function() {
+        // Delegate to ExportEngine if available (loaded on map page),
+        // otherwise call the standalone generator below.
+        if (typeof ExportEngine !== 'undefined' && ExportEngine.generateExcel) {
+            ExportEngine.generateExcel();
+        } else {
+            generateSiteInfoExcel(sd, lotSF, baseFAR, commFAR, maxHt, densPS, fSb, rSb, sSb);
+        }
+    });
+
+    /* ── Export LISP ── */
+    document.getElementById('siteInfoExportBtn').addEventListener('click', function() {
+        var lispCode = generateSiteInfoLISP(sd, lotSF, baseFAR, commFAR, maxHt, densPS, fSb, rSb, sSb, exSF);
+        document.getElementById('siteInfoLispOutput').value = lispCode;
+        var blob = new Blob([lispCode], { type: 'text/plain' });
+        var a = document.createElement('a');
+        a.download = 'SiteProjectInfo_' + (sd.apn || 'Site').replace(/[^a-zA-Z0-9-]/g, '_') + '.lsp';
+        a.href = URL.createObjectURL(blob);
+        a.click();
+        URL.revokeObjectURL(a.href);
+    });
+
+})();
+
+
+/* ==========================================
+   LISP GENERATOR — SiteProjectInfo
+   ========================================== */
+function generateSiteInfoLISP(sd, lotSF, baseFAR, commFAR, maxHt, densPS, fSb, rSb, sSb, exSF) {
+
+    var today = new Date().toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' });
+    function q(v)  { return '"' + String(v || '').replace(/"/g, "'") + '"'; }
+    function n1(v) { return Number(v || 0).toFixed(1); }
+    function n2(v) { return Number(v || 0).toFixed(2); }
+
+    /* Buildings */
+    var bldgs = sd.buildings || [];
+    var bldgLines = [];
+    var totalProposedSF = 0;
+    bldgs.forEach(function(b, i) {
+        var n = i + 1;
+        var sf = Math.round((b.W || 0) * (b.D || 0) * (b.count || 1));
+        totalProposedSF += sf;
+        bldgLines.push(
+            '(setq SPI:Bldg' + n + 'W       ' + n1(b.W)        + ')   ; ft',
+            '(setq SPI:Bldg' + n + 'D       ' + n1(b.D)        + ')   ; ft',
+            '(setq SPI:Bldg' + n + 'Count   ' + (b.count || 1) + ')',
+            '(setq SPI:Bldg' + n + 'Stories ' + (b.stories || 1) + ')',
+            '(setq SPI:Bldg' + n + 'SF      ' + sf              + ')   ; W x D x Count'
+        );
+    });
+
+    /* Planning areas — individual vars + list */
+    var planAreas = sd.planningAreas || [];
+    var planVarLines = planAreas.map(function(r, i) {
+        var n = i + 1;
+        return [
+            '(setq SPI:PA' + n + '_Name ' + q(r.name || '') + ')',
+            '(setq SPI:PA' + n + '_Val  ' + q(r.val  || '') + ')'
+        ].join('\n');
+    });
+    var planListLines = planAreas.map(function(r) {
+        return '  (list ' + q(r.name || '') + ' ' + q(r.val || '') + ')';
+    });
+
+    /* Overlay zones */
+    var overlays = sd.overlayZones || [];
+    var ozVarLines = overlays.map(function(r, i) {
+        var n = i + 1;
+        return [
+            '(setq SPI:OZ' + n + '_Name ' + q(r.name || '') + ')',
+            '(setq SPI:OZ' + n + '_Val  ' + q(r.val  || '') + ')'
+        ].join('\n');
+    });
+    var ozListLines = overlays.map(function(r) {
+        return '  (list ' + q(r.name || '') + ' ' + q(r.val || '') + ')';
+    });
+
+    /* Inspector contacts */
+    var inspectors = sd.inspectors || [];
+    var inspVarLines = inspectors.map(function(r, i) {
+        var n = i + 1;
+        return [
+            '(setq SPI:Insp' + n + '_Role ' + q(r.name || '') + ')',
+            '(setq SPI:Insp' + n + '_Val  ' + q(r.val  || '') + ')'
+        ].join('\n');
+    });
+
+    /* ── CONFIG section ── */
+    var config = [
+        ';; -- PROJECT IDENTITY --',
+        '(setq SPI:Address     ' + q(sd.address || '')         + ')',
+        '(setq SPI:APN         ' + q(sd.apn     || '')         + ')',
+        '(setq SPI:Zone        ' + q(sd.zoning  || '')         + ')',
+        '(setq SPI:LegalDesc   ' + q(sd.legalDescription || '') + ')',
+        '(setq SPI:YearBuilt   ' + q(sd.yearBuilt   || '--')   + ')',
+        '(setq SPI:OccGroup    ' + q(sd.occupancyGroup || '--') + ')',
+        '(setq SPI:ProjType    ' + q(sd.projectType  || '--')  + ')',
+        '(setq SPI:Architect   ' + q(sd.architect    || '--')  + ')',
+        '',
+        ';; -- LOT DIMENSIONS --',
+        '(setq SPI:LotWidth    ' + n1(sd.lotWidth || 0) + ')   ; ft',
+        '(setq SPI:LotDepth    ' + n1(sd.lotDepth || 0) + ')   ; ft',
+        '(setq SPI:LotSF       ' + Math.round(lotSF) + ')   ; sq ft',
+        '(setq SPI:ExBldgSF    ' + Math.round(exSF)  + ')   ; sq ft',
+        '',
+        ';; -- SETBACKS --',
+        '(setq SPI:FrontSb     ' + n1(fSb) + ')   ; ft',
+        '(setq SPI:RearSb      ' + n1(rSb) + ')   ; ft',
+        '(setq SPI:SideSb      ' + n1(sSb) + ')   ; ft',
+        '',
+        ';; -- ZONING PARAMETERS --',
+        '(setq SPI:BaseFAR      ' + n2(baseFAR) + ')',
+        '(setq SPI:CommFAR      ' + n2(commFAR) + ')',
+        '(setq SPI:MaxHeight    ' + n1(maxHt)   + ')   ; ft',
+        '(setq SPI:DensityPerSF ' + Math.round(densPS) + ')',
+        '(setq SPI:BuildableSF  (fix (* SPI:LotSF SPI:BaseFAR)))',
+        '',
+        ';; -- PLANNING & TRANSIT AREAS (' + planAreas.length + ') --',
+    ].concat(planVarLines).concat([
+        '(setq SPI:PlanningAreas (list',
+        planListLines.length ? planListLines.join('\n') : '  nil',
+        '))',
+        '',
+        ';; -- OVERLAY ZONES (' + overlays.length + ') --',
+    ]).concat(ozVarLines).concat([
+        '(setq SPI:OverlayZones (list',
+        ozListLines.length ? ozListLines.join('\n') : '  nil',
+        '))',
+        '',
+        ';; -- INSPECTOR CONTACTS (' + inspectors.length + ') --',
+    ]).concat(inspVarLines).concat([
+        '',
+        ';; -- PROPOSED BUILDINGS (' + bldgs.length + ') --',
+        '(setq SPI:BldgCount      ' + bldgs.length + ')',
+    ]).concat(bldgLines).concat([
+        '(setq SPI:TotalProposedSF ' + totalProposedSF + ')   ; sum of all building SFs',
+    ]).join('\n');
+
+    /* ── Commands ── */
+    var cmds = [
+        '(defun c:SPI ()',
+        '  (textscr)',
+        '  (princ "\\n=======================================================")',
+        '  (princ "\\n  SITE PROJECT INFO")',
+        '  (princ "\\n=======================================================")',
+        '  (princ (strcat "\\n  Address:       " SPI:Address))',
+        '  (princ (strcat "\\n  APN:           " SPI:APN))',
+        '  (princ (strcat "\\n  Zone:          " SPI:Zone))',
+        '  (princ (strcat "\\n  Legal:         " SPI:LegalDesc))',
+        '  (princ (strcat "\\n  Year Built:    " SPI:YearBuilt))',
+        '  (princ (strcat "\\n  Occupancy:     " SPI:OccGroup))',
+        '  (princ (strcat "\\n  Project Type:  " SPI:ProjType))',
+        '  (princ (strcat "\\n  Architect:     " SPI:Architect))',
+        '  (princ "\\n-------------------------------------------------------")',
+        '  (princ (strcat "\\n  Lot Width:     " (rtos SPI:LotWidth  2 1) " ft"))',
+        '  (princ (strcat "\\n  Lot Depth:     " (rtos SPI:LotDepth  2 1) " ft"))',
+        '  (princ (strcat "\\n  Lot SF:        " (itoa SPI:LotSF) " sq.ft."))',
+        '  (princ (strcat "\\n  Ex. Bldg SF:   " (itoa SPI:ExBldgSF) " sq.ft."))',
+        '  (princ "\\n-------------------------------------------------------")',
+        '  (princ (strcat "\\n  Front Setback: " (rtos SPI:FrontSb 2 1) " ft"))',
+        '  (princ (strcat "\\n  Rear Setback:  " (rtos SPI:RearSb  2 1) " ft"))',
+        '  (princ (strcat "\\n  Side Setback:  " (rtos SPI:SideSb  2 1) " ft"))',
+        '  (princ "\\n-------------------------------------------------------")',
+        '  (princ (strcat "\\n  Base FAR:      " (rtos SPI:BaseFAR     2 2)))',
+        '  (princ (strcat "\\n  Comm FAR:      " (rtos SPI:CommFAR     2 2)))',
+        '  (princ (strcat "\\n  Max Height:    " (rtos SPI:MaxHeight   2 1) " ft"))',
+        '  (princ (strcat "\\n  Buildable SF:  " (itoa SPI:BuildableSF) " sq.ft."))',
+        '  (princ "\\n-------------------------------------------------------")',
+        '  (princ (strcat "\\n  Buildings:     " (itoa SPI:BldgCount)))',
+        '  (princ (strcat "\\n  Proposed SF:   " (itoa SPI:TotalProposedSF) " sq.ft."))',
+        '  (princ "\\n=======================================================")',
+        '  (princ)',
+        ')',
+        '',
+        '(defun c:SiteProjectInfo () (c:SPI))',
+        '',
+        ';;; ==========================================================================',
+        ';;; COMMAND: SPI_Vars -- list all SPI: variable values',
+        ';;; ==========================================================================',
+        '',
+        '(defun c:SPI_Vars (/ _lst _pair)',
+        '  (textscr)',
+        '  (princ "\\n[SPI] Variables:")',
+        '  (setq _lst (list',
+        '    (cons "SPI:Address"      SPI:Address)',
+        '    (cons "SPI:APN"          SPI:APN)',
+        '    (cons "SPI:Zone"         SPI:Zone)',
+        '    (cons "SPI:LotSF"        (itoa SPI:LotSF))',
+        '    (cons "SPI:FrontSb"      (rtos SPI:FrontSb 2 1))',
+        '    (cons "SPI:RearSb"       (rtos SPI:RearSb  2 1))',
+        '    (cons "SPI:SideSb"       (rtos SPI:SideSb  2 1))',
+        '    (cons "SPI:BaseFAR"      (rtos SPI:BaseFAR 2 2))',
+        '    (cons "SPI:MaxHeight"    (rtos SPI:MaxHeight 2 1))',
+        '    (cons "SPI:BuildableSF"  (itoa SPI:BuildableSF))',
+        '    (cons "SPI:BldgCount"    (itoa SPI:BldgCount))',
+        '    (cons "SPI:TotalProposedSF" (itoa SPI:TotalProposedSF))',
+        '  ))',
+        '  (foreach _pair _lst',
+        '    (princ (strcat "\\n  " (car _pair) ": " (cdr _pair)))',
+        '  )',
+        '  (princ)',
+        ')',
+    ].join('\n');
+
+    /* ── Full skeleton ── */
+    return [
+        ';;; ====================================================================',
+        ';;; SiteProjectInfo.lsp',
+        ';;; ====================================================================',
+        ';;; PURPOSE:',
+        ';;;   Load site project data into AutoCAD session variables.',
+        ';;;   All variables use the SPI: namespace and persist for the session.',
+        ';;;',
+        ';;; COMMANDS:',
+        ';;;   SPI         -> Display formatted site info report',
+        ';;;   SPI_Vars    -> List all SPI: variable values',
+        ';;;',
+        ';;; GENERATED: ' + today + ' by ProjectBook-Planner',
+        ';;; ====================================================================',
+        '',
+        '(vl-load-com)',
+        '',
+        ';;; ==========================================================================',
+        ';;; CONFIG',
+        ';;; APN:     ' + (sd.apn || ''),
+        ';;; Address: ' + (sd.address || ''),
+        ';;; ==========================================================================',
+        '',
+        config,
+        '',
+        ';;; ==========================================================================',
+        ';;; COMMANDS',
+        ';;; ==========================================================================',
+        '',
+        cmds,
+        '',
+        ';;; ==========================================================================',
+        ';;; LOAD MESSAGE',
+        ';;; ==========================================================================',
+        '',
+        '(princ "\\n=======================================================")',
+        '(princ "\\n :: SiteProjectInfo.lsp [SPI] Loaded")',
+        '(princ (strcat "\\n :: APN:     " SPI:APN))',
+        '(princ (strcat "\\n :: Address: " SPI:Address))',
+        '(princ "\\n :: Commands: SPI | SPI_Vars")',
+        '(princ "\\n=======================================================")',
+        '(princ)',
+    ].join('\n');
+}
+
+/* ==========================================
+   EXCEL GENERATOR (standalone for siteinfo page)
+   Mirrors ExportEngine.generateExcel() — no engine dependency.
+   ========================================== */
+function generateSiteInfoExcel(sd, lotSF, baseFAR, commFAR, maxHt, densPS, fSb, rSb, sSb) {
+    var hasPolygon = sd.parcelPolygon && sd.parcelPolygon.length > 0;
+    var lotAC = (lotSF / 43560).toFixed(3);
+    function v(val, unit) {
+        if (val == null || val === '' || (val === 0 && unit)) return '--';
+        return unit ? val + ' ' + unit : String(val);
+    }
+    function esc(s) {
+        return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    var ROWS = [];
+    function sec(label) { ROWS.push({ type:'sec', label:label }); }
+    function row(field, value, source, even) { ROWS.push({ type:'row', field:field, value:value, source:source, even:even }); }
+
+    sec('A. Parcel Identity');
+    row('Full street address',           v(sd.address),               'County Assessor / ParcelQuest', true);
+    row('APN',                           v(sd.apn),                   'County Assessor / ParcelQuest', false);
+    row('Legal description',             v(sd.legalDescription),      'Deed or Assessor record', true);
+    row('Year built',                    v(sd.yearBuilt),             'Assessor record', false);
+    row('Occupancy group (existing)',    v(sd.occupancyGroup),        'Building permit history or existing plans', true);
+
+    sec('B. Lot Dimensions');
+    row('Lot width (ft)',                v(sd.lotWidth,'ft'),         'Assessor record or GIS parcel data', true);
+    row('Lot depth (ft)',                v(sd.lotDepth,'ft'),         'Assessor record or GIS parcel data', false);
+    row('Lot SF',                        lotSF>0 ? Math.round(lotSF).toLocaleString()+' SF' : '--', 'Assessor record', true);
+    row('Lot acres',                     lotSF>0 ? lotAC+' AC' : '--', 'Calculated', false);
+    row('Irregular lot?',                hasPolygon ? 'Yes — polygon captured ('+sd.parcelPolygon.length+' vertices)' : 'No (rectangular)', 'GIS parcel polygon', true);
+
+    sec('C. Zoning Standards');
+    row('Zone designation',              v(sd.zoning),                'City zoning map / ZIMS', true);
+    row('Base FAR',                      v(sd.baseFAR),               'Municipal code', false);
+    row('Commercial FAR',                v(sd.commFAR),               'Municipal code — mixed-use/CCHS', true);
+    row('Max height base (ft)',          v(sd.baseHeightLimit||sd.maxHeight,'ft'), 'Municipal code', false);
+    row('Max height with bonus (ft)',    v(maxHt,'ft'),               'CCHS / density bonus provisions', true);
+    row('CCHS max height cap (ft)',      v(sd.cchsMaxHeight,'ft'),    'San Diego CCHS Tier table', false);
+    row('Front setback (ft)',            v(fSb,'ft'),                 'Municipal code', true);
+    row('Rear setback (ft)',             v(rSb,'ft'),                 'Municipal code', false);
+    row('Side setback (ft)',             v(sSb,'ft'),                 'Municipal code', true);
+    row('Density: SF per unit',          densPS>0 ? '1 DU per '+densPS+' SF' : '--', 'Municipal code', false);
+    row('Commercial frontage depth',     v(sd.commercialDepth,'ft'), 'CUPD/mixed-use code', true);
+
+    sec('D. Planning Overlays');
+    var areas = sd.planningAreas || [];
+    if (areas.length>0) { areas.forEach(function(r,i){ row(r.name||('Area '+(i+1)), r.val||'--', 'City General Plan', i%2===0); }); }
+    else { row('Planning areas','--','City General Plan / community plan document',true); }
+    var ozs = sd.overlayZones || [];
+    if (ozs.length>0) { ozs.forEach(function(r,i){ row(r.name||('Zone '+(i+1)), r.val||'--', 'ZIMS zoning inquiry', i%2===0); }); }
+    else { row('Overlay zones','--','ZIMS zoning inquiry',false); }
+
+    sec('E. Fees');
+    row('NEF rate per SF',               v(sd.nefRatePerSF),         'City DSD Fee Schedule', true);
+    row('Affordability target %',        v(sd.affordabilityPct,'%'), 'State Gov Code 65915', false);
+    row('DIF per unit',                  v(sd.difPerUnit),           'City DSD DIF schedule', true);
+    row('DIF waiver SF threshold',       v(sd.difWaiverSF,'SF'),     'City affordable housing DIF waiver policy', false);
+
+    sec('F. Project Info');
+    row('Project type',                  v(sd.projectType),          'e.g. 3-Story Townhome', true);
+    row('Architect / firm name',         v(sd.architect),            'Project team', false);
+    row('Scope of work',                 v(sd.scopeOfWork),          'What is demolished / built / program', true);
+    row('Notes',                         v(sd.notes),                'Unusual conditions, easements', false);
+    row('Existing dwelling SF',          sd.existingDwellingSF>0 ? sd.existingDwellingSF.toLocaleString()+' SF' : '--', 'Assessor record', true);
+
+    sec('G. Inspector Contacts');
+    var insp = sd.inspectors || [];
+    if (insp.length>0) { insp.forEach(function(r,i){ row(r.name||('Inspector '+(i+1)), r.val||'--', 'City permit office / DSD', i%2===0); }); }
+    else { row('Inspectors','--','City permit office / DSD staff directory',true); }
+
+    sec('H. Map Setup');
+    row('Parcel polygon vertices',       hasPolygon ? sd.parcelPolygon.length+' vertices captured' : 'Not set', 'County GIS portal', true);
+    row('Map rotation (degrees)',        v(sd.rotation != null ? Number(sd.rotation).toFixed(1)+'°' : null), 'Estimate from aerial', false);
+
+    var C = { TITLE:'#64381F', HDR:'#64381F', SEC:'#C47244', ODD_A:'#66D9FF', ODD_B:'#F2F2F2', W:'#FFFFFF' };
+    function td(bg, bold, wrap, extra) {
+        return 'style="background:'+bg+';color:'+(bg===C.TITLE||bg===C.HDR||bg===C.SEC?'#fff':'#1a1a1a')+';"'
+            + (bold?' class="b"':'') + (extra||'');
+    }
+
+    var lines = [
+        '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel">',
+        '<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">',
+        '<style>body{font-family:Calibri,Arial,sans-serif;font-size:10pt}',
+        'table{border-collapse:collapse;width:100%}',
+        'td,th{border:1px solid #999;padding:4px 6px;vertical-align:top;font-size:10pt;white-space:normal;word-wrap:break-word}',
+        '.b{font-weight:bold}</style></head><body>',
+        '<table>',
+        '<tr><td colspan="5" style="background:#64381F;color:#fff;font-weight:bold;font-size:13pt;padding:6px 8px;border:1px solid #999">PROJECTBOOK-PLANNER — SITE DATA COLLECTION CHECKLIST &nbsp; '+esc(sd.address||'')+'</td></tr>',
+        '<tr>',
+        '<th style="background:#64381F;color:#fff;width:140px">SECTION</th>',
+        '<th style="background:#64381F;color:#fff;width:260px">FIELD / DATA POINT</th>',
+        '<th style="background:#64381F;color:#fff;width:50px">DONE</th>',
+        '<th style="background:#64381F;color:#fff;width:240px">VALUE COLLECTED</th>',
+        '<th style="background:#64381F;color:#fff;width:240px">SOURCE / WHERE TO GET IT</th>',
+        '</tr>',
+    ];
+
+    ROWS.forEach(function(r) {
+        if (r.type==='sec') {
+            lines.push('<tr><td colspan="5" class="b" style="background:#C47244;color:#fff;border:1px solid #999;padding:4px 6px">'+esc(r.label)+'</td></tr>');
+        } else {
+            var a = r.even ? C.W : C.ODD_A;
+            var b = r.even ? C.W : C.ODD_B;
+            var done = (r.value && r.value!=='--') ? '&#10003;' : '';
+            lines.push('<tr>');
+            lines.push('<td style="background:'+a+';border:1px solid #999;padding:4px 6px"></td>');
+            lines.push('<td style="background:'+b+';border:1px solid #999;padding:4px 6px">'+esc(r.field)+'</td>');
+            lines.push('<td style="background:#fff;border:1px solid #999;text-align:center">'+done+'</td>');
+            lines.push('<td style="background:'+a+';border:1px solid #999;padding:4px 6px">'+esc(r.value)+'</td>');
+            lines.push('<td style="background:'+b+';border:1px solid #999;padding:4px 6px;font-size:9pt">'+esc(r.source)+'</td>');
+            lines.push('</tr>');
+        }
+    });
+    lines.push('</table></body></html>');
+
+    var blob = new Blob([lines.join('\n')], { type: 'application/vnd.ms-excel;charset=utf-8' });
+    var a = document.createElement('a');
+    a.download = 'SiteDataChecklist_' + (sd.apn||'Site').replace(/[^a-zA-Z0-9-]/g,'_') + '.xls';
+    a.href = URL.createObjectURL(blob);
+    a.click();
+    URL.revokeObjectURL(a.href);
+}
+</script>
+
+</body>
+</html>
