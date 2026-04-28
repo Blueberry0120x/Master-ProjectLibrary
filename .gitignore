@@ -33,7 +33,21 @@ controller-note/.last-read
 # Build outputs (tracked separately in docs/ for Pages)
 app/Output/*.html
 
+# Surge deploy temp
+Output/.surge-tmp/
+
+# Oversized reference PDFs (>10MB)
+reference/StateRegulation/CA/San-Diego/GoBy_MixedUse_Imperial_FullSet_2021.pdf
+
 # Secrets
 .env
 *.pem
 *.key
+
+# Secrets (GLOBAL-027)
+.env
+.env.*
+*.pem
+*.key
+credentials.json
+.mcp.json

@@ -45,7 +45,7 @@ should be confirmed from the forms page before download.
 ## Site-specific fill-out workflow
 
 **Blank templates live in this directory, one per city.** Site-specific filled
-forms MUST be written to `Output/permits/{SiteLabel}/` — never checked in here.
+forms MUST be written to `Output/sites/{SiteLabel}/permits/` — never checked in here.
 
 Canonical DS-375 blank: `ds375-BLANK.pdf` (official City of San Diego AcroForm,
 46 fillable fields, 7 pages).
@@ -58,7 +58,13 @@ py tools/fill_permits.py --all-sandiego
 ```
 
 The tool reads `data/sites/<site>.json`, maps site fields onto the blank
-AcroForm, and writes `Output/permits/<SiteLabel>/01-app_DS-375.pdf`.
+AcroForm, and writes `Output/sites/<SiteLabel>/permits/01-app_DS-375.pdf`.
+
+All per-site artifacts (permits, reports, plans) live under
+`Output/sites/<SiteLabel>/` with subfolders:
+- `permits/` — filled City/County permit PDFs (DS-375, DS-3032, DS-3242, ...)
+- `reports/` — generated site reports (CostBreakdown.html, SiteInfoSheet.html, ...)
+- `plans/` — parcel map, site plan, CAD exports
 
 Fields intentionally left blank (require applicant judgment / not in site JSON):
 Applicant Name, Project Scope (when JSON is empty), CBC construction-type
