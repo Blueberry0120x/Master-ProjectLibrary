@@ -160,7 +160,14 @@ All paths above are relative to `knowledge/`. Prefix with `knowledge/` when read
 
 ## Project Goal
 
-<!-- TODO: Declare the project goal (1-3 sentences). -->
+Master project library for San Diego ADU/pre-app permit research: site data, regulatory references, floor plan templates, and concept proposals. Aggregates source material for PlanCheck-Planner and ProjectBook-Planner syncs.
+
+
+## Config / Settings Ownership
+
+- `app/` — build config for the concept proposal HTML app
+- `UserPref.json` — user preferences tracked per GLOBAL-016
+- `data/sites/` — per-project site data JSON (source-of-truth for syncs)
 
 
 ## File Encoding
@@ -183,8 +190,8 @@ Before declaring any task complete:
 
 ## Safety Contract
 
-- **Read-only:** <!-- TODO: list read-only sources -->
-- **Writable:** <!-- TODO: list writable paths -->
+- **Read-only:** `reference/` regulatory PDFs, CAD templates, state regulations
+- **Writable:** `Output/` HTML proposals, `data/sites/` site JSON, `app/docs/` built docs
 
 
 ## Controller-Note Protocol (CTRL-005)
