@@ -1,4 +1,5 @@
 # /scaffold -- Enforce uniform folder structure across all repos
+> Called as step 3 of `/push-baseline`. Run standalone for structure-only fixes.
 
 Ensures every repo has the standard core directories and files.
 Creates missing items. Renames case-mismatched folders.
