@@ -58,14 +58,42 @@ stated 4 ft for ≤16 ft ADUs. State law sets a "no more than 4 ft" ceiling on
 what localities can require; San Diego went further and eliminated the setback
 for ≤16 ft structures. The 4 ft rule now applies only to taller units.
 
-### Fire sprinklers
+### Fire sprinklers (IB-400 Aug 2025 + SDFD Technical Bulletin RESD 3-4)
 
-Detached ADU ≤ 1,200 sf is **not required** to have sprinklers if the
-primary dwelling does not have them (per state law + IB-400). If primary is
-sprinklered, ADU must tie in.
+**Standard waiver rule:** Detached ADU ≤ 1,200 sf is **not required** to have
+sprinklers if the primary dwelling does not have them (Gov Code §65852.2 +
+IB-400). This is a state preemption — San Diego cannot override it for
+standard ADUs.
 
-In VHFHSZ (fire-hazard) mapping, sprinklers may still be required — confirm
-with SDFD Community Risk Reduction.
+**Tie-in rule:** If the primary IS sprinklered, the ADU must connect to the
+sprinkler system or install its own NFPA 13D system.
+
+**Mandatory sprinklers regardless of primary:**
+- ADU in VHFHSZ — confirm with SDFD Community Risk Reduction (may be
+  required even if primary is unsprinklered)
+- **Bonus ADU** (deed-restricted affordable under SDMC 141.0302(d)) — sprinklers always required
+- **Affordable ADU** under Density Bonus program — sprinklers always required
+
+**Construction type does NOT affect the waiver.** Whether the ADU is built
+to Type V-A (1-hr rated) or Type V-B (0-hr) has no bearing on the sprinkler
+waiver. The V-A 1-hr rating is a structural fire-resistance requirement;
+CRC R313 sprinklers are a separate, independent requirement triggered by
+dwelling type and the primary's sprinkler status only.
+
+**JADU:** Same waiver — no sprinklers required if primary is unsprinklered.
+If primary is sprinklered, JADU must be included in the system.
+
+**Decision table:**
+
+| ADU type | Primary unsprinklered | Primary sprinklered | VHFHSZ |
+|---|---|---|---|
+| Detached ≤ 1,200 sf | No sprinklers | Tie-in required | Confirm SDFD |
+| Attached | No sprinklers | Tie-in required | Confirm SDFD |
+| JADU | No sprinklers | Include in system | Confirm SDFD |
+| Bonus / Affordable ADU | Required (program rule) | Required | Required |
+
+Reference: SDFD Technical Bulletin RESD 3-4 (sprinklers for ADUs) and
+IB-400 (Aug 2025). VHFHSZ map: sandiego.gov/fire/community-risk-reduction.
 
 ---
 

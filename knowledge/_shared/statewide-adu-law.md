@@ -90,7 +90,41 @@ Local agency may require **1 space per ADU or per bedroom** — but **must waive
 
 ### Sprinkler & Fire (§65852.2(a)(1)(D)(vii))
 
-- An ADU **cannot** be required to install fire sprinklers if the **primary dwelling** is not required to have them.
+**State preemption rule:** An ADU **cannot** be required to install fire sprinklers solely because the primary dwelling is not required to have them. This is a hard preemption — a local ordinance that requires ADU sprinklers when the primary is unsprinklered is void. (Gov Code §65852.2(a)(1)(D)(vii); reinforced by SB 897, eff. Jan 1 2023.)
+
+**SB 897 (2023) addition:** ADU construction also cannot *trigger* a retroactive sprinkler retrofit on the existing primary dwelling. The primary's sprinkler status is evaluated at the time of ADU permitting and is not escalated by the ADU project.
+
+#### Waiver decision tree
+
+```
+Is primary dwelling required to have / does it have sprinklers?
+  NO → ADU sprinklers are NOT required (state preemption)
+       UNLESS: site is in VHFHSZ (see below) OR it is a Bonus/Affordable ADU
+  YES → ADU must have sprinklers; tie-in to primary system or separate 13D
+```
+
+#### Waiver conditions summary
+
+| Scenario | Sprinklers required? |
+|---|---|
+| Detached ADU ≤ 1,200 sf, primary unsprinklered | **NO — waived** |
+| Attached ADU, primary unsprinklered | **NO — waived** |
+| JADU (≤ 500 sf inside primary), primary unsprinklered | **NO — waived** |
+| Any ADU, primary sprinklered (post-2011 CRC R313 home) | **YES — tie-in required** |
+| ADU in VHFHSZ — local FD may override | **YES — confirm with AHJ** |
+| Bonus ADU / Affordable ADU (San Diego) | **YES — required by program** |
+
+#### What does NOT waive sprinklers
+
+- **Construction type (V-A vs V-B)** — completely irrelevant to the ADU sprinkler waiver. Type V-A 1-hr rated construction addresses structural fire resistance of the framing, not fire suppression. CRC R313 sprinkler requirements are triggered by dwelling type and primary-dwelling status, not by construction type. An R-3 ADU built to V-A standard still needs sprinklers if the primary is sprinklered.
+- **Building height or size** — the waiver threshold is the primary's sprinkler status, not ADU size (though local fire codes may have additional thresholds in VHFHSZ areas).
+
+#### CRC R313 baseline (new construction)
+
+CRC R313 requires NFPA 13D throughout all **new** one- and two-family dwellings and townhouses in California (effective statewide since 2011). This means any primary SFD permitted after ~2011 has sprinklers → any ADU on that lot also requires sprinklers (no waiver available).
+
+Pre-2011 primaries and older un-permitted conversions are typically unsprinklered → ADU waiver applies.
+
 - If primary was built after CRC R313 took effect (2011), primary has sprinklers → ADU must also (CRC R313).
 - Local fire marshal may still require other fire measures (access, water supply) but cannot ban the ADU outright.
 

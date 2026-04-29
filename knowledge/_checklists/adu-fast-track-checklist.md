@@ -101,18 +101,41 @@ A complete, compliant first submittal triggers the clock; a deficient one resets
 
 ---
 
-## 9. Fire Sprinklers (Jurisdiction-Specific)
+## 9. Fire Sprinklers
 
-| Jurisdiction | New Detached ADU Trigger | Source |
-|-------------|--------------------------|--------|
-| San Diego City | No sprinklers required if primary is unsprinklered | IB-400 Aug 2025 |
-| San Diego City (Bonus ADU program) | Sprinkler exception may apply | IB-402 |
-| San Diego County | Verify with PDS / SDCFA | SDCFA |
-| Chula Vista | Verify with CVFD | CVFD (619) 409-1930 |
-| Garden Grove | Verify with GGFD | GGFD (714) 741-5550 |
-| Santa Ana | Verify with SAFD | SAFD (714) 647-5720 |
-| Escondido | Verify with EFD | EFD (760) 839-4600 |
-| Orange County unincorporated | Verify with OCFA | OCFA (714) 573-6100 |
+### Step 1 — Is the primary dwelling sprinklered?
+
+- [ ] **Primary built after 2011** → likely has NFPA 13D (CRC R313 mandatory since 2011)
+  → **ADU sprinklers REQUIRED** — tie into primary system or install standalone 13D
+- [ ] **Primary built before 2011** → likely unsprinklered
+  → **ADU sprinklers WAIVED** under Gov Code §65852.2 (state preemption)
+
+### Step 2 — Override checks (even if primary is unsprinklered)
+
+- [ ] Is the site in **VHFHSZ** (Very High Fire Hazard Severity Zone)?
+  → Confirm with local fire dept — may be required regardless
+- [ ] Is this a **Bonus ADU** (San Diego deed-restricted affordable program)?
+  → Sprinklers always required
+- [ ] Is this a **Density Bonus Affordable ADU**?
+  → Sprinklers always required
+
+### Step 3 — Construction type check (common misconception)
+
+> **Type V-A (1-hr rated) does NOT waive sprinklers.**
+> The 1-hr fire-resistance rating is a structural framing requirement.
+> CRC R313 sprinklers are triggered by dwelling type + primary sprinkler status — completely independent of construction type. A V-A ADU still needs sprinklers if the primary is sprinklered.
+
+### Jurisdiction quick-reference
+
+| Jurisdiction | Waiver if primary unsprinklered | Notes |
+|---|---|---|
+| **San Diego City** | **YES** — waived (IB-400 Aug 2025) | Bonus/Affordable ADU: required; VHFHSZ: confirm SDFD |
+| San Diego County | YES (state law applies) | Verify SDCFA for VHFHSZ areas |
+| Chula Vista | YES (state law applies) | Verify CVFD (619) 409-1930 |
+| Garden Grove | YES (state law applies) | Verify GGFD (714) 741-5550 |
+| Santa Ana | YES (state law applies) | Verify SAFD (714) 647-5720 |
+| Escondido | YES (state law applies) | Verify EFD (760) 839-4600 |
+| Orange County unincorporated | YES (state law applies) | Verify OCFA (714) 573-6100 |
 
 ---
 
