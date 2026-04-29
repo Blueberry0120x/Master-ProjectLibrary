@@ -5,23 +5,55 @@ design studies, or contractor bids.
 
 ---
 
-## Free Plan Sources
+## Locally Saved PDFs (reference/general/sheds/)
 
-| Source | Sizes | What's Included | URL |
-|---|---|---|---|
-| Construct101 | 4×8 to 12×16 | Dimensioned PDFs, cut list, shopping list | https://www.construct101.com/6-free-shed-plans/ |
-| Craftcamp | 2×3 up to 30×40 (incl. 8×10, 10×12) | Print-ready blueprints, material list, cut diagrams | https://craft.camp/free/shed-plans/ |
-| HowToBuildAShed | 6×4 to 16×24 — gable, lean-to, hip roof | 30 plans; good for permit reference | https://www.howtobuildashed.org/shed-plans/ |
-| Sheddrafts (8×10) | 8×10 specifically | Gable backyard wooden shed blueprints | https://sheddrafts.com/8x10-backyard-wooden-shed-building-plans-blueprints |
-| Shedplans.org | 100+ plans, all sizes | Foundation, framing, roof framing details | https://shedplans.org/shed-plans/ |
-| Shedplans.org — Roof Framing | N/A | Detailed roof framing design + rafter calcs | https://shedplans.org/shed-roof-framing/ |
-| Shedking (10×12 gable) | 10×12 | Full-color PDF, instant download | https://www.shedking.net/10x12-gable-shed-plans.html |
-| iCreatables | 10×12 and others | Detailed illustrations + full plan examples | https://www.icreatables.com/sheds/shed-plans |
-| Popular Mechanics | Varies | Isometric views, step-by-step guides | https://todaysplans.com/use-popularmechanics-free-diy-shed-plans.html |
+Downloaded from shedplans.org — free, direct PDF links. No login required.
+
+### storage/
+| File | Size | Type |
+|---|---|---|
+| Free-8x8-Storage-Shed-Plan.pdf | 8×8 | Gable storage shed |
+| Free-8x12-Storage-Shed-Plan.pdf | 8×12 | Gable storage shed |
+| Free-10x10-Storage-Shed-Plan.pdf | 10×10 | Gable storage shed |
+| Free-10x14-Storage-Shed-Plan.pdf | 10×14 | Gable storage shed |
+| Free-10x20-Storage-Shed-Plan.pdf | 10×20 | Gable storage shed |
+| Free-12x16-Storage-Shed-Plan.pdf | 12×16 | Gable storage shed |
+| 12x12-Storage-Shed-Plan-Free.pdf | 12×12 | Gable storage shed |
+
+### lean-to/
+| File | Size | Type |
+|---|---|---|
+| 8x8-Lean-to-Storage-Shed-Plans-Free.pdf | 8×8 | Lean-to |
+| 8x12-Lean-to-Storage-Shed-Plans-Free.pdf | 8×12 | Lean-to |
+| 10x16-Lean-to-Storage-Shed-Plans-Free.pdf | 10×16 | Lean-to |
+| 10x20-Lean-to-Storage-Shed-Plans-Free.pdf | 10×20 | Lean-to |
+| 12x14-Lean-to-Storage-Shed-Plan-Free.pdf | 12×14 | Lean-to |
+| 12x16-Lean-to-Storage-Shed-Plan-Free.pdf | 12×16 | Lean-to |
+
+### garden/
+| File | Size | Type |
+|---|---|---|
+| 10x10-Garden-Shed-Plan-Free.pdf | 10×10 | Garden shed |
+| 10x12-Garden-Shed-Plan-Free.pdf | 10×12 | Garden shed |
+| 10x16-Garden-Shed-Plan-Free.pdf | 10×16 | Garden shed |
+| 14x8-Garden-Shed-Plan-Free.pdf | 14×8 | Garden shed |
 
 ---
 
-## Typical Plan Contents (across most sources)
+## Online Sources
+
+| Source | Notes | URL |
+|---|---|---|
+| Shedplans.org | 100+ plans — source of local PDFs above | https://shedplans.org/shed-plans/ |
+| Shedplans.org Roof Framing | Rafter calc details | https://shedplans.org/shed-roof-framing/ |
+| Construct101 | Free plans online; PDFs require free checkout (no direct link) | https://www.construct101.com/6-free-shed-plans/ |
+| Craftcamp | 79+ print-ready blueprint PDFs | https://craft.camp/free/shed-plans/ |
+| HowToBuildAShed | 30 plans — gable, lean-to, hip roof | https://www.howtobuildashed.org/shed-plans/ |
+| Sheddrafts (8×10) | 8×10 gable specifically | https://sheddrafts.com/8x10-backyard-wooden-shed-building-plans-blueprints |
+
+---
+
+## Typical Plan Contents
 
 - Floor plan (dimensioned)
 - Four elevations (front, rear, left, right)
@@ -43,10 +75,3 @@ For a residential storage shed permit in CA cities (e.g., Carlsbad, San Diego):
 - Sheds ≤ 120 sq ft may be **exempt from permit** in many CA jurisdictions — verify locally
 - For permit-required sheds: structural calcs may be required depending on size and jurisdiction
 - Carlsbad standalone plumbing permit (if adding sink/hose bib): flat $166 fee
-
----
-
-## Recommended Starting Point
-
-**Craftcamp** or **Construct101** for the most permit-ready dimensioned packages.
-Cross-reference **Shedplans.org** for roof framing structural details.
