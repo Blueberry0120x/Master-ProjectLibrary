@@ -1,0 +1,129 @@
+{
+  "site_id": "ca-23175-palomar",
+  "project_book_id": "CA-23175_PALOMAR",
+  "site": {
+    "siteId": "CA-23175_PALOMAR",
+    "address": "23175 Palomar St, Wildomar, CA 92595",
+    "apn": "-- TBD: Riverside County Assessor APN | Source: https://rivcoview.rivcoacr.org/ or call (951) 955-6200",
+    "legalDescription": "-- TBD: Tract/lot from deed | Source: Riverside County Assessor",
+    "yearBuilt": "2010",
+    "occupancyGroup": "R-3",
+    "zoning": "-- TBD: Likely R-1 (Wildomar Development Code Title 17) | Source: https://experience.arcgis.com/experience/6fa2e70c038d49959e13ff41f1397364",
+    "cadZone": "CA_V",
+    "lotWidth": 0,
+    "lotDepth": 0,
+    "lotSF": 0,
+    "commercialDepth": 0,
+    "baseFAR": 0,
+    "commFAR": 0,
+    "maxHeight": 35,
+    "baseHeightLimit": 35,
+    "frontSetback": 20,
+    "rearSetback": 10,
+    "sideSetback": 5,
+    "densityPerSF": 0,
+    "nefRatePerSF": 0,
+    "affordabilityPct": 0,
+    "difPerUnit": 0,
+    "difWaiverSF": 0,
+    "existingDwellingSF": 1724,
+    "notes": "JURISDICTION ALERT: Address entered as Murrieta CA 92562 but parcel is in City of WILDOMAR CA 92595 (incorporated 2008). Wildomar uses its own Development Code (Title 17, effective Feb 15 2025), NOT Murrieta Municipal Code. | CONFIRMED (Census Geocoder 2026-04-29): lat=33.585205360128, lng=-117.246314929568. YearBuilt=2010 | Beds=4 | Baths=2 | BuildingSF=1,724. LastSale=2015-12-31 $360,500. Listing shows ~8+ acres — NOT confirmed from assessor. | FEMA: Zone X (minimal flood hazard, outside SFHA) — confirmed via FEMA NFHL API. | SEISMIC: SDC D (Ss=1.81g, S1=0.60g) — confirmed via USGS Seismic Design Web Service. | HOA: Palomar Ridge HOA ~$45/month, Avalon Management (951) 244-0048. | CAD ZONE: Explicitly set CA_V (California State Plane Zone V, FIPS 0405) — Riverside County designation. Auto-detection does not cover 92595 ZIP. | TBD - APN: Visit https://rivcoview.rivcoacr.org/ or call Riverside County Assessor (951) 955-6200. | TBD - LOT SF: Use assessor confirmed SF only — listing estimate (~8 acres) is not reliable. | TBD - LOT DIMENSIONS: Width x Depth from GIS parcel viewer. | TBD - LOT POLYGON: Extract from Wildomar GIS viewer https://experience.arcgis.com/experience/6fa2e70c038d49959e13ff41f1397364 — designer approval required before ingest. | TBD - ZONING CONFIRMED: Likely R-1 but verify via GIS parcel tool above. | TBD - FIRE HAZARD: Wildomar is in RVCFD jurisdiction. Check 2025 OSFM FHSZ maps — possible VHFHSZ LRA. Call RVCFD (951) 955-4777.",
+    "inspectors": [
+      {
+        "name": "Building & Safety",
+        "val": "City of Wildomar Building & Safety — (951) 677-7751 | bldgpermits@wildomar.gov | 23873 Clinton Keith Rd, Wildomar CA 92595 | Mon–Fri 8am–5pm"
+      },
+      {
+        "name": "Planning",
+        "val": "City of Wildomar Planning Dept — (951) 677-7751 | planning@wildomar.gov"
+      },
+      {
+        "name": "Riverside County Assessor",
+        "val": "(951) 955-6200 | 4080 Lemon Street 9th Floor, Riverside CA 92501 | https://rivcoview.rivcoacr.org/"
+      },
+      {
+        "name": "Fire",
+        "val": "Riverside County Fire Department (RVCFD) — (951) 955-4777 | https://www.rvcfire.org/"
+      }
+    ],
+    "planningAreas": [
+      {
+        "name": "ZONING",
+        "val": "TBD — Likely R-1 per Wildomar Development Code Title 17 (eff. Feb 15 2025). Verify via ArcGIS parcel viewer. R-1 provisional setbacks: front=20ft, rear=10ft, side=5ft, max height=35ft."
+      },
+      {
+        "name": "HOA",
+        "val": "Palomar Ridge HOA — ~$45/month. Managed by Avalon Management (951) 244-0048. ADU/addition may require HOA architectural approval."
+      }
+    ],
+    "overlayZones": [
+      {
+        "name": "FEMA FLOOD ZONE",
+        "val": "Zone X — Outside SFHA, minimal flood hazard. Confirmed via FEMA NFHL API at parcel coordinates."
+      },
+      {
+        "name": "SEISMIC",
+        "val": "SDC D — Ss=1.81g, S1=0.60g (USGS ASCE 7-22 confirmed). High seismic demand. Wildomar is in a seismically active area near Elsinore Fault Zone."
+      },
+      {
+        "name": "WILDFIRE / FHSZ",
+        "val": "TBD — Wildomar area has high wildfire risk near WUI. Verify 2025 OSFM FHSZ maps for LRA/SRA designation. Call RVCFD (951) 955-4777 or check https://osfm.fire.ca.gov/divisions/wildfire-planning-engineering/wildland-hazards-building-codes/fire-hazard-severity-zones-maps/"
+      }
+    ],
+    "parcelPolygon": []
+  },
+  "saved": {
+    "lat": 33.585205,
+    "lng": -117.246315,
+    "rotation": 0,
+    "locked": true,
+    "setbacks": {
+      "front": 20,
+      "rear": 10,
+      "sideL": 5,
+      "sideR": 5
+    },
+    "buildings": [
+      {
+        "orientation": 0,
+        "W": 30,
+        "D": 60,
+        "offsetX": 0,
+        "offsetY": 0,
+        "count": 1,
+        "stackSpacing": 0,
+        "anchor": "center",
+        "stories": 1,
+        "floorHeight": 9
+      }
+    ],
+    "activeBuilding": 0,
+    "commFront": false,
+    "showBldgDims": false,
+    "hiddenDimKeys": [],
+    "mergedDimKeys": [],
+    "chainWOffset": 0,
+    "chainDOffset": 0,
+    "propDimOffsets": {},
+    "parcelPolygon": [],
+    "mapOpacity": 60,
+    "setbacksApplied": false,
+    "freeDrag": true,
+    "snapEdge": true,
+    "siteNorthDeg": 0,
+    "frontBearing": 270,
+    "vehicles": [],
+    "activeVehicle": -1,
+    "existingBuildings": [],
+    "activeExBuilding": -1
+  },
+  "checklist": {
+    "ck": {},
+    "sel": {},
+    "notes": {},
+    "bldgs": [],
+    "mapLocked": false
+  },
+  "_mpl_id": "ca-23175-palomar",
+  "_schema": "mpl-skeleton — APN + lot SF + zoning + parcel polygon pending"
+}

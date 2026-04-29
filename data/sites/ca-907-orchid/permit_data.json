@@ -1,0 +1,64 @@
+{
+  "site_id": "ca-907-orchid",
+  "address": {
+    "street": "907 Orchid Way",
+    "city": "Carlsbad",
+    "state": "CA",
+    "zip": "92011"
+  },
+  "jurisdiction": "carlsbad",
+  "lot": {
+    "dimensions_ft": "128.15 x 63.5",
+    "area_sf": null,
+    "source": "as-built site plan A01"
+  },
+  "structure": {
+    "stories": 1,
+    "construction_type": "V-B",
+    "exterior": "brick",
+    "roof_pitch": "5:12",
+    "garage": true,
+    "existing_rooms": ["Garage", "Bedroom 1", "Bedroom 2", "Bedroom 3", "Kitchen", "Family Room", "Living Room", "Dining"]
+  },
+  "as_built": {
+    "file": "907_Orchid_AsBuilt.pdf",
+    "drawn_by": "AU Design Drafting",
+    "date": "2014-10-10",
+    "sheets": ["A01 Site Plan", "A02 Floor Plan + RCP", "A03 Roof Plan", "A04 Elevations"]
+  },
+  "permits": {
+    "permit_1": {
+      "type": "Interior Remodel + Plumbing",
+      "status": "planning",
+      "form": "B-1",
+      "valuation_low": 85500,
+      "valuation_high": 156500,
+      "b50_required": true,
+      "file": "B1_Application_Draft.md"
+    },
+    "permit_2": {
+      "type": "Structural + Exterior",
+      "status": "planning",
+      "structural_engineer_required": true,
+      "file": "permit-scope-split.md"
+    },
+    "permit_3": {
+      "type": "Electrical Upgrade",
+      "status": "planning",
+      "panel_upgrade_amps": 400,
+      "file": "permit-scope-split.md"
+    }
+  },
+  "owner": {
+    "name": null,
+    "address": null,
+    "phone": null,
+    "email": null
+  },
+  "contractor": {
+    "name": null,
+    "license": null,
+    "phone": null,
+    "email": null
+  }
+}

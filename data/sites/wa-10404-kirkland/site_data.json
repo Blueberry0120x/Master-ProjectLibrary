@@ -145,7 +145,23 @@
       "sideL": 5,
       "sideR": 5
     },
-    "buildings": [],
+    "buildings": [
+      {
+        "orientation": 0,
+        "W": 30,
+        "D": 60,
+        "offsetX": 0,
+        "offsetY": 0,
+        "spacing": 0,
+        "count": 1,
+        "stackSpacing": 0,
+        "anchor": "center",
+        "stories": 1,
+        "floorHeight": 9,
+        "locked": false,
+        "stackAngle": 0
+      }
+    ],
     "activeBuilding": 0,
     "commFront": false,
     "showBldgDims": false,
@@ -189,9 +205,9 @@
     "freeDrag": true,
     "snapEdge": true,
     "siteNorthDeg": 0,
+    "frontBearing": 270,
     "vehicles": [],
     "activeVehicle": -1,
-    "frontBearing": 270,
     "existingBuildings": [],
     "activeExBuilding": -1,
     "_geoOffsets": true

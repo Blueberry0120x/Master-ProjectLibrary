@@ -1,0 +1,140 @@
+{
+  "site_id": "wa-2902-49th",
+  "project_book_id": "WA-2902_49TH",
+  "project": "ProjectBook-Planner",
+  "site": {
+    "siteId": "WA-2902_49TH",
+    "address": "2902 49th Ave NE, Tacoma, WA 98422",
+    "apn": "5750000078",
+    "legalDescription": "Section 26 Township 21 Range 03 Quarter 12 MEEKERS HALF ACRE TRACTS L 25 BLK B TOG/W THAT POR OF VAC 49TH AVE NE ABUTT SEG F 7080",
+    "yearBuilt": "1971",
+    "adjustedYearBuilt": "1990",
+    "occupancyGroup": "R-3",
+    "zoning": "TBD",
+    "cadZone": "WA_S",
+    "lotWidth": 0,
+    "lotDepth": 0,
+    "lotSF": 18533,
+    "commercialDepth": 0,
+    "baseFAR": 0,
+    "commFAR": 0,
+    "maxHeight": 0,
+    "baseHeightLimit": 0,
+    "cchsMaxHeight": 0,
+    "frontSetback": 0,
+    "rearSetback": 0,
+    "sideSetback": 0,
+    "densityPerSF": 0,
+    "nefRatePerSF": 0,
+    "affordabilityPct": 0,
+    "difPerUnit": 0,
+    "difWaiverSF": 0,
+    "projectType": "",
+    "architect": "",
+    "scopeOfWork": "",
+    "existingDwellingSF": 2228,
+    "notes": "ASSESSOR CONFIRMED (Pierce County ATIP 5750000078, 2026-04-29): APN=5750000078 | Owner=NGUYEN FRANK T & PHAM BICH CHI THI | LotSF=18,533 | Acres=0.426 | YearBuilt=1971 | AdjustedYearBuilt=1990 | Beds=3 | Baths=2.25 | Exterior=Frame Siding | Roof=Composition Shingle | HVAC=Heat Pump (existing) | Fireplaces=1 | Attached Garage=462sf | Wood Deck=547sf | AssessedTotal=$738,400 | AnnualTax2026=$4,021.47 | LastSale=2024-02-08 $700,000 (family transfer). TBD - ZONING: Must verify post-Home in Tacoma reform at dart.cityoftacoma.org — may be UR-1/UR-2/UR-3 instead of legacy R-1. TBD - SETBACKS/HEIGHT: Confirm per current zone. TBD - LOT DIMENSIONS: Width x Depth from GIS. TBD - LOT POLYGON: Extract from matterhornwab.co.pierce.wa.us/publicgis/. | Source: https://atip.piercecountywa.gov/app/v2/propertyDetail/5750000078/summary",
+    "inspectors": [
+      {
+        "name": "Building / Permits",
+        "val": "City of Tacoma Planning & Development Services — (253) 591-5030 | residentialdevelopment@tacoma.gov | 747 Market Street 3rd Floor, Tacoma WA 98402 | Mon–Thu 9am–1pm"
+      },
+      {
+        "name": "Zoning",
+        "val": "City of Tacoma Planning — zoning@tacoma.gov | (253) 591-5030"
+      },
+      {
+        "name": "Permits Portal",
+        "val": "tacomapermits.org | Fee estimator: https://www.tacomapermits.org/pds-resource-library/fee-estimator"
+      },
+      {
+        "name": "Pierce County Assessor",
+        "val": "(253) 798-6111 | 2401 South 35th Street, Tacoma WA 98409 | https://atip.piercecountywa.gov/"
+      }
+    ],
+    "planningAreas": [
+      {
+        "name": "ZONING",
+        "val": "TBD — Tacoma Home in Tacoma reform in progress. Verify current zone at dart.cityoftacoma.org. May be UR-1, UR-2, or UR-3. Legacy R-1 front=25ft, height=35ft — re-verify."
+      },
+      {
+        "name": "COUNTY",
+        "val": "Pierce County — Tax Code Area 005, Rate 10.87641605302. Assessed 2025 values for 2026 tax."
+      }
+    ],
+    "overlayZones": [
+      {
+        "name": "FEMA FLOOD ZONE",
+        "val": "TBD — verify at msc.fema.gov for Pierce County FIRM panels"
+      },
+      {
+        "name": "SEISMIC",
+        "val": "TBD — Pierce County is in Cascadia Subduction Zone region. Verify seismic design category at permit stage."
+      },
+      {
+        "name": "WILDFIRE",
+        "val": "TBD — Northeast Tacoma urban area; likely low WUI risk. Verify WA DNR wildfire map."
+      }
+    ],
+    "parcelPolygon": []
+  },
+  "saved": {
+    "lat": 47.283438,
+    "lng": -122.382253,
+    "rotation": 0,
+    "locked": false,
+    "setbacks": {
+      "front": 0,
+      "rear": 0,
+      "sideL": 0,
+      "sideR": 0
+    },
+    "buildings": [
+      {
+        "orientation": 0,
+        "W": 30,
+        "D": 60,
+        "offsetX": 0,
+        "offsetY": 0,
+        "spacing": 0,
+        "count": 1,
+        "stackSpacing": 0,
+        "anchor": "center",
+        "stories": 1,
+        "floorHeight": 9,
+        "locked": false,
+        "stackAngle": 0
+      }
+    ],
+    "activeBuilding": 0,
+    "commFront": false,
+    "showBldgDims": true,
+    "hiddenDimKeys": [],
+    "mergedDimKeys": [],
+    "chainWOffset": 30,
+    "chainDOffset": 15,
+    "propDimOffsets": {},
+    "parcelPolygon": null,
+    "mapOpacity": 85,
+    "setbacksApplied": false,
+    "freeDrag": true,
+    "snapEdge": false,
+    "siteNorthDeg": 0,
+    "frontBearing": 0,
+    "unitMode": "SF",
+    "vehicles": [],
+    "activeVehicle": -1,
+    "existingBuildings": [],
+    "activeExBuilding": -1,
+    "_geoOffsets": true
+  },
+  "checklist": {
+    "ck": {},
+    "sel": {},
+    "notes": {},
+    "bldgs": [],
+    "mapLocked": false
+  },
+  "_mpl_id": "wa-2902-49th",
+  "_schema": "mpl-skeleton — zoning + setbacks + lot polygon pending"
+}
