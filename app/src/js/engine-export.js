@@ -21,9 +21,9 @@ const ExportEngine = {
 
         // ── Dynamic CONFIG section ──────────────────────────────────────────────
         const configSection = [
-            '(setq DPL:APN       "' + ConfigEngine.data.apn     + '")',
-            '(setq DPL:Address   "' + ConfigEngine.data.address + '")',
-            '(setq DPL:Rotation  ' + s.rotation.toFixed(1) + ')   ; site north degrees',
+            '(setq DPL:APN       "' + (ConfigEngine.data.apn     || '').replace(/"/g,"'") + '")',
+            '(setq DPL:Address   "' + (ConfigEngine.data.address || '').replace(/"/g,"'") + '")',
+            '(setq DPL:Rotation  ' + (s.siteNorthDeg ?? s.rotation).toFixed(1) + ')   ; site north degrees',
             '(setq DPL:CenterLat ' + s.lat.toFixed(8)      + ')   ; WGS84 latitude  (reference only)',
             '(setq DPL:CenterLng ' + s.lng.toFixed(8)      + ')   ; WGS84 longitude (reference only)',
             '(setq DPL:CoordCode "' + csCode + '")',
@@ -493,7 +493,7 @@ const ExportEngine = {
             } else {
                 var abg = r.even ? C.EVEN_A : C.ODD_A;
                 var bbg = r.even ? C.EVEN_B : C.ODD_B;
-                var isDone = r.value && r.value !== '--';
+                var isDone = r.value && r.value !== '--' && String(r.value).toUpperCase().indexOf('TBD') === -1;
                 html.push(
                     '<tr>',
                     '<td style="' + tdStyle(abg, false, 10) + '"></td>',
@@ -780,6 +780,7 @@ const ExportEngine = {
                 snapEdge:       s.snapEdge ?? true,
                 siteNorthDeg:   s.siteNorthDeg ?? 0,
                 frontBearing:   s.frontBearing ?? 270,
+                unitMode:       s.unitMode || 'SF',
                 vehicles:       s.vehicles || [],
                 activeVehicle:  s.activeVehicle ?? -1,
                 existingBuildings: s.existingBuildings || [],
@@ -830,6 +831,7 @@ const ExportEngine = {
         var el = document.getElementById('map-save-flash');
         if (!el) { console.warn('Save failed:', msg); return; }
         if (this._flashTimer) clearTimeout(this._flashTimer);
+        console.warn('[SAVE] Server save failed:', msg);
         el.textContent = 'Save failed: ' + msg;
         el.style.display = 'block';
         el.style.background = '#c53030';
@@ -837,7 +839,7 @@ const ExportEngine = {
         var self = this;
         this._flashTimer = setTimeout(function() {
             el.style.display = 'none';
-            el.textContent = 'Saved';
+            el.textContent = '✓ Auto-saved';
             el.style.background = '';
         }, 4000);
     },

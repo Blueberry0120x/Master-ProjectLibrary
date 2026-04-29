@@ -27,6 +27,11 @@
             if (!siteId) return;
             var sd = window.__SITE_DEFAULTS__ || {};
             var stateCode = getStateFromSiteId(siteId);
+            // Show loading feedback immediately
+            var siteSel = document.getElementById('site-switcher');
+            if (siteSel) { siteSel.disabled = true; }
+            var flash = document.getElementById('map-save-flash');
+            if (flash) { flash.textContent = 'Switching site…'; flash.style.background = '#1d4ed8'; flash.style.display = 'block'; }
             safeStorageSet('selected_site', siteId);
             if (stateCode) safeStorageSet('selected_state', stateCode);
             safeStorageRemove('site_state');

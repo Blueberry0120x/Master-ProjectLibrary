@@ -1231,8 +1231,8 @@ const MapEngine = {
         const deg  = document.getElementById('compassDeg');
         const arc  = document.getElementById('compassArc');
         if (!arm) return;
-        // SN tracks lot rotation — compass shows where site north points relative to TN
-        const snDeg = ConfigEngine.state.rotation || 0;
+        // SN tracks siteNorthDeg (set by compass drag or rotation slider)
+        const snDeg = ConfigEngine.state.siteNorthDeg ?? ConfigEngine.state.rotation ?? 0;
         arm.setAttribute('transform', 'rotate(' + snDeg.toFixed(2) + ')');
         if (deg) deg.textContent = 'Site North ' + snDeg.toFixed(1) + '\u00b0';
         // Arc from TN (0°) to SN arm position at r=22

@@ -37,7 +37,7 @@ MUST_HAVE: dict[str, str] = {
     "polygon_clamp":            "clampToLot",
     "CDN_geoman_pinned":        "leaflet-geoman-free@2.16.0",
     "dim_text_counter_rot":     "ConfigEngine.state.rotation",
-    "compass_SN_rotation":      "const snDeg = ConfigEngine.state.rotation || 0",
+    "compass_SN_rotation":      "const snDeg = ConfigEngine.state.siteNorthDeg",
 }
 
 # Features must NOT regress from v5.0 (the baseline stable)

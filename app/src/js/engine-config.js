@@ -64,7 +64,7 @@ const ConfigEngine = {
         if (typeof sd.lotDepth !== 'undefined')  this.data.depth = sd.lotDepth;
         if (sd.commercialDepth != null) this.data.commercialDepth = sd.commercialDepth;
         if (sd.lotSF != null)   this.data.lotSF           = sd.lotSF;
-        if (sd.parcelPolygon)   this.data.parcelPolygon   = sd.parcelPolygon;
+        if (sd.parcelPolygon && sd.parcelPolygon.length > 0) this.data.parcelPolygon = sd.parcelPolygon;
         if (sd.siteId)          this.data.siteId          = sd.siteId;
         if (sd.existingDwellingSF != null) this.data.existingDwellingSF = sd.existingDwellingSF;
 
@@ -110,6 +110,7 @@ const ConfigEngine = {
             this.state.commFront      = saved.commFront      ?? false;
             this.state.showBldgDims   = saved.showBldgDims   ?? false;
             this.state.hiddenDimKeys  = saved.hiddenDimKeys  ?? [];
+            this.state.mergedDimKeys  = saved.mergedDimKeys  ?? [];
             this.state.chainWOffset   = saved.chainWOffset   ?? 0;
             this.state.chainDOffset   = saved.chainDOffset   ?? 0;
             this.state.mapOpacity     = saved.mapOpacity     ?? 60;
@@ -118,6 +119,7 @@ const ConfigEngine = {
             this.state.snapEdge       = saved.snapEdge       ?? true;
             this.state.siteNorthDeg   = saved.siteNorthDeg   ?? 0;
             this.state.frontBearing   = saved.frontBearing   ?? 270;
+            this.state.unitMode       = saved.unitMode       || 'SF';
             if (saved.buildings && saved.buildings.length) {
                 this.state.buildings      = saved.buildings;
                 this.state.activeBuilding = saved.activeBuilding ?? 0;
@@ -127,7 +129,7 @@ const ConfigEngine = {
                 this.state.activeVehicle = saved.activeVehicle ?? -1;
             }
             // Restore edited parcel polygon only if site JSON didn't supply one
-            if (saved.parcelPolygon && !this.data.parcelPolygon) {
+            if (saved.parcelPolygon && saved.parcelPolygon.length > 0 && (!this.data.parcelPolygon || this.data.parcelPolygon.length === 0)) {
                 this.data.parcelPolygon = saved.parcelPolygon;
             }
             // Migration: old single existingBuilding → existingBuildings array
@@ -151,6 +153,7 @@ const ConfigEngine = {
             this.state.commFront        = sd.commFront        ?? false;
             this.state.showBldgDims     = sd.showBldgDims     ?? false;
             this.state.hiddenDimKeys    = sd.hiddenDimKeys    ?? [];
+            this.state.mergedDimKeys    = sd.mergedDimKeys    ?? [];
             this.state.chainWOffset     = sd.chainWOffset     ?? 0;
             this.state.chainDOffset     = sd.chainDOffset     ?? 0;
             this.state.mapOpacity       = sd.mapOpacity       ?? 60;
@@ -159,6 +162,7 @@ const ConfigEngine = {
             this.state.snapEdge         = sd.snapEdge         ?? true;
             this.state.siteNorthDeg     = sd.siteNorthDeg     ?? 0;
             this.state.frontBearing     = sd.frontBearing     ?? 270;
+            this.state.unitMode         = sd.unitMode         || 'SF';
             if (sd.buildings && sd.buildings.length) {
                 this.state.buildings      = sd.buildings;
                 this.state.activeBuilding = sd.activeBuilding ?? 0;
@@ -167,7 +171,7 @@ const ConfigEngine = {
                 this.state.vehicles      = sd.vehicles;
                 this.state.activeVehicle = sd.activeVehicle ?? -1;
             }
-            if (sd.parcelPolygon && !this.data.parcelPolygon) {
+            if (sd.parcelPolygon && sd.parcelPolygon.length > 0 && (!this.data.parcelPolygon || this.data.parcelPolygon.length === 0)) {
                 this.data.parcelPolygon = sd.parcelPolygon;
             }
             // Migration: old single existingBuilding → existingBuildings array
@@ -219,6 +223,8 @@ const ConfigEngine = {
             commFront:        this.state.commFront,
             showBldgDims:     this.state.showBldgDims,
             hiddenDimKeys:    this.state.hiddenDimKeys.slice(),
+            mergedDimKeys:    this.state.mergedDimKeys ? this.state.mergedDimKeys.slice() : [],
+            unitMode:         this.state.unitMode || 'SF',
             chainWOffset:     this.state.chainWOffset,
             chainDOffset:     this.state.chainDOffset,
             mapOpacity:       this.state.mapOpacity,
@@ -284,16 +290,21 @@ const ConfigEngine = {
         var a = addr.toUpperCase();
         // San Diego County
         if (a.indexOf('SAN DIEGO') > -1 || /\b921\d{2}\b/.test(a)) return 'CA_VI';
-        // Orange County / LA County
+        // Orange County / LA County / Riverside County (State Plane Zone V)
         if (a.indexOf('GARDEN GROVE') > -1 || a.indexOf('ANAHEIM') > -1 ||
             a.indexOf('SANTA ANA') > -1 || a.indexOf('IRVINE') > -1 ||
             a.indexOf('LOS ANGELES') > -1 || a.indexOf('LONG BEACH') > -1 ||
+            a.indexOf('WILDOMAR') > -1 || a.indexOf('MURRIETA') > -1 ||
+            a.indexOf('TEMECULA') > -1 || a.indexOf('RIVERSIDE') > -1 ||
             /\b926\d{2}\b/.test(a) || /\b928\d{2}\b/.test(a) ||
-            /\b900\d{2}\b/.test(a) || /\b906\d{2}\b/.test(a)) return 'CA_V';
-        // WA - Seattle / King County area
+            /\b900\d{2}\b/.test(a) || /\b906\d{2}\b/.test(a) ||
+            /\b925\d{2}\b/.test(a)) return 'CA_V';
+        // WA North: Seattle / King County (980xx, 981xx)
         if (a.indexOf('SEATTLE') > -1 || a.indexOf('BURIEN') > -1 ||
-            a.indexOf('BELLEVUE') > -1 || a.indexOf('TACOMA') > -1 ||
+            a.indexOf('BELLEVUE') > -1 || a.indexOf('KIRKLAND') > -1 || a.indexOf('RENTON') > -1 ||
             /\b981\d{2}\b/.test(a) || /\b980\d{2}\b/.test(a)) return 'WA_N';
+        // WA South: Tacoma / Pierce County (984xx, 985xx)
+        if (a.indexOf('TACOMA') > -1 || /\b984\d{2}\b/.test(a) || /\b985\d{2}\b/.test(a)) return 'WA_S';
         return null;
     },
 
@@ -314,6 +325,8 @@ const ConfigEngine = {
         this.state.setbacksApplied  = d.setbacksApplied ?? false;
         this.state.mapOpacity       = d.mapOpacity      ?? 60;
         this.state.hiddenDimKeys    = d.hiddenDimKeys   ? d.hiddenDimKeys.slice() : [];
+        this.state.mergedDimKeys    = d.mergedDimKeys   ? d.mergedDimKeys.slice() : [];
+        this.state.unitMode         = d.unitMode        || 'SF';
         this.state.chainWOffset     = d.chainWOffset    ?? 0;
         this.state.chainDOffset     = d.chainDOffset    ?? 0;
         this.state.freeDrag         = d.freeDrag        ?? true;

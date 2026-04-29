@@ -38,7 +38,8 @@ const VertexEngine = {
         poly.pm.enable({
             allowSelfIntersection: false,
             draggable: true,
-            removeLayerBelowMinVertices: false,
+            removeLayerBelowMinVertices: true,
+            minVertexCount: 3,
             preventVertexRemoval: false
         });
 
@@ -82,8 +83,9 @@ const VertexEngine = {
         const spanX = Math.max(...xs) - Math.min(...xs);
         const spanY = Math.max(...ys) - Math.min(...ys);
         // Keep W/D as the bounding extents (used for chain dims)
-        bldg.W = parseFloat(spanY.toFixed(1));
-        bldg.D = parseFloat(spanX.toFixed(1));
+        // Frame B: x=east (W axis), y=north (D axis) — match drawBuilding() convention
+        bldg.W = parseFloat(spanX.toFixed(1));
+        bldg.D = parseFloat(spanY.toFixed(1));
 
         this._cleanup();
         SetbackEngine.drawBuilding();

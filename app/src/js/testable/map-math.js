@@ -1,6 +1,12 @@
 // map-math.js — Pure math extracted from MapEngine (no DOM, no Leaflet)
 // Imported by tests and also used internally by MapEngine for consistency.
 // DO NOT add browser globals here — this module must run in Node.js (Vitest).
+//
+// NOTE — rotation divergence: these functions apply state.rotation to the
+// coordinate transform. Production MapEngine.render() passes effectiveRotation()
+// which always returns 0 — visual rotation is handled by Leaflet map.setBearing().
+// Tests that use non-zero rotation exercise this module's math but NOT the
+// production render path. This is intentional; do not "fix" it.
 
 /**
  * Converts a local {x, y} point (feet, lot-centered, rotated) to [lat, lng].

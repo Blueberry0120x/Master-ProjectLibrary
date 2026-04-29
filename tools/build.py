@@ -698,7 +698,9 @@ def validate_sites():
                     b[bk] = 0 if bk != "floorHeight" else 9
                     fixed.append(f"buildings[{i}].{bk}")
         if fixed:
-            f.write_text(json.dumps(sd, indent=2) + "\n", encoding="utf-8")
+            tmp = f.with_suffix(".tmp")
+            tmp.write_text(json.dumps(sd, indent=2) + "\n", encoding="utf-8")
+            tmp.replace(f)
             print(f"  [FIX] {sid}: added missing fields: {', '.join(fixed)}")
 
 

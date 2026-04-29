@@ -12,8 +12,12 @@ const UIEngine = {
         var elApn = document.getElementById('header-ui-apn');
         if (elApn) elApn.innerText = d.apn;
         document.getElementById('ui-zoning').innerText  = d.zoning;
-        document.getElementById('ui-w').innerText       = d.width;
-        document.getElementById('ui-d').innerText       = d.depth;
+        document.getElementById('ui-w').innerText       = d.width  > 0 ? d.width  : '--';
+        document.getElementById('ui-d').innerText       = d.depth  > 0 ? d.depth  : '--';
+        var uiWTick = document.getElementById('ui-w-tick');
+        var uiDTick = document.getElementById('ui-d-tick');
+        if (uiWTick) uiWTick.innerText = d.width  > 0 ? "'" : '';
+        if (uiDTick) uiDTick.innerText = d.depth  > 0 ? "'" : '';
         document.getElementById('ui-sqft').innerText    = sqft.toLocaleString() + ' SF  [' + (sqft / 43560).toFixed(2) + ' AC]';
 
         var exSF = d.existingDwellingSF || 0;
@@ -28,7 +32,7 @@ const UIEngine = {
         document.getElementById('info-address').innerText = d.address;
         document.getElementById('info-apn').innerText     = d.apn;
         document.getElementById('info-zone').innerText    = d.zoning;
-        document.getElementById('info-w').innerText       = d.width.toFixed(1) + ' FT';
+        document.getElementById('info-w').innerText       = d.width > 0 ? d.width.toFixed(1) + ' FT' : '--';
 
         this.updateLotSizeDisplay();
         document.getElementById('info-density-lot').innerText   = sqft.toFixed(1) + " S.F.";
@@ -42,7 +46,7 @@ const UIEngine = {
 
         // Dynamic banner stats from site-data
         var elDen = document.getElementById('ui-density');
-        if (elDen) elDen.innerText = '1 DU / ' + densPS + ' SF';
+        if (elDen) elDen.innerText = densPS > 0 ? '1 DU / ' + densPS + ' SF' : 'Per zoning overlay';
         var elFar = document.getElementById('ui-far');
         if (elFar) elFar.innerText = baseFAR + ' / ' + commFAR;
         var elHt  = document.getElementById('ui-maxht');

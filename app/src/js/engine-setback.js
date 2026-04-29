@@ -3,13 +3,15 @@
    ========================================== */
 const SetbackEngine = {
     applySetbacks: function() {
-        const front = parseFloat(document.getElementById('sb-front').value)  || 0;
-        const rear  = parseFloat(document.getElementById('sb-rear').value)   || 0;
-        const sideL = parseFloat(document.getElementById('sb-side-l').value) || 0;
-        const sideR = parseFloat(document.getElementById('sb-side-r').value) || 0;
+        const front = Math.max(0, parseFloat(document.getElementById('sb-front').value)  || 0);
+        const rear  = Math.max(0, parseFloat(document.getElementById('sb-rear').value)   || 0);
+        const sideL = Math.max(0, parseFloat(document.getElementById('sb-side-l').value) || 0);
+        const sideR = Math.max(0, parseFloat(document.getElementById('sb-side-r').value) || 0);
 
         const { width: w, depth: h } = ConfigEngine.data;
-        if (front + rear >= h || sideL + sideR >= w) {
+        const _applyPP = ConfigEngine.data.parcelPolygon;
+        const _isPolyLot = _applyPP && _applyPP.length > 2;
+        if (!_isPolyLot && (front + rear >= h || sideL + sideR >= w)) {
             alert("Setbacks exceed lot dimensions — please reduce values.");
             return;
         }
@@ -1342,7 +1344,10 @@ const SetbackEngine = {
         if (chk) chk.checked = state.commFront || false;
 
         // Auto-draw setbacks if they were explicitly applied in a prior session
-        if (ConfigEngine.state.setbacksApplied) {
+        // Guard: skip on skeleton sites where lot dimensions are 0×0 (no polygon, no rect)
+        const _pp = ConfigEngine.data.parcelPolygon;
+        const _hasLot = (_pp && _pp.length > 2) || (ConfigEngine.data.width > 0 && ConfigEngine.data.depth > 0);
+        if (ConfigEngine.state.setbacksApplied && _hasLot) {
             this.drawSetbacks();
         }
 
