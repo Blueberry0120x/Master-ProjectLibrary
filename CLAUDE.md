@@ -306,3 +306,9 @@ Valid tags: `@claude-cli`, `@copilot`, `@vscode-ext`, `@remote-cli`, `@cloud`
 - **Copilot:** reads `.github/copilot-instructions.md` (points here)
 - **Controller:** CTRL-005 convention (`controller-note/`)
 
+## Config & Settings Ownership (GLOBAL-009)
+
+- `.claude/settings.json` — hook wiring (Controller baseline CTRL-004); do not edit manually
+- `.claude/CLAUDE.md` — agent instructions (this file); Controller may add baseline sections
+- `controller-note/` — ping/upnote protocol files (CTRL-005)
+- Any project config files (`.gitignore`, `.gitattributes`) — project agent owned
