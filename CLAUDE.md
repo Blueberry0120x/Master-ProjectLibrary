@@ -40,6 +40,8 @@ Master-ProjectLibrary/
 |---|---|---|
 | ca-2921-el-cajon | 2921-2923 El Cajon Blvd, SD 92104 | In progress — DS375 |
 | ca-4335-euclid | 4335 Euclid Ave, SD 92105 | In progress — DS375 |
+| ca-907-orchid | 907 Orchid Way, Carlsbad CA 92011 | Planning — remodel + plumbing permit |
+| wa-2902-49th | 2902 49th Ave NE, Tacoma WA 98422 | Skeleton — APN + zoning TBD |
 
 ---
 
