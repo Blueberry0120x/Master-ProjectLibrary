@@ -1,0 +1,77 @@
+{
+  "_comment": "MPL canonical site data for 5552 Redwood Street ADU project.",
+  "site_id": "ca-5552-redwood",
+  "project_book_id": "CA-5552_REDWOOD",
+  "address": {
+    "full": "5552 Redwood Street, San Diego, CA 92105",
+    "street": "5552 Redwood Street",
+    "city": "San Diego",
+    "state": "CA",
+    "zip": "92105"
+  },
+  "site": {
+    "apn": "476-050-26-00",
+    "prj_number": "PRJ-1142530",
+    "zoning": "RS-1-7",
+    "community_plan": "Mid-City: City Heights",
+    "neighborhood": "Redwood Village",
+    "base_zone": "RS-1-7",
+    "lot_sf": null,
+    "lot_width": null,
+    "lot_depth": null,
+    "vhfhsz": "verify",
+    "transit_priority_area": "verify — check ½-mi walk to MTS stop",
+    "notes": "APN and lot dimensions to be confirmed via SD County Assessor. VHFHSZ and TPA status must be verified before submittal."
+  },
+  "existing": {
+    "use": "Single-family dwelling (R-3)",
+    "construction_type": "V-B",
+    "sprinklered": false,
+    "year_built": null,
+    "stories": null,
+    "living_area_sf": null
+  },
+  "project": {
+    "type": "New detached ADU",
+    "description": "2-story detached Accessory Dwelling Unit — 1,200 sf, wood-frame, stucco exterior, slab-on-grade foundation, composition shingle roof. Associated site work: grading, utility connections (water, sewer, electrical), landscaping.",
+    "occupancy": "R-3",
+    "construction_type": "V-B",
+    "stories": 2,
+    "adu_sf": 1200,
+    "total_du_after": 2,
+    "sprinklers_required": false,
+    "sprinkler_basis": "Primary dwelling unsprinklered — waiver per Gov Code §65852.2 and IB-400 (Aug 2025)",
+    "setbacks": {
+      "note": "ADU >16 ft / 2-story → 4 ft rear and interior side required per SDMC 141.0302 + Ord. O-21989 Aug 2025"
+    },
+    "parking": 0,
+    "parking_basis": "Verify: within ½-mi transit (TPA) or state ADU exemption"
+  },
+  "applicant": {
+    "name": "ADEC Group",
+    "email": "passio.engineering@gmail.com",
+    "phone": null,
+    "address": null
+  },
+  "owner": {
+    "name": null,
+    "phone": null,
+    "email": null
+  },
+  "permits": {
+    "building": "DS-3032",
+    "trade_electrical": true,
+    "trade_mechanical": true,
+    "trade_plumbing": true,
+    "trade_grading": true,
+    "trade_row": "verify — sidewalk/curb repair along Redwood St frontage",
+    "soils_report": "waived — standard residential flat developed lot",
+    "school_fee": "required — ADU > 500 sf (SDUSD Level 1 rate)"
+  },
+  "submittals": {
+    "ds3032": "knowledge/san-diego-city/ProjectBook/5552-redwood-adu/ds3032-building-permit-app.html",
+    "ds420": "knowledge/san-diego-city/ProjectBook/5552-redwood-adu/ds420-owner-authorization.html",
+    "site_plan": "knowledge/san-diego-city/ProjectBook/5552-redwood-adu/site-plan — NOT YET LOCATED"
+  },
+  "status": "In progress — permit prep"
+}
