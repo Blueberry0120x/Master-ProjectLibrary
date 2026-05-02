@@ -19,6 +19,8 @@ jobs:
         run: |
           rm -rf .claude/ .vscode/ .github/
           rm -f  .env .env.*
+          # Remove MPL-branded landing files — public mirror serves ParcelDashboard, not MPL
+          rm -f README.md CLAUDE.md
 
       - name: Transform app/docs/ for static hosting (fix cross-links)
         run: |
@@ -42,6 +44,41 @@ jobs:
 
           print("Transformed HTML files: cross-links fixed")
           PYEOF
+
+      - name: Write ParcelDashboard landing (root index.html + README)
+        run: |
+          cat > index.html <<'HTML'
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+            <meta charset="utf-8">
+            <meta http-equiv="refresh" content="0; url=app/docs/InteractiveMap.html">
+            <title>ParcelDashboard</title>
+            <style>
+              body { font-family: system-ui, sans-serif; background:#0d1117; color:#c9d1d9;
+                     display:flex; align-items:center; justify-content:center; height:100vh; margin:0; }
+              a { color:#58a6ff; }
+            </style>
+          </head>
+          <body>
+            <p>Loading <a href="app/docs/InteractiveMap.html">ParcelDashboard &rarr; InteractiveMap</a>&hellip;</p>
+          </body>
+          </html>
+          HTML
+
+          cat > README.md <<'MD'
+          # ParcelDashboard (public mirror)
+
+          Public, sanitized mirror of the Master-ProjectLibrary site planning + permit prep stack.
+
+          - Live viewer: [app/docs/InteractiveMap.html](app/docs/InteractiveMap.html)
+          - Pre-app checklist: [app/docs/PreApp_Checklist.html](app/docs/PreApp_Checklist.html)
+          - Architecture overview: [app/docs/architecture.html](app/docs/architecture.html)
+
+          Source: private `Master-ProjectLibrary` repo. This branch is force-pushed by the
+          mirror workflow on every `main` update. Do not commit here directly — changes
+          will be overwritten on the next mirror run.
+          MD
 
       - name: Commit mirror snapshot
         run: |
